@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile App Development Blogs - TechMayank</title>
+    <meta name="description"
+        content="Explore mobile app development tutorials, trends, frameworks, and best practices on TechMayank. Learn Android, iOS, Flutter, React Native, and more.">
+    <meta name="keywords"
+        content="mobile development, Android, iOS, Flutter, React Native, Swift, Kotlin, mobile UI/UX, app design">
+    <meta name="author" content="Mayank">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Mobile App Development Blogs - TechMayank">
+    <meta property="og:description"
+        content="Explore the latest mobile app development tutorials, trends and best practices.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://techmayank.com/category-mobile.html">
+
+    <!-- Favicon -->
+    <link rel="icon" href="fav.png" type="image/png">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="web.css">
+</head>
+
+<body class="mobile-category">
+    <header id="main-header">
+        <nav>
+            <a href="index.html" class="logo">Tech<span>Mayank</span></a>
+            <button class="mobile-menu-btn">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blogs.html">Blogs</a></li>
+                <li class="dropdown">
+                    <a href="">Categories</a>
+                    <div class="dropdown-content">
+                        <a href="category-webdev.html">Web Development</a>
+                        <a href="category-ai.html">Artificial Intelligence</a>
+                        <a href="category-cybersecurity.html">Cybersecurity</a>
+                        <a href="category-iot.html">IoT</a>
+                        <a href="category-mobile.html">Mobile Development</a>
+                        <a href="category-cloud.html">Cloud Computing</a>
+                    </div>
+                </li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="subscribe.html" class="subscribe-btn">Subscribe</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="category-header">
+            <div class="category-icon-large">
+                <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h1>Mobile App Development</h1>
+            <p class="category-description">Discover the latest innovations in mobile app development, from native iOS
+                and Android to cross-platform frameworks like Flutter and React Native. Learn about mobile UI/UX design,
+                performance optimization, and successful app deployment strategies.</p>
+
+            <div class="category-stats">
+                <div class="stat-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>0 Articles</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-tags"></i>
+                    <span>10 Topics</span>
+                </div>
+            </div>
+
+            <div class="category-tags">
+                <a href="#" class="tag">Android</a>
+                <a href="#" class="tag">iOS</a>
+                <a href="#" class="tag">Flutter</a>
+                <a href="#" class="tag">React Native</a>
+                <a href="#" class="tag">Kotlin</a>
+                <a href="#" class="tag">Swift</a>
+                <a href="#" class="tag">Mobile UI/UX</a>
+                <a href="#" class="tag">App Architecture</a>
+                <a href="#" class="tag">Performance</a>
+                <a href="#" class="tag">Testing</a>
+            </div>
+        </section>
+
+        <section class="blog-filter">
+            <div class="filter-wrapper">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search mobile development articles...">
+                    <button id="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+
+                <div class="filter-options">
+                    <label for="sort-by">Sort by:</label>
+                    <select id="sort-by">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="popular">Most Popular</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-posts">
+            <h2 class="section-title">Latest Mobile Development Articles</h2>
+            <div style="text-align: center; font-size: 20px; font-weight: bold;">
+                Not Any Post Found Yet! 😞
+            </div>
+            <!-- <div class="posts-grid">
+                Blog Post 1
+                <article class="post-card">
+                    <img src="/api/placeholder/400/320" alt="Mobile Dev Trends" class="post-img">
+                    <div class="post-content">
+                        <div class="post-category">Cross-Platform</div>
+                        <h3 class="post-title"><a href="blog-post.html">Mobile Development Trends to Watch in 2025</a></h3>
+                        <p class="post-excerpt">From super apps to AI-powered development tools, explore the mobile technologies that are reshaping the app landscape in 2025.</p>
+                        <div class="post-meta">
+                            <span class="post-date"><i class="far fa-calendar-alt"></i> March 27, 2025</span>
+                            <span class="post-read-time"><i class="far fa-clock"></i> 6 min read</span>
+                        </div>
+                    </div>
+                </article>
+                
+                Blog Post 2
+                <article class="post-card">
+                    <img src="/api/placeholder/400/320" alt="Flutter Architecture" class="post-img">
+                    <div class="post-content">
+                        <div class="post-category">Flutter</div>
+                        <h3 class="post-title"><a href="blog-post.html">Scalable Flutter Architecture for Enterprise Apps</a></h3>
+                        <p class="post-excerpt">Learn how to design maintainable Flutter applications using clean architecture, state management, and dependency injection.</p>
+                        <div class="post-meta">
+                            <span class="post-date"><i class="far fa-calendar-alt"></i> March 22, 2025</span>
+                            <span class="post-read-time"><i class="far fa-clock"></i> 9 min read</span>
+                        </div>
+                    </div>
+                </article>
+                
+                Blog Post 3
+                <article class="post-card">
+                    <img src="/api/placeholder/400/320" alt="SwiftUI Development" class="post-img">
+                    <div class="post-content">
+                        <div class="post-category">iOS</div>
+                        <h3 class="post-title"><a href="blog-post.html">Mastering SwiftUI: From Basics to Advanced Techniques</a></h3>
+                        <p class="post-excerpt">A comprehensive guide to building beautiful, responsive iOS interfaces with SwiftUI's declarative syntax and powerful features.</p>
+                        <div class="post-meta">
+                            <span class="post-date"><i class="far fa-calendar-alt"></i> March 18, 2025</span>
+                            <span class="post-read-time"><i class="far fa-clock"></i> 11 min read</span>
+                        </div>
+                    </div>
+                </article>
+                
+                Blog Post 4
+                <article class="post-card">
+                    <img src="/api/placeholder/400/320" alt="Kotlin Multiplatform" class="post-img">
+                    <div class="post-content">
+                        <div class="post-category">Kotlin</div>
+                        <h3 class="post-title"><a href="blog-post.html">Kotlin Multiplatform Mobile: Share Code Between iOS and Android</a></h3>
+                        <p class="post-excerpt">Explore how KMM helps you share business logic between platforms while keeping native UI, reducing development time and costs.</p>
+                        <div class="post-meta">
+                            <span class="post-date"><i class="far fa-calendar-alt"></i> March 14, 2025</span>
+                            <span class="post-read-time"><i class="far fa-clock"></i> 8 min read</span>
+                        </div>
+                    </div>
+                </article>
+                
+                Blog Post 5
+                <article class="post-card">
+                    <img src="/api/placeholder/400/320" alt="Mobile UX Design" class="post-img">
+                    <div class="post-content">
+                        <div class="post-category">UI/UX</div>
+                        <h3 class="post-title"><a href="blog-post.html">Designing for Gestures: Creating Intuitive Mobile Experiences</a></h3>
+                        <p class="post-excerpt">Learn how to implement natural gesture interactions that enhance usability and create delightful user experiences on mobile.</p>
+                        <div class="post-meta">
+                            <span class="post-date"><i class="far fa-calendar-alt"></i> March 10, 2025</span>
+                            <span class="post-read-time"><i class="far fa-clock"></i> 7 min read</span>
+                        </div>
+                    </div>
+                </article>
+                
+                Blog Post 6
+                <article class="post-card">
+                    <img src="/api/placeholder/400/320" alt="React Native Performance" class="post-img">
+                    <div class="post-content">
+                        <div class="post-category">React Native</div>
+                        <h3 class="post-title"><a href="blog-post.html">Optimizing React Native Performance: The Complete Guide</a></h3>
+                        <p class="post-excerpt">Practical strategies for identifying and fixing common performance bottlenecks in React Native applications.</p>
+                        <div class="post-meta">
+                            <span class="post-date"><i class="far fa-calendar-alt"></i> March 5, 2025</span>
+                            <span class="post-read-time"><i class="far fa-clock"></i> 10 min read</span>
+                        </div>
+                    </div>
+                </article>
+                
+                Blog Post 7
+                <article class="post-card">
+                    <img src="/api/placeholder/400/320" alt="Android Jetpack Compose" class="post-img">
+                    <div class="post-content">
+                        <div class="post-category">Android</div>
+                        <h3 class="post-title"><a href="blog-post.html">Building Modern Android UIs with Jetpack Compose</a></h3>
+                        <p class="post-excerpt">How to leverage Jetpack Compose to create dynamic, responsive interfaces with less code and more flexibility.</p>
+                        <div class="post-meta">
+                            <span class="post-date"><i class="far fa-calendar-alt"></i> February 28, 2025</span>
+                            <span class="post-read-time"><i class="far fa-clock"></i> 9 min read</span>
+                        </div>
+                    </div>
+                </article>
+                
+                Blog Post 8
+                <article class="post-card">
+                    <img src="/api/placeholder/400/320" alt="Mobile App Testing" class="post-img">
+                    <div class="post-content">
+                        <div class="post-category">Testing</div>
+                        <h3 class="post-title"><a href="blog-post.html">Comprehensive Mobile App Testing Strategies for Quality Assurance</a></h3>
+                        <p class="post-excerpt">From unit testing to automated UI testing, learn how to implement a robust testing strategy for mobile applications.</p>
+                        <div class="post-meta">
+                            <span class="post-date"><i class="far fa-calendar-alt"></i> February 22, 2025</span>
+                            <span class="post-read-time"><i class="far fa-clock"></i> 8 min read</span>
+                        </div>
+                    </div>
+                </article>
+                
+                Blog Post 9
+                <article class="post-card">
+                    <img src="/api/placeholder/400/320" alt="Mobile App Monetization" class="post-img">
+                    <div class="post-content">
+                        <div class="post-category">Business</div>
+                        <h3 class="post-title"><a href="blog-post.html">Effective Monetization Strategies for Mobile Apps in 2025</a></h3>
+                        <p class="post-excerpt">Explore different revenue models from subscriptions to in-app purchases, and learn how to choose the right approach for your app.</p>
+                        <div class="post-meta">
+                            <span class="post-date"><i class="far fa-calendar-alt"></i> February 16, 2025</span>
+                            <span class="post-read-time"><i class="far fa-clock"></i> 7 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="pagination">
+                <a href="#" class="pagination-btn active">1</a>
+                <a href="#" class="pagination-btn">2</a>
+                <a href="#" class="pagination-btn">3</a>
+                <span class="pagination-ellipsis">...</span>
+                <a href="#" class="pagination-btn">5</a>
+                <a href="#" class="pagination-btn next">
+                    Next <i class="fas fa-angle-right"></i>
+                </a>
+            </div>
+        </section> -->
+
+            <section class="cta-section" id="subscribe">
+                <h2>Subscribe to Our Newsletter</h2>
+                <p>Get the latest tech updates, tutorials, and insights delivered directly to your inbox. No spam, just
+                    valuable content!</p>
+                <form class="newsletter-form"
+                    action="https://app.us9.list-manage.com/subscribe/post?u=c88a828829a68ce01295ca9d8&amp;id=a39a689fbb&amp;f_id=00e6c2e1f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_blank">
+                    <input type="email" name="EMAIL" class="newsletter-input" id="mce-EMAIL"
+                        placeholder="Your email address" required>
+                    <!-- This hidden div is required to prevent bot signups -->
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                        <input type="text" name="b_c88a828829a68ce01295ca9d8_a39a689fbb" tabindex="-1" value="">
+                    </div>
+                    <button type="submit" class="btn btn-submit" name="subscribe"
+                        id="mc-embedded-subscribe">Subscribe</button>
+                    <div id="mce-responses" class="clear foot">
+                        <div class="response" id="mce-error-response" style="display: none;"></div>
+                        <div class="response" id="mce-success-response" style="display: none;"></div>
+                    </div>
+                    <div id="subscribe-status" class="subscribe-message" style="display: none;">
+                        <p>Thank you for subscribing! Please check your inbox to confirm your subscription.</p>
+                    </div>
+                </form>
+            </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section footer-about">
+                <a href="index.html" class="footer-logo">Tech<span>Mayank</span></a>
+                <p>Your go-to source for tech insights, tutorials, and reviews. We make complex technology concepts easy
+                    to understand for everyone.</p>
+                <div class="social-links">
+                    <a href="https://x.com/Mayank_Pras" class="social-icon twitter" aria-label="Twitter"><i
+                            class="fab fa-x-twitter"></i></a>
+                    <a href="https://www.linkedin.com/in/mitthu-kumar/" class="social-icon linkedin"
+                        aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/mkshahi22" class="social-icon github" aria-label="GitHub"><i
+                            class="fab fa-github"></i></a>
+                    <a href="https://techmayank.netlify.app/" class="social-icon website" aria-label="Website"><i
+                            class="fas fa-globe"></i></a>
+                    <a href="https://www.instagram.com/shahi_jii_22/?next=%2F" class="social-icon instagram"
+                        aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blogs.html">Blogs</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Popular Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="category-webdev.html">Web Development</a></li>
+                    <li><a href="category-ai.html">Artificial Intelligence</a></li>
+                    <li><a href="category-cybersecurity.html">Cybersecurity</a></li>
+                    <li><a href="category-cloud.html">Cloud Computing</a></li>
+                    <li><a href="category-mobile.html">Mobile Development</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="far fa-envelope"></i> mayankpra97@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Greater Noida , India</p>
+                <p><i class="fas fa-phone"></i> +91 9798743248</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2025 TechMayank. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile menu toggle
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+
+            menuBtn.addEventListener('click', function () {
+                navLinks.classList.toggle('active');
+            });
+
+            // Mobile dropdown toggle
+            const dropdowns = document.querySelectorAll('.dropdown');
+
+            dropdowns.forEach(dropdown => {
+                const dropdownLink = dropdown.querySelector('a');
+
+                if (window.innerWidth <= 768) {
+                    dropdownLink.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                    });
+                }
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function (event) {
+                if (!event.target.closest('nav') && !event.target.closest('.mobile-menu-btn')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', function () {
+                const header = document.getElementById('main-header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('search-input');
+            const searchBtn = document.getElementById('search-btn');
+            const postCards = document.querySelectorAll('.post-card');
+
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keyup', function (e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+
+                if (searchTerm === '') {
+                    // If search is empty, show all posts
+                    postCards.forEach(card => {
+                        card.style.display = 'block';
+                    });
+                    return;
+                }
+
+                // Filter posts based on search term
+                postCards.forEach(card => {
+                    const title = card.querySelector('.post-title').textContent.toLowerCase();
+                    const excerpt = card.querySelector('.post-excerpt').textContent.toLowerCase();
+                    const category = card.querySelector('.post-category').textContent.toLowerCase();
+
+                    if (title.includes(searchTerm) || excerpt.includes(searchTerm) || category.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
+            // Sort functionality
+            const sortSelect = document.getElementById('sort-by');
+            const postsGrid = document.querySelector('.posts-grid');
+
+            sortSelect.addEventListener('change', function () {
+                const sortValue = this.value;
+                const postsArray = Array.from(postCards);
+
+                switch (sortValue) {
+                    case 'newest':
+                        postsArray.sort((a, b) => {
+                            const dateA = new Date(a.querySelector('.post-date').textContent.replace('<i class="far fa-calendar-alt"></i> ', ''));
+                            const dateB = new Date(b.querySelector('.post-date').textContent.replace('<i class="far fa-calendar-alt"></i> ', ''));
+                            return dateB - dateA; // Newest first
+                        });
+                        break;
+                    case 'oldest':
+                        postsArray.sort((a, b) => {
+                            const dateA = new Date(a.querySelector('.post-date').textContent.replace('<i class="far fa-calendar-alt"></i> ', ''));
+                            const dateB = new Date(b.querySelector('.post-date').textContent.replace('<i class="far fa-calendar-alt"></i> ', ''));
+                            return dateA - dateB; // Oldest first
+                        });
+                        break;
+                    case 'popular':
+                        postsArray.sort((a, b) => {
+                            const readTimeA = parseInt(a.querySelector('.post-read-time').textContent.match(/\d+/)[0]);
+                            const readTimeB = parseInt(b.querySelector('.post-read-time').textContent.match(/\d+/)[0]);
+                            return readTimeB - readTimeA; // Using read time as a proxy for popularity
+                        });
+                        break;
+                }
+
+                // Re-append sorted posts to grid
+                postsArray.forEach(post => {
+                    postsGrid.appendChild(post);
+                });
+            });
+
+            // Tag filtering
+            const tags = document.querySelectorAll('.tag');
+
+            tags.forEach(tag => {
+                tag.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const tagText = this.textContent.toLowerCase();
+
+                    // Remove active class from all tags
+                    tags.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tag
+                    this.classList.add('active');
+
+                    if (tagText === 'all') {
+                        // Show all posts if "All" tag is clicked
+                        postCards.forEach(card => {
+                            card.style.display = 'block';
+                        });
+                        return;
+                    }
+
+                    // Filter posts based on tag
+                    postCards.forEach(card => {
+                        const category = card.querySelector('.post-category').textContent.toLowerCase();
+                        const title = card.querySelector('.post-title').textContent.toLowerCase();
+                        const excerpt = card.querySelector('.post-excerpt').textContent.toLowerCase();
+
+                        if (category.includes(tagText) || title.includes(tagText) || excerpt.includes(tagText)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Pagination functionality
+            const paginationBtns = document.querySelectorAll('.pagination-btn');
+
+            paginationBtns.forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    // Remove active class from all buttons
+                    paginationBtns.forEach(b => b.classList.remove('active'));
+
+                    // Add active class to clicked button
+                    if (!this.classList.contains('next')) {
+                        this.classList.add('active');
+                    }
+
+                    // Scroll to top of category section
+                    window.scrollTo({
+                        top: document.querySelector('.category-header').offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+    <script src="subscription.js"></script>
+</body>
+
+</html>

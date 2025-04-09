@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechMayank - Blog Posts</title>
+    <meta name="description"
+        content="Browse all blog posts from TechMayank - Tech tutorials, insights, and reviews on the latest technology trends.">
+    <meta name="keywords"
+        content="tech blog, technology blogs, programming tutorials, web development articles, tech reviews">
+    <meta name="author" content="Mayank">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="TechMayank - Blog Posts">
+    <meta property="og:description"
+        content="Browse our collection of tech tutorials, insights, and reviews on the latest technology trends.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://techmayank.com/blogs.html">
+
+    <!-- Favicon - Replace with your own -->
+    <link rel="icon" href="/favicon-32x32.png" type="fav-icon">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="blogs.css">
+
+</head>
+
+<body>
+    <header id="main-header">
+        <nav>
+            <a href="index.html" class="logo">Tech<span>Mayank</span></a>
+            <button class="mobile-menu-btn">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blogs.html">Blogs</a></li>
+                <li class="dropdown">
+                    <a href="">Categories</a>
+                    <div class="dropdown-content">
+                        <a href="category-webdev.html">Web Development</a>
+                        <a href="category-ai.html">Artificial Intelligence</a>
+                        <a href="category-cybersecurity.html">Cybersecurity</a>
+                        <a href="category-iot.html">IoT</a>
+                        <a href="category-mobile.html">Mobile Development</a>
+                        <a href="category-cloud.html">Cloud Computing</a>
+                    </div>
+                </li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="subscribe.html" class="subscribe-btn">Subscribe</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="breadcrumbs">
+            <a href="index.html">Home</a> <span class="separator">></span> <span>Blogs</span>
+        </div>
+
+        <div class="page-header">
+            <h1>All Blog Posts</h1>
+            <p>Discover our latest articles, tutorials, and insights on technology, programming, and digital trends.</p>
+        </div>
+
+        <!-- <section class="featured-blog-container">
+            <div class="featured-blog">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1zwhySGCEBxRRFYIcQgvOLOpRGqrT3d7Qng&s" alt="AI Ethics" class="featured-blog-img">
+                <div class="featured-blog-content">
+                    <div class="featured-badge">Featured Post</div>
+                    <div class="blog-category">Artificial Intelligence</div>
+                    <h2 class="featured-blog-title"><a href="blog-post.html">The Ethics of AI: Navigating the Future of Technology</a></h2>
+                    <p class="featured-blog-excerpt">As AI becomes more integrated into our daily lives, ethical considerations are more important than ever. Explore the key challenges and potential solutions in this deep dive into AI ethics.</p>
+                    <div class="blog-meta">
+                        <span class="blog-date"><i class="far fa-calendar-alt"></i> March 28, 2025</span>
+                        <span class="blog-read-time"><i class="far fa-clock"></i> 10 min read</span>
+                    </div>
+                    <a href="blog-post.html" class="read-more">Read Full Article <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+         -->
+        <section class="blog-filter">
+            <div class="filter-container">
+                <div class="category-filter">
+                    <div class="category-tag active" data-category="all">All</div>
+                    <div class="category-tag" data-category="webdev">Web Development</div>
+                    <div class="category-tag" data-category="ai">Artificial Intelligence</div>
+                    <div class="category-tag" data-category="cybersecurity">Cybersecurity</div>
+                    <div class="category-tag" data-category="cloud">Cloud Computing</div>
+                    <div class="category-tag" data-category="mobile">Mobile Development</div>
+                    <div class="category-tag" data-category="iot">IoT</div>
+                </div>
+            </div>
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search articles...">
+            </div>
+        </section>
+        <div style="text-align: center; font-size: 20px; font-weight: bold;">
+            Not Any Post Found Yet! 😞
+        </div>
+        <!-- <section class="blogs-grid">
+            Blog Post 1
+            <article class="blog-card" data-category="webdev">
+                <img src="/api/placeholder/400/320" alt="Web Development Trends" class="blog-img">
+                <div class="blog-content">
+                    <div class="blog-category">Web Development</div>
+                    <h3 class="blog-title"><a href="blog-post.html">Top 10 Web Development Trends in 2025</a></h3>
+                    <p class="blog-excerpt">Discover the latest web development technologies and methodologies that are shaping the digital landscape in 2025.</p>
+                    <div class="blog-meta">
+                        <span class="blog-date"><i class="far fa-calendar-alt"></i> March 25, 2025</span>
+                        <span class="blog-read-time"><i class="far fa-clock"></i> 5 min read</span>
+                    </div>
+                    <div class="blog-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Frameworks</span>
+                        <span class="tag">Trends</span>
+                    </div>
+                </div>
+            </article>
+            
+            Blog Post 2
+            <article class="blog-card" data-category="ai">
+                <img src="/api/placeholder/400/320" alt="AI Applications" class="blog-img">
+                <div class="blog-content">
+                    <div class="blog-category">Artificial Intelligence</div>
+                    <h3 class="blog-title"><a href="blog-post.html">Practical AI Applications for Everyday Life</a></h3>
+                    <p class="blog-excerpt">How artificial intelligence is transforming our daily routines and improving efficiency in unexpected ways.</p>
+                    <div class="blog-meta">
+                        <span class="blog-date"><i class="far fa-calendar-alt"></i> March 20, 2025</span>
+                        <span class="blog-read-time"><i class="far fa-clock"></i> 7 min read</span>
+                    </div>
+                    <div class="blog-tags">
+                        <span class="tag">Machine Learning</span>
+                        <span class="tag">Daily Life</span>
+                        <span class="tag">Automation</span>
+                    </div>
+                </div>
+            </article>
+            
+            Blog Post 3
+            <article class="blog-card" data-category="cybersecurity">
+                <img src="/api/placeholder/400/320" alt="Cybersecurity Tips" class="blog-img">
+                <div class="blog-content">
+                    <div class="blog-category">Cybersecurity</div>
+                    <h3 class="blog-title"><a href="blog-post.html">Essential Cybersecurity Practices for Everyone</a></h3>
+                    <p class="blog-excerpt">Simple yet effective security measures to protect your digital life from common threats and vulnerabilities.</p>
+                    <div class="blog-meta">
+                        <span class="blog-date"><i class="far fa-calendar-alt"></i> March 15, 2025</span>
+                        <span class="blog-read-time"><i class="far fa-clock"></i> 8 min read</span>
+                    </div>
+                    <div class="blog-tags">
+                        <span class="tag">Security</span>
+                        <span class="tag">Protection</span>
+                        <span class="tag">Privacy</span>
+                    </div>
+                </div>
+            </article>
+            
+            Blog Post 4
+            <article class="blog-card" data-category="cloud">
+                <img src="/api/placeholder/400/320" alt="Cloud Computing" class="blog-img">
+                <div class="blog-content">
+                    <div class="blog-category">Cloud Computing</div>
+                    <h3 class="blog-title"><a href="blog-post.html">Multi-Cloud Strategies for Modern Businesses</a></h3>
+                    <p class="blog-excerpt">How businesses are leveraging multiple cloud providers to optimize performance, reduce costs, and avoid vendor lock-in.</p>
+                    <div class="blog-meta">
+                        <span class="blog-date"><i class="far fa-calendar-alt"></i> March 10, 2025</span>
+                        <span class="blog-read-time"><i class="far fa-clock"></i> 6 min read</span>
+                    </div>
+                    <div class="blog-tags">
+                        <span class="tag">AWS</span>
+                        <span class="tag">Azure</span>
+                        <span class="tag">GCP</span>
+                    </div>
+                </div>
+            </article>
+            
+            Blog Post 5
+            <article class="blog-card" data-category="mobile">
+                <img src="/api/placeholder/400/320" alt="Mobile Development" class="blog-img">
+                <div class="blog-content">
+                    <div class="blog-category">Mobile Development</div>
+                    <h3 class="blog-title"><a href="blog-post.html">Cross-Platform vs Native: Which Mobile Development Approach is Right for You?</a></h3>
+                    <p class="blog-excerpt">A comprehensive comparison of cross-platform and native mobile development approaches to help you make the best choice for your project.</p>
+                    <div class="blog-meta">
+                        <span class="blog-date"><i class="far fa-calendar-alt"></i> March 5, 2025</span>
+                        <span class="blog-read-time"><i class="far fa-clock"></i> 9 min read</span>
+                    </div>
+                    <div class="blog-tags">
+                        <span class="tag">React Native</span>
+                        <span class="tag">Flutter</span>
+                        <span class="tag">Swift</span>
+                    </div>
+                </div>
+            </article>
+            
+            Blog Post 6
+            <article class="blog-card" data-category="iot">
+                <img src="/api/placeholder/400/320" alt="IoT Devices" class="blog-img">
+                <div class="blog-content">
+                    <div class="blog-category">IoT</div>
+                    <h3 class="blog-title"><a href="blog-post.html">IoT Security: Protecting Your Smart Home from Hackers</a></h3>
+                    <p class="blog-excerpt">As smart home devices become more prevalent, learn how to secure your connected ecosystem from potential cybersecurity threats.</p>
+                    <div class="blog-meta">
+                        <span class="blog-date"><i class="far fa-calendar-alt"></i> February 28, 2025</span>
+                        <span class="blog-read-time"><i class="far fa-clock"></i> 7 min read</span>
+                    </div>
+                    <div class="blog-tags">
+                        <span class="tag">Smart Home</span>
+                        <span class="tag">Security</span>
+                        <span class="tag">Privacy</span>
+                    </div>
+                </div>
+            </article>
+        </section> -->
+
+        <!-- <div class="pagination">
+            <a href="#" class="prev"><i class="fas fa-chevron-left"></i> <span class="prev-text">Previous</span></a>
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#" class="next"><span class="next-text">Next</span> <i class="fas fa-chevron-right"></i></a>
+        </div> -->
+
+        <section class="cta-section" id="subscribe">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get the latest tech updates, tutorials, and insights delivered directly to your inbox. No spam, just
+                valuable content!</p>
+            <form class="newsletter-form"
+                action="https://app.us9.list-manage.com/subscribe/post?u=c88a828829a68ce01295ca9d8&amp;id=a39a689fbb&amp;f_id=00e6c2e1f0"
+                method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                target="_blank">
+                <input type="email" name="EMAIL" class="newsletter-input" id="mce-EMAIL"
+                    placeholder="Your email address" required>
+                <!-- This hidden div is required to prevent bot signups -->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input type="text" name="b_c88a828829a68ce01295ca9d8_a39a689fbb" tabindex="-1" value="">
+                </div>
+                <button type="submit" class="btn btn-submit" name="subscribe"
+                    id="mc-embedded-subscribe">Subscribe</button>
+                <div id="mce-responses" class="clear foot">
+                    <div class="response" id="mce-error-response" style="display: none;"></div>
+                    <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                <div id="subscribe-status" class="subscribe-message" style="display: none;">
+                    <p>Thank you for subscribing! Please check your inbox to confirm your subscription.</p>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <!-- Enhanced Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section footer-about">
+                <a href="index.html" class="footer-logo">Tech<span>Mayank</span></a>
+                <p>Your go-to source for tech insights, tutorials, and reviews. We make complex technology concepts easy
+                    to understand for everyone.</p>
+                <div class="social-links">
+                    <a href="https://x.com/Mayank_Pras" class="social-icon twitter" aria-label="Twitter"><i
+                            class="fab fa-x-twitter"></i></a>
+                    <a href="https://www.linkedin.com/in/mitthu-kumar/" class="social-icon linkedin"
+                        aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/mkshahi22" class="social-icon github" aria-label="GitHub"><i
+                            class="fab fa-github"></i></a>
+                    <a href="https://techmayank.netlify.app/" class="social-icon website" aria-label="Website"><i
+                            class="fas fa-globe"></i></a>
+                    <a href="https://www.instagram.com/shahi_jii_22/?next=%2F" class="social-icon instagram"
+                        aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blogs.html">Blogs</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Popular Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="category-webdev.html">Web Development</a></li>
+                    <li><a href="category-ai.html">Artificial Intelligence</a></li>
+                    <li><a href="category-cybersecurity.html">Cybersecurity</a></li>
+                    <li><a href="category-cloud.html">Cloud Computing</a></li>
+                    <li><a href="category-mobile.html">Mobile Development</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="far fa-envelope"></i> mayankpra97@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Greater Noida , India</p>
+                <p><i class="fas fa-phone"></i> +91 9798743248</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2025 TechMayank. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile menu toggle
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+
+            menuBtn.addEventListener('click', function () {
+                navLinks.classList.toggle('active');
+            });
+
+            // Mobile dropdown toggle
+            const dropdowns = document.querySelectorAll('.dropdown');
+
+            dropdowns.forEach(dropdown => {
+                const dropdownLink = dropdown.querySelector('a');
+
+                if (window.innerWidth <= 768) {
+                    dropdownLink.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                    });
+                }
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function (event) {
+                if (!event.target.closest('nav') && !event.target.closest('.mobile-menu-btn')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', function () {
+                const header = document.getElementById('main-header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Category filter functionality
+            const categoryTags = document.querySelectorAll('.category-tag');
+            const blogCards = document.querySelectorAll('.blog-card');
+
+            categoryTags.forEach(tag => {
+                tag.addEventListener('click', function () {
+                    // Remove active class from all tags
+                    categoryTags.forEach(t => t.classList.remove('active'));
+
+                    // Add active class to clicked tag
+                    this.classList.add('active');
+
+                    const selectedCategory = this.getAttribute('data-category');
+
+                    // Show/hide blog cards based on category
+                    blogCards.forEach(card => {
+                        if (selectedCategory === 'all' || card.getAttribute('data-category') === selectedCategory) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.querySelector('.search-input');
+
+            searchInput.addEventListener('keyup', function () {
+                const searchTerm = this.value.toLowerCase();
+
+                blogCards.forEach(card => {
+                    const title = card.querySelector('.blog-title').textContent.toLowerCase();
+                    const excerpt = card.querySelector('.blog-excerpt').textContent.toLowerCase();
+                    const category = card.querySelector('.blog-category').textContent.toLowerCase();
+
+                    // Get all tags in the card
+                    const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase());
+
+                    // Check if search term exists in title, excerpt, category, or tags
+                    if (title.includes(searchTerm) ||
+                        excerpt.includes(searchTerm) ||
+                        category.includes(searchTerm) ||
+                        tags.some(tag => tag.includes(searchTerm))) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+
+            // Pagination functionality (demo only)
+            const paginationLinks = document.querySelectorAll('.pagination a:not(.prev):not(.next)');
+
+            paginationLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    // Remove active class from all pagination links
+                    paginationLinks.forEach(l => l.classList.remove('active'));
+
+                    // Add active class to clicked link
+                    this.classList.add('active');
+
+                    // In a real implementation, you would load new content here
+                    // For demo purposes, we'll just scroll to the top
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Newsletter subscription (demo only)
+            const newsletterForm = document.querySelector('.newsletter-form');
+
+            newsletterForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const emailInput = this.querySelector('.newsletter-input');
+
+                // In a real implementation, you would send this to your backend
+                alert(`Thank you for subscribing with: ${emailInput.value}`);
+                emailInput.value = '';
+            });
+        });
+    </script>
+    <script src="subscription.js"></script>
+</body>
+
+</html>
