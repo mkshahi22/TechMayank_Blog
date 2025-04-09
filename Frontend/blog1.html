@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Accessible First - TechMayank</title>
+    <meta name="description" content="How to design inclusive web experiences from day one">
+    <meta name="keywords" content="accessibility, web design, WCAG, inclusive design, ADA compliance">
+    <meta name="author" content="Mayank">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Building Accessible First - TechMayank">
+    <meta property="og:description" content="How to design inclusive web experiences from day one">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://techmayank.com/building-accessible-first">
+
+    <!-- Favicon -->
+    <link rel="icon" href="fav.png" type="image/png">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="common-design.css">
+</head>
+
+<body>
+    <header id="main-header">
+        <nav>
+            <a href="index.html" class="logo">Tech<span>Mayank</span></a>
+            <button class="mobile-menu-btn">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blogs.html">Blogs</a></li>
+                <li class="dropdown">
+                    <a href="">Categories</a>
+                    <div class="dropdown-content">
+                        <a href="category-webdev.html">Web Development</a>
+                        <a href="category-ai.html">Artificial Intelligence</a>
+                        <a href="category-cybersecurity.html">Cybersecurity</a>
+                        <a href="category-iot.html">IoT</a>
+                        <a href="category-mobile.html">Mobile Development</a>
+                        <a href="category-cloud.html">Cloud Computing</a>
+                    </div>
+                </li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="subscribe.html" class="subscribe-btn">Subscribe</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="blog-post-container">
+        <!-- Blog Header -->
+        <section class="blog-header">
+            <div class="post-category">Accessibility</div>
+            <h1 class="post-title">Building Accessible First: How to Design Inclusive Web Experiences from Day One</h1>
+            <div class="post-meta">
+                <div class="author-info">
+                    <img src="author.webp" alt="Author" class="author-img">
+                    <span class="author-name">Mitthu Kumar (Mayank)</span>
+                </div>
+                <span class="post-date"><i class="far fa-calendar-alt"></i> April 2, 2025</span>
+                <span class="post-read-time"><i class="far fa-clock"></i> 12 min read</span>
+                <div class="post-share">
+                    <span>Share:</span>
+                    <a href="#" class="share-icon twitter" aria-label="Share on Twitter"><i
+                            class="fab fa-twitter"></i></a>
+                    <a href="#" class="share-icon facebook" aria-label="Share on Facebook"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="share-icon linkedin" aria-label="Share on LinkedIn"><i
+                            class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Image -->
+        <div class="featured-image">
+            <img src="main_blog1.jpg"
+                alt="A diverse group of people using various devices and assistive technologies to access the same website">
+            <p class="image-caption">Inclusive design benefits everyone, regardless of abilities</p>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="table-of-contents">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#why-matters">Why Accessibility Matters</a></li>
+                <li><a href="#accessibility-mindset">Starting with an Accessibility Mindset</a></li>
+                <li><a href="#design-considerations">Design Considerations</a></li>
+                <li><a href="#development-practices">Development Practices</a></li>
+                <li><a href="#testing">Testing Throughout the Process</a></li>
+                <li><a href="#accessibility-culture">Creating an Accessibility Culture</a></li>
+                <li><a href="#launch-beyond">Launch and Beyond</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+            </ul>
+        </div>
+
+        <!-- Blog Content -->
+        <article class="blog-content">
+            <section id="introduction">
+                <h2>Introduction</h2>
+                <p>Accessibility is not an afterthought or a checkbox to tick off before launching a website. It's a
+                    fundamental approach to design and development that ensures everyone, regardless of ability or
+                    disability, can perceive, understand, navigate, and interact with digital content. When we build
+                    with accessibility in mind, we create more inclusive, usable, and ultimately better web experiences
+                    for all users.</p>
+            </section>
+
+            <section id="why-matters">
+                <h2>Why Accessibility Matters</h2>
+                <p>Beyond the moral imperative and legal requirements (such as ADA, Section 508, and WCAG compliance),
+                    accessibility offers tangible benefits:</p>
+
+                <ul>
+                    <li><strong>Expanded audience reach:</strong> Approximately 15% of the world's population lives with
+                        some form of disability</li>
+                    <li><strong>Improved user experience for everyone:</strong> Features built for accessibility often
+                        benefit all users</li>
+                    <li><strong>Better SEO:</strong> Many accessibility practices align with search engine optimization
+                        techniques</li>
+                    <li><strong>Legal risk reduction:</strong> Protection against accessibility-related lawsuits</li>
+                    <li><strong>Brand reputation enhancement:</strong> Demonstrates corporate social responsibility</li>
+                </ul>
+
+                <div class="image-with-caption">
+                    <img src="img1_blog1.jpg"
+                        alt="A graphic showing the percentage of users with different types of disabilities who benefit from accessible design">
+                    <p class="image-caption">Percentage of users with different types of disabilities who benefit from
+                        accessible design</p>
+                </div>
+            </section>
+
+            <section id="accessibility-mindset">
+                <h2>Starting with an Accessibility Mindset</h2>
+
+                <h3>Set Clear Goals and Standards</h3>
+                <p>Begin by establishing which standards your project will follow. The Web Content Accessibility
+                    Guidelines (WCAG) 2.1 at Level AA is a common baseline, but your organization may have additional
+                    requirements.</p>
+                <p>Create measurable accessibility objectives alongside your other project goals. For example, "All
+                    interactive elements must be keyboard navigable" or "Content must be readable at 200% zoom."</p>
+
+                <div class="image-with-caption">
+                    <img src="img2_blog1.jpg"
+                        alt="A project planning board or document template with accessibility goals included">
+                    <p class="image-caption">Example of a project planning document with accessibility goals included
+                    </p>
+                </div>
+
+                <h3>Build a Diverse Team</h3>
+                <p>Accessibility insights come from diverse perspectives. Consider:</p>
+
+                <ul>
+                    <li>Including team members with disabilities</li>
+                    <li>Consulting with accessibility experts</li>
+                    <li>Establishing relationships with disability advocacy organizations</li>
+                    <li>Training all team members on accessibility basics</li>
+                </ul>
+            </section>
+
+            <section id="design-considerations">
+                <h2>Design Considerations</h2>
+
+                <h3>Create an Inclusive Design System</h3>
+                <p>A thoughtful design system forms the foundation of accessible websites:</p>
+
+                <ul>
+                    <li><strong>Color palette:</strong> Ensure sufficient contrast between text and background (minimum
+                        4.5:1 for standard text)</li>
+                    <li><strong>Typography:</strong> Select readable fonts and establish a clear hierarchy</li>
+                    <li><strong>Interaction states:</strong> Design for keyboard, mouse, touch, and voice inputs</li>
+                    <li><strong>Responsive design:</strong> Ensure content remains accessible at all screen sizes</li>
+                    <li><strong>Spacing and layout:</strong> Create breathing room between elements for better
+                        readability</li>
+                </ul>
+
+                <div class="image-with-caption">
+                    <img src="img3_blog1.jpg"
+                        alt="Example components from an accessible design system showing various states">
+                    <p class="image-caption">Components from an accessible design system showing various states</p>
+                </div>
+
+                <h3>Provide Multiple Ways to Perceive Content</h3>
+                <p>Users access content in different ways:</p>
+
+                <ul>
+                    <li><strong>Visual alternatives:</strong> Always include text alternatives for images, charts, and
+                        graphs</li>
+                    <li><strong>Captions and transcripts:</strong> Make audio and video content accessible</li>
+                    <li><strong>Descriptive links:</strong> Write link text that makes sense out of context</li>
+                    <li><strong>Focus indicators:</strong> Ensure interactive elements have clear focus states</li>
+                </ul>
+
+                <div class="image-with-caption">
+                    <img src="img4_blog1.jpg"
+                        alt="Examples of the same content presented in multiple formats—text, image, audio">
+                    <p class="image-caption">The same content presented in multiple formats to ensure accessibility</p>
+                </div>
+            </section>
+
+            <section id="development-practices">
+                <h2>Development Practices</h2>
+
+                <h3>Build with Semantic HTML</h3>
+                <p>HTML provides built-in accessibility features when used correctly:</p>
+
+                <div class="code-block">
+                    <pre><code>
+<!-- Instead of this -->
+<div class="button" onclick="submitForm()">Submit</div>
+
+<!-- Use this -->
+<button type="submit">Submit</button>
+                    </code></pre>
+                    <div class="copy-btn" title="Copy to clipboard">
+                        <i class="far fa-copy"></i>
+                    </div>
+                </div>
+
+                <p>Using the correct HTML elements provides:</p>
+
+                <ul>
+                    <li>Proper keyboard behavior</li>
+                    <li>Screen reader announcements</li>
+                    <li>Touch target size</li>
+                    <li>Focus management</li>
+                </ul>
+
+                <div class="image-with-caption">
+                    <img src="img5_blog1.jpg"
+                        alt="Side-by-side comparison of semantic vs. non-semantic markup with annotations">
+                    <p class="image-caption">Comparison of semantic vs. non-semantic markup with annotations</p>
+                </div>
+
+                <h3>Progressive Enhancement</h3>
+                <p>Start with the most basic functional experience and layer on enhancements:</p>
+
+                <ol>
+                    <li>Begin with semantic HTML</li>
+                    <li>Add CSS for visual styling</li>
+                    <li>Implement JavaScript for enhanced functionality</li>
+                    <li>Test at each stage for accessibility</li>
+                </ol>
+
+                <p>This approach ensures content remains accessible even when technologies fail.</p>
+
+                <h3>ARIA When Necessary</h3>
+                <p>WAI-ARIA (Accessible Rich Internet Applications) provides additional semantics when HTML alone isn't
+                    sufficient:</p>
+
+                <div class="code-block">
+                    <pre><code>
+<div role="alert" aria-live="assertive">
+  Your form has been submitted successfully.
+</div>
+                    </code></pre>
+                    <div class="copy-btn" title="Copy to clipboard">
+                        <i class="far fa-copy"></i>
+                    </div>
+                </div>
+
+                <p>Remember the first rule of ARIA: don't use ARIA if an equivalent HTML element exists.</p>
+
+                <div class="image-with-caption">
+                    <img src="img6_blog1.jpg" alt="A flowchart showing when to use native HTML vs. ARIA">
+                    <p class="image-caption">Decision flowchart: when to use native HTML vs. ARIA</p>
+                </div>
+            </section>
+
+            <section id="testing">
+                <h2>Testing Throughout the Process</h2>
+
+                <h3>Integrate Accessibility Testing in Your Workflow</h3>
+
+                <div class="image-with-caption">
+                    <img src="/api/placeholder/600/300"
+                        alt="A testing workflow diagram showing where accessibility testing fits">
+                    <p class="image-caption">Testing workflow diagram showing accessibility testing integration points
+                    </p>
+                </div>
+
+                <ul>
+                    <li><strong>Design reviews:</strong> Evaluate wireframes and designs for accessibility issues</li>
+                    <li><strong>Code reviews:</strong> Check for semantic HTML and proper ARIA usage</li>
+                    <li><strong>Automated testing:</strong> Implement tools like axe-core or Lighthouse</li>
+                    <li><strong>Manual testing:</strong> Verify keyboard navigation and screen reader usage</li>
+                    <li><strong>User testing:</strong> Include people with disabilities in your testing process</li>
+                </ul>
+
+                <h3>Essential Testing Techniques</h3>
+
+                <ul>
+                    <li><strong>Keyboard navigation:</strong> Can you use the site without a mouse?</li>
+                    <li><strong>Screen reader testing:</strong> Is content announced correctly?</li>
+                    <li><strong>Color contrast checking:</strong> Do all elements meet contrast requirements?</li>
+                    <li><strong>Zoom testing:</strong> Does content remain usable at 200% zoom?</li>
+                    <li><strong>Reading order:</strong> Does the DOM order match the visual order?</li>
+                </ul>
+
+                <div class="tip-box">
+                    <h4><i class="fas fa-lightbulb"></i> Pro Tip</h4>
+                    <p>Use browser extensions like axe DevTools or the WAVE Evaluation Tool for quick accessibility
+                        checks during development. These tools catch common issues early, saving time during formal
+                        testing.</p>
+                </div>
+            </section>
+
+            <section id="accessibility-culture">
+                <h2>Creating an Accessibility Culture</h2>
+
+                <h3>Documentation and Knowledge Sharing</h3>
+                <p>Document accessibility decisions and create guidelines that become part of your team's shared
+                    knowledge:</p>
+
+                <ul>
+                    <li>Accessibility pattern library</li>
+                    <li>Testing procedures</li>
+                    <li>Standard solutions to accessibility challenges</li>
+                </ul>
+
+                <div class="image-with-caption">
+                    <img src="/api/placeholder/600/300" alt="An example page from an accessibility documentation site">
+                    <p class="image-caption">Example page from an accessibility documentation site</p>
+                </div>
+
+                <h3>Continuous Education</h3>
+                <p>Accessibility standards and best practices evolve. Invest in ongoing education:</p>
+
+                <ul>
+                    <li>Regular team training</li>
+                    <li>Conference attendance</li>
+                    <li>Following accessibility experts</li>
+                    <li>Participating in accessibility communities</li>
+                </ul>
+            </section>
+
+            <section id="launch-beyond">
+                <h2>Launch and Beyond</h2>
+
+                <h3>Accessibility Statement</h3>
+                <p>Create a public accessibility statement that:</p>
+
+                <ul>
+                    <li>Explains commitment to accessibility</li>
+                    <li>Lists known issues with timelines for fixes</li>
+                    <li>Provides contact information for users experiencing accessibility problems</li>
+                </ul>
+
+                <div class="image-with-caption">
+                    <img src="/api/placeholder/600/300" alt="Example of a well-written accessibility statement">
+                    <p class="image-caption">Example of a well-written accessibility statement</p>
+                </div>
+
+                <h3>Ongoing Monitoring</h3>
+                <p>Accessibility is not a one-time achievement but an ongoing commitment:</p>
+
+                <ul>
+                    <li>Schedule regular accessibility audits</li>
+                    <li>Implement accessibility monitoring tools</li>
+                    <li>Review user feedback for accessibility issues</li>
+                    <li>Update as standards evolve</li>
+                </ul>
+            </section>
+
+            <section id="conclusion">
+                <h2>Conclusion</h2>
+                <p>Building accessible first doesn't just meet legal requirements—it creates better products for
+                    everyone. By embedding accessibility into your process from day one, you build more inclusive
+                    experiences, reach wider audiences, and often discover design innovations that benefit all users.
+                    The time and effort invested in accessibility up front saves significant resources later and
+                    demonstrates a genuine commitment to creating a web that works for everyone.</p>
+
+                <div class="image-with-caption">
+                    <img src="/api/placeholder/600/300"
+                        alt="A diverse group of happy users with the website accessible to all of them">
+                    <p class="image-caption">Creating digital experiences that are truly accessible to everyone</p>
+                </div>
+
+                <p>If you enjoyed this article, consider subscribing to our newsletter to get more content like this
+                    delivered directly to your inbox.</p>
+            </section>
+        </article>
+
+        <!-- Author Bio -->
+        <section class="author-bio">
+            <img src="/Image/Common/author.webp" alt="Author" class="author-img-large">
+            <div class="author-details">
+                <h3>About the Author</h3>
+                <h4>Mitthu Kumar (Mayank)</h4>
+                <p>Mitthu Kumar (Mayank) is a front-end developer and web accessibility enthusiast, passionate about
+                    creating inclusive digital experiences. He focuses on implementing accessibility best practices and
+                    ensuring compliance with WCAG standards. With expertise in modern web technologies, Mitthu Kumar
+                    (Mayank) is dedicated to building user-friendly and accessible web applications. He also shares
+                    insights on accessibility and inclusive design through his blog and projects.</p>
+                <div class="author-social">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Posts -->
+
+
+        <!-- Comments Section -->
+        <section class="comments-section">
+            <h2>Comments (0)</h2>
+
+            <!-- Comment Form -->
+            <div class="comment-form-container">
+                <h3>Leave a Comment</h3>
+                <form class="comment-form">
+                    <div class="form-group">
+                        <label for="comment-name">Name</label>
+                        <input type="text" id="comment-name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment-email">Email</label>
+                        <input type="email" id="comment-email" placeholder="Your Email (will not be published)"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment-content">Comment</label>
+                        <textarea id="comment-content" placeholder="Your comment..." rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Post Comment</button>
+                </form>
+            </div>
+
+            <!-- Comments List -->
+            <div class="comments-list">
+                <!-- No comments yet -->
+                <p class="no-comments">Be the first to share your thoughts on this article!</p>
+            </div>
+        </section>
+
+        <!-- Newsletter CTA -->
+        <section class="cta-section" id="subscribe">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get the latest accessibility tips, tutorials, and insights delivered directly to your inbox. No spam,
+                just valuable content!</p>
+            <form class="newsletter-form">
+                <input type="email" name="EMAIL" class="newsletter-input" placeholder="Your email address" required>
+                <button type="submit" class="btn btn-submit">Subscribe</button>
+                <div id="subscribe-status" class="subscribe-message" style="display: none;">
+                    <p>Thank you for subscribing! Please check your inbox to confirm your subscription.</p>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section footer-about">
+                <a href="index.html" class="footer-logo">Tech<span>Mayank</span></a>
+                <p>Your go-to source for tech insights, tutorials, and reviews. We make complex technology concepts easy
+                    to understand for everyone.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon linkedin" aria-label="LinkedIn"><i
+                            class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon github" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-icon website" aria-label="Website"><i class="fas fa-globe"></i></a>
+                    <a href="#" class="social-icon instagram" aria-label="Instagram"><i
+                            class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blogs.html">Blogs</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Popular Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="category-webdev.html">Web Development</a></li>
+                    <li><a href="category-accessibility.html">Accessibility</a></li>
+                    <li><a href="category-design.html">Design</a></li>
+                    <li><a href="category-ux.html">User Experience</a></li>
+                    <li><a href="category-performance.html">Web Performance</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="far fa-envelope"></i> contact@techmayank.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Greater Noida, India</p>
+                <p><i class="fas fa-phone"></i> +91 9798743248</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2025 TechMayank. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile menu toggle
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+
+            menuBtn.addEventListener('click', function () {
+                navLinks.classList.toggle('active');
+            });
+
+            // Mobile dropdown toggle
+            const dropdowns = document.querySelectorAll('.dropdown');
+
+            dropdowns.forEach(dropdown => {
+                const dropdownLink = dropdown.querySelector('a');
+
+                if (window.innerWidth <= 768) {
+                    dropdownLink.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                    });
+                }
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function (event) {
+                if (!event.target.closest('nav') && !event.target.closest('.mobile-menu-btn')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', function () {
+                const header = document.getElementById('main-header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Copy code button functionality
+            const copyBtns = document.querySelectorAll('.copy-btn');
+            copyBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const codeBlock = this.previousElementSibling.textContent;
+                    navigator.clipboard.writeText(codeBlock.trim())
+                        .then(() => {
+                            // Change button icon/text to indicate success
+                            const icon = this.querySelector('i');
+                            icon.className = 'fas fa-check';
+                            setTimeout(() => {
+                                icon.className = 'far fa-copy';
+                            }, 2000);
+                        })
+                        .catch(err => {
+                            console.error('Failed to copy: ', err);
+                        });
+                });
+            });
+
+            // Table of contents smooth scrolling
+            const tocLinks = document.querySelectorAll('.table-of-contents a');
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    const headerOffset = 80; // Adjust based on your header height
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+    <script src="subcription.js"></script>
+</body>
+
+</html>

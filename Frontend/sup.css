@@ -1,0 +1,503 @@
+/* Subscribe Page Specific Styles */
+
+/* Hero Section */
+.subscribe-hero {
+    padding: 60px 0;
+    text-align: center;
+    background-color: var(--light-gray);
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+
+.subscribe-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+}
+
+.subscribe-hero p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #666;
+}
+
+/* Main Subscribe Section */
+.subscribe-section {
+    padding: 20px 0 60px;
+}
+
+.subscribe-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Benefits List */
+.subscribe-benefits {
+    background-color: var(--bg-color);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: var(--card-shadow);
+}
+
+.subscribe-benefits h2 {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    color: var(--secondary-color);
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.subscribe-benefits h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+.benefits-list {
+    list-style: none;
+}
+
+.benefits-list li {
+    display: flex;
+    margin-bottom: 25px;
+    align-items: flex-start;
+}
+
+.benefits-list li:last-child {
+    margin-bottom: 0;
+}
+
+.benefits-list li i {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.benefits-list li div {
+    flex-grow: 1;
+}
+
+.benefits-list h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: var(--secondary-color);
+}
+
+.benefits-list p {
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Subscription Form */
+.subscription-form-container {
+    background-color: var(--bg-color);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: var(--card-shadow);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+}
+
+.form-header p {
+    color: #666;
+}
+
+.subscription-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--secondary-color);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Checkbox Styles */
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: normal;
+    margin-bottom: 8px;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 8px;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+}
+
+.frequency-select select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.consent-checkbox {
+    margin-top: 10px;
+}
+
+.subscribe-submit-btn {
+    margin-top: 10px;
+    padding: 14px 20px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    background-color: var(--accent-color);
+    transition: all 0.3s;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.subscribe-submit-btn:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+}
+
+.subscribe-submit-btn:active {
+    transform: translateY(-1px);
+}
+
+/* Success/Error Messages */
+.subscription-message {
+    text-align: center;
+    padding: 30px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.success-message {
+    background-color: rgba(46, 204, 113, 0.1);
+    border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.error-message {
+    background-color: rgba(231, 76, 60, 0.1);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.subscription-message i {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.success-message i {
+    color: #2ecc71;
+}
+
+.error-message i {
+    color: #e74c3c;
+}
+
+.subscription-message h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.testimonials-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+    color: var(--secondary-color);
+    position: relative;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.testimonials-section h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+.testimonials-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.testimonial-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+.testimonial-content {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.testimonial-content::before {
+    content: '\201C';
+    font-size: 4rem;
+    position: absolute;
+    top: -20px;
+    left: -10px;
+    color: rgba(52, 152, 219, 0.2);
+    font-family: Georgia, serif;
+}
+
+.testimonial-content p {
+    font-style: italic;
+    color: #555;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.testimonial-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.author-details {
+    text-align: left;
+}
+
+.author-details h4 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: var(--secondary-color);
+}
+
+.author-details p {
+    color: #777;
+    font-size: 0.9rem;
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 60px 0;
+    background-color: var(--light-gray);
+    border-radius: 10px;
+    margin: 40px 0;
+}
+
+.faq-section h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+    color: var(--secondary-color);
+    position: relative;
+    padding-bottom: 10px;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.faq-section h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+
+.faq-question {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.faq-question:hover {
+    background-color: rgba(52, 152, 219, 0.05);
+}
+
+.faq-question h3 {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    margin: 0;
+}
+
+.faq-toggle {
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.faq-answer p {
+    padding-bottom: 20px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.faq-item.active .faq-question {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* Responsive Design for Subscribe Page */
+@media (max-width: 992px) {
+    .subscribe-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .subscribe-benefits {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .subscribe-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .testimonials-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .faq-question h3 {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .subscribe-hero {
+        padding: 40px 0;
+    }
+    
+    .subscribe-hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .subscription-form-container,
+    .subscribe-benefits {
+        padding: 20px;
+    }
+    
+    .form-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .testimonial-card {
+        padding: 20px;
+    }
+    
+    .testimonial-img {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .author-details h4 {
+        font-size: 1rem;
+    }
+}
