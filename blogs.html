@@ -429,19 +429,6 @@
                     });
                 });
             });
-
-            // Newsletter subscription (demo only)
-            const newsletterForm = document.querySelector('.newsletter-form');
-
-            newsletterForm.addEventListener('submit', function (e) {
-                e.preventDefault();
-                const emailInput = this.querySelector('.newsletter-input');
-
-                // In a real implementation, you would send this to your backend
-                alert(`Thank you for subscribing with: ${emailInput.value}`);
-                emailInput.value = '';
-            });
-        });
     </script>
     <script src="subscription.js"></script>
 
