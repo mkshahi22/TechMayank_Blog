@@ -838,3 +838,26 @@
     width: 100%;
   }
 }
+
+.delete-comment-btn {
+  background: none;
+  border: none;
+  color: #ff4757;
+  cursor: pointer;
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.delete-comment-btn:hover {
+  color: #ff0000;
+}
+
+.admin-login-btn {
+  background: #f1f1f1;
+  border: 1px solid #ddd;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.9em;
+  margin-bottom: 20px;
+}

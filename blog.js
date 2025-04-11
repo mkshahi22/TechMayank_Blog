@@ -88,18 +88,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // COMMENT SYSTEM FUNCTIONALITY
     // Check if comment elements exist before initializing
     const commentForm = document.querySelector('.comment-form');
-
-    // Fixed: Use querySelector for a class instead of getElementById
     const commentsList = document.querySelector('.comments-list');
 
     if (commentForm && commentsList) {
         const commentMessage = document.getElementById('comment-message');
-        // Fixed: Use querySelector instead of getElementById for loading comments
         const loadingComments = document.querySelector('.loading-comments');
         const commentCount = document.getElementById('comment-count');
 
         // Get post ID from meta tag or data attribute
-        // Fixed: Better handling of the post ID acquisition
         const postIdElement = document.querySelector('[data-post-id]');
         const postId = postIdElement ? postIdElement.getAttribute('data-post-id') : 'building-accessible-first';
 
@@ -121,6 +117,73 @@ document.addEventListener('DOMContentLoaded', function () {
             const div = document.createElement('div');
             div.textContent = str;
             return div.innerHTML;
+        }
+
+        // Function to add delete buttons to comments if admin
+        function addDeleteButtons() {
+            // Check if user is admin
+            const isAdmin = localStorage.getItem('isAdmin') === 'true';
+
+            if (isAdmin) {
+                // Add delete buttons to all comments
+                const comments = document.querySelectorAll('.comment');
+                comments.forEach((comment, index) => {
+                    // Check if delete button already exists
+                    if (!comment.querySelector('.delete-comment-btn')) {
+                        const deleteBtn = document.createElement('button');
+                        deleteBtn.className = 'delete-comment-btn';
+                        deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+                        deleteBtn.dataset.index = index;
+
+                        // Add button to comment header
+                        const commentHeader = comment.querySelector('.comment-header');
+                        if (commentHeader) {
+                            commentHeader.appendChild(deleteBtn);
+                        }
+
+                        // Add click event to delete button
+                        deleteBtn.addEventListener('click', function () {
+                            deleteComment(this.dataset.index);
+                        });
+                    }
+                });
+            }
+        }
+
+        // Function to delete a comment
+        function deleteComment(index) {
+            try {
+                // Get comments from localStorage
+                let comments = JSON.parse(localStorage.getItem(`comments-${postId}`)) || [];
+
+                // Remove the comment at the specified index
+                comments.splice(index, 1);
+
+                // Save updated comments back to localStorage
+                localStorage.setItem(`comments-${postId}`, JSON.stringify(comments));
+
+                // Show success message
+                if (commentMessage) {
+                    commentMessage.className = 'form-message success';
+                    commentMessage.innerHTML = '<i class="fas fa-check-circle"></i> Comment has been successfully removed.';
+                    commentMessage.style.display = 'block';
+
+                    // Hide message after delay
+                    setTimeout(() => {
+                        commentMessage.style.display = 'none';
+                    }, 3000);
+                }
+
+                // Refresh comments display
+                fetchComments();
+            } catch (error) {
+                console.error('Error deleting comment:', error);
+                if (commentMessage) {
+                    commentMessage.className = 'form-message error';
+                    commentMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> There was a problem removing the comment. Please try again.';
+                    commentMessage.style.display = 'block';
+                }
+            }
         }
 
         // Function to display comments
@@ -151,13 +214,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="comment-header">
                         <div class="comment-author">${safeName}</div>
                         <div class="comment-date">${formatDate(comment.created_at)}</div>
+                        <!-- Delete button will be added here for admins -->
                     </div>
                     <div class="comment-content">${safeContent}</div>
                 </div>
-            `;
+                `;
             });
 
             commentsList.innerHTML = commentsHTML;
+
+            // Add delete buttons to comments if admin
+            addDeleteButtons();
         }
 
         // Function to fetch comments using localStorage
@@ -266,6 +333,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         });
+
+        // Add admin login functionality
+        const adminLoginBtn = document.getElementById('admin-login-btn');
+        if (adminLoginBtn) {
+            adminLoginBtn.addEventListener('click', function () {
+                const password = prompt('Enter admin password:');
+                // In production, you would use proper authentication
+                // This is just for demonstration purposes
+                if (password === 'Mayank#123') {
+                    localStorage.setItem('isAdmin', 'true');
+                    alert('Hii, Mitthu Kumar Mayank! You are now logged in as admin.');
+                    // Add delete buttons to existing comments
+                    addDeleteButtons();
+                } else {
+                    alert('Incorrect password');
+                }
+            });
+        }
     }
 
     // Subscription form functionality
