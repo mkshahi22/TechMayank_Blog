@@ -96,14 +96,21 @@
     line-height: 1.5;
 }
 
-/* Subscription Form - UPDATED */
+/* Subscription Form - ENHANCED */
 .subscription-form-container {
     background-color: var(--bg-color);
     border-radius: 15px;
-    padding: 35px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
+    border: 1px solid rgba(52, 152, 219, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.subscription-form-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .subscription-form-container::before {
@@ -112,33 +119,65 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 5px;
-    background: linear-gradient(to right, var(--accent-color), var(--secondary-color));
+    height: 6px;
+    background: linear-gradient(90deg, var(--accent-color), var(--secondary-color), var(--accent-color));
+    background-size: 200% 100%;
+    animation: gradientFlow 3s ease infinite;
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .form-header {
     text-align: center;
     margin-bottom: 35px;
+    position: relative;
+}
+
+.form-header::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+    border-radius: 2px;
 }
 
 .form-header h2 {
-    font-size: 2rem;
-    margin-bottom: 12px;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
     color: var(--secondary-color);
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 .form-header p {
     color: #666;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     max-width: 90%;
     margin: 0 auto;
+    line-height: 1.6;
 }
 
 .subscription-form {
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: 25px;
+    margin-top: 15px;
 }
 
 .form-group {
@@ -148,21 +187,26 @@
 
 .form-group label {
     display: block;
-    margin-bottom: 10px;
-    font-weight: 500;
+    margin-bottom: 12px;
+    font-weight: 600;
     color: var(--secondary-color);
-    font-size: 0.95rem;
+    font-size: 1rem;
     letter-spacing: 0.3px;
+    transition: color 0.3s ease;
+}
+
+.form-group:focus-within label {
+    color: var(--accent-color);
 }
 
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group select {
     width: 100%;
-    padding: 14px 18px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 1rem;
+    padding: 16px 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 1.05rem;
     transition: all 0.3s;
     background-color: rgba(255, 255, 255, 0.9);
 }
@@ -172,16 +216,24 @@
 .form-group select:focus {
     outline: none;
     border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.15);
     background-color: #fff;
+    transform: translateY(-2px);
+}
+
+.form-group input[type="text"]::placeholder,
+.form-group input[type="email"]::placeholder {
+    color: #aaa;
+    font-style: italic;
+    font-weight: 300;
 }
 
 /* Checkbox Styles */
 .checkbox-group {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 12px;
-    margin-top: 8px;
+    gap: 15px;
+    margin-top: 10px;
 }
 
 .checkbox-label {
@@ -190,43 +242,67 @@
     cursor: pointer;
     font-weight: normal;
     margin-bottom: 8px;
-    padding: 8px 12px;
-    border-radius: 6px;
-    transition: background-color 0.2s;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
 }
 
 .checkbox-label:hover {
-    background-color: rgba(52, 152, 219, 0.05);
+    background-color: rgba(52, 152, 219, 0.07);
+    border-color: rgba(52, 152, 219, 0.15);
+    transform: translateY(-2px);
 }
 
 .checkbox-label input[type="checkbox"] {
-    margin-right: 10px;
+    margin-right: 12px;
     cursor: pointer;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     accent-color: var(--accent-color);
+    transition: transform 0.2s;
+}
+
+.checkbox-label:hover input[type="checkbox"] {
+    transform: scale(1.1);
 }
 
 .frequency-select select {
     width: 100%;
-    padding: 14px 18px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
+    padding: 16px 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.9);
     cursor: pointer;
     appearance: none;
     background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
     background-repeat: no-repeat;
-    background-position: right 18px center;
+    background-position: right 20px center;
     background-size: 12px auto;
+    font-size: 1.05rem;
+    transition: all 0.3s;
+}
+
+.frequency-select select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.15);
+    background-color: #fff;
+    transform: translateY(-2px);
 }
 
 .consent-checkbox {
-    margin-top: 15px;
-    padding: 12px 15px;
+    margin-top: 20px;
+    padding: 15px 18px;
     background-color: rgba(52, 152, 219, 0.05);
-    border-radius: 8px;
-    border-left: 3px solid var(--accent-color);
+    border-radius: 10px;
+    border-left: 4px solid var(--accent-color);
+    transition: all 0.3s ease;
+}
+
+.consent-checkbox:hover {
+    background-color: rgba(52, 152, 219, 0.08);
+    transform: translateY(-2px);
 }
 
 .consent-checkbox .checkbox-label {
@@ -236,35 +312,55 @@
 
 .consent-checkbox .checkbox-label:hover {
     background-color: transparent;
+    transform: none;
+    border-color: transparent;
 }
 
 .subscribe-submit-btn {
-    margin-top: 20px;
-    padding: 16px 20px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 8px;
-    background: linear-gradient(to right, var(--accent-color), var(--secondary-color));
-    transition: all 0.3s;
+    margin-top: 30px;
+    padding: 18px 25px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 12px;
+    background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+    transition: all 0.4s;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     border: none;
     color: white;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.25);
+    box-shadow: 0 8px 15px rgba(52, 152, 219, 0.3);
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+}
+
+.subscribe-submit-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.7s;
 }
 
 .subscribe-submit-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 15px rgba(52, 152, 219, 0.35);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(52, 152, 219, 0.4);
+}
+
+.subscribe-submit-btn:hover::before {
+    left: 100%;
 }
 
 .subscribe-submit-btn:active {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(52, 152, 219, 0.35);
 }
 
 /* Success/Error Messages */
@@ -522,11 +618,11 @@
     }
 
     .subscription-form-container {
-        padding: 25px;
+        padding: 30px 25px;
     }
 
     .form-header h2 {
-        font-size: 1.7rem;
+        font-size: 1.8rem;
     }
 }
 
@@ -541,11 +637,11 @@
 
     .subscription-form-container,
     .subscribe-benefits {
-        padding: 20px;
+        padding: 25px 20px;
     }
 
     .form-header h2 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
 
     .testimonial-card {
@@ -565,10 +661,10 @@
     .form-group input[type="email"],
     .form-group select,
     .frequency-select select {
-        padding: 12px 15px;
+        padding: 14px 16px;
     }
 
     .subscribe-submit-btn {
-        padding: 14px 20px;
+        padding: 16px 20px;
     }
 }
