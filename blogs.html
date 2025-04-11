@@ -325,110 +325,111 @@
             menuBtn.addEventListener('click', function () {
                 navLinks.classList.toggle('active');
             });
+        });
 
-            // Mobile dropdown toggle
-            const dropdowns = document.querySelectorAll('.dropdown');
+        // Mobile dropdown toggle
+        const dropdowns = document.querySelectorAll('.dropdown');
 
-            dropdowns.forEach(dropdown => {
-                const dropdownLink = dropdown.querySelector('a');
+        dropdowns.forEach(dropdown => {
+            const dropdownLink = dropdown.querySelector('a');
 
-                if (window.innerWidth <= 768) {
-                    dropdownLink.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        dropdown.classList.toggle('active');
-                    });
-                }
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', function (event) {
-                if (!event.target.closest('nav') && !event.target.closest('.mobile-menu-btn')) {
-                    navLinks.classList.remove('active');
-                }
-            });
-
-            // Navbar scroll effect
-            window.addEventListener('scroll', function () {
-                const header = document.getElementById('main-header');
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-
-            // Category filter functionality
-            const categoryTags = document.querySelectorAll('.category-tag');
-            const blogCards = document.querySelectorAll('.blog-card');
-
-            categoryTags.forEach(tag => {
-                tag.addEventListener('click', function () {
-                    // Remove active class from all tags
-                    categoryTags.forEach(t => t.classList.remove('active'));
-
-                    // Add active class to clicked tag
-                    this.classList.add('active');
-
-                    const selectedCategory = this.getAttribute('data-category');
-
-                    // Show/hide blog cards based on category
-                    blogCards.forEach(card => {
-                        if (selectedCategory === 'all' || card.getAttribute('data-category') === selectedCategory) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
+            if (window.innerWidth <= 768) {
+                dropdownLink.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
                 });
-            });
+            }
+        });
 
-            // Search functionality
-            const searchInput = document.querySelector('.search-input');
+        // Close menu when clicking outside
+        document.addEventListener('click', function (event) {
+            if (!event.target.closest('nav') && !event.target.closest('.mobile-menu-btn')) {
+                navLinks.classList.remove('active');
+            }
+        });
 
-            searchInput.addEventListener('keyup', function () {
-                const searchTerm = this.value.toLowerCase();
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
 
+        // Category filter functionality
+        const categoryTags = document.querySelectorAll('.category-tag');
+        const blogCards = document.querySelectorAll('.blog-card');
+
+        categoryTags.forEach(tag => {
+            tag.addEventListener('click', function () {
+                // Remove active class from all tags
+                categoryTags.forEach(t => t.classList.remove('active'));
+
+                // Add active class to clicked tag
+                this.classList.add('active');
+
+                const selectedCategory = this.getAttribute('data-category');
+
+                // Show/hide blog cards based on category
                 blogCards.forEach(card => {
-                    const title = card.querySelector('.blog-title').textContent.toLowerCase();
-                    const excerpt = card.querySelector('.blog-excerpt').textContent.toLowerCase();
-                    const category = card.querySelector('.blog-category').textContent.toLowerCase();
-
-                    // Get all tags in the card
-                    const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase());
-
-                    // Check if search term exists in title, excerpt, category, or tags
-                    if (title.includes(searchTerm) ||
-                        excerpt.includes(searchTerm) ||
-                        category.includes(searchTerm) ||
-                        tags.some(tag => tag.includes(searchTerm))) {
+                    if (selectedCategory === 'all' || card.getAttribute('data-category') === selectedCategory) {
                         card.style.display = 'block';
                     } else {
                         card.style.display = 'none';
                     }
                 });
             });
+        });
 
-            // Pagination functionality (demo only)
-            const paginationLinks = document.querySelectorAll('.pagination a:not(.prev):not(.next)');
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
 
-            paginationLinks.forEach(link => {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
+        searchInput.addEventListener('keyup', function () {
+            const searchTerm = this.value.toLowerCase();
 
-                    // Remove active class from all pagination links
-                    paginationLinks.forEach(l => l.classList.remove('active'));
+            blogCards.forEach(card => {
+                const title = card.querySelector('.blog-title').textContent.toLowerCase();
+                const excerpt = card.querySelector('.blog-excerpt').textContent.toLowerCase();
+                const category = card.querySelector('.blog-category').textContent.toLowerCase();
 
-                    // Add active class to clicked link
-                    this.classList.add('active');
+                // Get all tags in the card
+                const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase());
 
-                    // In a real implementation, you would load new content here
-                    // For demo purposes, we'll just scroll to the top
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
+                // Check if search term exists in title, excerpt, category, or tags
+                if (title.includes(searchTerm) ||
+                    excerpt.includes(searchTerm) ||
+                    category.includes(searchTerm) ||
+                    tags.some(tag => tag.includes(searchTerm))) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Pagination functionality (demo only)
+        const paginationLinks = document.querySelectorAll('.pagination a:not(.prev):not(.next)');
+
+        paginationLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Remove active class from all pagination links
+                paginationLinks.forEach(l => l.classList.remove('active'));
+
+                // Add active class to clicked link
+                this.classList.add('active');
+
+                // In a real implementation, you would load new content here
+                // For demo purposes, we'll just scroll to the top
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
                 });
             });
+        });
     </script>
     <script src="subscription.js"></script>
 
