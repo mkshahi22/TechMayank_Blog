@@ -113,7 +113,17 @@
 
                 <div class="contact-form-container">
                     <h2>Send Us a Message</h2>
-                    <form class="contact-form" action="#" method="post">
+                    <!-- Updated form with Netlify attributes -->
+                    <form class="contact-form" name="contact" method="POST" data-netlify="true"
+                        netlify-honeypot="bot-field">
+                        <!-- Honeypot field to prevent spam -->
+                        <p class="hidden" style="display: none;">
+                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
+
+                        <!-- Required Netlify form field -->
+                        <input type="hidden" name="form-name" value="contact" />
+
                         <div class="form-group">
                             <label for="contact-name">Name</label>
                             <input type="text" id="contact-name" name="name" placeholder="Your Name" required>
@@ -137,7 +147,7 @@
 
                         <button type="submit" class="btn btn-submit">Send Message</button>
 
-                        <!-- Add message container for form submission feedback -->
+                        <!-- Success message container -->
                         <div id="contact-form-message" class="form-message" style="display: none;"></div>
                     </form>
                 </div>
@@ -239,7 +249,6 @@
             <p>&copy; 2025 TechMayank. All rights reserved.</p>
         </div>
     </footer>
-    <script src="/backend.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -282,15 +291,8 @@
                 }
             });
 
-            // Form submission handling (prevent default for demo)
-            const contactForm = document.querySelector('.contact-form');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    alert('Thank you for your message! We will get back to you soon.');
-                    this.reset();
-                });
-            }
+            // Remove the form submission handling since Netlify will handle this
+            // The form will automatically redirect to a success page
         });
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -309,7 +311,6 @@
                 .openPopup();
         });
     </script>
-    <script src="script.js"></script>
 </body>
 
 </html>
