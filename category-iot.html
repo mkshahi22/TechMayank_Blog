@@ -514,24 +514,6 @@
                     });
                 });
             });
-
-            // Newsletter subscription
-            const newsletterForm = document.querySelector('.newsletter-form');
-
-            if (newsletterForm) {
-                newsletterForm.addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    const emailInput = this.querySelector('.newsletter-input');
-
-                    if (emailInput.value) {
-                        // Here you would normally submit the form to your backend
-                        // For demo purposes, just show an alert
-                        alert('Thanks for subscribing to our IoT newsletter!');
-                        emailInput.value = '';
-                    }
-                });
-            }
-        });
     </script>
     <script src="subscription.js"></script>
 
