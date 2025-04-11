@@ -424,12 +424,16 @@
   transform: translateY(-3px);
 }
 
-/* Comments Section */
+/* Comments Section - UPDATED */
+/* Main Comments Section container */
 .comments-section {
   margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid #e9ecef;
 }
 
-.comments-section h2 {
+/* Comments Section Main Title */
+.comments-section>h2 {
   font-size: 1.8rem;
   margin-bottom: 30px;
   color: var(--secondary-color);
@@ -437,6 +441,7 @@
   align-items: center;
 }
 
+/* Comment Count Badge */
 #comment-count {
   display: inline-block;
   background-color: #0d6efd;
@@ -447,18 +452,61 @@
   margin-left: 0.5rem;
 }
 
-/* Comment Form Styling */
+/* Comments Container */
+.comments-container {
+  margin-bottom: 40px;
+}
+
+/* Section titles within comments area */
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: var(--secondary-color);
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 3px;
+  background-color: var(--accent-color);
+}
+
+/* Enhanced Comment Form Styling - Fixed */
 .comment-form {
-  background-color: #f8f9fa;
-  padding: 2rem;
-  border-radius: 8px;
-  margin-bottom: 3rem;
-  border: 1px solid #e9ecef;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  background-color: #f8fbff;
+  padding: 1.8rem;
+  border-radius: 12px;
+  margin-bottom: 2.5rem;
+  border: 1px solid #e0e8f5;
+  box-shadow: 0 6px 15px rgba(13, 110, 253, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.comment-form:hover {
+  box-shadow: 0 8px 20px rgba(13, 110, 253, 0.12);
+  transform: translateY(-2px);
+}
+
+.comment-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #0d6efd, #5a9cff);
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
+  position: relative;
 }
 
 .comment-form label {
@@ -466,64 +514,142 @@
   margin-bottom: 0.5rem;
   font-weight: 600;
   color: #495057;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
 }
 
 .comment-form input,
 .comment-form textarea {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-  transition: border-color 0.2s ease-in-out;
+  padding: 0.8rem 1rem;
+  border: 2px solid #e0e8f5;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  background-color: #ffffff;
+  color: #495057;
 }
 
 .comment-form input:focus,
 .comment-form textarea:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
+}
+
+.comment-form input:hover,
+.comment-form textarea:hover {
+  border-color: #5a9cff;
+}
+
+.comment-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.comment-form .input-icon {
+  position: absolute;
+  top: 38px;
+  right: 15px;
+  color: #6c757d;
+  transition: all 0.3s ease;
+}
+
+.comment-form input:focus+.input-icon,
+.comment-form textarea:focus+.input-icon {
+  color: #0d6efd;
 }
 
 .comment-form button {
-  background-color: #0d6efd;
+  background: linear-gradient(90deg, #0d6efd, #3a8bfe);
   color: white;
   border: none;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 4px;
+  padding: 0.8rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
 }
 
 .comment-form button:hover {
-  background-color: #0b5ed7;
+  background: linear-gradient(90deg, #0b5ed7, #2474e9);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(13, 110, 253, 0.25);
 }
 
-/* Legacy Comment Form Container */
-.comment-form-container {
-  background-color: var(--light-gray);
-  padding: 30px;
-  border-radius: 10px;
-  margin-bottom: 40px;
+.comment-form button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(13, 110, 253, 0.2);
 }
 
-.comment-form-container h3 {
-  margin-bottom: 20px;
-  color: var(--secondary-color);
+.comment-form button i {
+  margin-right: 8px;
+  font-size: 1.1rem;
 }
 
-/* Comment List & Individual Comments */
-.comments-list-container {
-  margin-top: 2rem;
+.required-field::after {
+  content: '*';
+  color: #dc3545;
+  margin-left: 4px;
 }
 
-.comments-list-container h3 {
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid #e9ecef;
-  font-size: 1.5rem;
+.form-text {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-top: 0.5rem;
 }
 
+/* Form message container */
+.form-message {
+  padding: 0.8rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.form-message i {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.form-message.success {
+  background-color: #d1e7dd;
+  border: 1px solid #badbcc;
+  color: #0f5132;
+}
+
+.form-message.error {
+  background-color: #f8d7da;
+  border: 1px solid #f5c2c7;
+  color: #842029;
+}
+
+/* Comments List Container */
+.comments-list {
+  margin-top: 30px;
+}
+
+/* Individual Comment Styling */
 .comment {
   margin-bottom: 2rem;
   padding: 1.5rem;
@@ -622,7 +748,7 @@
 /* Status Messages */
 .no-comments {
   text-align: center;
-  padding: 3rem 2rem;
+  padding: 2rem 1.5rem;
   background-color: #f8f9fa;
   border-radius: 8px;
   margin: 1.5rem 0;
@@ -635,44 +761,6 @@
   padding: 1.5rem;
   color: #6c757d;
   font-style: italic;
-}
-
-.form-message {
-  padding: 1rem;
-  margin: 1rem 0;
-  border-radius: 4px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  opacity: 0;
-  animation: fadeIn 0.5s forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.form-message i {
-  margin-right: 0.5rem;
-  font-size: 1.2rem;
-}
-
-.form-message.success {
-  background-color: #d1e7dd;
-  border: 1px solid #badbcc;
-  color: #0f5132;
-}
-
-.form-message.error {
-  background-color: #f8d7da;
-  border: 1px solid #f5c2c7;
-  color: #842029;
 }
 
 /* Responsive Adjustments */
@@ -740,5 +828,13 @@
 
   .comment.reply {
     margin-left: 15px;
+  }
+
+  .comment-form {
+    padding: 1.2rem;
+  }
+
+  .comment-form button {
+    width: 100%;
   }
 }
