@@ -260,24 +260,30 @@
             <h2>Subscribe to Our Newsletter</h2>
             <p>Get the latest tech updates, tutorials, and insights delivered directly to your inbox. No spam, just
                 valuable content!</p>
-            <form class="newsletter-form"
-                action="https://app.us9.list-manage.com/subscribe/post?u=c88a828829a68ce01295ca9d8&amp;id=a39a689fbb&amp;f_id=00e6c2e1f0"
-                method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                target="_blank">
-                <input type="email" name="EMAIL" class="newsletter-input" id="mce-EMAIL"
-                    placeholder="Your email address" required>
-                <!-- This hidden div is required to prevent bot signups -->
-                <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                    <input type="text" name="b_c88a828829a68ce01295ca9d8_a39a689fbb" tabindex="-1" value="">
+
+            <!-- Netlify Form with improved design -->
+            <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+                class="newsletter-form" action="/success">
+                <!-- Honeypot field to prevent spam -->
+                <div hidden>
+                    <label>Don't fill this out if you're human: <input name="bot-field"></label>
                 </div>
-                <button type="submit" class="btn btn-submit" name="subscribe"
-                    id="mc-embedded-subscribe">Subscribe</button>
-                <div id="mce-responses" class="clear foot">
-                    <div class="response" id="mce-error-response" style="display: none;"></div>
-                    <div class="response" id="mce-success-response" style="display: none;"></div>
+
+                <!-- Required for Netlify forms -->
+                <input type="hidden" name="form-name" value="newsletter">
+
+                <!-- Form input group -->
+                <div class="form-group">
+                    <input type="email" name="email" class="newsletter-input" placeholder="Your email address" required
+                        aria-label="Email address">
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-paper-plane"></i> Subscribe
+                    </button>
                 </div>
-                <div id="subscribe-status" class="subscribe-message" style="display: none;">
-                    <p>Thank you for subscribing! Please check your inbox to confirm your subscription.</p>
+
+                <!-- Success message container -->
+                <div id="form-success" class="form-message" style="display: none;">
+                    <p><i class="fas fa-check-circle"></i> Thank you for subscribing! Check your inbox for updates.</p>
                 </div>
             </form>
         </section>
@@ -517,6 +523,7 @@
         });
     </script>
     <script src="subscription.js"></script>
+
 </body>
 
 </html>

@@ -52,7 +52,7 @@
 
     <main class="blog-post-container">
         <!-- Blog Header -->
-        <section class="blog-header">
+        <section class="blog-header" data-post-id="1">
             <div class="post-category">Accessibility</div>
             <h1 class="post-title">Building Accessible First: How to Design Inclusive Web Experiences from Day One</h1>
             <div class="post-meta">
@@ -60,7 +60,8 @@
                     <img src="author.webp" alt="Author" class="author-img">
                     <span class="author-name">Mitthu Kumar (Mayank)</span>
                 </div>
-                <span class="post-date"><i class="far fa-calendar-alt"></i> April 2, 2025</span>
+                <span class="post-date" data-published="2025-04-02"><i class="far fa-calendar-alt"></i> April 2,
+                    2025</span>
                 <span class="post-read-time"><i class="far fa-clock"></i> 12 min read</span>
                 <div class="post-share">
                     <span>Share:</span>
@@ -410,46 +411,79 @@
             <h2>Comments (0)</h2>
 
             <!-- Comment Form -->
-            <div class="comment-form-container">
-                <h3>Leave a Comment</h3>
-                <form class="comment-form">
+            <!-- Comment Form Section -->
+            <section class="comments-container">
+                <h3 class="section-title">Leave a Comment</h3>
+
+                <form class="comment-form" action="#" method="post">
+                    <input type="hidden" id="post-id" value="1"> <!-- Update with actual post ID -->
+
                     <div class="form-group">
                         <label for="comment-name">Name</label>
-                        <input type="text" id="comment-name" placeholder="Your Name" required>
+                        <input type="text" id="comment-name" name="name" placeholder="Your Name" required>
                     </div>
+
                     <div class="form-group">
                         <label for="comment-email">Email</label>
-                        <input type="email" id="comment-email" placeholder="Your Email (will not be published)"
-                            required>
+                        <input type="email" id="comment-email" name="email"
+                            placeholder="Your Email (will not be published)" required>
                     </div>
+
                     <div class="form-group">
                         <label for="comment-content">Comment</label>
-                        <textarea id="comment-content" placeholder="Your comment..." rows="5" required></textarea>
+                        <textarea id="comment-content" name="content" placeholder="Your comment..." rows="5"
+                            required></textarea>
                     </div>
+
                     <button type="submit" class="btn">Post Comment</button>
+
+                    <!-- Comment submission message -->
+                    <div id="comment-message" class="form-message" style="display: none;"></div>
                 </form>
-            </div>
 
-            <!-- Comments List -->
-            <div class="comments-list">
-                <!-- No comments yet -->
-                <p class="no-comments">Be the first to share your thoughts on this article!</p>
-            </div>
-        </section>
-
-        <!-- Newsletter CTA -->
-        <section class="cta-section" id="subscribe">
-            <h2>Subscribe to Our Newsletter</h2>
-            <p>Get the latest accessibility tips, tutorials, and insights delivered directly to your inbox. No spam,
-                just valuable content!</p>
-            <form class="newsletter-form">
-                <input type="email" name="EMAIL" class="newsletter-input" placeholder="Your email address" required>
-                <button type="submit" class="btn btn-submit">Subscribe</button>
-                <div id="subscribe-status" class="subscribe-message" style="display: none;">
-                    <p>Thank you for subscribing! Please check your inbox to confirm your subscription.</p>
+                <!-- Comments Display Section -->
+                <div class="comments-section">
+                    <h3 class="section-title">Comments</h3>
+                    <div class="comments-list">
+                        <!-- Comments will be loaded here via JavaScript -->
+                        <div class="loading-comments">Loading comments...</div>
+                    </div>
                 </div>
-            </form>
-        </section>
+            </section>
+
+            <!-- Newsletter CTA -->
+            <section class="cta-section" id="subscribe">
+                <h2>Subscribe to Our Newsletter</h2>
+                <p>Get the latest tech updates, tutorials, and insights delivered directly to your inbox. No spam, just
+                    valuable content!</p>
+
+                <!-- Netlify Form with improved design -->
+                <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+                    class="newsletter-form" action="/success">
+                    <!-- Honeypot field to prevent spam -->
+                    <div hidden>
+                        <label>Don't fill this out if you're human: <input name="bot-field"></label>
+                    </div>
+
+                    <!-- Required for Netlify forms -->
+                    <input type="hidden" name="form-name" value="newsletter">
+
+                    <!-- Form input group -->
+                    <div class="form-group">
+                        <input type="email" name="email" class="newsletter-input" placeholder="Your email address"
+                            required aria-label="Email address">
+                        <button type="submit" class="btn btn-submit">
+                            <i class="fas fa-paper-plane"></i> Subscribe
+                        </button>
+                    </div>
+
+                    <!-- Success message container -->
+                    <div id="form-success" class="form-message" style="display: none;">
+                        <p><i class="fas fa-check-circle"></i> Thank you for subscribing! Check your inbox for updates.
+                        </p>
+                    </div>
+                </form>
+            </section>
     </main>
 
     <!-- Footer -->
@@ -504,7 +538,6 @@
             <p>&copy; 2025 TechMayank. All rights reserved.</p>
         </div>
     </footer>
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Mobile menu toggle
@@ -586,6 +619,7 @@
         });
     </script>
     <script src="subcription.js"></script>
+
 </body>
 
 </html>
