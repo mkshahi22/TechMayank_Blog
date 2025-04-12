@@ -267,9 +267,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 appId: "1:339110129251:web:d44f5bebace6c5bdc61256",
                 measurementId: "G-8JNQLZ809S",
                 // Add the database URL as it's required for the Realtime Database
-                databaseURL: "https://techmayank-3aa98-default-rtdb.firebaseio.com"
+                databaseURL: "https://techmayank-3aa98-default-rtdb.firebaseio.com/"
             };
-
             // Check if Firebase is already initialized
             try {
                 if (!firebase.apps.length) {
