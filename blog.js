@@ -225,274 +225,372 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // COMMENT SYSTEM FUNCTIONALITY
+    // UPDATED COMMENT SYSTEM FUNCTIONALITY - WITH FIREBASE INTEGRATION
     // Check if comment elements exist before initializing
     const commentForm = document.querySelector('.comment-form');
     const commentsList = document.querySelector('.comments-list');
 
     if (commentForm && commentsList) {
-        const commentMessage = document.getElementById('comment-message');
-        const loadingComments = document.querySelector('.loading-comments');
-        const commentCount = document.getElementById('comment-count');
+        console.log("Comment form and list found. Initializing comment system...");
 
-        // Get post ID from meta tag or data attribute
-        const postIdElement = document.querySelector('[data-post-id]');
-        const postId = postIdElement ? postIdElement.getAttribute('data-post-id') : 'building-accessible-first';
+        // First, check if Firebase scripts are loaded
+        if (typeof firebase === 'undefined') {
+            console.error("Firebase is not defined. Make sure to include Firebase scripts in your HTML.");
 
-        // Function to format date nicely
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const options = {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
+            // Add Firebase scripts dynamically if they're missing
+            const firebaseAppScript = document.createElement('script');
+            firebaseAppScript.src = "https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js";
+            document.head.appendChild(firebaseAppScript);
+
+            const firebaseDatabaseScript = document.createElement('script');
+            firebaseDatabaseScript.src = "https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js";
+            document.head.appendChild(firebaseDatabaseScript);
+
+            // Wait for scripts to load
+            firebaseDatabaseScript.onload = function () {
+                initializeFirebase();
             };
-            return date.toLocaleDateString('en-US', options);
+        } else {
+            initializeFirebase();
         }
 
-        // Function to safely escape HTML to prevent XSS
-        function escapeHTML(str) {
-            const div = document.createElement('div');
-            div.textContent = str;
-            return div.innerHTML;
-        }
+        function initializeFirebase() {
+            console.log("Initializing Firebase...");
 
-        // Function to add delete buttons to comments if admin
-        function addDeleteButtons() {
-            // Check if user is admin
-            const isAdmin = localStorage.getItem('isAdmin') === 'true';
+            // Initialize Firebase (Add your Firebase config here)
+            const firebaseConfig = {
+                apiKey: "AIzaSyDyhGRHregnd4cGiACYZ41sV58AXyOlYY4",
+                authDomain: "techmayank-3aa98.firebaseapp.com",
+                projectId: "techmayank-3aa98",
+                storageBucket: "techmayank-3aa98.firebasestorage.app",
+                messagingSenderId: "339110129251",
+                appId: "1:339110129251:web:d44f5bebace6c5bdc61256",
+                measurementId: "G-8JNQLZ809S",
+                // Add the database URL as it's required for the Realtime Database
+                databaseURL: "https://techmayank-3aa98-default-rtdb.firebaseio.com"
+            };
 
-            if (isAdmin) {
-                // Add delete buttons to all comments
-                const comments = document.querySelectorAll('.comment');
-                comments.forEach((comment, index) => {
-                    // Check if delete button already exists
-                    if (!comment.querySelector('.delete-comment-btn')) {
-                        const deleteBtn = document.createElement('button');
-                        deleteBtn.className = 'delete-comment-btn';
-                        deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-                        deleteBtn.dataset.index = index;
+            // Check if Firebase is already initialized
+            try {
+                if (!firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                    console.log("Firebase initialized successfully");
+                } else {
+                    console.log("Firebase already initialized");
+                }
+            } catch (error) {
+                console.error("Error initializing Firebase:", error);
+                return;
+            }
 
-                        // Add button to comment header
-                        const commentHeader = comment.querySelector('.comment-header');
-                        if (commentHeader) {
-                            commentHeader.appendChild(deleteBtn);
+            // Make sure database module is available
+            if (!firebase.database) {
+                console.error("Firebase database module is not available");
+                return;
+            }
+
+            // Get a reference to the database service
+            const database = firebase.database();
+            console.log("Database reference created");
+
+            const commentMessage = document.getElementById('comment-message');
+            const loadingComments = document.querySelector('.loading-comments');
+            const commentCount = document.getElementById('comment-count');
+
+            // Get post ID from meta tag or data attribute
+            const postIdElement = document.querySelector('[data-post-id]');
+            const postId = postIdElement ? postIdElement.getAttribute('data-post-id') : 'building-accessible-first';
+            console.log("Using post ID:", postId);
+
+            // Function to format date nicely
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                const options = {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                };
+                return date.toLocaleDateString('en-US', options);
+            }
+
+            // Function to safely escape HTML to prevent XSS
+            function escapeHTML(str) {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            // Function to add delete buttons to comments if admin
+            function addDeleteButtons() {
+                // Check if user is admin
+                const isAdmin = localStorage.getItem('isAdmin') === 'true';
+
+                if (isAdmin) {
+                    // Add delete buttons to all comments
+                    const comments = document.querySelectorAll('.comment');
+                    comments.forEach(comment => {
+                        // Check if delete button already exists
+                        if (!comment.querySelector('.delete-comment-btn')) {
+                            const deleteBtn = document.createElement('button');
+                            deleteBtn.className = 'delete-comment-btn';
+                            deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+                            deleteBtn.dataset.commentId = comment.dataset.commentId;
+
+                            // Add button to comment header
+                            const commentHeader = comment.querySelector('.comment-header');
+                            if (commentHeader) {
+                                commentHeader.appendChild(deleteBtn);
+                            }
+
+                            // Add click event to delete button
+                            deleteBtn.addEventListener('click', function () {
+                                deleteComment(this.dataset.commentId);
+                            });
                         }
+                    });
+                }
+            }
 
-                        // Add click event to delete button
-                        deleteBtn.addEventListener('click', function () {
-                            deleteComment(this.dataset.index);
+            // Function to delete a comment from Firebase
+            function deleteComment(commentId) {
+                try {
+                    console.log("Deleting comment with ID:", commentId);
+                    // Reference to the specific comment to delete
+                    const commentRef = database.ref(`comments/${postId}/${commentId}`);
+
+                    // Remove the comment
+                    commentRef.remove()
+                        .then(() => {
+                            console.log("Comment deleted successfully");
+                            // Show success message
+                            if (commentMessage) {
+                                commentMessage.className = 'form-message success';
+                                commentMessage.innerHTML = '<i class="fas fa-check-circle"></i> Comment has been successfully removed.';
+                                commentMessage.style.display = 'block';
+
+                                // Hide message after delay
+                                setTimeout(() => {
+                                    commentMessage.style.display = 'none';
+                                }, 3000);
+                            }
+                        })
+                        .catch((error) => {
+                            console.error('Error removing comment:', error);
+                            if (commentMessage) {
+                                commentMessage.className = 'form-message error';
+                                commentMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> There was a problem removing the comment. Please try again.';
+                                commentMessage.style.display = 'block';
+                            }
                         });
+                } catch (error) {
+                    console.error('Error deleting comment:', error);
+                    if (commentMessage) {
+                        commentMessage.className = 'form-message error';
+                        commentMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> There was a problem removing the comment. Please try again.';
+                        commentMessage.style.display = 'block';
+                    }
+                }
+            }
+
+            // Function to display comments
+            function displayComments(comments) {
+                console.log("Displaying comments:", comments);
+                if (loadingComments) {
+                    loadingComments.style.display = 'none';
+                }
+
+                if (!comments || Object.keys(comments).length === 0) {
+                    commentsList.innerHTML = '<div class="no-comments">No comments yet. Be the first to share your thoughts!</div>';
+                    if (commentCount) commentCount.textContent = '0';
+                    return;
+                }
+
+                if (commentCount) commentCount.textContent = Object.keys(comments).length;
+
+                // Convert object to array for sorting
+                let commentsArray = [];
+                for (let id in comments) {
+                    comments[id].id = id; // Add the Firebase key as an id property
+                    commentsArray.push(comments[id]);
+                }
+
+                // Sort comments by date (newest first)
+                commentsArray.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+                let commentsHTML = '';
+                commentsArray.forEach(comment => {
+                    // Escape user input to prevent XSS
+                    const safeName = escapeHTML(comment.name);
+                    const safeContent = escapeHTML(comment.content);
+
+                    // Calculate time ago for comment
+                    const timeAgo = getTimeAgo(new Date(comment.created_at));
+
+                    commentsHTML += `
+                    <div class="comment" data-comment-id="${comment.id}">
+                        <div class="comment-header">
+                            <div class="comment-author">${safeName}</div>
+                            <div class="comment-date">${formatDate(comment.created_at)} <span class="time-ago">(${timeAgo})</span></div>
+                            <!-- Delete button will be added here for admins -->
+                        </div>
+                        <div class="comment-content">${safeContent}</div>
+                    </div>
+                    `;
+                });
+
+                commentsList.innerHTML = commentsHTML;
+
+                // Add delete buttons to comments if admin
+                addDeleteButtons();
+            }
+
+            // Function to fetch comments from Firebase
+            function fetchComments() {
+                try {
+                    console.log("Fetching comments for post:", postId);
+                    // Show loading indicator
+                    if (loadingComments) {
+                        loadingComments.style.display = 'block';
+                    }
+
+                    // Reference to comments for this post
+                    const commentsRef = database.ref(`comments/${postId}`);
+
+                    // Listen for comments
+                    commentsRef.on('value', (snapshot) => {
+                        console.log("Comments data received from Firebase");
+                        const comments = snapshot.val();
+                        displayComments(comments);
+                        updateCommentsTimeAgo(); // Update time ago for comments
+                    }, (error) => {
+                        console.error("Error fetching comments:", error);
+                        commentsList.innerHTML = '<div class="no-comments">Unable to load comments. Please try again later.</div>';
+                        if (loadingComments) {
+                            loadingComments.style.display = 'none';
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error setting up comments listener:', error);
+                    commentsList.innerHTML = '<div class="no-comments">Unable to load comments. Please try again later.</div>';
+                    if (loadingComments) {
+                        loadingComments.style.display = 'none';
+                    }
+                }
+            }
+
+            // Fetch comments on page load
+            fetchComments();
+
+            // Handle comment form submission
+            commentForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                console.log("Comment form submitted");
+
+                const nameInput = document.getElementById('comment-name');
+                const emailInput = document.getElementById('comment-email');
+                const contentInput = document.getElementById('comment-content');
+
+                if (!nameInput || !emailInput || !contentInput) {
+                    console.error('Required form fields not found');
+                    return;
+                }
+
+                const name = nameInput.value.trim();
+                const email = emailInput.value.trim();
+                const content = contentInput.value.trim();
+
+                console.log("Form values:", { name, email, content });
+
+                // Basic validation
+                if (!name || !email || !content) {
+                    console.log("Validation failed - missing fields");
+                    if (commentMessage) {
+                        commentMessage.className = 'form-message error';
+                        commentMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please fill in all required fields.';
+                        commentMessage.style.display = 'block';
+                    }
+                    return;
+                }
+
+                // Create new comment object
+                const newComment = {
+                    name: name,
+                    email: email,
+                    content: content,
+                    created_at: new Date().toISOString(),
+                    post_id: postId
+                };
+
+                console.log("Saving new comment:", newComment);
+
+                try {
+                    // Get reference to the comments list for this post
+                    const commentsRef = database.ref(`comments/${postId}`);
+
+                    // Push the new comment to Firebase
+                    commentsRef.push(newComment)
+                        .then(() => {
+                            console.log("Comment saved successfully");
+                            // Show success message
+                            if (commentMessage) {
+                                commentMessage.className = 'form-message success';
+                                commentMessage.innerHTML = '<i class="fas fa-check-circle"></i> Thank you for your comment! It has been posted.';
+                                commentMessage.style.display = 'block';
+
+                                // Hide message after a delay
+                                setTimeout(() => {
+                                    commentMessage.style.display = 'none';
+                                }, 5000);
+                            }
+
+                            // Clear form
+                            commentForm.reset();
+
+                            // Scroll to the comments list
+                            const commentsListElement = document.querySelector('.comments-list');
+                            if (commentsListElement) {
+                                setTimeout(() => {
+                                    commentsListElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }, 500);
+                            }
+                        })
+                        .catch((error) => {
+                            console.error('Error saving comment:', error);
+                            if (commentMessage) {
+                                commentMessage.className = 'form-message error';
+                                commentMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> There was a problem posting your comment. Please try again.';
+                                commentMessage.style.display = 'block';
+                            }
+                        });
+                } catch (error) {
+                    console.error('Error saving comment:', error);
+                    if (commentMessage) {
+                        commentMessage.className = 'form-message error';
+                        commentMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> There was a problem posting your comment. Please try again.';
+                        commentMessage.style.display = 'block';
+                    }
+                }
+            });
+
+            // Add admin login functionality
+            const adminLoginBtn = document.getElementById('admin-login-btn');
+            if (adminLoginBtn) {
+                adminLoginBtn.addEventListener('click', function () {
+                    const password = prompt('Enter admin password:');
+                    // In production, you would use proper authentication
+                    // This is just for demonstration purposes
+                    if (password === 'Mayank#123') {
+                        localStorage.setItem('isAdmin', 'true');
+                        alert('Hii, Mitthu Kumar Mayank! You are now logged in as admin.');
+                        // Add delete buttons to existing comments
+                        addDeleteButtons();
+                    } else {
+                        alert('Incorrect password');
                     }
                 });
             }
-        }
-
-        // Function to delete a comment
-        function deleteComment(index) {
-            try {
-                // Get comments from localStorage
-                let comments = JSON.parse(localStorage.getItem(`comments-${postId}`)) || [];
-
-                // Remove the comment at the specified index
-                comments.splice(index, 1);
-
-                // Save updated comments back to localStorage
-                localStorage.setItem(`comments-${postId}`, JSON.stringify(comments));
-
-                // Show success message
-                if (commentMessage) {
-                    commentMessage.className = 'form-message success';
-                    commentMessage.innerHTML = '<i class="fas fa-check-circle"></i> Comment has been successfully removed.';
-                    commentMessage.style.display = 'block';
-
-                    // Hide message after delay
-                    setTimeout(() => {
-                        commentMessage.style.display = 'none';
-                    }, 3000);
-                }
-
-                // Refresh comments display
-                fetchComments();
-            } catch (error) {
-                console.error('Error deleting comment:', error);
-                if (commentMessage) {
-                    commentMessage.className = 'form-message error';
-                    commentMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> There was a problem removing the comment. Please try again.';
-                    commentMessage.style.display = 'block';
-                }
-            }
-        }
-
-        // Function to display comments
-        function displayComments(comments) {
-            if (loadingComments) {
-                loadingComments.style.display = 'none';
-            }
-
-            if (comments.length === 0) {
-                commentsList.innerHTML = '<div class="no-comments">No comments yet. Be the first to share your thoughts!</div>';
-                if (commentCount) commentCount.textContent = '0';
-                return;
-            }
-
-            if (commentCount) commentCount.textContent = comments.length;
-
-            // Sort comments by date (newest first)
-            comments.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-
-            let commentsHTML = '';
-            comments.forEach(comment => {
-                // Escape user input to prevent XSS
-                const safeName = escapeHTML(comment.name);
-                const safeContent = escapeHTML(comment.content);
-
-                // Calculate time ago for comment
-                const timeAgo = getTimeAgo(new Date(comment.created_at));
-
-                commentsHTML += `
-                <div class="comment">
-                    <div class="comment-header">
-                        <div class="comment-author">${safeName}</div>
-                        <div class="comment-date">${formatDate(comment.created_at)} <span class="time-ago">(${timeAgo})</span></div>
-                        <!-- Delete button will be added here for admins -->
-                    </div>
-                    <div class="comment-content">${safeContent}</div>
-                </div>
-                `;
-            });
-
-            commentsList.innerHTML = commentsHTML;
-
-            // Add delete buttons to comments if admin
-            addDeleteButtons();
-        }
-
-        // Function to fetch comments using localStorage
-        function fetchComments() {
-            try {
-                let comments = localStorage.getItem(`comments-${postId}`);
-
-                if (comments) {
-                    comments = JSON.parse(comments);
-                    displayComments(comments);
-                } else {
-                    // Initialize with empty array if no comments exist
-                    localStorage.setItem(`comments-${postId}`, JSON.stringify([]));
-                    displayComments([]);
-                }
-            } catch (error) {
-                console.error('Error fetching comments:', error);
-                commentsList.innerHTML = '<div class="no-comments">Unable to load comments. Please try again later.</div>';
-            }
-        }
-
-        // Fetch comments on page load
-        fetchComments();
-
-        // Handle comment form submission
-        commentForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const nameInput = document.getElementById('comment-name');
-            const emailInput = document.getElementById('comment-email');
-            const contentInput = document.getElementById('comment-content');
-
-            if (!nameInput || !emailInput || !contentInput) {
-                console.error('Required form fields not found');
-                return;
-            }
-
-            const name = nameInput.value.trim();
-            const email = emailInput.value.trim();
-            const content = contentInput.value.trim();
-
-            // Basic validation
-            if (!name || !email || !content) {
-                if (commentMessage) {
-                    commentMessage.className = 'form-message error';
-                    commentMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please fill in all required fields.';
-                    commentMessage.style.display = 'block';
-                }
-                return;
-            }
-
-            // In a production environment, this would go to Netlify Forms
-            // For demo purposes, we'll store in localStorage
-            const newComment = {
-                name: name,
-                email: email,
-                content: content,
-                created_at: new Date().toISOString(),
-                post_id: postId
-            };
-
-            try {
-                // Get existing comments
-                let comments = JSON.parse(localStorage.getItem(`comments-${postId}`)) || [];
-
-                // Add new comment
-                comments.push(newComment);
-
-                // Save updated comments
-                localStorage.setItem(`comments-${postId}`, JSON.stringify(comments));
-
-                // Show success message
-                if (commentMessage) {
-                    commentMessage.className = 'form-message success';
-                    commentMessage.innerHTML = '<i class="fas fa-check-circle"></i> Thank you for your comment! It has been posted.';
-                    commentMessage.style.display = 'block';
-
-                    // Hide message after a delay
-                    setTimeout(() => {
-                        commentMessage.style.display = 'none';
-                    }, 5000);
-                }
-
-                // Clear form
-                commentForm.reset();
-
-                // Refresh comments display
-                fetchComments();
-
-                // Fixed: Use querySelector to find the comments list for scrolling
-                const commentsListElement = document.querySelector('.comments-list');
-
-                // Scroll to the comments list if it exists
-                if (commentsListElement) {
-                    setTimeout(() => {
-                        commentsListElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 500);
-                }
-
-            } catch (error) {
-                console.error('Error saving comment:', error);
-                if (commentMessage) {
-                    commentMessage.className = 'form-message error';
-                    commentMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> There was a problem posting your comment. Please try again.';
-                    commentMessage.style.display = 'block';
-                }
-            }
-        });
-
-        // Add admin login functionality
-        const adminLoginBtn = document.getElementById('admin-login-btn');
-        if (adminLoginBtn) {
-            adminLoginBtn.addEventListener('click', function () {
-                const password = prompt('Enter admin password:');
-                // In production, you would use proper authentication
-                // This is just for demonstration purposes
-                if (password === 'Mayank#123') {
-                    localStorage.setItem('isAdmin', 'true');
-                    alert('Hii, Mitthu Kumar Mayank! You are now logged in as admin.');
-                    // Add delete buttons to existing comments
-                    addDeleteButtons();
-                } else {
-                    alert('Incorrect password');
-                }
-            });
         }
     }
 
