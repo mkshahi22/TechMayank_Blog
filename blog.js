@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // COMMENT SYSTEM WITH MODERN FIREBASE MODULAR SDK
+    // COMMENT SYSTEM WITH FIREBASE
     // Check if comment elements exist before initializing
     const commentForm = document.querySelector('.comment-form');
     const commentsList = document.querySelector('.comments-list');
@@ -233,103 +233,15 @@ document.addEventListener('DOMContentLoaded', function () {
     if (commentForm && commentsList) {
         console.log("Comment form and list found. Initializing comment system...");
 
-        // Initialize Firebase using the imported module
-        try {
-            // Get Firebase modules from the window object (they're loaded by the module script in HTML)
-            const firebaseApp = window.firebase;
-
-            if (!firebaseApp) {
-                console.error("Firebase not found on window object");
-                showErrorMessage("Comments system is unavailable - Firebase not loaded");
-                return;
-            }
-
-            // Check if the database is available
-            if (!window.firebase.database) {
-                // Load the database module dynamically
-                const databaseScript = document.createElement('script');
-                databaseScript.src = 'https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js';
-                databaseScript.type = 'module';
-
-                databaseScript.onload = function () {
-                    console.log("Firebase Database module loaded");
-                    initializeCommentSystem();
-                };
-
-                databaseScript.onerror = function () {
-                    console.error("Failed to load Firebase Database module");
-                    showErrorMessage("Comments system is unavailable - Failed to load database");
-                };
-
-                document.head.appendChild(databaseScript);
-            } else {
-                initializeCommentSystem();
-            }
-        } catch (error) {
-            console.error("Error initializing Firebase:", error);
-            showErrorMessage("Failed to initialize comments system");
-
-            // Fall back to loading Firebase directly
-            loadFirebaseDirectly();
-        }
-
-        function showErrorMessage(message) {
-            const loadingIndicator = document.querySelector('.loading-comments');
-            if (loadingIndicator) loadingIndicator.style.display = 'none';
-
-            commentsList.innerHTML = `<div class="comments-error">${message}</div>`;
-        }
-
-        // Fall back to loading Firebase directly with the older SDK
-        function loadFirebaseDirectly() {
-            console.log("Falling back to direct Firebase loading...");
-
-            // Create script elements for Firebase
-            const script1 = document.createElement('script');
-            script1.src = 'https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js';
-
-            const script2 = document.createElement('script');
-            script2.src = 'https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js';
-
-            // Set onload handler for the second script
-            script2.onload = function () {
-                console.log("Firebase scripts loaded directly");
-
-                // Initialize Firebase with the older SDK
-                const firebaseConfig = {
-                    apiKey: "AIzaSyDyhGRHregnd4cGiACYZ41sV58AXyOlYY4",
-                    authDomain: "techmayank-3aa98.firebaseapp.com",
-                    databaseURL: "https://techmayank-3aa98-default-rtdb.firebaseio.com",
-                    projectId: "techmayank-3aa98",
-                    storageBucket: "techmayank-3aa98.appspot.com",
-                    messagingSenderId: "339110129251",
-                    appId: "1:339110129251:web:d44f5bebace6c5bdc61256",
-                    measurementId: "G-8JNQLZ809S"
-                };
-
-                // Initialize Firebase if not already initialized
-                if (!firebase.apps.length) {
-                    firebase.initializeApp(firebaseConfig);
-                    console.log("Firebase initialized with fallback method");
-                }
-
-                setupCommentSystem(firebase.database());
-            };
-
-            // Add scripts to document
-            document.head.appendChild(script1);
-
-            // Wait for first script to load before adding second
-            script1.onload = function () {
-                document.head.appendChild(script2);
-            };
-        }
-
+        // Check if Firebase is already loaded via the window.firebase object
         function initializeCommentSystem() {
+            console.log("Initializing comment system");
+
+            // Create a consistent Firebase config with all required properties
             const firebaseConfig = {
                 apiKey: "AIzaSyDyhGRHregnd4cGiACYZ41sV58AXyOlYY4",
                 authDomain: "techmayank-3aa98.firebaseapp.com",
-                databaseURL: "https://techmayank-3aa98-default-rtdb.firebaseio.com", // Added this critical line
+                databaseURL: "https://techmayank-3aa98-default-rtdb.firebaseio.com", // Critical field
                 projectId: "techmayank-3aa98",
                 storageBucket: "techmayank-3aa98.appspot.com",
                 messagingSenderId: "339110129251",
@@ -337,24 +249,84 @@ document.addEventListener('DOMContentLoaded', function () {
                 measurementId: "G-8JNQLZ809S"
             };
 
-            // Initialize Firebase if not already initialized
-            if (!firebase.apps || !firebase.apps.length) {
-                firebase.initializeApp(firebaseConfig);
-                console.log("Firebase initialized successfully with modern SDK");
+            // Initialize Firebase if we have access to the window.firebase object (from import script)
+            if (window.firebase && typeof window.firebase.initializeApp === 'function') {
+                // Modern v9 SDK usage
+                console.log("Using modern SDK via window.firebase");
+                setupCommentSystem(window.firebase.database);
+            } else {
+                // Fall back to loading Firebase directly with CDN approach
+                loadFirebaseFromCDN(firebaseConfig);
             }
-
-            // Get database reference and setup comment system
-            setupCommentSystem(firebase.database());
         }
 
-        function setupCommentSystem(database) {
-            if (!database) {
-                console.error("Database reference not available");
-                showErrorMessage("Comments system is unavailable - Database not accessible");
+        function loadFirebaseFromCDN(firebaseConfig) {
+            console.log("Loading Firebase from CDN...");
+
+            // Check if Firebase is already loaded
+            if (typeof firebase !== 'undefined') {
+                console.log("Firebase global object already exists");
+                if (!firebase.apps || !firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+                setupCommentSystem(firebase.database());
                 return;
             }
 
-            console.log("Setting up comment system with database");
+            // Load Firebase App first
+            const scriptApp = document.createElement('script');
+            scriptApp.src = 'https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js';
+            scriptApp.onload = function () {
+                console.log("Firebase App script loaded");
+
+                // Then load Firebase Database
+                const scriptDb = document.createElement('script');
+                scriptDb.src = 'https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js';
+                scriptDb.onload = function () {
+                    console.log("Firebase Database script loaded");
+
+                    // Initialize Firebase with config
+                    if (!firebase.apps.length) {
+                        firebase.initializeApp(firebaseConfig);
+                    }
+
+                    setupCommentSystem(firebase.database());
+                };
+                document.head.appendChild(scriptDb);
+            };
+            document.head.appendChild(scriptApp);
+        }
+
+        function showErrorMessage(message) {
+            const loadingIndicator = document.querySelector('.loading-comments');
+            if (loadingIndicator) loadingIndicator.style.display = 'none';
+            commentsList.innerHTML = `<div class="comments-error">${message}</div>`;
+        }
+
+        function setupCommentSystem(databaseFunction) {
+            // Different ways the database might be available
+            let database;
+
+            try {
+                // Try different ways to get the database based on how Firebase was loaded
+                if (typeof databaseFunction === 'function') {
+                    database = databaseFunction();
+                } else if (window.firebase && window.firebase.database) {
+                    database = window.firebase.database();
+                } else if (typeof firebase !== 'undefined' && firebase.database) {
+                    database = firebase.database();
+                }
+
+                if (!database) {
+                    throw new Error("Database reference could not be created");
+                }
+
+                console.log("Database reference obtained successfully");
+            } catch (error) {
+                console.error("Error getting database reference:", error);
+                showErrorMessage("Comments system is unavailable - Database not accessible");
+                return;
+            }
 
             const commentMessage = document.getElementById('comment-message');
             const loadingComments = document.querySelector('.loading-comments');
@@ -633,6 +605,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
         }
+
+        // Start the comment system initialization
+        initializeCommentSystem();
     }
 
     // Call updateCommentsTimeAgo to apply time ago to comment dates
