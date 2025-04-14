@@ -233,58 +233,105 @@ document.addEventListener('DOMContentLoaded', function () {
     if (commentForm && commentsList) {
         console.log("Comment form and list found. Initializing comment system...");
 
-        // First, check if Firebase scripts are loaded
-        if (typeof firebase === 'undefined') {
-            console.error("Firebase is not defined. Make sure to include Firebase scripts in your HTML.");
+        // Load Firebase scripts dynamically to ensure they're available
+        function loadFirebaseScripts() {
+            return new Promise((resolve, reject) => {
+                // Check if Firebase is already loaded
+                if (typeof firebase !== 'undefined' && firebase.apps && firebase.database) {
+                    console.log("Firebase already loaded");
+                    resolve();
+                    return;
+                }
 
-            // Add Firebase scripts dynamically if they're missing
-            const firebaseAppScript = document.createElement('script');
-            firebaseAppScript.src = "https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js";
-            document.head.appendChild(firebaseAppScript);
+                console.log("Loading Firebase scripts...");
 
-            const firebaseDatabaseScript = document.createElement('script');
-            firebaseDatabaseScript.src = "https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js";
-            document.head.appendChild(firebaseDatabaseScript);
+                // Add Firebase app script
+                const firebaseAppScript = document.createElement('script');
+                firebaseAppScript.src = "https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js";
+                document.head.appendChild(firebaseAppScript);
 
-            // Wait for scripts to load
-            firebaseDatabaseScript.onload = function () {
-                initializeFirebase();
-            };
-        } else {
-            initializeFirebase();
+                // Wait for app script to load before adding database script
+                firebaseAppScript.onload = function () {
+                    console.log("Firebase app script loaded");
+
+                    const firebaseDatabaseScript = document.createElement('script');
+                    firebaseDatabaseScript.src = "https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js";
+                    document.head.appendChild(firebaseDatabaseScript);
+
+                    // Resolve when database script is loaded
+                    firebaseDatabaseScript.onload = function () {
+                        console.log("Firebase database script loaded");
+                        // Give a small delay to ensure everything is properly initialized
+                        setTimeout(resolve, 500);
+                    };
+
+                    firebaseDatabaseScript.onerror = function (error) {
+                        console.error("Error loading Firebase database script:", error);
+                        reject(error);
+                    };
+                };
+
+                firebaseAppScript.onerror = function (error) {
+                    console.error("Error loading Firebase app script:", error);
+                    reject(error);
+                };
+            });
         }
 
-        function initializeFirebase() {
-            console.log("Initializing Firebase...");
+        // Initialize Firebase with proper error handling
+        loadFirebaseScripts()
+            .then(() => {
+                console.log("Initializing Firebase...");
 
-            // Initialize Firebase (Add your Firebase config here)
-            const firebaseConfig = {
-                apiKey: "AIzaSyDyhGRHregnd4cGiACYZ41sV58AXyOlYY4",
-                authDomain: "techmayank-3aa98.firebaseapp.com",
-                projectId: "techmayank-3aa98",
-                storageBucket: "techmayank-3aa98.firebasestorage.app",
-                messagingSenderId: "339110129251",
-                appId: "1:339110129251:web:d44f5bebace6c5bdc61256",
-                measurementId: "G-8JNQLZ809S",
-                // Add the database URL as it's required for the Realtime Database
-                databaseURL: "https://techmayank-3aa98-default-rtdb.firebaseio.com/"
-            };
-            // Check if Firebase is already initialized
-            try {
-                if (!firebase.apps.length) {
-                    firebase.initializeApp(firebaseConfig);
-                    console.log("Firebase initialized successfully");
-                } else {
-                    console.log("Firebase already initialized");
+                // Firebase configuration - ensure this is correct
+                const firebaseConfig = {
+                    apiKey: "AIzaSyDyhGRHregnd4cGiACYZ41sV58AXyOlYY4",
+                    authDomain: "techmayank-3aa98.firebaseapp.com",
+                    databaseURL: "https://techmayank-3aa98-default-rtdb.firebaseio.com",  // Make sure this URL is correct
+                    projectId: "techmayank-3aa98",
+                    storageBucket: "techmayank-3aa98.appspot.com",  // Fixed storage bucket URL
+                    messagingSenderId: "339110129251",
+                    appId: "1:339110129251:web:d44f5bebace6c5bdc61256",
+                    measurementId: "G-8JNQLZ809S"
+                };
+
+                // Initialize Firebase with proper error handling
+                try {
+                    if (!firebase.apps.length) {
+                        firebase.initializeApp(firebaseConfig);
+                        console.log("Firebase initialized successfully");
+                    } else {
+                        console.log("Firebase already initialized");
+                    }
+
+                    // Now that Firebase is initialized, set up the comment system
+                    setupCommentSystem();
+                } catch (error) {
+                    console.error("Error initializing Firebase:", error);
+                    displayErrorMessage("There was a problem connecting to the comments system. Please try again later.");
                 }
-            } catch (error) {
-                console.error("Error initializing Firebase:", error);
-                return;
+            })
+            .catch(error => {
+                console.error("Failed to load Firebase scripts:", error);
+                displayErrorMessage("Could not load comments system. Please check your internet connection and try again.");
+            });
+
+        // Display error message in comments area
+        function displayErrorMessage(message) {
+            const loadingComments = document.querySelector('.loading-comments');
+            if (loadingComments) {
+                loadingComments.style.display = 'none';
             }
 
+            commentsList.innerHTML = `<div class="error-message">${message}</div>`;
+        }
+
+        // Set up the comment system once Firebase is ready
+        function setupCommentSystem() {
             // Make sure database module is available
             if (!firebase.database) {
                 console.error("Firebase database module is not available");
+                displayErrorMessage("Comments system unavailable. Please try again later.");
                 return;
             }
 
@@ -296,9 +343,24 @@ document.addEventListener('DOMContentLoaded', function () {
             const loadingComments = document.querySelector('.loading-comments');
             const commentCount = document.getElementById('comment-count');
 
-            // Get post ID from meta tag or data attribute
+            // Get post ID from meta tag or data attribute - with fallback options
+            let postId = 'default-post';
             const postIdElement = document.querySelector('[data-post-id]');
-            const postId = postIdElement ? postIdElement.getAttribute('data-post-id') : 'building-accessible-first';
+
+            if (postIdElement) {
+                postId = postIdElement.getAttribute('data-post-id');
+            } else {
+                // Try to get from URL
+                const urlPath = window.location.pathname;
+                const pathSegments = urlPath.split('/');
+                const lastSegment = pathSegments[pathSegments.length - 1];
+
+                if (lastSegment && lastSegment !== '' && lastSegment !== '/') {
+                    // Remove file extension if present
+                    postId = lastSegment.replace(/\.[^/.]+$/, "");
+                }
+            }
+
             console.log("Using post ID:", postId);
 
             // Function to format date nicely
@@ -457,25 +519,22 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Reference to comments for this post
                     const commentsRef = database.ref(`comments/${postId}`);
 
-                    // Listen for comments
-                    commentsRef.on('value', (snapshot) => {
-                        console.log("Comments data received from Firebase");
-                        const comments = snapshot.val();
-                        displayComments(comments);
-                        updateCommentsTimeAgo(); // Update time ago for comments
-                    }, (error) => {
-                        console.error("Error fetching comments:", error);
-                        commentsList.innerHTML = '<div class="no-comments">Unable to load comments. Please try again later.</div>';
-                        if (loadingComments) {
-                            loadingComments.style.display = 'none';
+                    // Listen for comments with error handling
+                    commentsRef.on('value',
+                        (snapshot) => {
+                            console.log("Comments data received from Firebase");
+                            const comments = snapshot.val();
+                            displayComments(comments);
+                            updateCommentsTimeAgo(); // Update time ago for comments
+                        },
+                        (error) => {
+                            console.error("Error fetching comments:", error);
+                            displayErrorMessage("Unable to load comments. Please try again later.");
                         }
-                    });
+                    );
                 } catch (error) {
                     console.error('Error setting up comments listener:', error);
-                    commentsList.innerHTML = '<div class="no-comments">Unable to load comments. Please try again later.</div>';
-                    if (loadingComments) {
-                        loadingComments.style.display = 'none';
-                    }
+                    displayErrorMessage("Unable to load comments. Please try again later.");
                 }
             }
 
