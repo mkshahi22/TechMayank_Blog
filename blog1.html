@@ -545,8 +545,38 @@
             </p>
         </div>
     </footer>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
+        import { getDatabase } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDyhGRHregnd4cGiACYZ41sV58AXyOlYY4",
+            authDomain: "techmayank-3aa98.firebaseapp.com",
+            databaseURL: "https://techmayank-3aa98-default-rtdb.firebaseio.com", // Added this critical line
+            projectId: "techmayank-3aa98",
+            storageBucket: "techmayank-3aa98.appspot.com",
+            messagingSenderId: "339110129251",
+            appId: "1:339110129251:web:d44f5bebace6c5bdc61256",
+            measurementId: "G-8JNQLZ809S"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+
+        // Make Firebase available globally
+        window.firebase = {
+            app: app,
+            database: database,
+            analytics: analytics,
+            getDatabase: () => database,
+            ref: (path) => database.ref(path)
+        };
+    </script>
     <script src="subcription.js"></script>
     <script src="blog.js"></script>
 
