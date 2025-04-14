@@ -233,67 +233,70 @@ document.addEventListener('DOMContentLoaded', function () {
     if (commentForm && commentsList) {
         console.log("Comment form and list found. Initializing comment system...");
 
-        // Check if Firebase is already loaded via the window.firebase object
+        // Initialize comment system using Firebase v9 modular SDK if available
         function initializeCommentSystem() {
             console.log("Initializing comment system");
 
-            // Create a consistent Firebase config with all required properties
-            const firebaseConfig = {
-                apiKey: "AIzaSyDyhGRHregnd4cGiACYZ41sV58AXyOlYY4",
-                authDomain: "techmayank-3aa98.firebaseapp.com",
-                databaseURL: "https://techmayank-3aa98-default-rtdb.firebaseio.com", // Critical field
-                projectId: "techmayank-3aa98",
-                storageBucket: "techmayank-3aa98.appspot.com",
-                messagingSenderId: "339110129251",
-                appId: "1:339110129251:web:d44f5bebace6c5bdc61256",
-                measurementId: "G-8JNQLZ809S"
-            };
-
-            // Initialize Firebase if we have access to the window.firebase object (from import script)
-            if (window.firebase && typeof window.firebase.initializeApp === 'function') {
-                // Modern v9 SDK usage
-                console.log("Using modern SDK via window.firebase");
-                setupCommentSystem(window.firebase.database);
+            // Check if we already have Firebase from the module import
+            if (window.firebase && window.firebase.push) {
+                console.log("Using Firebase from modular import");
+                setupCommentSystemModular();
             } else {
-                // Fall back to loading Firebase directly with CDN approach
-                loadFirebaseFromCDN(firebaseConfig);
+                // Fall back to loading Firebase from CDN (v8)
+                loadFirebaseFromCDN();
             }
         }
 
-        function loadFirebaseFromCDN(firebaseConfig) {
+        function loadFirebaseFromCDN() {
             console.log("Loading Firebase from CDN...");
 
-            // Check if Firebase is already loaded
-            if (typeof firebase !== 'undefined') {
-                console.log("Firebase global object already exists");
-                if (!firebase.apps || !firebase.apps.length) {
-                    firebase.initializeApp(firebaseConfig);
-                }
-                setupCommentSystem(firebase.database());
+            // Check if Firebase is already loaded (legacy v8)
+            if (typeof firebase !== 'undefined' && firebase.database) {
+                console.log("Firebase v8 already loaded");
+                setupCommentSystemLegacy();
                 return;
             }
 
-            // Load Firebase App first
+            // Load Firebase App first (v8)
             const scriptApp = document.createElement('script');
             scriptApp.src = 'https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js';
+
             scriptApp.onload = function () {
                 console.log("Firebase App script loaded");
 
                 // Then load Firebase Database
                 const scriptDb = document.createElement('script');
                 scriptDb.src = 'https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js';
+
                 scriptDb.onload = function () {
                     console.log("Firebase Database script loaded");
 
-                    // Initialize Firebase with config
+                    // Firebase config
+                    const firebaseConfig = {
+                        apiKey: "AIzaSyDyhGRHregnd4cGiACYZ41sV58AXyOlYY4",
+                        authDomain: "techmayank-3aa98.firebaseapp.com",
+                        databaseURL: "https://techmayank-3aa98-default-rtdb.asia-southeast1.firebasedatabase.app/",
+                        projectId: "techmayank-3aa98",
+                        storageBucket: "techmayank-3aa98.firebasestorage.app",
+                        messagingSenderId: "339110129251",
+                        appId: "1:339110129251:web:d44f5bebace6c5bdc61256",
+                        measurementId: "G-8JNQLZ809S"
+                    };
+                    // Initialize Firebase with legacy v8 API
                     if (!firebase.apps.length) {
                         firebase.initializeApp(firebaseConfig);
                     }
 
-                    setupCommentSystem(firebase.database());
+                    setupCommentSystemLegacy();
                 };
                 document.head.appendChild(scriptDb);
             };
+
+            scriptApp.onerror = function () {
+                console.error("Failed to load Firebase App script");
+                showErrorMessage("Comments system could not be loaded. Please try again later.");
+            };
+
             document.head.appendChild(scriptApp);
         }
 
@@ -303,56 +306,298 @@ document.addEventListener('DOMContentLoaded', function () {
             commentsList.innerHTML = `<div class="comments-error">${message}</div>`;
         }
 
-        function setupCommentSystem(databaseFunction) {
-            // Different ways the database might be available
-            let database;
-
-            try {
-                // Try different ways to get the database based on how Firebase was loaded
-                if (typeof databaseFunction === 'function') {
-                    database = databaseFunction();
-                } else if (window.firebase && window.firebase.database) {
-                    database = window.firebase.database();
-                } else if (typeof firebase !== 'undefined' && firebase.database) {
-                    database = firebase.database();
-                }
-
-                if (!database) {
-                    throw new Error("Database reference could not be created");
-                }
-
-                console.log("Database reference obtained successfully");
-            } catch (error) {
-                console.error("Error getting database reference:", error);
-                showErrorMessage("Comments system is unavailable - Database not accessible");
-                return;
-            }
+        // Setup comment system with modular v9 Firebase API
+        function setupCommentSystemModular() {
+            console.log("Setting up comment system with modular Firebase v9");
 
             const commentMessage = document.getElementById('comment-message');
             const loadingComments = document.querySelector('.loading-comments');
             const commentCount = document.getElementById('comment-count');
 
-            // Determine post ID - first try data attribute
-            let postId = 'default-post';
-            const postIdElement = document.querySelector('[data-post-id]');
+            // Determine post ID
+            let postId = determinePostId();
+            console.log("Using post ID:", postId);
 
-            if (postIdElement) {
-                postId = postIdElement.getAttribute('data-post-id');
-            } else {
-                // Try to extract from URL
-                const urlPath = window.location.pathname;
-                const pathSegments = urlPath.split('/');
-                const lastSegment = pathSegments[pathSegments.length - 1].replace(/\.html$/, '');
+            // Format date nicely
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                const options = {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                };
+                return date.toLocaleDateString('en-US', options);
+            }
 
-                if (lastSegment && lastSegment !== '') {
-                    postId = lastSegment;
+            // Safely escape HTML to prevent XSS
+            function escapeHTML(str) {
+                if (!str) return '';
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            // Add delete buttons to comments if admin
+            function addDeleteButtons() {
+                const isAdmin = localStorage.getItem('isAdmin') === 'true';
+
+                if (isAdmin) {
+                    const comments = document.querySelectorAll('.comment');
+                    comments.forEach(comment => {
+                        if (!comment.querySelector('.delete-comment-btn')) {
+                            const deleteBtn = document.createElement('button');
+                            deleteBtn.className = 'delete-comment-btn';
+                            deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+                            deleteBtn.dataset.commentId = comment.dataset.commentId;
+
+                            const commentHeader = comment.querySelector('.comment-header');
+                            if (commentHeader) {
+                                commentHeader.appendChild(deleteBtn);
+
+                                deleteBtn.addEventListener('click', function () {
+                                    deleteComment(this.dataset.commentId);
+                                });
+                            }
+                        }
+                    });
                 }
             }
 
-            // Sanitize postId to be valid in Firebase path
-            postId = postId.replace(/[.#$\/\[\]]/g, '_');
+            // Delete a comment using modular API
+            function deleteComment(commentId) {
+                if (!commentId) {
+                    console.error("No comment ID provided for deletion");
+                    return;
+                }
 
-            // Log the post ID we're using
+                console.log("Deleting comment:", commentId);
+
+                try {
+                    const commentRef = window.firebase.ref(`comments/${postId}/${commentId}`);
+                    window.firebase.remove(commentRef)
+                        .then(() => {
+                            console.log("Comment deleted successfully");
+                            if (commentMessage) {
+                                commentMessage.className = 'form-message success';
+                                commentMessage.innerHTML = '<i class="fas fa-check-circle"></i> Comment deleted successfully.';
+                                commentMessage.style.display = 'block';
+
+                                setTimeout(() => {
+                                    commentMessage.style.display = 'none';
+                                }, 3000);
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error deleting comment:", error);
+                            if (commentMessage) {
+                                commentMessage.className = 'form-message error';
+                                commentMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> Failed to delete comment.';
+                                commentMessage.style.display = 'block';
+                            }
+                        });
+                } catch (error) {
+                    console.error("Error during comment deletion:", error);
+                    if (commentMessage) {
+                        commentMessage.className = 'form-message error';
+                        commentMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> Failed to delete comment.';
+                        commentMessage.style.display = 'block';
+                    }
+                }
+            }
+
+            // Display comments in the UI
+            function displayComments(comments) {
+                // Hide loading indicator
+                if (loadingComments) {
+                    loadingComments.style.display = 'none';
+                }
+
+                // No comments case
+                if (!comments || Object.keys(comments).length === 0) {
+                    commentsList.innerHTML = '<div class="no-comments">No comments yet. Be the first to share your thoughts!</div>';
+                    if (commentCount) commentCount.textContent = '0';
+                    return;
+                }
+
+                // Update comment count
+                if (commentCount) {
+                    commentCount.textContent = Object.keys(comments).length.toString();
+                }
+
+                // Convert to array and sort
+                const commentsArray = Object.keys(comments).map(id => {
+                    return { ...comments[id], id };
+                });
+
+                commentsArray.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+                // Build HTML
+                let commentsHTML = '';
+                commentsArray.forEach(comment => {
+                    const safeName = escapeHTML(comment.name);
+                    const safeContent = escapeHTML(comment.content);
+                    const timeAgo = getTimeAgo(new Date(comment.created_at));
+
+                    commentsHTML += `
+                    <div class="comment" data-comment-id="${comment.id}">
+                        <div class="comment-header">
+                            <div class="comment-author">${safeName}</div>
+                            <div class="comment-date">${formatDate(comment.created_at)} <span class="time-ago">(${timeAgo})</span></div>
+                        </div>
+                        <div class="comment-content">${safeContent}</div>
+                    </div>
+                    `;
+                });
+
+                commentsList.innerHTML = commentsHTML;
+
+                // Add delete buttons if admin
+                addDeleteButtons();
+            }
+
+            // Fetch comments from Firebase using v9 modular API
+            function fetchComments() {
+                console.log("Fetching comments for post:", postId);
+
+                // Show loading
+                if (loadingComments) {
+                    loadingComments.style.display = 'block';
+                }
+
+                try {
+                    // Set up listener for comments
+                    const commentsRef = window.firebase.ref(`comments/${postId}`);
+
+                    window.firebase.onValue(commentsRef,
+                        (snapshot) => {
+                            console.log("Comments received from Firebase:", snapshot.val());
+                            displayComments(snapshot.val());
+                        },
+                        (error) => {
+                            console.error("Error fetching comments:", error);
+                            showErrorMessage("Unable to load comments. Please try again later.");
+                        }
+                    );
+                } catch (error) {
+                    console.error("Error setting up comments listener:", error);
+                    showErrorMessage("Unable to load comments. Please try again later.");
+                }
+            }
+
+            // Call fetchComments to load comments initially
+            fetchComments();
+
+            // Handle comment form submission - prevent page reload on submit
+            commentForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                console.log("Comment form submitted");
+
+                const nameInput = document.getElementById('comment-name');
+                const emailInput = document.getElementById('comment-email');
+                const contentInput = document.getElementById('comment-content');
+
+                if (!nameInput || !emailInput || !contentInput) {
+                    console.error("Required form fields missing");
+                    return;
+                }
+
+                const name = nameInput.value.trim();
+                const email = emailInput.value.trim();
+                const content = contentInput.value.trim();
+
+                console.log("Form values:", { name, email, content });
+
+                // Form validation
+                if (!name || !email || !content) {
+                    if (commentMessage) {
+                        commentMessage.className = 'form-message error';
+                        commentMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please fill all required fields.';
+                        commentMessage.style.display = 'block';
+                    }
+                    return;
+                }
+
+                // Create comment object
+                const newComment = {
+                    name,
+                    email,
+                    content,
+                    created_at: new Date().toISOString(),
+                    post_id: postId
+                };
+
+                console.log("Saving new comment:", newComment);
+
+                try {
+                    // Add to Firebase using modular API
+                    const commentsRef = window.firebase.ref(`comments/${postId}`);
+                    window.firebase.push(commentsRef, newComment)
+                        .then(() => {
+                            console.log("Comment saved successfully");
+
+                            // Show success message
+                            if (commentMessage) {
+                                commentMessage.className = 'form-message success';
+                                commentMessage.innerHTML = '<i class="fas fa-check-circle"></i> Your comment has been posted successfully!';
+                                commentMessage.style.display = 'block';
+
+                                setTimeout(() => {
+                                    commentMessage.style.display = 'none';
+                                }, 3000);
+                            }
+
+                            // Reset form
+                            commentForm.reset();
+                        })
+                        .catch(error => {
+                            console.error("Error saving comment:", error);
+
+                            if (commentMessage) {
+                                commentMessage.className = 'form-message error';
+                                commentMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> Failed to post your comment. Please try again.';
+                                commentMessage.style.display = 'block';
+                            }
+                        });
+                } catch (error) {
+                    console.error("Error pushing comment:", error);
+                    if (commentMessage) {
+                        commentMessage.className = 'form-message error';
+                        commentMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> Failed to post your comment. Please try again.';
+                        commentMessage.style.display = 'block';
+                    }
+                }
+            });
+
+            // Admin login functionality
+            const adminLoginBtn = document.getElementById('admin-login-btn');
+            if (adminLoginBtn) {
+                adminLoginBtn.addEventListener('click', function () {
+                    const password = prompt("Enter admin password:");
+
+                    if (password === "Mayank#123") {
+                        localStorage.setItem('isAdmin', 'true');
+                        alert("Hii, Mitthu Kumar Mayank! You are now logged in as admin.");
+                        addDeleteButtons();
+                    } else {
+                        alert("Incorrect password");
+                    }
+                });
+            }
+        }
+
+        // Setup comment system with legacy v8 Firebase API
+        function setupCommentSystemLegacy() {
+            console.log("Setting up comment system with legacy Firebase v8");
+
+            const database = firebase.database();
+            const commentMessage = document.getElementById('comment-message');
+            const loadingComments = document.querySelector('.loading-comments');
+            const commentCount = document.getElementById('comment-count');
+
+            // Determine post ID
+            let postId = determinePostId();
             console.log("Using post ID:", postId);
 
             // Format date nicely
@@ -518,7 +763,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Handle comment form submission
             commentForm.addEventListener('submit', function (e) {
-                e.preventDefault();
+                e.preventDefault(); // Prevent form from causing page reload
                 console.log("Comment form submitted");
 
                 const nameInput = document.getElementById('comment-name');
@@ -589,7 +834,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
             });
 
-            // Admin login functionality
+            // Admin login functionality (continued)
             const adminLoginBtn = document.getElementById('admin-login-btn');
             if (adminLoginBtn) {
                 adminLoginBtn.addEventListener('click', function () {
@@ -604,6 +849,34 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
             }
+        }
+
+        // Helper function to determine post ID from various sources
+        function determinePostId() {
+            let postId = 'default-post';
+
+            // First try data attribute
+            const postIdElement = document.querySelector('[data-post-id]');
+            if (postIdElement) {
+                postId = postIdElement.getAttribute('data-post-id');
+            } else {
+                // Try to extract from URL
+                const urlPath = window.location.pathname;
+
+                // Remove trailing slash if present
+                const cleanPath = urlPath.endsWith('/') ? urlPath.slice(0, -1) : urlPath;
+
+                // Get the last segment and remove .html extension if present
+                const pathSegments = cleanPath.split('/');
+                const lastSegment = pathSegments[pathSegments.length - 1].replace(/\.html$/, '');
+
+                if (lastSegment && lastSegment !== '') {
+                    postId = lastSegment;
+                }
+            }
+
+            // Sanitize postId to be valid in Firebase path
+            return postId.replace(/[.#$\/\[\]]/g, '_');
         }
 
         // Start the comment system initialization
