@@ -13,14 +13,16 @@
     <meta property="og:title" content="Building Accessible First - TechMayank">
     <meta property="og:description" content="How to design inclusive web experiences from day one">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://techmayank.com/building-accessible-first">
+    <meta property="og:url" content="https://techmayank.netlify.app/blog1.html">
 
     <!-- Favicon -->
     <link rel="icon" href="fav.png" type="image/png">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="responsive-newsletter.css">
     <link rel="stylesheet" href="common-design.css">
 </head>
 
@@ -52,7 +54,7 @@
 
     <main class="blog-post-container">
         <!-- Blog Header -->
-        <section class="blog-header">
+        <section class="blog-header" data-post-id="1">
             <div class="post-category">Accessibility</div>
             <h1 class="post-title">Building Accessible First: How to Design Inclusive Web Experiences from Day One</h1>
             <div class="post-meta">
@@ -60,16 +62,25 @@
                     <img src="author.webp" alt="Author" class="author-img">
                     <span class="author-name">Mitthu Kumar (Mayank)</span>
                 </div>
-                <span class="post-date"><i class="far fa-calendar-alt"></i> April 2, 2025</span>
+                <span class="post-date" data-published="2025-04-13"><i class="far fa-calendar-alt"></i> April 13,
+                    2025</span>
                 <span class="post-read-time"><i class="far fa-clock"></i> 12 min read</span>
+
                 <div class="post-share">
                     <span>Share:</span>
-                    <a href="#" class="share-icon twitter" aria-label="Share on Twitter"><i
+                    <a href="https://twitter.com/intent/tweet?url=https://techmayank.netlify.app/blog1.html&text=Building Accessible First"
+                        class="share-icon twitter" aria-label="Share on Twitter" target="_blank"><i
                             class="fab fa-twitter"></i></a>
-                    <a href="#" class="share-icon facebook" aria-label="Share on Facebook"><i
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://techmayank.netlify.app/blog1.html"
+                        class="share-icon facebook" aria-label="Share on Facebook" target="_blank"><i
                             class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="share-icon linkedin" aria-label="Share on LinkedIn"><i
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://techmayank.netlify.app/blog1.html&title=Building Accessible First"
+                        class="share-icon linkedin" aria-label="Share on LinkedIn" target="_blank"><i
                             class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="share-icon copy-link" aria-label="Copy link to clipboard"><i
+                            class="fas fa-link"></i></a>
+                    <a href="#" class="share-icon text-to-speech" aria-label="Read article aloud"><i
+                            class="fas fa-volume-up"></i></a>
                 </div>
             </div>
         </section>
@@ -125,7 +136,7 @@
                 </ul>
 
                 <div class="image-with-caption">
-                    <img src="img1_blog1.jpg"
+                    <img src="img1_blog1.png"
                         alt="A graphic showing the percentage of users with different types of disabilities who benefit from accessible design">
                     <p class="image-caption">Percentage of users with different types of disabilities who benefit from
                         accessible design</p>
@@ -194,7 +205,7 @@
                 </ul>
 
                 <div class="image-with-caption">
-                    <img src="img4_blog1.jpg"
+                    <img src="img4_blog1.png"
                         alt="Examples of the same content presented in multiple formats—text, image, audio">
                     <p class="image-caption">The same content presented in multiple formats to ensure accessibility</p>
                 </div>
@@ -208,10 +219,8 @@
 
                 <div class="code-block">
                     <pre><code>
-<!-- Instead of this -->
 <div class="button" onclick="submitForm()">Submit</div>
 
-<!-- Use this -->
 <button type="submit">Submit</button>
                     </code></pre>
                     <div class="copy-btn" title="Copy to clipboard">
@@ -229,7 +238,7 @@
                 </ul>
 
                 <div class="image-with-caption">
-                    <img src="img5_blog1.jpg"
+                    <img src="img5_blog1.png"
                         alt="Side-by-side comparison of semantic vs. non-semantic markup with annotations">
                     <p class="image-caption">Comparison of semantic vs. non-semantic markup with annotations</p>
                 </div>
@@ -264,7 +273,7 @@
                 <p>Remember the first rule of ARIA: don't use ARIA if an equivalent HTML element exists.</p>
 
                 <div class="image-with-caption">
-                    <img src="img6_blog1.jpg" alt="A flowchart showing when to use native HTML vs. ARIA">
+                    <img src="img6_blog1.png" alt="A flowchart showing when to use native HTML vs. ARIA">
                     <p class="image-caption">Decision flowchart: when to use native HTML vs. ARIA</p>
                 </div>
             </section>
@@ -275,8 +284,7 @@
                 <h3>Integrate Accessibility Testing in Your Workflow</h3>
 
                 <div class="image-with-caption">
-                    <img src="/api/placeholder/600/300"
-                        alt="A testing workflow diagram showing where accessibility testing fits">
+                    <img src="img7_blog1.png" alt="A testing workflow diagram showing where accessibility testing fits">
                     <p class="image-caption">Testing workflow diagram showing accessibility testing integration points
                     </p>
                 </div>
@@ -321,7 +329,7 @@
                 </ul>
 
                 <div class="image-with-caption">
-                    <img src="/api/placeholder/600/300" alt="An example page from an accessibility documentation site">
+                    <img src="img8_blog1.jpg" alt="An example page from an accessibility documentation site">
                     <p class="image-caption">Example page from an accessibility documentation site</p>
                 </div>
 
@@ -349,7 +357,7 @@
                 </ul>
 
                 <div class="image-with-caption">
-                    <img src="/api/placeholder/600/300" alt="Example of a well-written accessibility statement">
+                    <img src="img9_blog1.png" alt="Example of a well-written accessibility statement">
                     <p class="image-caption">Example of a well-written accessibility statement</p>
                 </div>
 
@@ -373,7 +381,7 @@
                     demonstrates a genuine commitment to creating a web that works for everyone.</p>
 
                 <div class="image-with-caption">
-                    <img src="/api/placeholder/600/300"
+                    <img src="img10_blog1.jpg"
                         alt="A diverse group of happy users with the website accessible to all of them">
                     <p class="image-caption">Creating digital experiences that are truly accessible to everyone</p>
                 </div>
@@ -385,7 +393,7 @@
 
         <!-- Author Bio -->
         <section class="author-bio">
-            <img src="/Image/Common/author.webp" alt="Author" class="author-img-large">
+            <img src="author.webp" alt="Author" class="author-img-large">
             <div class="author-details">
                 <h3>About the Author</h3>
                 <h4>Mitthu Kumar (Mayank)</h4>
@@ -395,9 +403,10 @@
                     (Mayank) is dedicated to building user-friendly and accessible web applications. He also shares
                     insights on accessibility and inclusive design through his blog and projects.</p>
                 <div class="author-social">
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://x.com/Mayank_Pras" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                    <a href="https://www.linkedin.com/in/mitthu-kumar/" aria-label="LinkedIn"><i
+                            class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/mkshahi22" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
         </section>
@@ -408,48 +417,79 @@
         <!-- Comments Section -->
         <section class="comments-section">
             <h2>Comments (0)</h2>
+            <!-- Comments Display Section -->
+            <div class="comments-section">
+                <h3 class="section-title">Comments</h3>
+                <div class="comments-list">
+                    <!-- Comments will be loaded here via JavaScript -->
+                    <div class="loading-comments">Loading comments...</div>
+                </div>
+            </div>
+            <!-- Comment Form Section -->
+            <section class="comments-container">
+                <h3 class="section-title">Leave a Comment</h3>
 
-            <!-- Comment Form -->
-            <div class="comment-form-container">
-                <h3>Leave a Comment</h3>
-                <form class="comment-form">
+                <form class="comment-form" action="#" method="post">
+                    <input type="hidden" id="post-id" value="1"> <!-- Update with actual post ID -->
+
                     <div class="form-group">
                         <label for="comment-name">Name</label>
-                        <input type="text" id="comment-name" placeholder="Your Name" required>
+                        <input type="text" id="comment-name" name="name" placeholder="Your Name" required>
                     </div>
+
                     <div class="form-group">
                         <label for="comment-email">Email</label>
-                        <input type="email" id="comment-email" placeholder="Your Email (will not be published)"
-                            required>
+                        <input type="email" id="comment-email" name="email"
+                            placeholder="Your Email (will not be published)" required>
                     </div>
+
                     <div class="form-group">
                         <label for="comment-content">Comment</label>
-                        <textarea id="comment-content" placeholder="Your comment..." rows="5" required></textarea>
+                        <textarea id="comment-content" name="content" placeholder="Your comment..." rows="5"
+                            required></textarea>
                     </div>
+
                     <button type="submit" class="btn">Post Comment</button>
+
+                    <!-- Comment submission message -->
+                    <div id="comment-message" class="form-message" style="display: none;"></div>
                 </form>
-            </div>
+            </section>
+            <button id="admin-login-btn" class="admin-login-btn">Admin Login</button>
+            <span> Only for admin</span>
+            <!-- Newsletter CTA -->
+            <section class="cta-section" id="subscribe">
+                <h2>Subscribe to Our Newsletter</h2>
+                <p>Get the latest tech updates, tutorials, and insights delivered directly to your inbox. No spam, just
+                    valuable content!</p>
 
-            <!-- Comments List -->
-            <div class="comments-list">
-                <!-- No comments yet -->
-                <p class="no-comments">Be the first to share your thoughts on this article!</p>
-            </div>
-        </section>
+                <!-- Netlify Form with improved design -->
+                <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+                    class="newsletter-form" action="/success">
+                    <!-- Honeypot field to prevent spam -->
+                    <div hidden>
+                        <label>Don't fill this out if you're human: <input name="bot-field"></label>
+                    </div>
 
-        <!-- Newsletter CTA -->
-        <section class="cta-section" id="subscribe">
-            <h2>Subscribe to Our Newsletter</h2>
-            <p>Get the latest accessibility tips, tutorials, and insights delivered directly to your inbox. No spam,
-                just valuable content!</p>
-            <form class="newsletter-form">
-                <input type="email" name="EMAIL" class="newsletter-input" placeholder="Your email address" required>
-                <button type="submit" class="btn btn-submit">Subscribe</button>
-                <div id="subscribe-status" class="subscribe-message" style="display: none;">
-                    <p>Thank you for subscribing! Please check your inbox to confirm your subscription.</p>
-                </div>
-            </form>
-        </section>
+                    <!-- Required for Netlify forms -->
+                    <input type="hidden" name="form-name" value="newsletter">
+
+                    <!-- Form input group -->
+                    <div class="form-group">
+                        <input type="email" name="email" class="newsletter-input" placeholder="Your email address"
+                            required aria-label="Email address">
+                        <button type="submit" class="btn btn-submit">
+                            <i class="fas fa-paper-plane"></i> Subscribe
+                        </button>
+                    </div>
+
+                    <!-- Success message container -->
+                    <div id="form-success" class="form-message" style="display: none;">
+                        <p><i class="fas fa-check-circle"></i> Thank you for subscribing! Check your inbox for updates.
+                        </p>
+                    </div>
+                </form>
+            </section>
     </main>
 
     <!-- Footer -->
@@ -460,13 +500,16 @@
                 <p>Your go-to source for tech insights, tutorials, and reviews. We make complex technology concepts easy
                     to understand for everyone.</p>
                 <div class="social-links">
-                    <a href="#" class="social-icon twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-icon linkedin" aria-label="LinkedIn"><i
-                            class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-icon github" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="#" class="social-icon website" aria-label="Website"><i class="fas fa-globe"></i></a>
-                    <a href="#" class="social-icon instagram" aria-label="Instagram"><i
-                            class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/Mayank_Pras" class="social-icon twitter" aria-label="Twitter"><i
+                            class="fab fa-x-twitter"></i></a>
+                    <a href="https://www.linkedin.com/in/mitthu-kumar/" class="social-icon linkedin"
+                        aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/mkshahi22" class="social-icon github" aria-label="GitHub"><i
+                            class="fab fa-github"></i></a>
+                    <a href="https://techmayank.netlify.app/" class="social-icon website" aria-label="Website"><i
+                            class="fas fa-globe"></i></a>
+                    <a href="https://www.instagram.com/shahi_jii_22/?next=%2F" class="social-icon instagram"
+                        aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
 
@@ -485,107 +528,72 @@
                 <h3>Popular Categories</h3>
                 <ul class="footer-links">
                     <li><a href="category-webdev.html">Web Development</a></li>
-                    <li><a href="category-accessibility.html">Accessibility</a></li>
-                    <li><a href="category-design.html">Design</a></li>
-                    <li><a href="category-ux.html">User Experience</a></li>
-                    <li><a href="category-performance.html">Web Performance</a></li>
+                    <li><a href="category-ai.html">Artificial Intelligence</a></li>
+                    <li><a href="category-cybersecurity.html">Cybersecurity</a></li>
+                    <li><a href="category-cloud.html">Cloud Computing</a></li>
+                    <li><a href="category-mobile.html">Mobile Development</a></li>
                 </ul>
             </div>
 
             <div class="footer-section footer-contact">
                 <h3>Contact Us</h3>
-                <p><i class="far fa-envelope"></i> contact@techmayank.com</p>
+                <p><i class="far fa-envelope"></i> mayankpra97@gmail.com</p>
                 <p><i class="fas fa-map-marker-alt"></i> Greater Noida, India</p>
                 <p><i class="fas fa-phone"></i> +91 9798743248</p>
             </div>
         </div>
 
         <div class="copyright">
-            <p>&copy; 2025 TechMayank. All rights reserved.</p>
+            <p>&copy; 2025 TechMayank. All rights reserved.
+            <p><a href="privacy.html" style="color: white; text-decoration: none;">Privacy Policy</a></p>
+            </p>
         </div>
     </footer>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
+        import { getDatabase, ref, push, remove, onValue } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Mobile menu toggle
-            const menuBtn = document.querySelector('.mobile-menu-btn');
-            const navLinks = document.querySelector('.nav-links');
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDyhGRHregnd4cGiACYZ41sV58AXyOlYY4",
+            authDomain: "techmayank-3aa98.firebaseapp.com",
+            databaseURL: "https://techmayank-3aa98-default-rtdb.asia-southeast1.firebasedatabase.app/",
+            projectId: "techmayank-3aa98",
+            storageBucket: "techmayank-3aa98.firebasestorage.app",
+            messagingSenderId: "339110129251",
+            appId: "1:339110129251:web:d44f5bebace6c5bdc61256",
+            measurementId: "G-8JNQLZ809S"
+        };
 
-            menuBtn.addEventListener('click', function () {
-                navLinks.classList.toggle('active');
-            });
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
 
-            // Mobile dropdown toggle
-            const dropdowns = document.querySelectorAll('.dropdown');
+        // Make Firebase available globally
+        window.firebase = {
+            app: app,
+            database: database,
+            analytics: analytics,
+            ref: (path) => ref(database, path),
+            onValue: onValue,
+            push: push,
+            remove: remove,
+            getDatabase: () => database,
+            initializeApp: () => console.log("Firebase already initialized") // Add dummy function to prevent errors
+        };
 
-            dropdowns.forEach(dropdown => {
-                const dropdownLink = dropdown.querySelector('a');
-
-                if (window.innerWidth <= 768) {
-                    dropdownLink.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        dropdown.classList.toggle('active');
-                    });
-                }
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', function (event) {
-                if (!event.target.closest('nav') && !event.target.closest('.mobile-menu-btn')) {
-                    navLinks.classList.remove('active');
-                }
-            });
-
-            // Navbar scroll effect
-            window.addEventListener('scroll', function () {
-                const header = document.getElementById('main-header');
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-
-            // Copy code button functionality
-            const copyBtns = document.querySelectorAll('.copy-btn');
-            copyBtns.forEach(btn => {
-                btn.addEventListener('click', function () {
-                    const codeBlock = this.previousElementSibling.textContent;
-                    navigator.clipboard.writeText(codeBlock.trim())
-                        .then(() => {
-                            // Change button icon/text to indicate success
-                            const icon = this.querySelector('i');
-                            icon.className = 'fas fa-check';
-                            setTimeout(() => {
-                                icon.className = 'far fa-copy';
-                            }, 2000);
-                        })
-                        .catch(err => {
-                            console.error('Failed to copy: ', err);
-                        });
-                });
-            });
-
-            // Table of contents smooth scrolling
-            const tocLinks = document.querySelectorAll('.table-of-contents a');
-            tocLinks.forEach(link => {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    const headerOffset = 80; // Adjust based on your header height
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                });
-            });
-        });
+        console.log("Firebase v9 modular SDK initialized successfully");
     </script>
+    <!-- Add any other Firebase products you need -->
     <script src="subcription.js"></script>
+    <script src="comment.js"></script>
+    <!-- <script src="test.js"></script> -->
+    <script src="main.js"></script>
+    <script src="time.js"></script>
+    <script src="accible.js"></script>
 </body>
 
 </html>
