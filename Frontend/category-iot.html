@@ -23,9 +23,7 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="base.css">
-    <link rel="stylesheet" href="layout.css">
-    <link rel="stylesheet" href="responsive-newsletter.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="web.css">
 </head>
 
@@ -409,9 +407,9 @@
 
                 // Filter posts based on search term
                 postCards.forEach(card => {
-                    const title = card.querySelector('.post-title')?.textContent.toLowerCase() || '';
-                    const excerpt = card.querySelector('.post-excerpt')?.textContent.toLowerCase() || '';
-                    const category = card.querySelector('.post-category')?.textContent.toLowerCase() || '';
+                    const title = card.querySelector('.post-title').textContent.toLowerCase();
+                    const excerpt = card.querySelector('.post-excerpt').textContent.toLowerCase();
+                    const category = card.querySelector('.post-category').textContent.toLowerCase();
 
                     if (title.includes(searchTerm) || excerpt.includes(searchTerm) || category.includes(searchTerm)) {
                         card.style.display = 'block';
@@ -425,41 +423,39 @@
             const sortSelect = document.getElementById('sort-by');
             const postsGrid = document.querySelector('.posts-grid');
 
-            if (sortSelect && postsGrid) {
-                sortSelect.addEventListener('change', function () {
-                    const sortValue = this.value;
-                    const postsArray = Array.from(postCards);
+            sortSelect.addEventListener('change', function () {
+                const sortValue = this.value;
+                const postsArray = Array.from(postCards);
 
-                    switch (sortValue) {
-                        case 'newest':
-                            postsArray.sort((a, b) => {
-                                const dateA = new Date(a.querySelector('.post-date')?.textContent.replace('<i class="far fa-calendar-alt"></i> ', '') || '');
-                                const dateB = new Date(b.querySelector('.post-date')?.textContent.replace('<i class="far fa-calendar-alt"></i> ', '') || '');
-                                return dateB - dateA; // Newest first
-                            });
-                            break;
-                        case 'oldest':
-                            postsArray.sort((a, b) => {
-                                const dateA = new Date(a.querySelector('.post-date')?.textContent.replace('<i class="far fa-calendar-alt"></i> ', '') || '');
-                                const dateB = new Date(b.querySelector('.post-date')?.textContent.replace('<i class="far fa-calendar-alt"></i> ', '') || '');
-                                return dateA - dateB; // Oldest first
-                            });
-                            break;
-                        case 'popular':
-                            postsArray.sort((a, b) => {
-                                const readTimeA = parseInt(a.querySelector('.post-read-time')?.textContent.match(/\d+/)?.[0] || '0');
-                                const readTimeB = parseInt(b.querySelector('.post-read-time')?.textContent.match(/\d+/)?.[0] || '0');
-                                return readTimeB - readTimeA; // Using read time as a proxy for popularity
-                            });
-                            break;
-                    }
+                switch (sortValue) {
+                    case 'newest':
+                        postsArray.sort((a, b) => {
+                            const dateA = new Date(a.querySelector('.post-date').textContent.replace('<i class="far fa-calendar-alt"></i> ', ''));
+                            const dateB = new Date(b.querySelector('.post-date').textContent.replace('<i class="far fa-calendar-alt"></i> ', ''));
+                            return dateB - dateA; // Newest first
+                        });
+                        break;
+                    case 'oldest':
+                        postsArray.sort((a, b) => {
+                            const dateA = new Date(a.querySelector('.post-date').textContent.replace('<i class="far fa-calendar-alt"></i> ', ''));
+                            const dateB = new Date(b.querySelector('.post-date').textContent.replace('<i class="far fa-calendar-alt"></i> ', ''));
+                            return dateA - dateB; // Oldest first
+                        });
+                        break;
+                    case 'popular':
+                        postsArray.sort((a, b) => {
+                            const readTimeA = parseInt(a.querySelector('.post-read-time').textContent.match(/\d+/)[0]);
+                            const readTimeB = parseInt(b.querySelector('.post-read-time').textContent.match(/\d+/)[0]);
+                            return readTimeB - readTimeA; // Using read time as a proxy for popularity
+                        });
+                        break;
+                }
 
-                    // Re-append sorted posts to grid
-                    postsArray.forEach(post => {
-                        postsGrid.appendChild(post);
-                    });
+                // Re-append sorted posts to grid
+                postsArray.forEach(post => {
+                    postsGrid.appendChild(post);
                 });
-            }
+            });
 
             // Tag filtering
             const tags = document.querySelectorAll('.tag');
@@ -484,9 +480,9 @@
 
                     // Filter posts based on tag
                     postCards.forEach(card => {
-                        const category = card.querySelector('.post-category')?.textContent.toLowerCase() || '';
-                        const title = card.querySelector('.post-title')?.textContent.toLowerCase() || '';
-                        const excerpt = card.querySelector('.post-excerpt')?.textContent.toLowerCase() || '';
+                        const category = card.querySelector('.post-category').textContent.toLowerCase();
+                        const title = card.querySelector('.post-title').textContent.toLowerCase();
+                        const excerpt = card.querySelector('.post-excerpt').textContent.toLowerCase();
 
                         if (category.includes(tagText) || title.includes(tagText) || excerpt.includes(tagText)) {
                             card.style.display = 'block';
@@ -520,7 +516,6 @@
                     });
                 });
             });
-        });
     </script>
     <script src="subscription.js"></script>
 
