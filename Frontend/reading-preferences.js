@@ -1,25 +1,13 @@
-// Enhanced social sharing script with improved reading time and customizable reading functionality
+// reading-preferences.js - Handles text-to-speech and reading preferences
 document.addEventListener("DOMContentLoaded", function () {
-    // Get blog metadata more reliably
-    const getBlogMetadata = () => {
-        return {
-            title: document.title || document.querySelector('meta[property="og:title"]')?.content || '',
-            description: document.querySelector('meta[name="description"]')?.content ||
-                document.querySelector('meta[property="og:description"]')?.content || '',
-            siteName: document.querySelector('meta[property="og:site_name"]')?.content || 'TechMayank',
-            url: window.location.href,
-            image: document.querySelector('meta[property="og:image"]')?.content ||
-                document.querySelector('article img')?.src || ''
-        };
-    };
-
-    // Reading preferences configuration (new)
+    // Reading preferences configuration
     let readingPreferences = {
         speed: 1, // 0.8 = slower, 1 = normal, 1.25 = faster
         voice: null, // Will be set dynamically
         pitch: 1, // 0.5 to 2
         volume: 1, // 0 to 1
-        highlightText: true // Whether to highlight text while reading
+        highlightText: true, // Whether to highlight text while reading
+        chunkSize: 120 // Number of words per chunk to reduce buffering
     };
 
     // Load preferences from localStorage if available
@@ -32,126 +20,34 @@ document.addEventListener("DOMContentLoaded", function () {
         console.warn('Could not load saved reading preferences:', e);
     }
 
-    // Setup share links
-    const setupShareLinks = () => {
-        const metadata = getBlogMetadata();
-        const shareContainer = document.querySelector('.post-share');
+    // Cache for voices to avoid repeated fetching
+    let cachedVoices = [];
 
-        if (!shareContainer) return;
-
-        // Fix: Replace the existing href attributes with dynamically generated ones
-
-        // Twitter/X share
-        const twitterLink = shareContainer.querySelector('.twitter');
-        if (twitterLink) {
-            // Update href directly for non-JS fallback
-            const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(metadata.url)}&text=${encodeURIComponent(metadata.title)}`;
-            twitterLink.setAttribute('href', twitterUrl);
-
-            twitterLink.addEventListener('click', function (e) {
-                e.preventDefault();
-                window.open(twitterUrl, '_blank', 'width=550,height=420');
-            });
-        }
-
-        // Facebook share
-        const facebookLink = shareContainer.querySelector('.facebook');
-        if (facebookLink) {
-            // Update href directly for non-JS fallback
-            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(metadata.url)}`;
-            facebookLink.setAttribute('href', facebookUrl);
-
-            facebookLink.addEventListener('click', function (e) {
-                e.preventDefault();
-                window.open(facebookUrl, '_blank', 'width=550,height=420');
-            });
-        }
-
-        // LinkedIn share
-        const linkedinLink = shareContainer.querySelector('.linkedin');
-        if (linkedinLink) {
-            // Update href directly for non-JS fallback
-            const linkedinUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(metadata.url)}&title=${encodeURIComponent(metadata.title)}&summary=${encodeURIComponent(metadata.description)}&source=${encodeURIComponent(metadata.siteName)}`;
-            linkedinLink.setAttribute('href', linkedinUrl);
-
-            linkedinLink.addEventListener('click', function (e) {
-                e.preventDefault();
-                window.open(linkedinUrl, '_blank', 'width=550,height=420');
-            });
-        }
-
-        // Handle copy link button
-        const copyLinkButton = shareContainer.querySelector('.copy-link');
-        if (copyLinkButton) {
-            copyLinkButton.addEventListener('click', function (e) {
-                e.preventDefault();
-                navigator.clipboard.writeText(metadata.url).then(() => {
-                    // Visual feedback
-                    const originalIcon = copyLinkButton.querySelector('i');
-                    const originalClass = originalIcon.className;
-                    originalIcon.className = 'fas fa-check';
-                    copyLinkButton.classList.add('copied');
-
-                    // Create and append success message
-                    const feedbackMsg = document.createElement('div');
-                    feedbackMsg.className = 'copy-feedback';
-                    feedbackMsg.textContent = 'Link copied!';
-                    feedbackMsg.style.position = 'absolute';
-                    feedbackMsg.style.backgroundColor = '#4CAF50';
-                    feedbackMsg.style.color = 'white';
-                    feedbackMsg.style.padding = '5px 10px';
-                    feedbackMsg.style.borderRadius = '4px';
-                    feedbackMsg.style.fontSize = '14px';
-                    feedbackMsg.style.top = '100%';
-                    feedbackMsg.style.left = '50%';
-                    feedbackMsg.style.transform = 'translateX(-50%)';
-                    feedbackMsg.style.zIndex = '100';
-                    feedbackMsg.style.marginTop = '5px';
-                    feedbackMsg.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
-                    copyLinkButton.style.position = 'relative';
-                    copyLinkButton.appendChild(feedbackMsg);
-
-                    // Revert back after 2 seconds
-                    setTimeout(() => {
-                        originalIcon.className = originalClass;
-                        copyLinkButton.classList.remove('copied');
-                        if (copyLinkButton.contains(feedbackMsg)) {
-                            copyLinkButton.removeChild(feedbackMsg);
-                        }
-                    }, 2000);
-
-                    // Announce to screen readers
-                    const announcement = document.createElement('div');
-                    announcement.setAttribute('aria-live', 'polite');
-                    announcement.className = 'sr-only';
-                    announcement.textContent = 'Link copied to clipboard';
-                    document.body.appendChild(announcement);
-
-                    setTimeout(() => {
-                        document.body.removeChild(announcement);
-                    }, 3000);
-                }).catch(err => {
-                    console.error('Failed to copy: ', err);
-                    // Show error message if clipboard fails
-                    alert('Failed to copy the link. Please try again.');
-                });
-            });
-        }
-
-        // Handle text-to-speech button with enhanced reading options
-        setupTextToSpeech(shareContainer);
-    };
-
-    // New function to handle text-to-speech with customization
+    // Function to handle text-to-speech with customization
     function setupTextToSpeech(shareContainer) {
         const ttsButton = shareContainer.querySelector('.text-to-speech');
         if (!ttsButton) return;
 
         let isSpeaking = false;
+        let isPaused = false;
         let utterance = null;
         let currentParagraphIndex = 0;
+        let currentChunkIndex = 0;
         let paragraphElements = [];
+        let paragraphChunks = [];
         let activeHighlight = null;
+
+        // Pre-fetch voices when possible
+        if ('speechSynthesis' in window) {
+            cachedVoices = window.speechSynthesis.getVoices();
+
+            if (cachedVoices.length === 0) {
+                // If voices aren't loaded yet, set up event listener
+                window.speechSynthesis.onvoiceschanged = () => {
+                    cachedVoices = window.speechSynthesis.getVoices();
+                };
+            }
+        }
 
         // Create a settings menu for reading preferences
         const settingsButton = document.createElement('button');
@@ -166,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
         settingsButton.style.padding = '5px';
         ttsButton.parentNode.insertBefore(settingsButton, ttsButton.nextSibling);
 
-        // Create settings panel (fixed with proper visibility control)
+        // Create settings panel
         const settingsPanel = createSettingsPanel();
         document.body.appendChild(settingsPanel);
 
@@ -184,13 +80,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 settingsPanel.style.top = (rect.bottom + window.scrollY) + 'px';
                 settingsPanel.style.left = (rect.left + window.scrollX - 100) + 'px'; // Offset to center
                 settingsPanel.style.display = 'block';
-
-                // Debug message to confirm panel is being displayed
-                console.log('Settings panel should be visible at:', {
-                    top: settingsPanel.style.top,
-                    left: settingsPanel.style.left,
-                    display: settingsPanel.style.display
-                });
             }
         });
 
@@ -210,15 +99,17 @@ document.addEventListener("DOMContentLoaded", function () {
             // Check if browser supports speech synthesis
             if ('speechSynthesis' in window) {
                 if (isSpeaking) {
-                    // Stop speaking
-                    window.speechSynthesis.cancel();
-                    ttsButton.innerHTML = '<i class="fas fa-volume-up"></i>';
-                    ttsButton.setAttribute('aria-label', 'Read article aloud');
-                    ttsButton.classList.remove('active');
-                    isSpeaking = false;
-
-                    // Remove any active highlights
-                    removeHighlights();
+                    if (isPaused) {
+                        // Resume speaking
+                        window.speechSynthesis.resume();
+                        ttsButton.innerHTML = '<i class="fas fa-pause"></i>';
+                        isPaused = false;
+                    } else {
+                        // Pause speaking
+                        window.speechSynthesis.pause();
+                        ttsButton.innerHTML = '<i class="fas fa-play"></i>';
+                        isPaused = true;
+                    }
                 } else {
                     // Show loading state
                     ttsButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
@@ -229,6 +120,15 @@ document.addEventListener("DOMContentLoaded", function () {
                         document.querySelector('.blog-content');
 
                     if (articleContent) {
+                        // Reset state for new reading session
+                        currentParagraphIndex = 0;
+                        currentChunkIndex = 0;
+                        paragraphElements = [];
+                        paragraphChunks = [];
+
+                        // Cancel any ongoing speech
+                        window.speechSynthesis.cancel();
+
                         startReading(articleContent);
                     } else {
                         ttsButton.innerHTML = '<i class="fas fa-volume-up"></i>';
@@ -239,6 +139,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Sorry, your browser doesn't support text-to-speech functionality.");
             }
         });
+
+        // Function to split text into chunks to avoid buffering issues
+        function splitTextIntoChunks(text, chunkSize) {
+            // Split the text into words
+            const words = text.trim().split(/\s+/);
+            const chunks = [];
+
+            // Create chunks of approximately chunkSize words
+            for (let i = 0; i < words.length; i += chunkSize) {
+                chunks.push(words.slice(i, i + chunkSize).join(' '));
+            }
+
+            return chunks;
+        }
 
         // Function to start the reading process
         function startReading(articleContent) {
@@ -260,31 +174,52 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Start with the first paragraph
             currentParagraphIndex = 0;
-            readCurrentParagraph();
+            currentChunkIndex = 0;
+            isSpeaking = true;
+            isPaused = false;
+
+            // Pre-process all paragraphs into chunks
+            paragraphChunks = paragraphElements.map(element =>
+                splitTextIntoChunks(element.textContent, readingPreferences.chunkSize)
+            );
+
+            readNextChunk();
         }
 
-        // Function to read the current paragraph
-        function readCurrentParagraph() {
+        // Function to read the next chunk
+        function readNextChunk() {
+            // Check if we've reached the end of all paragraphs
             if (currentParagraphIndex >= paragraphElements.length) {
-                // End of article
-                ttsButton.innerHTML = '<i class="fas fa-volume-up"></i>';
-                ttsButton.setAttribute('aria-label', 'Read article aloud');
-                ttsButton.classList.remove('active');
-                isSpeaking = false;
-                removeHighlights();
+                finishReading();
                 return;
             }
 
             const paragraph = paragraphElements[currentParagraphIndex];
+            const chunks = paragraphChunks[currentParagraphIndex];
 
-            // Highlight current paragraph if enabled
-            if (readingPreferences.highlightText) {
+            // If first chunk of paragraph, highlight the paragraph
+            if (currentChunkIndex === 0 && readingPreferences.highlightText) {
                 removeHighlights(); // Remove any previous highlights
                 highlightElement(paragraph);
+
+                // Scroll element into view if it's not already visible
+                paragraph.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
 
-            // Create new utterance for this paragraph
-            utterance = new SpeechSynthesisUtterance(paragraph.textContent);
+            // Check if we've processed all chunks in this paragraph
+            if (currentChunkIndex >= chunks.length) {
+                // Move to next paragraph
+                currentParagraphIndex++;
+                currentChunkIndex = 0;
+                readNextChunk();
+                return;
+            }
+
+            // Get the current chunk text
+            const chunkText = chunks[currentChunkIndex];
+
+            // Create utterance for this chunk
+            utterance = new SpeechSynthesisUtterance(chunkText);
 
             // Apply user preferences
             utterance.rate = readingPreferences.speed;
@@ -296,8 +231,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Use selected voice if available
             if (readingPreferences.voice) {
-                const voices = window.speechSynthesis.getVoices();
-                const selectedVoice = voices.find(v => v.name === readingPreferences.voice);
+                const selectedVoice = cachedVoices.find(v => v.name === readingPreferences.voice);
                 if (selectedVoice) {
                     utterance.voice = selectedVoice;
                 }
@@ -306,29 +240,28 @@ document.addEventListener("DOMContentLoaded", function () {
             // Set up event handlers
             utterance.onstart = () => {
                 ttsButton.innerHTML = '<i class="fas fa-pause"></i>';
-                ttsButton.setAttribute('aria-label', 'Stop reading');
+                ttsButton.setAttribute('aria-label', 'Pause reading');
                 ttsButton.classList.add('active');
-                isSpeaking = true;
-
-                // Scroll element into view if it's not already visible
-                if (readingPreferences.highlightText) {
-                    paragraph.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
             };
 
             utterance.onend = () => {
-                // Move to next paragraph
-                currentParagraphIndex++;
-                readCurrentParagraph();
+                // Move to next chunk
+                currentChunkIndex++;
+
+                // Use setTimeout to prevent potential speech synthesis queue issues
+                setTimeout(readNextChunk, 50);
             };
 
-            utterance.onerror = () => {
-                console.error('Speech synthesis error');
-                ttsButton.innerHTML = '<i class="fas fa-volume-up"></i>';
-                ttsButton.setAttribute('aria-label', 'Read article aloud');
-                ttsButton.classList.remove('active');
-                isSpeaking = false;
-                removeHighlights();
+            utterance.onerror = (event) => {
+                console.error('Speech synthesis error:', event);
+
+                // If it's a network error or audio output error, try again with the next chunk
+                if (event.error === 'network' || event.error === 'audio-busy') {
+                    currentChunkIndex++;
+                    setTimeout(readNextChunk, 250); // Wait a bit longer before retry
+                } else {
+                    finishReading();
+                }
             };
 
             // Start speaking
@@ -336,9 +269,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 window.speechSynthesis.speak(utterance);
             } catch (e) {
                 console.error('Speech synthesis error:', e);
-                ttsButton.innerHTML = '<i class="fas fa-volume-up"></i>';
+                finishReading();
                 alert("An error occurred while trying to read the content.");
             }
+        }
+
+        // Function to clean up when reading is finished
+        function finishReading() {
+            ttsButton.innerHTML = '<i class="fas fa-volume-up"></i>';
+            ttsButton.setAttribute('aria-label', 'Read article aloud');
+            ttsButton.classList.remove('active');
+            isSpeaking = false;
+            isPaused = false;
+            removeHighlights();
+
+            // Make sure any pending speech is canceled
+            window.speechSynthesis.cancel();
         }
 
         // Utility functions for text-to-speech
@@ -428,6 +374,9 @@ document.addEventListener("DOMContentLoaded", function () {
             // Add volume control
             addRangeControl(panel, 'Volume', 'volume', 0.1, 1, 0.1, readingPreferences.volume);
 
+            // Add chunk size control (for buffering reduction)
+            addRangeControl(panel, 'Buffer Size (words)', 'chunkSize', 50, 200, 10, readingPreferences.chunkSize);
+
             // Add voice selection
             const voiceContainer = document.createElement('div');
             voiceContainer.style.marginBottom = '15px';
@@ -453,6 +402,9 @@ document.addEventListener("DOMContentLoaded", function () {
             // Populate voices when they're available
             function populateVoiceList() {
                 const voices = window.speechSynthesis.getVoices();
+                // Cache the voices
+                cachedVoices = voices;
+
                 voiceSelect.innerHTML = ''; // Clear existing options
 
                 // Add default option
@@ -534,7 +486,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     voice: null,
                     pitch: 1,
                     volume: 1,
-                    highlightText: true
+                    highlightText: true,
+                    chunkSize: 120
                 };
 
                 // Update UI
@@ -544,6 +497,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById('pitch-value').textContent = '1';
                 document.getElementById('volume-range').value = 1;
                 document.getElementById('volume-value').textContent = '1';
+                document.getElementById('chunkSize-range').value = 120;
+                document.getElementById('chunkSize-value').textContent = '120';
                 document.getElementById('voice-select').value = '';
                 document.getElementById('highlight-toggle').checked = true;
 
@@ -603,15 +558,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 valueSpan.textContent = newValue;
                 readingPreferences[id] = newValue;
 
-                // If currently speaking, update the current utterance
-                if (isSpeaking && utterance) {
+                // If currently speaking, update the current utterance if possible
+                if (isSpeaking && utterance && id !== 'chunkSize') {
                     utterance[id] = newValue;
-
-                    // For rate changes, we need to restart speech synthesis
-                    if (id === 'speed') {
-                        window.speechSynthesis.cancel();
-                        window.speechSynthesis.speak(utterance);
-                    }
                 }
 
                 savePreferences();
@@ -629,6 +578,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.warn('Could not save reading preferences:', e);
             }
         }
+
+        // Set up a periodic check to keep speech synthesis active
+        // (Some browsers have issues with long text and stop speaking)
+        setInterval(() => {
+            if (isSpeaking && !isPaused && !window.speechSynthesis.speaking) {
+                // If we should be speaking but nothing is being spoken,
+                // try to continue from the current position
+                readNextChunk();
+            }
+        }, 1000);
     }
 
     // ENHANCED READING TIME FUNCTIONALITY
@@ -704,8 +663,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Initialize all functionality
-    setupShareLinks();
+    // Export functions that need to be accessible from the social-sharing module
+    window.readingModule = {
+        setupTextToSpeech: setupTextToSpeech,
+        updateReadingTimes: updateReadingTimes
+    };
+
+    // Initialize reading time functionality
     updateReadingTimes();
 
     // Add event listener for dynamic content changes (if you use AJAX)

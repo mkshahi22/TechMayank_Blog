@@ -65,7 +65,7 @@
                 </div>
                 <span class="post-date" data-published="2025-04-17"><i class="far fa-calendar-alt"></i> April 17,
                     2025</span>
-                <span class="post-read-time"><i class="far fa-clock"></i> 10 min read</span>
+                <span class="post-read-time"><i class="far fa-clock"></i></span>
 
                 <div class="post-share">
                     <span>Share:</span>
@@ -612,6 +612,10 @@ struct UserProfileView: View {
             </p>
         </div>
     </footer>
+    <script async type='module'
+        src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
+    <zapier-interfaces-chatbot-embed is-popup='true'
+        chatbot-id='cm9ngz6uv008lwhyr81hwf7zr'></zapier-interfaces-chatbot-embed>
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
@@ -650,12 +654,10 @@ struct UserProfileView: View {
 
         console.log("Firebase v9 modular SDK initialized successfully");
     </script>
-    <!-- Add any other Firebase products you need -->
     <script src="subcription.js"></script>
-    <script src="comment.js"></script>
-    <!-- <script src="test.js"></script> -->
     <script src="main.js"></script>
-    <script src="time.js"></script>
+    <script src="comments-core.js"></script>
+    <script src="comments-firebase.js"></script>
     <script src="accible.js"></script>
 </body>
 
