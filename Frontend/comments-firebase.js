@@ -187,6 +187,16 @@ function setupCommentSystemModular() {
 
         // Add delete buttons if admin
         addDeleteButtons();
+
+        // Update comment count if counter is available
+        if (window.CommentCounter && typeof window.CommentCounter.refresh === 'function') {
+            window.CommentCounter.refresh();
+        } else {
+            // Dispatch event for external counter systems
+            document.dispatchEvent(new CustomEvent('commentsLoaded', {
+                detail: { count: commentsArray.length }
+            }));
+        }
     }
 
     // Fetch comments from Firebase using v9 modular API
@@ -436,6 +446,16 @@ function setupCommentSystemLegacy() {
 
         // Add delete buttons if admin
         addDeleteButtons();
+
+        // Update comment count if counter is available
+        if (window.CommentCounter && typeof window.CommentCounter.refresh === 'function') {
+            window.CommentCounter.refresh();
+        } else {
+            // Dispatch event for external counter systems
+            document.dispatchEvent(new CustomEvent('commentsLoaded', {
+                detail: { count: commentsArray ? commentsArray.length : 0 }
+            }));
+        }
     }
 
     // Fetch comments from Firebase

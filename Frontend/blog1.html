@@ -53,7 +53,7 @@
     <main class="blog-post-container">
         <!-- Blog Header -->
         <section class="blog-header" data-post-id="1">
-            <div class="post-category">Accessibility</div>
+            <div class="post-category">Web Development</div>
             <h1 class="post-title">Building Accessible First: How to Design Inclusive Web Experiences from Day One</h1>
             <div class="post-meta">
                 <div class="author-info">
@@ -396,10 +396,14 @@
                 <h3>About the Author</h3>
                 <h4>Mitthu Kumar (Mayank)</h4>
                 <p>Mitthu Kumar (Mayank) is a front-end developer and web accessibility enthusiast, passionate about
-                    creating inclusive digital experiences. He focuses on implementing accessibility best practices and
-                    ensuring compliance with WCAG standards. With expertise in modern web technologies, Mitthu Kumar
-                    (Mayank) is dedicated to building user-friendly and accessible web applications. He also shares
-                    insights on accessibility and inclusive design through his blog and projects.</p>
+                    creating inclusive digital experiences. He ensures compliance with WCAG standards and builds modern,
+                    user-friendly web applications.</p>
+
+                <p>Through his blogs on <strong>TechMayank</strong>, he shares insights on web development, artificial
+                    intelligence, cybersecurity, cloud computing, mobile development, IoT, and inclusive design — making
+                    tech accessible for all.</p>
+
+                <p>Follow his journey on <strong>TechMayank</strong> — where code meets clarity.</p>
                 <div class="author-social">
                     <a href="https://x.com/Mayank_Pras" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
                     <a href="https://www.linkedin.com/in/mitthu-kumar/" aria-label="LinkedIn"><i
@@ -409,95 +413,90 @@
             </div>
         </section>
 
-        <!-- Related Posts -->
-        <!-- Comments Display Section -->
-        <div class="comments-section">
-            <h3 class="section-title">Comments</h3>
-            <div class="comments-list">
-                <!-- Comments will be loaded here via JavaScript -->
-                <div class="loading-comments">Loading comments...</div>
-            </div>
-        </div>
-
-        <!-- Comments Section -->
         <section class="comments-section">
-            <h2>Comments (0)</h2>
+            <h2>Comments (<span class="comment-count">0</span>)</h2>
 
             <!-- Comments Display Section -->
-            <div class="comments-section">
-                <h3 class="section-title">Comments</h3>
+            <div class="comments-list-container">
+                <h3 class="section-title">Discussion</h3>
                 <div class="comments-list">
                     <!-- Comments will be loaded here via JavaScript -->
                     <div class="loading-comments">Loading comments...</div>
                 </div>
             </div>
-            <!-- Comment Form -->
-            <!-- Comment Form Section -->
-            <section class="comments-container">
-                <h3 class="section-title">Leave a Comment</h3>
 
+            <!-- Comment Form Section -->
+            <div class="comments-container">
+                <h3 class="section-title">Leave a Comment</h3>
                 <form class="comment-form" action="#" method="post">
                     <input type="hidden" id="post-id" value="1"> <!-- Update with actual post ID -->
-
                     <div class="form-group">
                         <label for="comment-name">Name</label>
                         <input type="text" id="comment-name" name="name" placeholder="Your Name" required>
                     </div>
-
                     <div class="form-group">
                         <label for="comment-email">Email</label>
                         <input type="email" id="comment-email" name="email"
                             placeholder="Your Email (will not be published)" required>
                     </div>
-
                     <div class="form-group">
                         <label for="comment-content">Comment</label>
                         <textarea id="comment-content" name="content" placeholder="Your comment..." rows="5"
                             required></textarea>
                     </div>
-
                     <button type="submit" class="btn">Post Comment</button>
-
                     <!-- Comment submission message -->
                     <div id="comment-message" class="form-message" style="display: none;"></div>
                 </form>
-            </section>
-            <button id="admin-login-btn" class="admin-login-btn">Admin Login</button>
-            <span> Only for admin</span>
-            <!-- Newsletter CTA -->
-            <section class="cta-section" id="subscribe">
-                <h2>Subscribe to Our Newsletter</h2>
-                <p>Get the latest tech updates, tutorials, and insights delivered directly to your inbox. No spam, just
-                    valuable content!</p>
+            </div>
 
-                <!-- Netlify Form with improved design -->
-                <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field"
-                    class="newsletter-form" action="/success">
-                    <!-- Honeypot field to prevent spam -->
-                    <div hidden>
-                        <label>Don't fill this out if you're human: <input name="bot-field"></label>
-                    </div>
+            <!-- Admin controls (hidden until logged in) -->
+            <div class="admin-controls" style="display: none;">
+                <button id="admin-login-btn" class="btn btn-secondary">Admin Login</button>
+            </div>
+        </section>
 
-                    <!-- Required for Netlify forms -->
-                    <input type="hidden" name="form-name" value="newsletter">
 
-                    <!-- Form input group -->
-                    <div class="form-group">
-                        <input type="email" name="email" class="newsletter-input" placeholder="Your email address"
-                            required aria-label="Email address">
-                        <button type="submit" class="btn btn-submit">
-                            <i class="fas fa-paper-plane"></i> Subscribe
-                        </button>
-                    </div>
+        <button id="admin-login-btn" class="admin-login-btn">Admin Login</button>
+        <span> Only for admin</span>
+        <!-- Newsletter CTA -->
+        <section class="cta-section" id="subscribe">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get the latest tech updates, tutorials, and insights delivered directly to your inbox. No spam, just
+                valuable content!</p>
 
-                    <!-- Success message container -->
-                    <div id="form-success" class="form-message" style="display: none;">
-                        <p><i class="fas fa-check-circle"></i> Thank you for subscribing! Check your inbox for updates.
-                        </p>
-                    </div>
-                </form>
-            </section>
+            <!-- Netlify Form with improved design -->
+            <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+                class="newsletter-form" action="/success">
+                <!-- Honeypot field to prevent spam -->
+                <div hidden>
+                    <label>Don't fill this out if you're human: <input name="bot-field"></label>
+                </div>
+
+                <!-- Required for Netlify forms -->
+                <input type="hidden" name="form-name" value="newsletter">
+
+                <!-- Form input group -->
+                <div class="form-group">
+                    <input type="email" name="email" class="newsletter-input" placeholder="Your email address" required
+                        aria-label="Email address">
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-paper-plane"></i> Subscribe
+                    </button>
+                </div>
+
+                <!-- Success message container -->
+                <div id="form-success" class="form-message" style="display: none;">
+                    <p><i class="fas fa-check-circle"></i> Thank you for subscribing! Check your inbox for updates.
+                    </p>
+                </div>
+            </form>
+        </section>
     </main>
+    <p style="text-align: center; color: brown;">Occasionally, you may experience issues with posting comments or
+        accessing other
+        services due to intermittent
+        errors.</p>
 
     <!-- Footer -->
     <footer>
@@ -605,6 +604,7 @@
     <!-- <script src="accible.js"></script> -->
     <script src="reading-preferences.js"></script>
     <script src="social-sharing.js"></script>
+    <script src="comment-counter.js"></script>
 </body>
 
 </html>
