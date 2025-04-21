@@ -32,7 +32,7 @@
     margin-bottom: 25px;
     color: var(--secondary-color);
     position: relative;
-    padding-bottom: 12px;
+    /* padding-bottom: 12px; */
     font-weight: 700;
 }
 
@@ -173,7 +173,7 @@
 /* Contact Form Styles */
 .contact-form-container {
     background: linear-gradient(135deg, #ffffff 0%, #f7f9fa 100%);
-    padding: 35px;
+    padding: 0px 35px;
     border-radius: 16px;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
     border: 1px solid rgba(0, 0, 0, 0.05);
@@ -327,10 +327,14 @@
 }
 
 /* Location Section */
-.location-section,
+.location-section {
+    padding: 50px 0;
+    margin-top: -160px;
+}
+
 .faq-section {
     padding: 50px 0;
-    margin-top: 30px;
+    margin-top: -90px;
 }
 
 .location-section h2,
@@ -352,6 +356,7 @@
     overflow: hidden;
     box-shadow: var(--card-shadow);
     border: 1px solid rgba(0, 0, 0, 0.05);
+    margin-top: 0;
 }
 
 .location-info {
