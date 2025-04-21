@@ -1084,3 +1084,15 @@
                 margin-top: 10px;
             }
         }
+
+        .read-more {
+            color: #007BFF;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
