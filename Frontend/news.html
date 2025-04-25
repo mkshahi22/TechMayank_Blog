@@ -36,8 +36,22 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="news.css">
+    <link rel="stylesheet" href="./css/news.css">
 </head>
+<style>
+    /* Fade-in and slide-up animation */
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
 
 <body>
     <header id="main-header">
@@ -66,58 +80,58 @@
         </nav>
     </header>
 
-    <main class="news-container">
-        <section class="news-hero">
-            <div class="overlay"></div>
-            <div class="news-hero-content">
-                <h1>Latest Technology News</h1>
-                <p>Stay updated with the most recent breakthroughs, releases, and trends in the tech world</p>
-            </div>
-        </section>
+    <!--  <main class="news-container"> -->
+    <!-- <section class="news-hero">
+        <div class="overlay"></div>
+        <div class="news-hero-content">
+            <h1>Latest Technology News</h1>
+            <p>Stay updated with the most recent breakthroughs, releases, and trends in the tech world</p>
+        </div>
+    </section>
 
-        <section class="news-filter-section">
-            <div class="news-filters">
-                <button class="filter-btn active" data-filter="all">All News</button>
-                <button class="filter-btn" data-filter="ai">AI & ML</button>
-                <button class="filter-btn" data-filter="web">Web Tech</button>
-                <button class="filter-btn" data-filter="mobile">Mobile</button>
-                <button class="filter-btn" data-filter="security">Security</button>
-                <button class="filter-btn" data-filter="hardware">Hardware</button>
-            </div>
-            <div class="news-search">
-                <input type="text" id="news-search-input" placeholder="Search news...">
-                <button id="news-search-btn"><i class="fas fa-search"></i></button>
-            </div>
-        </section>
+    <section class="news-filter-section">
+        <div class="news-filters">
+            <button class="filter-btn active" data-filter="all">All News</button>
+            <button class="filter-btn" data-filter="ai">AI & ML</button>
+            <button class="filter-btn" data-filter="web">Web Tech</button>
+            <button class="filter-btn" data-filter="mobile">Mobile</button>
+            <button class="filter-btn" data-filter="security">Security</button>
+            <button class="filter-btn" data-filter="hardware">Hardware</button>
+        </div>
+        <div class="news-search">
+            <input type="text" id="news-search-input" placeholder="Search news...">
+            <button id="news-search-btn"><i class="fas fa-search"></i></button>
+        </div>
+    </section>
 
-        <section class="featured-news">
-            <h2 class="section-title">Breaking News</h2>
-            <div class="featured-news-grid">
-                <article class="featured-news-item">
-                    <div class="featured-news-image">
-                        <img src="https://media.wired.com/photos/67af89857dee8eed7170b1eb/master/w_2560%2Cc_limit/GettyImages-2156615862.jpg"
-                            alt="Quantum Computing Breakthrough">
-                        <span class="news-category">Quantum Computing</span>
+    <section class="featured-news">
+        <h2 class="section-title">Breaking News</h2>
+        <div class="featured-news-grid">
+            <article class="featured-news-item">
+                <div class="featured-news-image">
+                    <img src="https://media.wired.com/photos/67af89857dee8eed7170b1eb/master/w_2560%2Cc_limit/GettyImages-2156615862.jpg"
+                        alt="Quantum Computing Breakthrough">
+                    <span class="news-category">Quantum Computing</span>
+                </div>
+                <div class="featured-news-content">
+                    <h3><a href="#">Scientists Achieve 500-Qubit Quantum Computer, Breaking Previous Records</a>
+                    </h3>
+                    <p class="news-excerpt">Researchers at a leading quantum lab have developed a stable 500-qubit
+                        quantum computer, marking a significant milestone in the quantum computing race. This
+                        breakthrough could enable complex calculations previously thought impossible.</p>
+                    <div class="news-meta">
+                        <span class="news-date"><i class="far fa-calendar-alt"></i> April 22, 2025</span>
+                        <span class="news-source">Source: Quantum Technology Review</span>
                     </div>
-                    <div class="featured-news-content">
-                        <h3><a href="#">Scientists Achieve 500-Qubit Quantum Computer, Breaking Previous Records</a>
-                        </h3>
-                        <p class="news-excerpt">Researchers at a leading quantum lab have developed a stable 500-qubit
-                            quantum computer, marking a significant milestone in the quantum computing race. This
-                            breakthrough could enable complex calculations previously thought impossible.</p>
-                        <div class="news-meta">
-                            <span class="news-date"><i class="far fa-calendar-alt"></i> April 22, 2025</span>
-                            <span class="news-source">Source: Quantum Technology Review</span>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
+                </div>
+            </article>
+        </div>
+    </section>
 
-        <div class="news-grid-container">
-            <section class="news-grid">
-                <!-- AI & ML News -->
-                <article class="news-card" data-category="ai">
+    <div class="news-grid-container">
+        <section class="news-grid"> -->
+    <!-- AI & ML News -->
+    <!-- <article class="news-card" data-category="ai">
                     <div class="news-image">
                         <img src="https://media.wired.com/photos/67af89857dee8eed7170b1eb/master/w_2560%2Cc_limit/GettyImages-2156615862.jpg"
                             alt="AI Code Generation Tool">
@@ -135,10 +149,10 @@
                                         class="fas fa-arrow-right"></i></a></span>
                         </div>
                     </div>
-                </article>
+                </article> -->
 
-                <!-- Web Tech News -->
-                <article class="news-card" data-category="web">
+    <!-- Web Tech News -->
+    <!-- <article class="news-card" data-category="web">
                     <div class="news-image">
                         <img src="/api/placeholder/400/300" alt="WebAssembly">
                         <span class="news-category">Web Tech</span>
@@ -153,10 +167,10 @@
                                         class="fas fa-arrow-right"></i></a></span>
                         </div>
                     </div>
-                </article>
+                </article> -->
 
-                <!-- Mobile News -->
-                <article class="news-card" data-category="mobile">
+    <!-- Mobile News -->
+    <!-- <article class="news-card" data-category="mobile">
                     <div class="news-image">
                         <img src="/api/placeholder/400/300" alt="Foldable Phones">
                         <span class="news-category">Mobile</span>
@@ -172,10 +186,10 @@
                                         class="fas fa-arrow-right"></i></a></span>
                         </div>
                     </div>
-                </article>
+                </article> -->
 
-                <!-- Security News -->
-                <article class="news-card" data-category="security">
+    <!-- Security News -->
+    <!-- <article class="news-card" data-category="security">
                     <div class="news-image">
                         <img src="/api/placeholder/400/300" alt="Cybersecurity Alert">
                         <span class="news-category">Security</span>
@@ -191,10 +205,10 @@
                                         class="fas fa-arrow-right"></i></a></span>
                         </div>
                     </div>
-                </article>
+                </article> -->
 
-                <!-- Hardware News -->
-                <article class="news-card" data-category="hardware">
+    <!-- Hardware News -->
+    <!-- <article class="news-card" data-category="hardware">
                     <div class="news-image">
                         <img src="/api/placeholder/400/300" alt="New Processor Architecture">
                         <span class="news-category">Hardware</span>
@@ -210,10 +224,10 @@
                                         class="fas fa-arrow-right"></i></a></span>
                         </div>
                     </div>
-                </article>
+                </article> -->
 
-                <!-- AI & ML News -->
-                <article class="news-card" data-category="ai">
+    <!-- AI & ML News -->
+    <!-- <article class="news-card" data-category="ai">
                     <div class="news-image">
                         <img src="/api/placeholder/400/300" alt="AI in Healthcare">
                         <span class="news-category">AI & ML</span>
@@ -229,10 +243,10 @@
                                         class="fas fa-arrow-right"></i></a></span>
                         </div>
                     </div>
-                </article>
+                </article> -->
 
-                <!-- Web Tech News -->
-                <article class="news-card" data-category="web">
+    <!-- Web Tech News -->
+    <!-- <article class="news-card" data-category="web">
                     <div class="news-image">
                         <img src="/api/placeholder/400/300" alt="New CSS Features">
                         <span class="news-category">Web Tech</span>
@@ -248,10 +262,10 @@
                                         class="fas fa-arrow-right"></i></a></span>
                         </div>
                     </div>
-                </article>
+                </article> -->
 
-                <!-- Security News -->
-                <article class="news-card" data-category="security">
+    <!-- Security News -->
+    <!-- <article class="news-card" data-category="security">
                     <div class="news-image">
                         <img src="/api/placeholder/400/300" alt="Password Standards">
                         <span class="news-category">Security</span>
@@ -268,10 +282,10 @@
                                         class="fas fa-arrow-right"></i></a></span>
                         </div>
                     </div>
-                </article>
+                </article> -->
 
-                <!-- Hardware News -->
-                <article class="news-card" data-category="hardware">
+    <!-- Hardware News -->
+    <!-- <article class="news-card" data-category="hardware">
                     <div class="news-image">
                         <img src="/api/placeholder/400/300" alt="E-Ink Color Breakthrough">
                         <span class="news-category">Hardware</span>
@@ -287,10 +301,32 @@
                                         class="fas fa-arrow-right"></i></a></span>
                         </div>
                     </div>
-                </article>
+                </article> -->
+    <div style="text-align: center; margin: 200px 0; font-family: 'Segoe UI', sans-serif; opacity: 0; animation: fadeInUp 1.2s ease-out forwards;"
+        id="animated-container">
+        <!-- Image element instead of a video -->
+        <img src="https://cdn-icons-png.flaticon.com/512/4076/4076549.png" alt="No Articles" width="150"
+            style="opacity: 0.8; margin-bottom: 20px; animation: fadeInUp 1.2s ease-out 0.5s forwards;">
 
-                <!-- Mobile News -->
-                <article class="news-card" data-category="mobile">
+        <h2 style="color: gray; margin-bottom: 10px; animation: fadeInUp 1.2s ease-out 1s forwards;"
+            id="animated-heading">
+            No news articles have been published yet.
+        </h2>
+
+        <p style="color: #888; font-size: 16px; margin-bottom: 25px; animation: fadeInUp 1.2s ease-out 1.5s forwards;"
+            id="animated-text">
+            Our system is currently not displaying any articles. Content will appear here once published.
+        </p>
+
+        <button onclick="location.reload()"
+            style="padding: 10px 20px; background-color: #4A90E2; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 15px; animation: fadeInUp 1.2s ease-out 2s forwards;"
+            id="animated-button">
+            🔄 Refresh Page
+        </button>
+    </div>
+
+    <!-- Mobile News -->
+    <!-- <article class="news-card" data-category="mobile">
                     <div class="news-image">
                         <img src="/api/placeholder/400/300" alt="Mobile Battery Technology">
                         <span class="news-category">Mobile</span>
@@ -307,9 +343,9 @@
                         </div>
                     </div>
                 </article>
-            </section>
+            </section> -->
 
-            <aside class="news-sidebar">
+    <!-- <aside class="news-sidebar">
                 <div class="sidebar-section trending-news">
                     <h3 class="sidebar-title">Trending Now</h3>
                     <ul class="trending-list">
@@ -334,9 +370,9 @@
                             <a href="#">Tech Giants Announce Collaborative Effort on Climate Technology</a>
                         </li>
                     </ul>
-                </div>
+                </div> -->
 
-                <div class="sidebar-section upcoming-events">
+    <!-- <div class="sidebar-section upcoming-events">
                     <h3 class="sidebar-title">Upcoming Tech Events</h3>
                     <ul class="events-list">
                         <li>
@@ -373,49 +409,50 @@
                     <a href="#" class="view-all-events">View all events <i class="fas fa-arrow-right"></i></a>
                 </div>
             </aside>
-        </div>
+        </div> -->
 
-        <div class="pagination">
-            <a href="#" class="page-btn active">1</a>
-            <a href="#" class="page-btn">2</a>
-            <a href="#" class="page-btn">3</a>
-            <span class="page-dots">...</span>
-            <a href="#" class="page-btn">8</a>
-            <a href="#" class="page-btn next"><i class="fas fa-chevron-right"></i></a>
-        </div>
+    <!-- <div class="pagination">
+        <a href="#" class="page-btn active">1</a>
+        <a href="#" class="page-btn">2</a>
+        <a href="#" class="page-btn">3</a>
+        <span class="page-dots">...</span>
+        <a href="#" class="page-btn">8</a>
+        <a href="#" class="page-btn next"><i class="fas fa-chevron-right"></i></a>
+    </div> -->
 
-        <!-- Newsletter CTA -->
-        <section class="cta-section" id="subscribe">
-            <h2>Subscribe to Our Newsletter</h2>
-            <p>Get the latest tech updates, tutorials, and insights delivered directly to your inbox. No spam, just
-                valuable content!</p>
+    <!-- Newsletter CTA -->
+    <!-- <section class="cta-section" id="subscribe">
+        <h2>Subscribe to Our Newsletter</h2>
+        <p>Get the latest tech updates, tutorials, and insights delivered directly to your inbox. No spam, just
+            valuable content!</p> -->
 
-            <!-- Netlify Form with improved design -->
-            <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field"
-                class="newsletter-form" action="/success">
-                <!-- Honeypot field to prevent spam -->
-                <div hidden>
-                    <label>Don't fill this out if you're human: <input name="bot-field"></label>
-                </div>
+    <!-- Netlify Form with improved design -->
+    <!-- <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="newsletter-form"
+            action="/success">
+            <!-- Honeypot field to prevent spam -->
+    <!-- <div hidden>
+        <label>Don't fill this out if you're human: <input name="bot-field"></label>
+    </div> -->
 
-                <!-- Required for Netlify forms -->
-                <input type="hidden" name="form-name" value="newsletter">
+    <!-- Required for Netlify forms -->
+    <!-- <input type="hidden" name="form-name" value="newsletter"> -->
 
-                <!-- Form input group -->
-                <div class="form-group">
-                    <input type="email" name="email" class="newsletter-input" placeholder="Your email address" required
-                        aria-label="Email address">
-                    <button type="submit" class="btn btn-submit">
-                        <i class="fas fa-paper-plane"></i> Subscribe
-                    </button>
-                </div>
+    <!-- Form input group -->
+    <!-- <div class="form-group">
+        <input type="email" name="email" class="newsletter-input" placeholder="Your email address" required
+            aria-label="Email address">
+        <button type="submit" class="btn btn-submit">
+            <i class="fas fa-paper-plane"></i> Subscribe
+        </button>
+    </div> -->
 
-                <!-- Success message container -->
-                <div id="form-success" class="form-message" style="display: none;">
-                    <p><i class="fas fa-check-circle"></i> Thank you for subscribing! Check your inbox for updates.</p>
-                </div>
-            </form>
-        </section>
+    <!-- Success message container -->
+    <!-- <div id="form-success" class="form-message" style="display: none;">
+        <p><i class="fas fa-check-circle"></i> Thank you for subscribing! Check your inbox for updates.
+        </p>
+    </div>
+    </form> -->
+    </section>
     </main>
 
     <!-- Footer -->
@@ -423,7 +460,8 @@
         <div class="footer-content">
             <div class="footer-section footer-about">
                 <a href="index.html" class="footer-logo">Tech<span>Mayank</span></a>
-                <p>Your go-to source for tech insights, tutorials, and reviews. We make complex technology concepts easy
+                <p>Your go-to source for tech insights, tutorials, and reviews. We make complex technology
+                    concepts easy
                     to understand for everyone.</p>
                 <div class="social-links">
                     <a href="https://x.com/Mayank_Pras" class="social-icon twitter" aria-label="Twitter"><i
