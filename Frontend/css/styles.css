@@ -218,6 +218,10 @@
             color: var(--secondary-color);
         }
 
+        .hero span {
+            color: var(--accent-color);
+        }
+
         .hero p {
             font-size: 1.1rem;
             max-width: 700px;
