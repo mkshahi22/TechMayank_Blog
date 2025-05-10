@@ -1103,3 +1103,36 @@ h3 .comment-count {
     height: auto;
   }
 }
+
+/* Default Styles */
+.image-caption,
+.blog-content .image-caption {
+  display: block;
+  font-size: 16px;
+  color: #888;
+  text-align: center;
+  padding: 8px;
+  font-style: italic;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+/* Tablet: max-width 768px */
+@media (max-width: 768px) {
+
+  .image-caption,
+  .blog-content .image-caption {
+    font-size: 14px;
+    padding: 6px;
+  }
+}
+
+/* Mobile: max-width 480px */
+@media (max-width: 480px) {
+
+  .image-caption,
+  .blog-content .image-caption {
+    font-size: 12px;
+    padding: 4px;
+  }
+}
