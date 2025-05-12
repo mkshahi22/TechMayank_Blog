@@ -33,16 +33,16 @@
             <button class="mobile-menu-btn">☰</button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="/blogs/blogs.html">Blogs</a></li>
+                <li><a href="./blogs/blogs.html">Blogs</a></li>
                 <li class="dropdown">
                     <a href="#">Categories</a>
                     <div class="dropdown-content">
-                        <a href="category-webdev.html">Web Development</a>
-                        <a href="category-ai.html">Artificial Intelligence</a>
-                        <a href="category-cybersecurity.html">Cybersecurity</a>
-                        <a href="category-iot.html">IoT</a>
-                        <a href="category-mobile.html">Mobile Development</a>
-                        <a href="category-cloud.html">Cloud Computing</a>
+                        <a href="./cat/category-webdev.html">Web Development</a>
+                        <a href="./cat/category-ai.html">Artificial Intelligence</a>
+                        <a href="./cat/category-cybersecurity.html">Cybersecurity</a>
+                        <a href="./cat/category-iot.html">IoT</a>
+                        <a href="./cat/category-mobile.html">Mobile Development</a>
+                        <a href="./cat/category-cloud.html">Cloud Computing</a>
                     </div>
                 </li>
                 <li><a href="news.html">News</a></li>
@@ -194,8 +194,8 @@
             <div style="text-align: center; margin: 100px 0; font-family: 'Segoe UI', sans-serif;"
                 id="animated-container">
                 <!-- Image element -->
-                <img src="https://cdn-icons-webp.flaticon.com/512/4076/4076549.webp" alt="No Questions Found"
-                    width="150" style="opacity: 0.8; margin-bottom: 20px;">
+                <img src="https://comodosslstore.com/blog/wp-content/uploads/2024/01/website-page-found-error-robot-character-broken-chatbot-mascot-disabled-site-technical-work_502272-1888.jpg"
+                    alt="No Questions Found" width="200" style="opacity: 0.8; margin-bottom: 20px;">
                 <h2 style="color: gray; margin-bottom: 10px;" id="animated-heading">
                     Not Any Question Found Yet! 😞
                 </h2>
@@ -248,8 +248,8 @@
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="/blogs/blogs.html">Blogs</a></li>
-                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="./blogs/blogs.html">Blogs</a></li>
+                    <li><a href="./cat/categories.html">Categories</a></li>
                     <li><a href="news.html">News</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="contact.html">Contact</a></li>
@@ -259,12 +259,12 @@
             <div class="footer-section">
                 <h3>Popular Categories</h3>
                 <ul class="footer-links">
-                    <li><a href="category-webdev.html">Web Development</a></li>
-                    <li><a href="category-ai.html">Artificial Intelligence</a></li>
-                    <li><a href="category-cybersecurity.html">Cybersecurity</a></li>
-                    <li><a href="category-cloud.html">Cloud Computing</a></li>
-                    <li><a href="category-mobile.html">Mobile Development</a></li>
-                    <li><a href="category-iot.html">IoT</a></li>
+                    <li><a href="./cat/category-webdev.html">Web Development</a></li>
+                    <li><a href="./cat/category-ai.html">Artificial Intelligence</a></li>
+                    <li><a href="./cat/category-cybersecurity.html">Cybersecurity</a></li>
+                    <li><a href="./cat/category-cloud.html">Cloud Computing</a></li>
+                    <li><a href="./cat/category-mobile.html">Mobile Development</a></li>
+                    <li><a href="./cat/category-iot.html">IoT</a></li>
                 </ul>
             </div>
 
@@ -332,8 +332,8 @@
             // Initialize map
             const map = L.map('map').setView([28.4095, 77.5258], 14);
 
-            // Add OpenStreetMap tiles
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.webp', {
+            // Add OpenStreetMap tiles (corrected to .png)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
@@ -343,6 +343,7 @@
                 .bindPopup('TechMayanK Headquarters')
                 .openPopup();
         });
+
     </script>
 </body>
 

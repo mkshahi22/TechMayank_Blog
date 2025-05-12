@@ -38,20 +38,6 @@
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/news.css">
 </head>
-<style>
-    /* Fade-in and slide-up animation */
-    @keyframes fadeInUp {
-        0% {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-</style>
 
 <body>
     <header id="main-header">
@@ -60,16 +46,16 @@
             <button class="mobile-menu-btn">☰</button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="/blogs/blogs.html">Blogs</a></li>
+                <li><a href="./blogs/blogs.html">Blogs</a></li>
                 <li class="dropdown">
                     <a href="#">Categories</a>
                     <div class="dropdown-content">
-                        <a href="category-webdev.html">Web Development</a>
-                        <a href="category-ai.html">Artificial Intelligence</a>
-                        <a href="category-cybersecurity.html">Cybersecurity</a>
-                        <a href="category-iot.html">IoT</a>
-                        <a href="category-mobile.html">Mobile Development</a>
-                        <a href="category-cloud.html">Cloud Computing</a>
+                        <a href="./cat/category-webdev.html">Web Development</a>
+                        <a href="./cat/category-ai.html">Artificial Intelligence</a>
+                        <a href="./cat/category-cybersecurity.html">Cybersecurity</a>
+                        <a href="./cat/category-iot.html">IoT</a>
+                        <a href="./cat/category-mobile.html">Mobile Development</a>
+                        <a href="./cat/category-cloud.html">Cloud Computing</a>
                     </div>
                 </li>
                 <li><a href="news.html" class="active">News</a></li>
@@ -306,29 +292,17 @@
                         </div>
                     </div>
                 </article> -->
-    <div style="text-align: center; margin: 200px 0; font-family: 'Segoe UI', sans-serif; opacity: 0; animation: fadeInUp 1.2s ease-out forwards;"
-        id="animated-container">
-        <!-- Image element instead of a video -->
-        <img src="https://cdn-icons-png.flaticon.com/512/4076/4076549.png" alt="No Articles" width="150"
-            style="opacity: 0.8; margin-bottom: 20px; animation: fadeInUp 1.2s ease-out 0.5s forwards;">
-
-        <h2 style="color: gray; margin-bottom: 10px; animation: fadeInUp 1.2s ease-out 1s forwards;"
-            id="animated-heading">
+    <div style="text-align: center; margin: 100px 0; font-family: 'Segoe UI', sans-serif;" id="animated-container">
+        <!-- Image element -->
+        <img src="https://comodosslstore.com/blog/wp-content/uploads/2024/01/website-page-found-error-robot-character-broken-chatbot-mascot-disabled-site-technical-work_502272-1888.jpg"
+            alt="No Questions Found" width="300" style="opacity: 0.8; margin-bottom: 20px;">
+        <h2 style="color: gray; margin-bottom: 10px;" id="animated-heading">
             No news articles have been published yet.
         </h2>
-
-        <p style="color: #888; font-size: 16px; margin-bottom: 25px; animation: fadeInUp 1.2s ease-out 1.5s forwards;"
-            id="animated-text">
+        <p style="color: #888; font-size: 16px; margin-bottom: 25px;" id="animated-text">
             Our system is currently not displaying any articles. Content will appear here once published.
         </p>
-
-        <button onclick="location.reload()"
-            style="padding: 10px 20px; background-color: #4A90E2; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 15px; animation: fadeInUp 1.2s ease-out 2s forwards;"
-            id="animated-button">
-            🔄 Refresh Page
-        </button>
     </div>
-
     <!-- Mobile News -->
     <!-- <article class="news-card" data-category="mobile">
                     <div class="news-image">
@@ -485,8 +459,8 @@
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="/blogs/blogs.html">Blogs</a></li>
-                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="./blogs/blogs.html">Blogs</a></li>
+                    <li><a href="./cat/categories.html">Categories</a></li>
                     <li><a href="news.html">News</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="contact.html">Contact</a></li>
@@ -496,12 +470,12 @@
             <div class="footer-section">
                 <h3>Popular Categories</h3>
                 <ul class="footer-links">
-                    <li><a href="category-webdev.html">Web Development</a></li>
-                    <li><a href="category-ai.html">Artificial Intelligence</a></li>
-                    <li><a href="category-cybersecurity.html">Cybersecurity</a></li>
-                    <li><a href="category-cloud.html">Cloud Computing</a></li>
-                    <li><a href="category-mobile.html">Mobile Development</a></li>
-                    <li><a href="category-iot.html">IoT</a></li>
+                    <li><a href="./cat/category-webdev.html">Web Development</a></li>
+                    <li><a href="./cat/category-ai.html">Artificial Intelligence</a></li>
+                    <li><a href="./cat/category-cybersecurity.html">Cybersecurity</a></li>
+                    <li><a href="./cat/category-cloud.html">Cloud Computing</a></li>
+                    <li><a href="./cat/category-mobile.html">Mobile Development</a></li>
+                    <li><a href="./cat/category-iot.html">IoT</a></li>
                 </ul>
             </div>
 
@@ -519,14 +493,6 @@
             </p>
         </div>
     </footer>
-    <div style="text-align: center;">
-        <a href="//www.dmca.com/Protection/Status.aspx?ID=4a0e343e-0d24-492d-8b7c-45849c8ba1ba"
-            title="DMCA.com Protection Status" class="dmca-badge">
-            <img src="https://images.dmca.com/Badges/dmca_protected_sml_120l.webp?ID=4a0e343e-0d24-492d-8b7c-45849c8ba1ba"
-                alt="DMCA.com Protection Status" />
-        </a>
-        <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"></script>
-    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {

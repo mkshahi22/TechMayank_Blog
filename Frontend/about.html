@@ -38,12 +38,12 @@
                 <li class="dropdown">
                     <a href="#">Categories</a>
                     <div class="dropdown-content">
-                        <a href="category-webdev.html">Web Development</a>
-                        <a href="category-ai.html">Artificial Intelligence</a>
-                        <a href="category-cybersecurity.html">Cybersecurity</a>
-                        <a href="category-iot.html">IoT</a>
-                        <a href="category-mobile.html">Mobile Development</a>
-                        <a href="category-cloud.html">Cloud Computing</a>
+                        <a href="./cat/category-webdev.html">Web Development</a>
+                        <a href="./cat/category-ai.html">Artificial Intelligence</a>
+                        <a href="./cat/category-cybersecurity.html">Cybersecurity</a>
+                        <a href="./cat/category-iot.html">IoT</a>
+                        <a href="./cat/category-mobile.html">Mobile Development</a>
+                        <a href="./cat/category-cloud.html">Cloud Computing</a>
                     </div>
                 </li>
                 <li><a href="news.html">News</a></li>
@@ -406,7 +406,7 @@
                 <ul class="footer-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="./blogs/blogs.html">Blogs</a></li>
-                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="./cat/categories.html">Categories</a></li>
                     <li><a href="news.html">News</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="contact.html">Contact</a></li>
@@ -416,12 +416,12 @@
             <div class="footer-section">
                 <h3>Popular Categories</h3>
                 <ul class="footer-links">
-                    <li><a href="category-webdev.html">Web Development</a></li>
-                    <li><a href="category-ai.html">Artificial Intelligence</a></li>
-                    <li><a href="category-cybersecurity.html">Cybersecurity</a></li>
-                    <li><a href="category-cloud.html">Cloud Computing</a></li>
-                    <li><a href="category-mobile.html">Mobile Development</a></li>
-                    <li><a href="category-iot.html">IoT</a></li>
+                    <li><a href="./cat/category-webdev.html">Web Development</a></li>
+                    <li><a href="./cat/category-ai.html">Artificial Intelligence</a></li>
+                    <li><a href="./cat/category-cybersecurity.html">Cybersecurity</a></li>
+                    <li><a href="./cat/category-cloud.html">Cloud Computing</a></li>
+                    <li><a href="./cat/category-mobile.html">Mobile Development</a></li>
+                    <li><a href="./cat/category-iot.html">IoT</a></li>
                 </ul>
             </div>
 
@@ -527,7 +527,30 @@
                 , {
                     threshold: 0.1
                 });
+            const skillCards = document.querySelectorAll('.skill-card');
 
+            const skillObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bar = entry.target.querySelector('.skill-bar');
+                        const targetWidth = bar.getAttribute('data-width');
+                        bar.style.width = targetWidth;
+                        entry.target.classList.add('animated'); // Optional: for future styling
+                        skillObserver.unobserve(entry.target); // Animate once only
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            skillCards.forEach(card => {
+                const bar = card.querySelector('.skill-bar');
+                // Store original width as data attribute
+                bar.setAttribute('data-width', bar.style.width);
+                // Reset to 0 initially for animation
+                bar.style.width = '0';
+                skillObserver.observe(card);
+            });
             // Observe all elements that should animate on scroll
             document.querySelectorAll('.about-section, .timeline-item, .fun-card, .value-item').forEach(element => {
                 observer.observe(element);
