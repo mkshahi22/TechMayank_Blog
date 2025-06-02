@@ -35,8 +35,11 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/footer.css">
     <link rel="stylesheet" href="./css/news.css">
+
+
 </head>
 
 <body>
@@ -66,380 +69,60 @@
         </nav>
     </header>
 
-    <!--  <main class="news-container"> -->
     <section class="news-hero">
-        <div class="overlay"></div>
         <div class="news-hero-content">
             <h1>Latest Technology News</h1>
             <p>Stay updated with the most recent breakthroughs, releases, and trends in the tech world</p>
         </div>
     </section>
 
-    <section class="news-filter-section">
-        <div class="news-filters">
-            <button class="filter-btn active" data-filter="all">All News</button>
-            <button class="filter-btn" data-filter="ai">AI & ML</button>
-            <button class="filter-btn" data-filter="web">Web Tech</button>
-            <button class="filter-btn" data-filter="mobile">Mobile</button>
-            <button class="filter-btn" data-filter="security">Security</button>
-            <button class="filter-btn" data-filter="hardware">Hardware</button>
+    <div class="container">
+        <section class="news-filter-section">
+            <div class="news-filters">
+                <button class="filter-btn active" data-filter="all">All News</button>
+                <button class="filter-btn" data-filter="ai">AI & ML</button>
+                <button class="filter-btn" data-filter="web">Web Tech</button>
+                <button class="filter-btn" data-filter="mobile">Mobile</button>
+                <button class="filter-btn" data-filter="security">Security</button>
+                <button class="filter-btn" data-filter="hardware">Hardware</button>
+            </div>
+            <div class="news-search">
+                <input type="text" id="news-search-input" placeholder="Search news...">
+                <button id="news-search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </section>
+
+        <!-- Loading State -->
+        <div id="loading-container" class="loading-container">
+            <div class="loading-spinner"></div>
         </div>
-        <div class="news-search">
-            <input type="text" id="news-search-input" placeholder="Search news...">
-            <button id="news-search-btn"><i class="fas fa-search"></i></button>
+
+        <!-- Error State -->
+        <div id="error-message" class="error-message" style="display: none;">
+            <i class="fas fa-exclamation-triangle"></i>
+            <strong>Error loading news:</strong> <span id="error-text"></span>
         </div>
-    </section>
 
-    <!-- <section class="featured-news">
-        <h2 class="section-title">Breaking News</h2>
-        <div class="featured-news-grid">
-            <article class="featured-news-item">
-                <div class="featured-news-image">
-                    <img src="https://www.reuters.com/resizer/v2/SQJUZ3AW2VM3VM5OAGMPL5B454.jpg?auth=5b2924e1d2724747bce868340798181cd0c29b2484ad5002d9f1e9d56d602c02&width=960&quality=80"
-                        alt="Quantum Computing Breakthrough">
-                    <span class="news-category">AI & Technology</span>
-                </div>
-                <div class="featured-news-content">
-                    <h3><a href="#">Alphabet climbs as AI bets drive ad strength, quelling market fears</a>
-                    </h3>
-                    <p class="news-excerpt">Alphabet’s stock surged by approximately 3% following a robust earnings
-                        report, as the company’s investments in artificial intelligence (AI) are seen as a major factor
-                        behind the strong performance of its core advertising business. The positive results have
-                        quelled investor fears, particularly in the face of increased competition and tariff concerns,
-                        highlighting how AI is becoming a key growth driver for Alphabet. The company’s focus on AI has
-                        proven to be a strategic advantage, as it continues to reshape its ad business in the digital
-                        age.</p>
-                    <div class="news-meta">
-                        <span class="news-date"><i class="far fa-calendar-alt"></i> April 25, 2025</span>
-                        <span class="news-source">Source: Quantum Technology Review</span>
-                    </div>
-                </div>
-            </article>
+        <!-- News Grid -->
+        <section id="news-grid" class="news-grid" style="display: none;">
+            <!-- News cards will be dynamically inserted here -->
+        </section>
+
+        <!-- No Results State -->
+        <div id="no-results" class="no-results" style="display: none;">
+            <img src="https://comodosslstore.com/blog/wp-content/uploads/2024/01/website-page-found-error-robot-character-broken-chatbot-mascot-disabled-site-technical-work_502272-1888.jpg"
+                alt="No Results Found">
+            <h2>No articles found</h2>
+            <p>Try adjusting your search terms or browse different categories to find the latest tech news.</p>
         </div>
-    </section> -->
-
-    <!-- <div class="news-grid-container">
-        <section class="news-grid">  -->
-    <!-- AI & ML News -->
-    <!-- <article class="news-card" data-category="ai">
-                    <div class="news-image">
-                        <img src="https://media.wired.com/photos/67af89857dee8eed7170b1eb/master/w_2560%2Cc_limit/GettyImages-2156615862.jpg"
-                            alt="AI Code Generation Tool">
-                        <span class="news-category">AI & ML</span>
-                    </div>
-                    <div class="news-content">
-                        <h3><a href="#">New AI Code Generation Tool Claims 90% Accuracy for Production-Ready Code</a>
-                        </h3>
-                        <p class="news-excerpt">A startup has released an AI tool that can generate complete
-                            applications with claimed 90% production-ready accuracy, reducing development time by up to
-                            70%.</p>
-                        <div class="news-meta">
-                            <span class="news-date"><i class="far fa-calendar-alt"></i> April 21, 2025</span>
-                            <span class="news-read-more"><a href="#">Read more <i
-                                        class="fas fa-arrow-right"></i></a></span>
-                        </div>
-                    </div>
-                </article> -->
-
-    <!-- Web Tech News -->
-    <!-- <article class="news-card" data-category="web">
-                    <div class="news-image">
-                        <img src="/api/placeholder/400/300" alt="WebAssembly">
-                        <span class="news-category">Web Tech</span>
-                    </div>
-                    <div class="news-content">
-                        <h3><a href="#">WebAssembly 3.0 Specification Released with Enhanced Threading Support</a></h3>
-                        <p class="news-excerpt">The World Wide Web Consortium (W3C) has finalized WebAssembly 3.0,
-                            featuring improved threading capabilities and better integration with JavaScript APIs.</p>
-                        <div class="news-meta">
-                            <span class="news-date"><i class="far fa-calendar-alt"></i> April 20, 2025</span>
-                            <span class="news-read-more"><a href="#">Read more <i
-                                        class="fas fa-arrow-right"></i></a></span>
-                        </div>
-                    </div>
-                </article> -->
-
-    <!-- Mobile News -->
-    <!-- <article class="news-card" data-category="mobile">
-                    <div class="news-image">
-                        <img src="/api/placeholder/400/300" alt="Foldable Phones">
-                        <span class="news-category">Mobile</span>
-                    </div>
-                    <div class="news-content">
-                        <h3><a href="#">Tri-Fold Smartphones Set to Hit Market by Year End</a></h3>
-                        <p class="news-excerpt">Several major smartphone manufacturers have announced tri-fold display
-                            devices coming to market in Q4 2025, with enhanced durability and multitasking capabilities.
-                        </p>
-                        <div class="news-meta">
-                            <span class="news-date"><i class="far fa-calendar-alt"></i> April 19, 2025</span>
-                            <span class="news-read-more"><a href="#">Read more <i
-                                        class="fas fa-arrow-right"></i></a></span>
-                        </div>
-                    </div>
-                </article> -->
-
-    <!-- Security News -->
-    <!-- <article class="news-card" data-category="security">
-                    <div class="news-image">
-                        <img src="/api/placeholder/400/300" alt="Cybersecurity Alert">
-                        <span class="news-category">Security</span>
-                    </div>
-                    <div class="news-content">
-                        <h3><a href="#">Critical Zero-Day Vulnerability Discovered in Popular Cloud Services</a></h3>
-                        <p class="news-excerpt">Security researchers have identified a severe vulnerability affecting
-                            multiple cloud providers. Patches are being deployed, but organizations are advised to
-                            implement additional protection measures.</p>
-                        <div class="news-meta">
-                            <span class="news-date"><i class="far fa-calendar-alt"></i> April 18, 2025</span>
-                            <span class="news-read-more"><a href="#">Read more <i
-                                        class="fas fa-arrow-right"></i></a></span>
-                        </div>
-                    </div>
-                </article> -->
-
-    <!-- Hardware News -->
-    <!-- <article class="news-card" data-category="hardware">
-                    <div class="news-image">
-                        <img src="/api/placeholder/400/300" alt="New Processor Architecture">
-                        <span class="news-category">Hardware</span>
-                    </div>
-                    <div class="news-content">
-                        <h3><a href="#">Next-Gen 2nm Processor Architecture Promises 40% Energy Reduction</a></h3>
-                        <p class="news-excerpt">A leading semiconductor company has unveiled its 2nm chip architecture,
-                            promising significant power efficiency gains while delivering 25% better performance over
-                            current generation processors.</p>
-                        <div class="news-meta">
-                            <span class="news-date"><i class="far fa-calendar-alt"></i> April 17, 2025</span>
-                            <span class="news-read-more"><a href="#">Read more <i
-                                        class="fas fa-arrow-right"></i></a></span>
-                        </div>
-                    </div>
-                </article> -->
-
-    <!-- AI & ML News -->
-    <!-- <article class="news-card" data-category="ai">
-                    <div class="news-image">
-                        <img src="/api/placeholder/400/300" alt="AI in Healthcare">
-                        <span class="news-category">AI & ML</span>
-                    </div>
-                    <div class="news-content">
-                        <h3><a href="#">FDA Approves First AI System for Autonomous Medical Diagnostics</a></h3>
-                        <p class="news-excerpt">In a landmark decision, the FDA has approved an AI system capable of
-                            diagnosing certain medical conditions without human oversight, marking a significant shift
-                            in healthcare technology regulation.</p>
-                        <div class="news-meta">
-                            <span class="news-date"><i class="far fa-calendar-alt"></i> April 16, 2025</span>
-                            <span class="news-read-more"><a href="#">Read more <i
-                                        class="fas fa-arrow-right"></i></a></span>
-                        </div>
-                    </div>
-                </article> -->
-
-    <!-- Web Tech News -->
-    <!-- <article class="news-card" data-category="web">
-                    <div class="news-image">
-                        <img src="/api/placeholder/400/300" alt="New CSS Features">
-                        <span class="news-category">Web Tech</span>
-                    </div>
-                    <div class="news-content">
-                        <h3><a href="#">CSS Container Queries Finally Reach Full Browser Support</a></h3>
-                        <p class="news-excerpt">All major browsers now support CSS Container Queries, enabling more
-                            responsive component-level design and reducing the complexity of media query-based layouts.
-                        </p>
-                        <div class="news-meta">
-                            <span class="news-date"><i class="far fa-calendar-alt"></i> April 15, 2025</span>
-                            <span class="news-read-more"><a href="#">Read more <i
-                                        class="fas fa-arrow-right"></i></a></span>
-                        </div>
-                    </div>
-                </article> -->
-
-    <!-- Security News -->
-    <!-- <article class="news-card" data-category="security">
-                    <div class="news-image">
-                        <img src="/api/placeholder/400/300" alt="Password Standards">
-                        <span class="news-category">Security</span>
-                    </div>
-                    <div class="news-content">
-                        <h3><a href="#">NIST Announces New Digital Authentication Guidelines Eliminating Regular
-                                Password Changes</a></h3>
-                        <p class="news-excerpt">The National Institute of Standards and Technology has released updated
-                            digital authentication guidelines that no longer recommend periodic password changes,
-                            focusing instead on stronger initial passwords and multi-factor authentication.</p>
-                        <div class="news-meta">
-                            <span class="news-date"><i class="far fa-calendar-alt"></i> April 14, 2025</span>
-                            <span class="news-read-more"><a href="#">Read more <i
-                                        class="fas fa-arrow-right"></i></a></span>
-                        </div>
-                    </div>
-                </article> -->
-
-    <!-- Hardware News -->
-    <!-- <article class="news-card" data-category="hardware">
-                    <div class="news-image">
-                        <img src="/api/placeholder/400/300" alt="E-Ink Color Breakthrough">
-                        <span class="news-category">Hardware</span>
-                    </div>
-                    <div class="news-content">
-                        <h3><a href="#">New E-Ink Display Technology Achieves Full Color at 300Hz Refresh Rate</a></h3>
-                        <p class="news-excerpt">A display technology company has demonstrated a revolutionary e-ink
-                            panel capable of full color reproduction with refresh rates comparable to LCD displays while
-                            maintaining exceptional power efficiency.</p>
-                        <div class="news-meta">
-                            <span class="news-date"><i class="far fa-calendar-alt"></i> April 13, 2025</span>
-                            <span class="news-read-more"><a href="#">Read more <i
-                                        class="fas fa-arrow-right"></i></a></span>
-                        </div>
-                    </div>
-                </article> -->
-    <div style="text-align: center; margin: 100px 0; font-family: 'Segoe UI', sans-serif;" id="animated-container">
-        <!-- Image element -->
-        <img src="https://comodosslstore.com/blog/wp-content/uploads/2024/01/website-page-found-error-robot-character-broken-chatbot-mascot-disabled-site-technical-work_502272-1888.jpg"
-            alt="No Questions Found" width="300" style="opacity: 0.8; margin-bottom: 20px;">
-        <h2 style="color: gray; margin-bottom: 10px;" id="animated-heading">
-            No news articles have been published yet.
-        </h2>
-        <p style="color: #888; font-size: 16px; margin-bottom: 25px;" id="animated-text">
-            Our system is currently not displaying any articles. Content will appear here once published.
-        </p>
     </div>
-    <!-- Mobile News -->
-    <!-- <article class="news-card" data-category="mobile">
-                    <div class="news-image">
-                        <img src="/api/placeholder/400/300" alt="Mobile Battery Technology">
-                        <span class="news-category">Mobile</span>
-                    </div>
-                    <div class="news-content">
-                        <h3><a href="#">Solid-State Battery Technology Coming to Smartphones Next Year</a></h3>
-                        <p class="news-excerpt">Several smartphone manufacturers have announced plans to incorporate
-                            solid-state batteries in their flagship devices next year, promising double the battery life
-                            and significantly faster charging times.</p>
-                        <div class="news-meta">
-                            <span class="news-date"><i class="far fa-calendar-alt"></i> April 12, 2025</span>
-                            <span class="news-read-more"><a href="#">Read more <i
-                                        class="fas fa-arrow-right"></i></a></span>
-                        </div>
-                    </div>
-                </article>
-            </section> -->
-
-    <!-- <aside class="news-sidebar">
-                <div class="sidebar-section trending-news">
-                    <h3 class="sidebar-title">Trending Now</h3>
-                    <ul class="trending-list">
-                        <li>
-                            <span class="trending-number">1</span>
-                            <a href="#">Tech Industry Responds to New Global Data Protection Regulations</a>
-                        </li>
-                        <li>
-                            <span class="trending-number">2</span>
-                            <a href="#">Major Browser Update Introduces AI-Powered Search Features</a>
-                        </li>
-                        <li>
-                            <span class="trending-number">3</span>
-                            <a href="#">Open Source AI Model Matches Performance of Proprietary Leaders</a>
-                        </li>
-                        <li>
-                            <span class="trending-number">4</span>
-                            <a href="#">New Programming Language Gains Popularity Among Developers</a>
-                        </li>
-                        <li>
-                            <span class="trending-number">5</span>
-                            <a href="#">Tech Giants Announce Collaborative Effort on Climate Technology</a>
-                        </li>
-                    </ul>
-                </div> -->
-
-    <!-- <div class="sidebar-section upcoming-events">
-                    <h3 class="sidebar-title">Upcoming Tech Events</h3>
-                    <ul class="events-list">
-                        <li>
-                            <div class="event-date">
-                                <span class="event-month">May</span>
-                                <span class="event-day">15</span>
-                            </div>
-                            <div class="event-details">
-                                <h4 class="event-title">Annual Developer Conference 2025</h4>
-                                <p class="event-location"><i class="fas fa-map-marker-alt"></i> San Francisco, CA</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="event-date">
-                                <span class="event-month">May</span>
-                                <span class="event-day">22</span>
-                            </div>
-                            <div class="event-details">
-                                <h4 class="event-title">Global AI Summit</h4>
-                                <p class="event-location"><i class="fas fa-map-marker-alt"></i> London, UK</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="event-date">
-                                <span class="event-month">Jun</span>
-                                <span class="event-day">10</span>
-                            </div>
-                            <div class="event-details">
-                                <h4 class="event-title">Cybersecurity Conference 2025</h4>
-                                <p class="event-location"><i class="fas fa-map-marker-alt"></i> Tokyo, Japan</p>
-                            </div>
-                        </li>
-                    </ul>
-                    <a href="#" class="view-all-events">View all events <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </aside>
-        </div> -->
-
-    <!-- <div class="pagination">
-        <a href="#" class="page-btn active">1</a>
-        <a href="#" class="page-btn">2</a>
-        <a href="#" class="page-btn">3</a>
-        <span class="page-dots">...</span>
-        <a href="#" class="page-btn">8</a>
-        <a href="#" class="page-btn next"><i class="fas fa-chevron-right"></i></a>
-    </div> -->
-
-    <!-- Newsletter CTA -->
-    <!-- <section class="cta-section" id="subscribe">
-        <h2>Subscribe to Our Newsletter</h2>
-        <p>Get the latest tech updates, tutorials, and insights delivered directly to your inbox. No spam, just
-            valuable content!</p> -->
-
-    <!-- Netlify Form with improved design -->
-    <!-- <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="newsletter-form"
-            action="/success">
-            <!-- Honeypot field to prevent spam -->
-    <!-- <div hidden>
-        <label>Don't fill this out if you're human: <input name="bot-field"></label>
-    </div> -->
-
-    <!-- Required for Netlify forms -->
-    <!-- <input type="hidden" name="form-name" value="newsletter"> -->
-
-    <!-- Form input group -->
-    <!-- <div class="form-group">
-        <input type="email" name="email" class="newsletter-input" placeholder="Your email address" required
-            aria-label="Email address">
-        <button type="submit" class="btn btn-submit">
-            <i class="fas fa-paper-plane"></i> Subscribe
-        </button>
-    </div> -->
-
-    <!-- Success message container -->
-    <!-- <div id="form-success" class="form-message" style="display: none;">
-        <p><i class="fas fa-check-circle"></i> Thank you for subscribing! Check your inbox for updates.
-        </p>
-    </div>
-    </form> -->
-    </section>
-    </main>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section footer-about">
                 <a href="index.html" class="footer-logo">Tech<span>MayanK</span></a>
-                <p>Your go-to source for tech insights, tutorials, and reviews. We make complex technology
-                    concepts easy
+                <p>Your go-to source for tech insights, tutorials, and reviews. We make complex technology concepts easy
                     to understand for everyone.</p>
                 <div class="social-links">
                     <a href="https://x.com/MayanK_Pras" class="social-icon twitter" aria-label="Twitter"><i
@@ -488,129 +171,561 @@
         </div>
 
         <div class="copyright">
-            <p>&copy; 2025 TechMayanK. All rights reserved.
+            <p>&copy; 2025 TechMayanK. All rights reserved.</p>
             <p><a href="privacy.html" style="color: white; text-decoration: none;">Privacy Policy</a></p>
-            </p>
         </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Mobile menu toggle
-            const menuBtn = document.querySelector('.mobile-menu-btn');
-            const navLinks = document.querySelector('.nav-links');
+        class NewsManager {
+            constructor() {
+                this.allNews = [];
+                this.filteredNews = [];
+                this.currentFilter = 'all';
+                this.currentSearch = '';
+                this.initializeElements();
+                this.bindEvents();
+                this.loadNews();
+            }
 
-            menuBtn.addEventListener('click', function () {
-                navLinks.classList.toggle('active');
-            });
+            initializeElements() {
+                this.loadingContainer = document.getElementById('loading-container');
+                this.errorMessage = document.getElementById('error-message');
+                this.errorText = document.getElementById('error-text');
+                this.newsGrid = document.getElementById('news-grid');
+                this.noResults = document.getElementById('no-results');
+                this.filterBtns = document.querySelectorAll('.filter-btn');
+                this.searchInput = document.getElementById('news-search-input');
+                this.searchBtn = document.getElementById('news-search-btn');
+            }
 
-            // Mobile dropdown toggle
-            const dropdowns = document.querySelectorAll('.dropdown');
-
-            dropdowns.forEach(dropdown => {
-                const dropdownLink = dropdown.querySelector('a');
-
-                if (window.innerWidth <= 768) {
-                    dropdownLink.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        dropdown.classList.toggle('active');
-                    });
-                }
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', function (event) {
-                if (!event.target.closest('nav') && !event.target.closest('.mobile-menu-btn')) {
-                    navLinks.classList.remove('active');
-                }
-            });
-
-            // Navbar scroll effect
-            window.addEventListener('scroll', function () {
-                const header = document.getElementById('main-header');
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-
-            // News category filtering
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            const newsCards = document.querySelectorAll('.news-card');
-
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', function () {
-                    // Remove active class from all buttons
-                    filterBtns.forEach(btn => btn.classList.remove('active'));
-
-                    // Add active class to clicked button
-                    this.classList.add('active');
-
-                    // Get filter value
-                    const filterValue = this.getAttribute('data-filter');
-
-                    // Show/hide news cards based on filter
-                    newsCards.forEach(card => {
-                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                            card.style.display = 'flex';
-                        } else {
-                            card.style.display = 'none';
-                        }
+            bindEvents() {
+                // Filter buttons
+                this.filterBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        this.setActiveFilter(e.target);
+                        this.currentFilter = e.target.getAttribute('data-filter');
+                        this.filterAndDisplayNews();
                     });
                 });
-            });
 
-            // News search functionality
-            const searchInput = document.getElementById('news-search-input');
-            const searchBtn = document.getElementById('news-search-btn');
-
-            function searchNews() {
-                const searchTerm = searchInput.value.toLowerCase();
-
-                newsCards.forEach(card => {
-                    const title = card.querySelector('h3').textContent.toLowerCase();
-                    const excerpt = card.querySelector('.news-excerpt').textContent.toLowerCase();
-
-                    if (title.includes(searchTerm) || excerpt.includes(searchTerm)) {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
+                // Search functionality
+                this.searchBtn.addEventListener('click', () => this.performSearch());
+                this.searchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.performSearch();
                     }
                 });
 
-                // Reset category filter buttons
-                filterBtns.forEach(btn => btn.classList.remove('active'));
-                document.querySelector('[data-filter="all"]').classList.add('active');
-            }
+                // Mobile menu toggle
+                const menuBtn = document.querySelector('.mobile-menu-btn');
+                const navLinks = document.querySelector('.nav-links');
 
-            searchBtn.addEventListener('click', searchNews);
-            searchInput.addEventListener('keypress', function (e) {
-                if (e.key === 'Enter') {
-                    searchNews();
-                }
-            });
-
-            // Calculate read time for each news article
-            function calculateReadTime() {
-                const newsExcerpts = document.querySelectorAll('.news-excerpt');
-                const readTimeElements = document.querySelectorAll('.news-read-time');
-
-                // Only if read time spans exist
-                if (readTimeElements.length > 0) {
-                    newsExcerpts.forEach((excerpt, index) => {
-                        const text = excerpt.textContent;
-                        const wordCount = text.split(/\s+/).length;
-                        const readTime = Math.ceil(wordCount / 200); // Assuming 200 words per minute
-
-                        if (readTimeElements[index]) {
-                            readTimeElements[index].innerHTML = `<i class="far fa-clock"></i> ${readTime} min read`;
-                        }
+                if (menuBtn) {
+                    menuBtn.addEventListener('click', () => {
+                        navLinks.classList.toggle('active');
                     });
                 }
             }
 
-            calculateReadTime();
+            setActiveFilter(activeBtn) {
+                this.filterBtns.forEach(btn => btn.classList.remove('active'));
+                activeBtn.classList.add('active');
+            }
+
+            async loadNews() {
+                try {
+                    this.showLoading();
+
+                    // Multiple RSS feeds for different tech news sources
+                    const feeds = [
+                        'https://rss2json.com/api.json?rss_url=https://feeds.feedburner.com/oreilly/radar/atom',
+                        'https://rss2json.com/api.json?rss_url=https://www.wired.com/feed/tag/ai/latest/rss',
+                        'https://rss2json.com/api.json?rss_url=https://techcrunch.com/feed/',
+                        'https://rss2json.com/api.json?rss_url=https://www.theverge.com/rss/index.xml',
+                        'https://rss2json.com/api.json?rss_url=https://arstechnica.com/feed/'
+                    ];
+
+                    const promises = feeds.map(feed =>
+                        fetch(feed)
+                            .then(response => response.json())
+                            .catch(error => {
+                                console.warn('Feed failed:', feed, error);
+                                return { items: [] };
+                            })
+                    );
+
+                    const results = await Promise.all(promises);
+
+                    // Combine all news items
+                    this.allNews = [];
+                    results.forEach(result => {
+                        if (result.items && Array.isArray(result.items)) {
+                            result.items.forEach(item => {
+                                if (item.title && item.link) {
+                                    this.allNews.push({
+                                        ...item,
+                                        category: this.categorizeNews(item.title + ' ' + (item.description || '')),
+                                        publishedDate: new Date(item.pubDate || Date.now()),
+                                        source: this.extractSource(item.link)
+                                    });
+                                }
+                            });
+                        }
+                    });
+
+                    // Sort by date (newest first) and remove duplicates
+                    this.allNews = this.removeDuplicates(this.allNews)
+                        .sort((a, b) => b.publishedDate - a.publishedDate)
+                        .slice(0, 50); // Limit to 50 most recent articles
+
+                    this.filterAndDisplayNews();
+                    this.hideLoading();
+
+                } catch (error) {
+                    console.error('Error loading news:', error);
+                    this.showError('Failed to load news feeds. Please try again later.');
+                }
+            }
+
+            removeDuplicates(news) {
+                const seen = new Set();
+                return news.filter(item => {
+                    const key = item.title.toLowerCase().substring(0, 50);
+                    if (seen.has(key)) {
+                        return false;
+                    }
+                    seen.add(key);
+                    return true;
+                });
+            }
+
+            categorizeNews(content) {
+                const text = content.toLowerCase();
+                const categories = [];
+
+                // Enhanced categorization with more keywords and patterns
+                const categoryPatterns = {
+                    'ai': [
+                        'ai', 'artificial intelligence', 'machine learning', 'ml', 'neural', 'chatgpt', 'openai',
+                        'deep learning', 'tensorflow', 'pytorch', 'nlp', 'computer vision', 'gpt', 'llm',
+                        'large language model', 'bert', 'transformer', 'algorithm', 'data science',
+                        'predictive', 'automation', 'robotics', 'cognitive', 'claude', 'gemini', 'bard'
+                    ],
+                    'web': [
+                        'web', 'html', 'css', 'javascript', 'react', 'vue', 'angular', 'frontend', 'backend',
+                        'node.js', 'express', 'django', 'flask', 'php', 'laravel', 'wordpress', 'drupal',
+                        'bootstrap', 'tailwind', 'sass', 'typescript', 'webpack', 'npm', 'yarn', 'api',
+                        'rest', 'graphql', 'json', 'ajax', 'dom', 'browser', 'chrome', 'firefox', 'safari'
+                    ],
+                    'mobile': [
+                        'mobile', 'android', 'ios', 'iphone', 'smartphone', 'app store', 'google play',
+                        'react native', 'flutter', 'swift', 'kotlin', 'objective-c', 'xamarin',
+                        'cordova', 'phonegap', 'ionic', 'tablet', 'ipad', 'samsung', 'pixel',
+                        'mobile app', 'native app', 'hybrid app', 'progressive web app', 'pwa'
+                    ],
+                    'security': [
+                        'security', 'cyber', 'hack', 'breach', 'vulnerability', 'malware', 'encryption',
+                        'firewall', 'antivirus', 'phishing', 'ransomware', 'ddos', 'ssl', 'tls',
+                        'authentication', 'authorization', 'password', 'two-factor', '2fa', 'biometric',
+                        'blockchain', 'cryptocurrency', 'bitcoin', 'ethereum', 'privacy', 'gdpr'
+                    ],
+                    'hardware': [
+                        'processor', 'cpu', 'gpu', 'chip', 'semiconductor', 'hardware', 'intel', 'amd', 'nvidia',
+                        'memory', 'ram', 'storage', 'ssd', 'hdd', 'motherboard', 'cooling', 'overclocking',
+                        'benchmark', 'performance', 'gaming', 'graphics card', 'server', 'datacenter',
+                        'quantum computing', 'fpga', 'asic', 'arm', 'x86', '5g', 'wifi', 'bluetooth'
+                    ]
+                };
+
+                // Score each category based on keyword matches
+                const categoryScores = {};
+
+                for (const [category, keywords] of Object.entries(categoryPatterns)) {
+                    let score = 0;
+                    for (const keyword of keywords) {
+                        const regex = new RegExp('\\b' + keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+                        const matches = text.match(regex);
+                        if (matches) {
+                            score += matches.length * (keyword.length > 5 ? 2 : 1); // Longer keywords get more weight
+                        }
+                    }
+                    if (score > 0) {
+                        categoryScores[category] = score;
+                    }
+                }
+
+                // Return the category with the highest score, or 'web' as default for tech news
+                if (Object.keys(categoryScores).length === 0) {
+                    // If no specific category matches, try to determine if it's tech-related
+                    const techKeywords = ['tech', 'technology', 'digital', 'software', 'computer', 'internet', 'online', 'startup', 'innovation'];
+                    const isTech = techKeywords.some(keyword => text.includes(keyword));
+                    return isTech ? 'web' : 'web'; // Default to 'web' for tech news
+                }
+
+                // Find the category with the highest score
+                const bestCategory = Object.keys(categoryScores).reduce((a, b) =>
+                    categoryScores[a] > categoryScores[b] ? a : b
+                );
+
+                return bestCategory;
+            }
+
+            extractSource(url) {
+                try {
+                    const domain = new URL(url).hostname;
+                    return domain.replace('www.', '').split('.')[0];
+                } catch {
+                    return 'Unknown';
+                }
+            }
+
+            performSearch() {
+                this.currentSearch = this.searchInput.value.toLowerCase().trim();
+                this.filterAndDisplayNews();
+            }
+
+            filterAndDisplayNews() {
+                this.filteredNews = this.allNews.filter(item => {
+                    // Filter by category
+                    const categoryMatch = this.currentFilter === 'all' || item.category === this.currentFilter;
+
+                    // Filter by search term
+                    const searchMatch = !this.currentSearch ||
+                        item.title.toLowerCase().includes(this.currentSearch) ||
+                        (item.description && item.description.toLowerCase().includes(this.currentSearch));
+
+                    return categoryMatch && searchMatch;
+                });
+
+                this.displayNews();
+            }
+
+            displayNews() {
+                if (this.filteredNews.length === 0) {
+                    this.showNoResults();
+                    return;
+                }
+
+                this.hideNoResults();
+                this.hideError();
+
+                const newsHTML = this.filteredNews.map(item => this.createNewsCard(item)).join('');
+                this.newsGrid.innerHTML = newsHTML;
+                this.newsGrid.style.display = 'grid';
+
+                // Add click event listeners to news cards
+                this.addNewsCardListeners();
+            }
+
+            createNewsCard(item) {
+                const publishedDate = this.formatDate(item.publishedDate);
+                const excerpt = this.createExcerpt(item.description || '');
+                const categoryClass = `category-${item.category}`;
+                const categoryName = this.getCategoryDisplayName(item.category);
+
+                // Clean up the image URL or use a default placeholder
+                const imageUrl = this.getImageUrl(item);
+
+                return `
+        <article class="news-card" data-category="${item.category}">
+            <div class="news-image">
+                <img src="${imageUrl}" alt="${this.escapeHtml(item.title)}" 
+                     onerror="this.src='https://via.placeholder.com/400x200/667eea/ffffff?text=Tech+News'">
+                <span class="news-category ${categoryClass}">${categoryName}</span>
+            </div>
+            <div class="news-content">
+                <h3>
+                    <a href="${item.link}" target="_blank" rel="noopener noreferrer">
+                        ${this.escapeHtml(item.title)}
+                    </a>
+                </h3>
+                <p class="news-excerpt">${excerpt}</p>
+                <div class="news-meta">
+                    <div class="news-date">
+                        <i class="far fa-calendar-alt"></i>
+                        <span>${publishedDate}</span>
+                    </div>
+                    <div class="news-source">
+                        <i class="far fa-newspaper"></i>
+                        <span>${this.capitalizeFirst(item.source)}</span>
+                    </div>
+                </div>
+                <div class="news-read-more">
+                    <a href="${item.link}" target="_blank" rel="noopener noreferrer">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+    `;
+            }
+
+            getImageUrl(item) {
+                // Try to extract image from content or use placeholder
+                if (item.thumbnail) {
+                    return item.thumbnail;
+                }
+
+                if (item.enclosure && item.enclosure.link) {
+                    return item.enclosure.link;
+                }
+
+                // Look for images in content
+                if (item.content) {
+                    const imgMatch = item.content.match(/<img[^>]+src="([^">]+)"/);
+                    if (imgMatch) {
+                        return imgMatch[1];
+                    }
+                }
+
+                // Look for images in description
+                if (item.description) {
+                    const imgMatch = item.description.match(/<img[^>]+src="([^">]+)"/);
+                    if (imgMatch) {
+                        return imgMatch[1];
+                    }
+                }
+
+                // Category-specific placeholder images
+                const placeholders = {
+                    'ai': 'https://via.placeholder.com/400x200/9c27b0/ffffff?text=AI+%26+ML',
+                    'web': 'https://via.placeholder.com/400x200/4caf50/ffffff?text=Web+Tech',
+                    'mobile': 'https://via.placeholder.com/400x200/ff9800/ffffff?text=Mobile',
+                    'security': 'https://via.placeholder.com/400x200/f44336/ffffff?text=Security',
+                    'hardware': 'https://via.placeholder.com/400x200/607d8b/ffffff?text=Hardware'
+                };
+
+                return placeholders[item.category] || placeholders['web'];
+            }
+
+            createExcerpt(description) {
+                if (!description) return 'Click to read the full article...';
+
+                // Remove HTML tags
+                const text = description.replace(/<[^>]*>/g, '');
+
+                // Limit to 150 characters
+                if (text.length <= 150) return text;
+
+                return text.substring(0, 150).trim() + '...';
+            }
+
+            getCategoryDisplayName(category) {
+                const categoryNames = {
+                    'ai': 'AI & ML',
+                    'web': 'Web Tech',
+                    'mobile': 'Mobile',
+                    'security': 'Security',
+                    'hardware': 'Hardware'
+                };
+
+                return categoryNames[category] || 'Web Tech';
+            }
+
+            formatDate(date) {
+                const now = new Date();
+                const diffTime = Math.abs(now - date);
+                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+                const diffMinutes = Math.floor(diffTime / (1000 * 60));
+
+                if (diffMinutes < 60) {
+                    return `${diffMinutes} minutes ago`;
+                } else if (diffHours < 24) {
+                    return `${diffHours} hours ago`;
+                } else if (diffDays < 7) {
+                    return `${diffDays} days ago`;
+                } else {
+                    return date.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+                }
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            capitalizeFirst(str) {
+                return str.charAt(0).toUpperCase() + str.slice(1);
+            }
+
+            addNewsCardListeners() {
+                const newsCards = document.querySelectorAll('.news-card');
+                newsCards.forEach(card => {
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transform = 'translateY(-8px)';
+                    });
+
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'translateY(0)';
+                    });
+                });
+            }
+
+            showLoading() {
+                this.loadingContainer.style.display = 'flex';
+                this.newsGrid.style.display = 'none';
+                this.noResults.style.display = 'none';
+                this.errorMessage.style.display = 'none';
+            }
+
+            hideLoading() {
+                this.loadingContainer.style.display = 'none';
+            }
+
+            showError(message) {
+                this.errorText.textContent = message;
+                this.errorMessage.style.display = 'block';
+                this.newsGrid.style.display = 'none';
+                this.noResults.style.display = 'none';
+                this.loadingContainer.style.display = 'none';
+            }
+
+            hideError() {
+                this.errorMessage.style.display = 'none';
+            }
+
+            showNoResults() {
+                this.noResults.style.display = 'block';
+                this.newsGrid.style.display = 'none';
+            }
+
+            hideNoResults() {
+                this.noResults.style.display = 'none';
+            }
+
+            // Method to refresh news
+            async refreshNews() {
+                await this.loadNews();
+            }
+
+            // Method to get news by category
+            getNewsByCategory(category) {
+                return this.allNews.filter(item => item.category === category);
+            }
+
+            // Method to search news
+            searchNews(query) {
+                const searchTerm = query.toLowerCase().trim();
+                return this.allNews.filter(item =>
+                    item.title.toLowerCase().includes(searchTerm) ||
+                    (item.description && item.description.toLowerCase().includes(searchTerm))
+                );
+            }
+
+            // Debug method to check category distribution
+            getCategoryStats() {
+                const stats = {};
+                this.allNews.forEach(item => {
+                    stats[item.category] = (stats[item.category] || 0) + 1;
+                });
+                console.log('Category distribution:', stats);
+                return stats;
+            }
+        }
+
+        // Initialize the news manager when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const newsManager = new NewsManager();
+
+            // Add refresh button functionality (if needed)
+            const refreshBtn = document.getElementById('refresh-news');
+            if (refreshBtn) {
+                refreshBtn.addEventListener('click', () => {
+                    newsManager.refreshNews();
+                });
+            }
+
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                // Ctrl/Cmd + K to focus search
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                    e.preventDefault();
+                    document.getElementById('news-search-input').focus();
+                }
+
+                // ESC to clear search
+                if (e.key === 'Escape') {
+                    const searchInput = document.getElementById('news-search-input');
+                    if (searchInput.value) {
+                        searchInput.value = '';
+                        newsManager.currentSearch = '';
+                        newsManager.filterAndDisplayNews();
+                    }
+                }
+            });
+
+            // Add window resize handler for responsive adjustments
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    // Trigger any responsive adjustments if needed
+                    const newsGrid = document.getElementById('news-grid');
+                    if (newsGrid && newsGrid.style.display === 'grid') {
+                        // Recalculate grid if necessary
+                        newsGrid.style.display = 'none';
+                        setTimeout(() => {
+                            newsGrid.style.display = 'grid';
+                        }, 10);
+                    }
+                }, 250);
+            });
+
+            // Add intersection observer for lazy loading if needed
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            if (img.dataset.src) {
+                                img.src = img.dataset.src;
+                                img.removeAttribute('data-src');
+                                observer.unobserve(img);
+                            }
+                        }
+                    });
+                });
+
+                // Observe images as they're added to the DOM
+                const observeImages = () => {
+                    const lazyImages = document.querySelectorAll('img[data-src]');
+                    lazyImages.forEach(img => imageObserver.observe(img));
+                };
+
+                // Call initially and whenever news is updated
+                setTimeout(observeImages, 1000);
+            }
+
+            // Add error handling for failed image loads
+            document.addEventListener('error', (e) => {
+                if (e.target.tagName === 'IMG') {
+                    e.target.src = 'https://via.placeholder.com/400x200/667eea/ffffff?text=Tech+News';
+                }
+            }, true);
+
+            // Performance optimization: debounce search input
+            const searchInput = document.getElementById('news-search-input');
+            let searchTimeout;
+
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    newsManager.currentSearch = e.target.value.toLowerCase().trim();
+                    newsManager.filterAndDisplayNews();
+                }, 300);
+            });
+
+            // Debug: Log category stats after news loads
+            setTimeout(() => {
+                newsManager.getCategoryStats();
+            }, 5000);
         });
     </script>
     <script src="./js/subcription.js"></script>

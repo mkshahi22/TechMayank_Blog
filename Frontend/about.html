@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/about.css">
+    <link rel="stylesheet" href="./css/new-about.css">
 
 </head>
 
@@ -97,73 +98,109 @@
                     <br>
                     <p>TechMayanK strives to bridge the gap between theoretical knowledge and real-world applications,
                         making technology approachable for everyone regardless of their technical background.</p>
-
                 </div>
             </div>
         </section>
 
-        <!-- Skills Section -->
+
+        <!-- Counter Section (New) -->
+        <section class="counter-section">
+            <div class="container">
+                <div class="counter-container">
+                    <div class="counter-item">
+                        <div class="counter-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="counter-value" data-count="10000">0</div>
+                        <div class="counter-title">Lines of Code</div>
+                    </div>
+                    <div class="counter-item">
+                        <div class="counter-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="counter-value" data-count="25">0</div>
+                        <div class="counter-title">Projects Completed</div>
+                    </div>
+                    <div class="counter-item">
+                        <div class="counter-icon">
+                            <i class="fas fa-coffee"></i>
+                        </div>
+                        <div class="counter-value" data-count="500">0</div>
+                        <div class="counter-title">Cups of Coffee</div>
+                    </div>
+                    <div class="counter-item">
+                        <div class="counter-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="counter-value" data-count="1200">0</div>
+                        <div class="counter-title">Hours of Coding</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section (Enhanced with animation) -->
         <section class="skills-section">
             <div class="container">
                 <h2 class="section-title">My Skills</h2>
                 <div class="skills-container">
-                    <div class="skill-card">
+                    <div class="skill-card" data-skill="80">
                         <div class="skill-name">
                             <span>Java Backend</span>
                             <span class="skill-stars">⭐⭐⭐⭐☆</span>
                         </div>
                         <div class="skill-progress">
-                            <div class="skill-bar" style="width: 80%;"></div>
+                            <div class="skill-bar" style="width: 0;"></div>
                         </div>
                     </div>
 
-                    <div class="skill-card">
+                    <div class="skill-card" data-skill="80">
                         <div class="skill-name">
                             <span>MySQL</span>
                             <span class="skill-stars">⭐⭐⭐⭐☆</span>
                         </div>
                         <div class="skill-progress">
-                            <div class="skill-bar" style="width: 80%;"></div>
+                            <div class="skill-bar" style="width: 0;"></div>
                         </div>
                     </div>
 
-                    <div class="skill-card">
+                    <div class="skill-card" data-skill="100">
                         <div class="skill-name">
                             <span>HTML/CSS</span>
                             <span class="skill-stars">⭐⭐⭐⭐⭐</span>
                         </div>
                         <div class="skill-progress">
-                            <div class="skill-bar" style="width: 100%;"></div>
+                            <div class="skill-bar" style="width: 0;"></div>
                         </div>
                     </div>
 
-                    <div class="skill-card">
+                    <div class="skill-card" data-skill="65">
                         <div class="skill-name">
                             <span>JavaScript</span>
                             <span class="skill-stars">⭐⭐⭐☆☆</span>
                         </div>
                         <div class="skill-progress">
-                            <div class="skill-bar" style="width: 80%;"></div>
+                            <div class="skill-bar" style="width: 0;"></div>
                         </div>
                     </div>
 
-                    <div class="skill-card">
+                    <div class="skill-card" data-skill="60">
                         <div class="skill-name">
                             <span>Kotlin</span>
                             <span class="skill-stars">⭐⭐⭐☆☆</span>
                         </div>
                         <div class="skill-progress">
-                            <div class="skill-bar" style="width: 80%;"></div>
+                            <div class="skill-bar" style="width: 0;"></div>
                         </div>
                     </div>
 
-                    <div class="skill-card">
+                    <div class="skill-card" data-skill="85">
                         <div class="skill-name">
                             <span>Git & GitHub</span>
                             <span class="skill-stars">⭐⭐⭐⭐☆</span>
                         </div>
                         <div class="skill-progress">
-                            <div class="skill-bar" style="width: 80%;"></div>
+                            <div class="skill-bar" style="width: 0;"></div>
                         </div>
                     </div>
                 </div>
@@ -176,22 +213,48 @@
                 <h2 class="section-title">Projects & Achievements</h2>
                 <div class="projects-container">
                     <div class="project-card">
-                        <img src="./image/projects/techmayank.webp" alt="TechMayank Blog" class="project-image">
+                        <div class="project-image-container">
+                            <img src="./image/projects/techmayank.webp" alt="TechMayank Blog" class="project-image">
+                            <div class="project-overlay">
+                                <div class="project-tags">
+                                    <span class="project-tag">HTML5</span>
+                                    <span class="project-tag">CSS3</span>
+                                    <span class="project-tag">JavaScript</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="project-content">
                             <h3 class="project-title">TechMayank Blog</h3>
                             <p class="project-description">A tech blog built from scratch using modern web technologies
                                 to share knowledge and insights about the tech world.</p>
-                            <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                            <div class="project-actions">
+                                <a href="#" class="project-link primary-btn">View Project <i
+                                        class="fas fa-arrow-right"></i></a>
+                                <a href="#" class="project-link secondary-btn">GitHub <i class="fab fa-github"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <div class="project-card">
-                        <img src="./image/projects/portfolio.webp" alt="Personal Portfolio" class="project-image">
+                        <div class="project-image-container">
+                            <img src="./image/projects/portfolio.webp" alt="Personal Portfolio" class="project-image">
+                            <div class="project-overlay">
+                                <div class="project-tags">
+                                    <span class="project-tag">Responsive</span>
+                                    <span class="project-tag">CSS Grid</span>
+                                    <span class="project-tag">Animations</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="project-content">
                             <h3 class="project-title">Personal Portfolio</h3>
                             <p class="project-description">A responsive portfolio website showcasing my skills,
                                 projects, and journey in the tech world.</p>
-                            <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                            <div class="project-actions">
+                                <a href="#" class="project-link primary-btn">View Project <i
+                                        class="fas fa-arrow-right"></i></a>
+                                <a href="#" class="project-link secondary-btn">GitHub <i class="fab fa-github"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -245,31 +308,76 @@
         </section>
 
         <!-- Fun Section -->
-        <section class="fun-section">
-            <div class="container">
-                <h2 class="section-title">Beyond Code</h2>
-                <div class="fun-container">
-                    <div class="fun-card">
-                        <div class="fun-icon">
-                            <i class="fas fa-gamepad"></i>
+        <section class="fun-section py-10 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="section-title text-3xl font-bold text-center mb-10">Beyond Code</h2>
+                <div class="fun-container grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- What I Love Card -->
+                    <div class="fun-card bg-white rounded-lg p-6 shadow-md">
+                        <div
+                            class="fun-icon bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-gamepad text-2xl text-blue-500"></i>
                         </div>
-                        <h3 class="fun-title">What I Love</h3>
-                        <ul class="fun-list">
-                            <li>COD Mobile</li>
-                            <li>Coffee</li>
-                            <li>Tech Podcasts</li>
+                        <h3 class="fun-title text-xl font-semibold text-center mb-4">What I Love</h3>
+                        <ul class="fun-list space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-chevron-right text-blue-500 mr-2"></i>
+                                <span>COD Mobile</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-chevron-right text-blue-500 mr-2"></i>
+                                <span>Coffee</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-chevron-right text-blue-500 mr-2"></i>
+                                <span>Tech Podcasts</span>
+                            </li>
                         </ul>
                     </div>
 
-                    <div class="fun-card">
-                        <div class="fun-icon">
-                            <i class="fas fa-brain"></i>
+                    <!-- My Interests Card -->
+                    <div class="fun-card bg-white rounded-lg p-6 shadow-md">
+                        <div
+                            class="fun-icon bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-brain text-2xl text-green-500"></i>
                         </div>
-                        <h3 class="fun-title">My Interests</h3>
-                        <ul class="fun-list">
-                            <li>Java Development</li>
-                            <li>Geopolitics</li>
-                            <li>Emerging Tech Trends</li>
+                        <h3 class="fun-title text-xl font-semibold text-center mb-4">My Interests</h3>
+                        <ul class="fun-list space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-chevron-right text-green-500 mr-2"></i>
+                                <span>Java Development</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-chevron-right text-green-500 mr-2"></i>
+                                <span>Geopolitics</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-chevron-right text-green-500 mr-2"></i>
+                                <span>Emerging Tech Trends</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- New Card: My Hobbies -->
+                    <div class="fun-card bg-white rounded-lg p-6 shadow-md">
+                        <div
+                            class="fun-icon bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-hiking text-2xl text-purple-500"></i>
+                        </div>
+                        <h3 class="fun-title text-xl font-semibold text-center mb-4">My Hobbies</h3>
+                        <ul class="fun-list space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-chevron-right text-purple-500 mr-2"></i>
+                                <span>Photography</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-chevron-right text-purple-500 mr-2"></i>
+                                <span>Hiking</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-chevron-right text-purple-500 mr-2"></i>
+                                <span>Reading Tech Books</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -285,12 +393,17 @@
                         <div class="mission-card">
                             <h3><i class="fas fa-bullseye"></i> Mission</h3>
                             <p>To demystify technology and empower individuals with knowledge that enhances their
-                                digital literacy...</p>
+                                digital literacy and enables them to harness the full potential of modern tools. We
+                                strive to create
+                                a platform where complex concepts are broken down into accessible learning experiences.
+                            </p>
                         </div>
                         <div class="mission-card">
                             <h3><i class="fas fa-binoculars"></i> Vision</h3>
                             <p>To build a global community where technology is embraced, innovation is celebrated, and
-                                knowledge is accessible to all.</p>
+                                knowledge is accessible to all. We envision a future where everyone can contribute to
+                                the digital
+                                landscape regardless of their background or prior experience.</p>
                         </div>
                     </div>
                     <div class="about-image">
@@ -299,7 +412,6 @@
                 </div>
             </div>
         </section>
-
         <!-- Values Section (Keeping from original) -->
         <section class="about-section values-section">
             <div class="container">
@@ -439,127 +551,7 @@
             </p>
         </div>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Mobile menu toggle
-            const menuBtn = document.querySelector('.mobile-menu-btn');
-            const navLinks = document.querySelector('.nav-links');
-
-            menuBtn.addEventListener('click', function () {
-                navLinks.classList.toggle('active');
-            });
-
-            // Mobile dropdown toggle
-            const dropdowns = document.querySelectorAll('.dropdown');
-
-            dropdowns.forEach(dropdown => {
-                const dropdownLink = dropdown.querySelector('a');
-
-                if (window.innerWidth <= 768) {
-                    dropdownLink.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        dropdown.classList.toggle('active');
-                    });
-                }
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', function (event) {
-                if (!event.target.closest('nav') && !event.target.closest('.mobile-menu-btn')) {
-                    navLinks.classList.remove('active');
-                }
-            });
-
-            // Navbar scroll effect
-            window.addEventListener('scroll', function () {
-                const header = document.getElementById('main-header');
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-
-            // Animation for About Page elements
-            const animateOnScroll = function () {
-                const elements = document.querySelectorAll('.about-section, .why-card, .value-item, .team-member');
-
-                elements.forEach(element => {
-                    const elementPosition = element.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-
-                    if (elementPosition < windowHeight - 100) {
-                        element.classList.add('animate');
-                    }
-                });
-            };
-
-            // Run animation check on load and scroll
-            window.addEventListener('load', animateOnScroll);
-            window.addEventListener('scroll', animateOnScroll);
-        });
-        /* Animation JavaScript */
-        document.addEventListener('DOMContentLoaded', function () {
-
-            // Set indices for staggered animations
-            document.querySelectorAll('.timeline-item').forEach((item, index) => {
-                item.style.setProperty('--index', index);
-            });
-
-            document.querySelectorAll('.fun-card').forEach((item, index) => {
-                item.style.setProperty('--index', index);
-            });
-
-            document.querySelectorAll('.value-item').forEach((item, index) => {
-                item.style.setProperty('--index', index);
-            });
-
-            // Intersection Observer for animations
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                    }
-                });
-            }
-
-                , {
-                    threshold: 0.1
-                });
-            const skillCards = document.querySelectorAll('.skill-card');
-
-            const skillObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const bar = entry.target.querySelector('.skill-bar');
-                        const targetWidth = bar.getAttribute('data-width');
-                        bar.style.width = targetWidth;
-                        entry.target.classList.add('animated'); // Optional: for future styling
-                        skillObserver.unobserve(entry.target); // Animate once only
-                    }
-                });
-            }, {
-                threshold: 0.5
-            });
-
-            skillCards.forEach(card => {
-                const bar = card.querySelector('.skill-bar');
-                // Store original width as data attribute
-                bar.setAttribute('data-width', bar.style.width);
-                // Reset to 0 initially for animation
-                bar.style.width = '0';
-                skillObserver.observe(card);
-            });
-            // Observe all elements that should animate on scroll
-            document.querySelectorAll('.about-section, .timeline-item, .fun-card, .value-item').forEach(element => {
-                observer.observe(element);
-            });
-        });
-    </script>
-
-    <script src="./js/subcription.js"></script>
-
+    <script src="./js/about.js"></script>
 </body>
 
 </html>
