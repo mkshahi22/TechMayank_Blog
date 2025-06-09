@@ -370,44 +370,75 @@
         position: absolute;
         top: 15px;
         left: 15px;
-        padding: 6px 14px;
-        border-radius: 20px;
-        font-size: 0.8rem;
+        padding: 6px 16px;
+        border-radius: 30px;
+        font-size: 0.75rem;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.6px;
         z-index: 2;
         backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
     }
 
+    .news-category:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Category Colors - Enhanced with subtle gradients */
     .category-ai {
-        background: rgba(156, 39, 176, 0.9);
-        color: white;
+        background: linear-gradient(135deg, rgba(156, 39, 176, 0.95), rgba(123, 31, 162, 0.95));
+        color: #ffffff;
     }
 
     .category-web {
-        background: rgba(76, 175, 80, 0.9);
-        color: white;
+        background: linear-gradient(135deg, rgba(76, 175, 80, 0.95), rgba(56, 142, 60, 0.95));
+        color: #ffffff;
     }
 
     .category-mobile {
-        background: rgba(255, 152, 0, 0.9);
-        color: white;
+        background: linear-gradient(135deg, rgba(255, 152, 0, 0.95), rgba(255, 112, 67, 0.95));
+        color: #ffffff;
     }
 
     .category-security {
-        background: rgba(244, 67, 54, 0.9);
-        color: white;
+        background: linear-gradient(135deg, rgba(244, 67, 54, 0.95), rgba(211, 47, 47, 0.95));
+        color: #ffffff;
     }
 
     .category-hardware {
-        background: rgba(96, 125, 139, 0.9);
-        color: white;
+        background: linear-gradient(135deg, rgba(96, 125, 139, 0.95), rgba(69, 90, 100, 0.95));
+        color: #ffffff;
     }
 
     .category-general {
-        background: rgba(63, 81, 181, 0.9);
-        color: white;
+        background: linear-gradient(135deg, rgba(63, 81, 181, 0.95), rgba(48, 63, 159, 0.95));
+        color: #ffffff;
+    }
+
+    .category-cloud {
+        background: linear-gradient(135deg, rgba(33, 150, 243, 0.95), rgba(25, 118, 210, 0.95));
+        color: #ffffff;
+    }
+
+    .category-devops {
+        background: linear-gradient(135deg, rgba(121, 85, 72, 0.95), rgba(93, 64, 55, 0.95));
+        color: #ffffff;
+    }
+
+    .category-tools {
+        background: linear-gradient(135deg, rgba(63, 81, 181, 0.95), rgba(48, 63, 159, 0.95));
+        color: #ffffff;
+    }
+
+    .category-gaming {
+        background: linear-gradient(135deg, rgba(233, 30, 99, 0.95), rgba(194, 24, 91, 0.95));
+        color: #ffffff;
     }
 
     /* Default category style for news-category without specific class */
@@ -1268,6 +1299,7 @@
         .news-grid.list-view .news-card {
             flex-direction: column;
             max-height: none;
+            padding: auto;
         }
 
         .news-grid.list-view .news-image {
@@ -1346,6 +1378,11 @@
                 <button class="filter-btn" data-filter="mobile">Mobile</button>
                 <button class="filter-btn" data-filter="security">Security</button>
                 <button class="filter-btn" data-filter="hardware">Hardware</button>
+                <button class="filter-btn" data-filter="cloud">Cloud</button>
+                <button class="filter-btn" data-filter="devops">DevOps</button>
+                <button class="filter-btn" data-filter="tools">Tools</button>
+                <button class="filter-btn" data-filter="gaming">Gaming</button>
+
             </div>
             <div class="news-controls">
                 <div class="news-search">
@@ -1601,7 +1638,7 @@
 
                     // Use more reliable RSS feeds and backup options
                     const feeds = [
-                        // Primary feeds with fallbacks
+                        // General Tech News
                         {
                             url: 'https://api.rss2json.com/v1/api.json?rss_url=https://techcrunch.com/feed/',
                             name: 'TechCrunch'
@@ -1613,8 +1650,57 @@
                         {
                             url: 'https://api.rss2json.com/v1/api.json?rss_url=https://arstechnica.com/feed/',
                             name: 'Ars Technica'
+                        },
+
+                        // AI & ML
+                        {
+                            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.technologyreview.com/feed/',
+                            name: 'MIT Tech Review (AI)'
+                        },
+
+                        // Web Development
+                        {
+                            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://css-tricks.com/feed/',
+                            name: 'CSS-Tricks'
+                        },
+
+                        // Mobile
+                        {
+                            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.androidauthority.com/feed/',
+                            name: 'Android Authority'
+                        },
+
+                        // Security
+                        {
+                            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.securityweek.com/feed/',
+                            name: 'Security Week'
+                        },
+
+                        // Hardware
+                        {
+                            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.tomshardware.com/feeds/all',
+                            name: 'Tom\'s Hardware'
+                        },
+
+                        // Cloud & DevOps
+                        {
+                            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://devops.com/feed/',
+                            name: 'DevOps.com'
+                        },
+
+                        // Tools / Coding
+                        {
+                            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://thenewstack.io/feed/',
+                            name: 'The New Stack'
+                        },
+
+                        // Gaming
+                        {
+                            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.pcgamer.com/rss/',
+                            name: 'PC Gamer'
                         }
                     ];
+
 
                     // If RSS2JSON fails, use mock data as fallback
                     const promises = feeds.map(async (feed) => {
@@ -1800,33 +1886,84 @@
                         'ai', 'artificial intelligence', 'machine learning', 'ml', 'neural', 'chatgpt', 'openai',
                         'deep learning', 'tensorflow', 'pytorch', 'nlp', 'computer vision', 'gpt', 'llm',
                         'large language model', 'bert', 'transformer', 'algorithm', 'data science',
-                        'predictive', 'automation', 'robotics', 'cognitive', 'claude', 'gemini', 'bard'
+                        'predictive', 'automation', 'robotics', 'cognitive', 'claude', 'gemini', 'bard',
+                        'supervised learning', 'unsupervised learning', 'reinforcement learning',
+                        'stable diffusion', 'huggingface', 'langchain', 'prompt engineering', 'text generation',
+                        'image generation', 'fine-tuning', 'zero-shot', 'few-shot', 'vector db', 'embedding',
+                        'autonomous agents', 'self-driving', 'edge ai', 'ai ethics', 'explainable ai'
                     ],
+
                     'web': [
                         'web', 'html', 'css', 'javascript', 'react', 'vue', 'angular', 'frontend', 'backend',
                         'node.js', 'express', 'django', 'flask', 'php', 'laravel', 'wordpress', 'drupal',
                         'bootstrap', 'tailwind', 'sass', 'typescript', 'webpack', 'npm', 'yarn', 'api',
-                        'rest', 'graphql', 'json', 'ajax', 'dom', 'browser', 'chrome', 'firefox', 'safari'
+                        'rest', 'graphql', 'json', 'ajax', 'dom', 'browser', 'chrome', 'firefox', 'safari',
+                        'responsive design', 'seo', 'server-side rendering', 'next.js', 'nuxt', 'web3',
+                        'static site', 'jamstack', 'vite', 'astro', 'micro frontend', 'headless cms', 'websocket'
                     ],
+
                     'mobile': [
                         'mobile', 'android', 'ios', 'iphone', 'smartphone', 'app store', 'google play',
                         'react native', 'flutter', 'swift', 'kotlin', 'objective-c', 'xamarin',
                         'cordova', 'phonegap', 'ionic', 'tablet', 'ipad', 'samsung', 'pixel',
-                        'mobile app', 'native app', 'hybrid app', 'progressive web app', 'pwa'
+                        'mobile app', 'native app', 'hybrid app', 'progressive web app', 'pwa',
+                        'apk', 'ipa', 'mobile sdk', 'push notifications', 'firebase', 'adb', 'emulator',
+                        'cross-platform', 'ui kit', 'mobile design', 'touchscreen', 'mobile optimization'
                     ],
+
                     'security': [
                         'security', 'cyber', 'hack', 'breach', 'vulnerability', 'malware', 'encryption',
                         'firewall', 'antivirus', 'phishing', 'ransomware', 'ddos', 'ssl', 'tls',
                         'authentication', 'authorization', 'password', 'two-factor', '2fa', 'biometric',
-                        'blockchain', 'cryptocurrency', 'bitcoin', 'ethereum', 'privacy', 'gdpr'
+                        'blockchain', 'cryptocurrency', 'bitcoin', 'ethereum', 'privacy', 'gdpr',
+                        'cyberattack', 'threat detection', 'penetration testing', 'zero-day',
+                        'vpn', 'tor', 'dark web', 'keylogger', 'rootkit', 'spyware', 'bug bounty',
+                        'security audit', 'cyber forensics', 'infosec', 'endpoint protection'
                     ],
+
                     'hardware': [
                         'processor', 'cpu', 'gpu', 'chip', 'semiconductor', 'hardware', 'intel', 'amd', 'nvidia',
                         'memory', 'ram', 'storage', 'ssd', 'hdd', 'motherboard', 'cooling', 'overclocking',
                         'benchmark', 'performance', 'gaming', 'graphics card', 'server', 'datacenter',
-                        'quantum computing', 'fpga', 'asic', 'arm', 'x86', '5g', 'wifi', 'bluetooth'
+                        'quantum computing', 'fpga', 'asic', 'arm', 'x86', '5g', 'wifi', 'bluetooth',
+                        'usb', 'ethernet', 'nvme', 'power supply', 'fan', 'monitor', 'keyboard',
+                        'laptop', 'desktop', 'raspberry pi', 'arduino', 'iot', 'bios', 'firmware'
+                    ],
+
+                    'cloud': [
+                        'cloud', 'aws', 'azure', 'gcp', 'google cloud', 'amazon web services', 'cloud computing',
+                        'cloudflare', 'saas', 'paas', 'iaas', 'serverless', 'lambda', 'cloud functions',
+                        'cloud storage', 'object storage', 'cloud database', 'firebase', 'amplify', 's3',
+                        'ec2', 'elastic beanstalk', 'cloudwatch', 'cloudformation', 'terraform', 'kubernetes',
+                        'cloud native', 'cdn', 'cloud security', 'multi-cloud', 'devops on cloud'
+                    ],
+
+                    'devops': [
+                        'devops', 'ci', 'cd', 'cicd', 'jenkins', 'github actions', 'gitlab ci', 'bitbucket pipelines',
+                        'docker', 'containers', 'kubernetes', 'helm', 'ansible', 'chef', 'puppet',
+                        'infrastructure as code', 'iac', 'terraform', 'monitoring', 'prometheus', 'grafana',
+                        'log management', 'splunk', 'elk stack', 'observability', 'sre', 'site reliability',
+                        'build automation', 'deployment', 'version control', 'git', 'rollbacks', 'load balancing'
+                    ],
+
+                    'tools': [
+                        'tools', 'vscode', 'sublime text', 'postman', 'figma', 'xd', 'chrome devtools',
+                        'terminal', 'bash', 'zsh', 'git', 'github', 'gitlab', 'bitbucket', 'notion', 'slack',
+                        'jira', 'trello', 'zoom', 'obsidian', 'chatgpt', 'codepen', 'stackblitz',
+                        'npm', 'yarn', 'webpack', 'vite', 'eslint', 'prettier', 'docker desktop',
+                        'virtualbox', 'vmware', 'xcode', 'android studio', 'intellij', 'pycharm'
+                    ],
+
+                    'gaming': [
+                        'gaming', 'game', 'video game', 'pc game', 'console', 'playstation', 'xbox', 'nintendo',
+                        'steam', 'epic games', 'fps', 'rpg', 'mmo', 'strategy game', 'battle royale',
+                        'controller', 'joystick', 'gaming mouse', 'headset', 'streaming', 'twitch', 'discord',
+                        'esports', 'gaming rig', 'game dev', 'unity', 'unreal engine', 'game design',
+                        'frame rate', 'lag', 'graphics', 'multiplayer', 'online game', 'single player',
+                        'mobile game', 'crossplay', 'gamepad', 'gamer', 'vr', 'ar'
                     ]
                 };
+
 
                 const categoryScores = {};
 
@@ -2033,7 +2170,11 @@
                     'web': 'https://via.placeholder.com/400x200/4caf50/ffffff?text=Web+Tech',
                     'mobile': 'https://via.placeholder.com/400x200/ff9800/ffffff?text=Mobile',
                     'security': 'https://via.placeholder.com/400x200/f44336/ffffff?text=Security',
-                    'hardware': 'https://via.placeholder.com/400x200/607d8b/ffffff?text=Hardware'
+                    'hardware': 'https://via.placeholder.com/400x200/607d8b/ffffff?text=Hardware',
+                    'cloud': 'https://via.placeholder.com/400x200/2196f3/ffffff?text=Cloud',
+                    'devops': 'https://via.placeholder.com/400x200/795548/ffffff?text=DevOps',
+                    'tools': 'https://via.placeholder.com/400x200/3f51b5/ffffff?text=Tools',
+                    'gaming': 'https://via.placeholder.com/400x200/e91e63/ffffff?text=Gaming'
                 };
 
                 return placeholders[item.category] || placeholders['web'];
@@ -2052,7 +2193,11 @@
                     'web': 'Web Tech',
                     'mobile': 'Mobile',
                     'security': 'Security',
-                    'hardware': 'Hardware'
+                    'hardware': 'Hardware',
+                    'cloud': 'Cloud',
+                    'devops': 'DevOps',
+                    'tools': 'Tools',
+                    'gaming': 'Gaming'
                 };
                 return categoryNames[category] || 'Web Tech';
             }
