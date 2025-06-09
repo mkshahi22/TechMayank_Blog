@@ -1287,9 +1287,17 @@
             <button class="mobile-menu-btn">☰</button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="youtube.html">YouTube</a></li>
+
                 <li class="dropdown">
-                    <a href="#">Blogs</a>
+                    <a href="#">Resources</a>
+                    <div class="dropdown-content">
+                        <a href="editor.html">Online Code Editor</a>
+                        <a href="docs.html">Tech Docs & Paths</a>
+                    </div>
+                </li>
+
+                <li class="dropdown">
+                    <a href="./blogs/blogs.html">Blogs</a>
                     <div class="dropdown-content">
                         <a href="./cat/category-webdev.html">Web Development</a>
                         <a href="./cat/category-ai.html">Artificial Intelligence</a>
@@ -1299,12 +1307,14 @@
                         <a href="./cat/category-cloud.html">Cloud Computing</a>
                     </div>
                 </li>
+
                 <li><a href="news.html">News</a></li>
-                <li><a href="jobs.html" class="active">Tech Jobs</a></li>
+                <li><a href="jobs.html">Tech Jobs</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="subscribe.html" class="subscribe-btn">Subscribe</a></li>
             </ul>
         </nav>
+
     </header>
 
     <main class="jobs-main">
@@ -1440,6 +1450,11 @@
     <div class="toast" id="toast">
         <span id="toastMessage">Job saved successfully!</span>
     </div>
+    <p id="maintenance-message"
+        style="background: #fff3cd; color: #856404; padding: 12px 16px; border: 1px solid #ffeeba; border-radius: 8px; font-family: Arial, sans-serif; margin: 20px; text-align: center;">
+        🚧 This page is under maintenance. You may face some issues.<br><br>
+        Please check back soon on <strong>TechMayanK</strong> — Learn. Build. Rule the Future! 🚀
+    </p>
 
     <!-- Enhanced Footer (Using existing footer structure) -->
     <footer data-aos="fade-up" data-aos-delay="1100">
@@ -1503,6 +1518,7 @@
     <!-- JavaScript Files -->
     <!-- AOS Library for Scroll Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
 
     <script>
         class JobSearchPlatform {
@@ -2278,6 +2294,7 @@
             window.jobPlatform = new JobSearchPlatform();
         });
     </script>
+
 </body>
 
 </html>
