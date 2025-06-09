@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechMayanK - Latest Tech News, Programming & Reviews</title>
+    <meta name="description"
+        content="Get the latest updates on technology, programming, and gadget reviews. Learn coding, web development, and AI trends at TechMayanK.">
+    <meta name="keywords"
+        content="latest tech news, programming tutorials, web development, AI trends, gadget reviews, coding tips">
+    <meta name="author" content="Mitthu Kumar(MayanK)">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="TechMayanK - Latest Tech News & Programming">
+    <meta property="og:description"
+        content="Stay updated with the latest in technology, programming, web development, and AI trends.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://techmayank.netlify.app">
+    <meta property="og:image" content="https://techmayank.com/images/techmayank-thumbnail.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TechMayanK - Tech News & Programming">
+    <meta name="twitter:description"
+        content="Get the latest updates on tech, coding, and AI trends. Learn web development and gadget reviews at TechMayanK.">
+    <meta name="twitter:image" content="https://techmayank.com/images/techmayank-thumbnail.jpg">
+    <meta name="twitter:site" content="@MayanK_Pras">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://techmayank.com">
+
+    <!-- Favicon -->
+    <link rel="icon" href="./image/common/favi.webp" type="image/webp">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome for better social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- AOS Library for Scroll Animations -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <!-- Existing CSS Files -->
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/main.css">
+
+    <!-- Minimal CSS for new features only -->
+    <style>
+        /* Enhanced Hero Section Styles */
+        .hero-enhanced {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-tagline {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #fff;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Recent Articles Section */
+        .recent-articles {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .article-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .article-content {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .article-title a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .article-title a:hover {
+            color: #667eea;
+        }
+
+        .article-excerpt {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-tagline {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header id="main-header">
+        <nav>
+            <a href="index.html" class="logo">Tech<span>MayanK</span></a>
+            <button class="mobile-menu-btn">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="./blogs/blogs.html">Blogs</a></li>
+                <li class="dropdown">
+                    <a href="#">Categories</a>
+                    <div class="dropdown-content">
+                        <a href="./cat/category-webdev.html">Web Development</a>
+                        <a href="./cat/category-ai.html">Artificial Intelligence</a>
+                        <a href="./cat/category-cybersecurity.html">Cybersecurity</a>
+                        <a href="./cat/category-iot.html">IoT</a>
+                        <a href="./cat/category-mobile.html">Mobile Development</a>
+                        <a href="./cat/category-cloud.html">Cloud Computing</a>
+                    </div>
+                </li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="subscribe.html" class="subscribe-btn">Subscribe</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Enhanced Hero Section -->
+        <section class="hero-enhanced" data-aos="fade-up">
+            <div class="hero-content">
+                <h1 class="hero-tagline">TechMayanK — where code meets clarity.</h1>
+                <p class="hero-subtitle">Your go-to source for tech insights, tutorials, and reviews. Explore the latest
+                    in technology, programming, and digital trends with simple, easy-to-understand content.</p>
+                <a href="#featured-posts" class="cta-button">
+                    <i class="fas fa-rocket"></i> Explore Articles
+                </a>
+            </div>
+        </section>
+
+        <!-- Featured Posts Section -->
+        <section id="featured-posts" class="featured-posts" data-aos="fade-up" data-aos-delay="200">
+            <div class="container">
+                <h2 class="section-title">Featured Posts</h2>
+
+                <!-- Featured Post 1 -->
+                <article class="post-card" data-aos="fade-up" data-aos-delay="300">
+                    <img src="./image/blog1/main_blog1.webp" alt="Web Development Trends" class="post-img">
+                    <div class="post-content">
+                        <div class="post-category">Web Development</div>
+                        <h3 class="post-title">
+                            <a href="https://techmayank.netlify.app/blogs/blog1">
+                                Building Accessible First: Designing Inclusive Web Experiences from Day One
+                            </a>
+                        </h3>
+                        <p class="post-excerpt">
+                            Discover how to create accessible and inclusive websites by prioritizing accessibility from
+                            the start. This blog explores why accessibility isn't just a feature, but a foundation of
+                            modern web design. Learn how semantic HTML, proper contrast, keyboard navigation, ARIA
+                            roles, and testing tools can make your website usable for people of all abilities.
+                        </p>
+                        <div class="post-meta">
+                            <span class="post-date"><i class="far fa-calendar-alt"></i> April 13, 2025</span>
+                            <span class="post-read-time"><i class="far fa-clock"></i> 12 min read</span>
+                        </div>
+                        <a href="https://techmayank.netlify.app/blogs/blog1" class="read-more" target="_blank">Read more
+                            →</a>
+                    </div>
+                </article>
+
+                <!-- Featured Post 2 -->
+                <article class="post-card" data-aos="fade-up" data-aos-delay="400">
+                    <img src="./image/blog2/main_blog2.webp" alt="Mobile Development Trends" class="post-img">
+                    <div class="post-content">
+                        <div class="post-category">Mobile Development</div>
+                        <h3 class="post-title">
+                            <a href="https://techmayank.netlify.app/blogs/blog2">
+                                Cross-Platform vs. Native in 2025: The State of Mobile Development
+                            </a>
+                        </h3>
+                        <p class="post-excerpt">
+                            Explore the evolving landscape of mobile development in 2025. This article compares modern
+                            cross-platform frameworks like <strong>Flutter</strong>, <strong>React Native</strong>, and
+                            <strong>Kotlin Multiplatform</strong> with traditional native development for Android and
+                            iOS. Understand the pros, cons, performance differences, and use cases to help you make
+                            informed decisions.
+                        </p>
+                        <div class="post-meta">
+                            <span class="post-date"><i class="far fa-calendar-alt"></i> April 20, 2025</span>
+                            <span class="post-read-time"><i class="far fa-clock"></i> 8 min read</span>
+                        </div>
+                        <a href="https://techmayank.netlify.app/blogs/blog2" class="read-more" target="_blank">Read more
+                            →</a>
+                    </div>
+                </article>
+
+                <!-- Featured Post 3 -->
+                <article class="post-card" data-aos="fade-up" data-aos-delay="500">
+                    <img src="./image/blog3/main_blog3.webp" alt="Social Engineering in Cybersecurity" class="post-img">
+                    <div class="post-content">
+                        <div class="post-category">Cybersecurity</div>
+                        <h3 class="post-title">
+                            <a href="https://techmayank.netlify.app/blogs/blog3">
+                                The Human Element: Social Engineering Attacks and Defense in the AI Era
+                            </a>
+                        </h3>
+                        <p class="post-excerpt">
+                            Dive into the psychological side of cybersecurity—social engineering. This post explores how
+                            attackers exploit human behavior to bypass even the strongest technical defenses. Learn
+                            about phishing, pretexting, baiting, and AI-driven deception tactics, and discover how
+                            individuals and organizations can defend themselves.
+                        </p>
+                        <div class="post-meta">
+                            <span class="post-date"><i class="far fa-calendar-alt"></i> April 27, 2025</span>
+                            <span class="post-read-time"><i class="far fa-clock"></i> 10 min read</span>
+                        </div>
+                        <a href="https://techmayank.netlify.app/blogs/blog3" class="read-more" target="_blank">Read more
+                            →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Recent Articles Section -->
+        <section class="recent-articles" data-aos="fade-up" data-aos-delay="600">
+            <h2 class="section-title">Recent Articles</h2>
+            <div class="articles-grid">
+                <!-- Recent Article 1 -->
+                <article class="article-card" data-aos="fade-up" data-aos-delay="700">
+                    <img src="./image/blog4/main_blog4.webp" alt="LLM Use in Traditional Businesses"
+                        class="article-thumbnail">
+                    <div class="article-content">
+                        <div class="post-category">Artificial Intelligence</div>
+                        <h3 class="article-title">
+                            <a href="https://techmayank.netlify.app/blogs/blog4.html">
+                                Practical Applications of LLMs for Non-AI Businesses
+                            </a>
+                        </h3>
+                        <p class="article-excerpt">
+                            Discover how non-AI companies are embracing large language models (LLMs) to boost efficiency
+                            and cut costs—without building AI from scratch. This blog highlights real-world applications
+                            like automating customer support, generating reports, and optimizing workflows.
+                        </p>
+                        <div class="article-meta">
+                            <span class="post-date"><i class="far fa-calendar-alt"></i> May 11, 2025</span>
+                            <span class="post-read-time"><i class="far fa-clock"></i> 9 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Recent Article 2 -->
+                <article class="article-card" data-aos="fade-up" data-aos-delay="800">
+                    <img src="./image/blog1/main_blog1.webp" alt="Web Accessibility" class="article-thumbnail">
+                    <div class="article-content">
+                        <div class="post-category">Web Development</div>
+                        <h3 class="article-title">
+                            <a href="https://techmayank.netlify.app/blogs/blog1">
+                                Building Accessible First: Inclusive Web Design
+                            </a>
+                        </h3>
+                        <p class="article-excerpt">
+                            Learn how semantic HTML, proper contrast, keyboard navigation, and ARIA roles can make your
+                            website usable for people of all abilities. Accessibility isn't just a feature—it's a
+                            foundation of modern web design.
+                        </p>
+                        <div class="article-meta">
+                            <span class="post-date"><i class="far fa-calendar-alt"></i> April 13, 2025</span>
+                            <span class="post-read-time"><i class="far fa-clock"></i> 12 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Recent Article 3 -->
+                <article class="article-card" data-aos="fade-up" data-aos-delay="900">
+                    <img src="./image/blog2/main_blog2.webp" alt="Mobile Development" class="article-thumbnail">
+                    <div class="article-content">
+                        <div class="post-category">Mobile Development</div>
+                        <h3 class="article-title">
+                            <a href="https://techmayank.netlify.app/blogs/blog2">
+                                Cross-Platform vs Native Development in 2025
+                            </a>
+                        </h3>
+                        <p class="article-excerpt">
+                            Compare modern cross-platform frameworks like Flutter, React Native, and Kotlin
+                            Multiplatform with traditional native development. Make informed decisions for your next
+                            mobile app project.
+                        </p>
+                        <div class="article-meta">
+                            <span class="post-date"><i class="far fa-calendar-alt"></i> April 20, 2025</span>
+                            <span class="post-read-time"><i class="far fa-clock"></i> 8 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Newsletter Subscription Section -->
+        <section class="cta-section" id="subscribe" data-aos="fade-up" data-aos-delay="1000">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get the latest tech updates, tutorials, and insights delivered directly to your inbox. No spam, just
+                valuable content!</p>
+
+            <!-- Netlify Form with improved design -->
+            <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+                class="newsletter-form" action="/success">
+                <!-- Honeypot field to prevent spam -->
+                <div hidden>
+                    <label>Don't fill this out if you're human: <input name="bot-field"></label>
+                </div>
+
+                <!-- Required for Netlify forms -->
+                <input type="hidden" name="form-name" value="newsletter">
+
+                <!-- Form input group -->
+                <div class="form-group">
+                    <input type="email" name="email" class="newsletter-input" placeholder="Your email address" required
+                        aria-label="Email address">
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-paper-plane"></i> Subscribe
+                    </button>
+                </div>
+
+                <!-- Success message container -->
+                <div id="form-success" class="form-message" style="display: none;">
+                    <p><i class="fas fa-check-circle"></i> Thank you for subscribing! Check your inbox for updates.</p>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <!-- Enhanced Footer -->
+    <footer data-aos="fade-up" data-aos-delay="1100">
+        <div class="footer-content">
+            <div class="footer-section footer-about">
+                <a href="index.html" class="footer-logo">Tech<span>MayanK</span></a>
+                <p>Your go-to source for tech insights, tutorials, and reviews. We make complex technology concepts easy
+                    to understand for everyone.</p>
+                <div class="social-links">
+                    <a href="https://x.com/MayanK_Pras" class="social-icon twitter" aria-label="Twitter"><i
+                            class="fab fa-x-twitter"></i></a>
+                    <a href="https://www.linkedin.com/in/mitthu-kumar/" class="social-icon linkedin"
+                        aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/mkshahi22" class="social-icon github" aria-label="GitHub"><i
+                            class="fab fa-github"></i></a>
+                    <a href="https://mkshahi.netlify.app/" class="social-icon website" aria-label="Website"><i
+                            class="fas fa-globe"></i></a>
+                    <a href="https://www.instagram.com/shahi_jii_22/?next=%2F" class="social-icon instagram"
+                        aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="./blogs/blogs.html">Blogs</a></li>
+                    <li><a href="./cat/categories.html">Categories</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Popular Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="./cat/category-webdev.html">Web Development</a></li>
+                    <li><a href="./cat/category-ai.html">Artificial Intelligence</a></li>
+                    <li><a href="./cat/category-cybersecurity.html">Cybersecurity</a></li>
+                    <li><a href="./cat/category-cloud.html">Cloud Computing</a></li>
+                    <li><a href="./cat/category-mobile.html">Mobile Development</a></li>
+                    <li><a href="./cat/category-iot.html">IoT</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="far fa-envelope"></i> mayankpra97@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Greater Noida, India</p>
+                <p><i class="fas fa-phone"></i> +91 9798743248</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2025 TechMayanK. All rights reserved.</p>
+            <p><a href="privacy.html" style="color: white; text-decoration: none;">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <!-- AOS Library for Scroll Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize AOS (Animate On Scroll)
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false
+            });
+
+            // Mobile menu toggle
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+
+            menuBtn.addEventListener('click', function () {
+                navLinks.classList.toggle('active');
+            });
+
+            // Mobile dropdown toggle
+            const dropdowns = document.querySelectorAll('.dropdown');
+
+            dropdowns.forEach(dropdown => {
+                const dropdownLink = dropdown.querySelector('a');
+
+                if (window.innerWidth <= 768) {
+                    dropdownLink.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                    });
+                }
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function (event) {
+                if (!event.target.closest('nav') && !event.target.closest('.mobile-menu-btn')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', function () {
+                const header = document.getElementById('main-header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Smooth scrolling for CTA button
+            const ctaButton = document.querySelector('.cta-button');
+            if (ctaButton) {
+                ctaButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector('#featured-posts');
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Existing JavaScript Files -->
+    <script src="./js/subcription.js"></script>
+    <script src="./js/accible.js"></script>
+</body>
+
+</html>

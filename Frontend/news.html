@@ -37,10 +37,1271 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/footer.css">
-    <link rel="stylesheet" href="./css/news.css">
-
-
+    <!-- <link rel="stylesheet" href="./css/news.css"> -->
 </head>
+<style>
+    /* News Hero Section */
+    .news-hero {
+        height: 350px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        position: relative;
+        border-radius: 12px;
+        margin: 20px auto;
+        max-width: 1200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .news-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 1;
+    }
+
+    /* Alternative hero with background image */
+    .news-hero.hero-with-image {
+        background-image: url('/api/placeholder/1200/300');
+        background-size: cover;
+        background-position: center;
+        height: 300px;
+        margin-bottom: 40px;
+    }
+
+    .news-hero .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 10px;
+    }
+
+    .news-hero-content {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        padding: 0 20px;
+        animation: fadeInUp 1s ease-out;
+    }
+
+    .news-hero-content h1 {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        font-weight: 700;
+    }
+
+    .news-hero-content p {
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        opacity: 0.9;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Container */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    /* News Filter Section */
+    .news-filter-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 30px 0;
+        flex-wrap: wrap;
+        gap: 20px;
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: var(--card-shadow);
+    }
+
+    .news-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .filter-btn {
+        padding: 10px 20px;
+        background-color: var(--light-gray);
+        border: 2px solid transparent;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--secondary-color);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .filter-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s;
+    }
+
+    .filter-btn:hover::before {
+        left: 100%;
+    }
+
+    .filter-btn:hover {
+        background-color: #e3f2fd;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+    }
+
+    .filter-btn.active {
+        background: linear-gradient(135deg, var(--accent-color), var(--hover-color));
+        color: white;
+        border-color: var(--accent-color);
+    }
+
+    .news-search {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    #news-search-input {
+        padding: 12px 20px;
+        border: 2px solid var(--border-color);
+        border-radius: 50px 0 0 50px;
+        font-size: 0.9rem;
+        outline: none;
+        transition: all 0.3s ease;
+        width: 250px;
+        background: white;
+    }
+
+    #news-search-input:focus {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    }
+
+    #news-search-btn {
+        padding: 12px 20px;
+        background: linear-gradient(135deg, var(--accent-color), var(--hover-color));
+        color: white;
+        border: none;
+        border-radius: 0 50px 50px 0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+    }
+
+    #news-search-btn:hover {
+        background: linear-gradient(135deg, var(--hover-color), #1f5f99);
+        transform: translateY(-1px);
+    }
+
+    /* Loading Spinner */
+    .loading-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 60px 0;
+    }
+
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid var(--light-gray);
+        border-top: 4px solid var(--accent-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Featured News */
+    .featured-news {
+        margin-bottom: 40px;
+    }
+
+    .featured-news-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .featured-news-item {
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        transition: all 0.4s ease;
+    }
+
+    .featured-news-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .featured-news-image {
+        position: relative;
+        overflow: hidden;
+        height: 250px;
+    }
+
+    .featured-news-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .featured-news-item:hover .featured-news-image img {
+        transform: scale(1.1);
+    }
+
+    .featured-news-content {
+        padding: 25px;
+    }
+
+    .featured-news-content h3 {
+        margin-bottom: 15px;
+        font-size: 1.4rem;
+        line-height: 1.4;
+        font-weight: 600;
+    }
+
+    .featured-news-content h3 a {
+        color: var(--secondary-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .featured-news-content h3 a:hover {
+        color: var(--accent-color);
+    }
+
+    /* News Grid Layout */
+    .news-grid-container {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    .news-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    .news-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        transition: all 0.4s ease;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .news-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .news-image {
+        position: relative;
+        overflow: hidden;
+        height: 200px;
+    }
+
+    .news-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .news-card:hover .news-image img {
+        transform: scale(1.1);
+    }
+
+    .news-category {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        z-index: 2;
+        backdrop-filter: blur(10px);
+    }
+
+    .category-ai {
+        background: rgba(156, 39, 176, 0.9);
+        color: white;
+    }
+
+    .category-web {
+        background: rgba(76, 175, 80, 0.9);
+        color: white;
+    }
+
+    .category-mobile {
+        background: rgba(255, 152, 0, 0.9);
+        color: white;
+    }
+
+    .category-security {
+        background: rgba(244, 67, 54, 0.9);
+        color: white;
+    }
+
+    .category-hardware {
+        background: rgba(96, 125, 139, 0.9);
+        color: white;
+    }
+
+    .category-general {
+        background: rgba(63, 81, 181, 0.9);
+        color: white;
+    }
+
+    /* Default category style for news-category without specific class */
+    .news-category:not([class*="category-"]) {
+        background-color: var(--accent-color);
+        color: white;
+        padding: 5px 12px;
+        font-weight: 600;
+    }
+
+    .news-content {
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .news-content h3 {
+        margin: 0 0 15px 0;
+        font-size: 1.3rem;
+        line-height: 1.4;
+        font-weight: 600;
+    }
+
+    .news-content h3 a {
+        color: var(--secondary-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .news-content h3 a:hover {
+        color: var(--accent-color);
+    }
+
+    .news-excerpt {
+        color: #6c757d;
+        margin-bottom: 20px;
+        line-height: 1.6;
+        flex-grow: 1;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .news-meta {
+        margin-top: auto;
+        padding-top: 20px;
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+    .news-date {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .news-date i {
+        margin-right: 6px;
+    }
+
+    .news-source {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
+    }
+
+    .news-source i {
+        margin-right: 6px;
+    }
+
+    .news-read-more a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: all 0.3s ease;
+    }
+
+    .news-read-more a:hover {
+        color: var(--hover-color);
+        gap: 8px;
+    }
+
+    .news-read-more a i {
+        margin-left: 5px;
+        transition: transform 0.3s;
+    }
+
+    .news-read-more a:hover i {
+        transform: translateX(3px);
+    }
+
+    /* Sidebar Styles */
+    .news-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .sidebar-section {
+        background-color: white;
+        border-radius: 16px;
+        padding: 25px;
+        box-shadow: var(--card-shadow);
+    }
+
+    .sidebar-title {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        color: var(--secondary-color);
+        position: relative;
+        padding-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .sidebar-title::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 40px;
+        height: 3px;
+        background: linear-gradient(135deg, var(--accent-color), var(--hover-color));
+        border-radius: 2px;
+    }
+
+    /* Trending News List */
+    .trending-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .trending-list li {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .trending-list li:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .trending-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        background: linear-gradient(135deg, var(--accent-color), var(--hover-color));
+        color: white;
+        font-weight: 700;
+        border-radius: 50%;
+        margin-right: 12px;
+        flex-shrink: 0;
+        font-size: 0.9rem;
+    }
+
+    .trending-list a {
+        color: var(--secondary-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+        font-weight: 500;
+        line-height: 1.4;
+    }
+
+    .trending-list a:hover {
+        color: var(--accent-color);
+    }
+
+    /* Events List */
+    .events-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .events-list li {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .events-list li:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .event-date {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 55px;
+        height: 65px;
+        background: linear-gradient(135deg, var(--accent-color), var(--hover-color));
+        color: white;
+        border-radius: 12px;
+        margin-right: 15px;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+    }
+
+    .event-month {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    .event-day {
+        font-size: 1.6rem;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    .event-details {
+        flex-grow: 1;
+    }
+
+    .event-title {
+        font-size: 1rem;
+        color: var(--secondary-color);
+        margin-bottom: 5px;
+        font-weight: 500;
+    }
+
+    .event-location {
+        color: #888;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .event-location i {
+        margin-right: 5px;
+        color: var(--accent-color);
+    }
+
+    .view-all-events {
+        display: block;
+        margin-top: 20px;
+        color: var(--accent-color);
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-align: right;
+    }
+
+    .view-all-events:hover {
+        color: var(--hover-color);
+    }
+
+    .view-all-events i {
+        margin-left: 5px;
+        transition: transform 0.3s;
+    }
+
+    .view-all-events:hover i {
+        transform: translateX(3px);
+    }
+
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 40px 0;
+    }
+
+    .page-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        margin: 0 5px;
+        border-radius: 50%;
+        background-color: var(--light-gray);
+        color: var(--secondary-color);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        border: 2px solid transparent;
+    }
+
+    .page-btn:hover {
+        background-color: #e3f2fd;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+    }
+
+    .page-btn.active {
+        background: linear-gradient(135deg, var(--accent-color), var(--hover-color));
+        color: white;
+        border-color: var(--accent-color);
+    }
+
+    .page-dots {
+        margin: 0 10px;
+        color: #888;
+        font-weight: 600;
+    }
+
+    .page-btn.next {
+        width: auto;
+        padding: 0 20px;
+        border-radius: 25px;
+    }
+
+    /* No Results State */
+    .no-results {
+        text-align: center;
+        padding: 80px 20px;
+        background: white;
+        border-radius: 16px;
+        margin: 40px 0;
+        box-shadow: var(--card-shadow);
+    }
+
+    .no-results img {
+        max-width: 200px;
+        opacity: 0.6;
+        margin-bottom: 30px;
+    }
+
+    .no-results h2 {
+        color: var(--secondary-color);
+        margin-bottom: 15px;
+        font-size: 1.8rem;
+        font-weight: 600;
+    }
+
+    .no-results p {
+        color: #6c757d;
+        font-size: 1.1rem;
+        max-width: 500px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    /* Error State */
+    .error-message {
+        background: #fff5f5;
+        border: 2px solid #fed7d7;
+        color: #c53030;
+        padding: 20px;
+        border-radius: 12px;
+        margin: 20px 0;
+        text-align: center;
+        font-weight: 500;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+        .news-grid {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .news-grid-container {
+            grid-template-columns: 1fr;
+        }
+
+        .news-sidebar {
+            order: -1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .news-hero {
+            height: 280px;
+            margin: 10px;
+        }
+
+        .news-hero.hero-with-image {
+            height: 250px;
+        }
+
+        .news-hero-content h1 {
+            font-size: 2.2rem;
+        }
+
+        .news-hero-content p {
+            font-size: 1.1rem;
+        }
+
+        .news-filter-section {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 15px;
+        }
+
+        .news-filters {
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .news-search {
+            width: 100%;
+            justify-content: center;
+        }
+
+        #news-search-input {
+            width: 200px;
+            flex-grow: 1;
+        }
+
+        .news-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .container {
+            padding: 0 15px;
+        }
+
+        .featured-news-item {
+            flex-direction: column;
+        }
+
+        .featured-news-image {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .news-hero {
+            height: 220px;
+        }
+
+        .news-hero.hero-with-image {
+            height: 200px;
+        }
+
+        .news-hero-content h1 {
+            font-size: 1.8rem;
+        }
+
+        .news-hero-content p {
+            font-size: 1rem;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-content h3 {
+            font-size: 1.2rem;
+        }
+
+        .sidebar-section {
+            padding: 20px;
+        }
+
+        .page-btn {
+            width: 35px;
+            height: 35px;
+        }
+
+        .event-date {
+            width: 50px;
+            height: 60px;
+        }
+
+        .trending-number {
+            width: 25px;
+            height: 25px;
+            font-size: 0.8rem;
+        }
+    }
+
+    /* News Controls Section */
+    .news-controls {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    /* View Controls */
+    .view-controls {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        background: var(--light-gray);
+        border-radius: 8px;
+        padding: 4px;
+    }
+
+    .view-btn {
+        padding: 8px 12px;
+        background: transparent;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        color: var(--secondary-color);
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+    }
+
+    .view-btn:hover {
+        background: rgba(52, 152, 219, 0.1);
+        color: var(--accent-color);
+    }
+
+    .view-btn.active {
+        background: var(--accent-color);
+        color: white;
+    }
+
+    /* Pagination Info */
+    .pagination-info {
+        color: var(--secondary-color);
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    /* List View Styles */
+    .news-grid.list-view {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .news-grid.list-view .news-card {
+        display: flex;
+        flex-direction: row;
+        height: auto;
+        max-height: 200px;
+    }
+
+    .news-grid.list-view .news-image {
+        width: 300px;
+        height: 200px;
+        flex-shrink: 0;
+    }
+
+    .news-grid.list-view .news-content {
+        flex: 1;
+        padding: 20px 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .news-grid.list-view .news-excerpt {
+        -webkit-line-clamp: 2;
+        margin-bottom: 15px;
+    }
+
+    /* Pagination Container */
+    .pagination-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 40px 0;
+        padding: 20px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: var(--card-shadow);
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    /* Pagination Controls */
+    .pagination-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .pagination-btn {
+        padding: 10px 16px;
+        background: var(--light-gray);
+        border: 2px solid transparent;
+        border-radius: 8px;
+        color: var(--secondary-color);
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .pagination-btn:hover:not(:disabled) {
+        background: #e3f2fd;
+        color: var(--accent-color);
+        transform: translateY(-1px);
+    }
+
+    .pagination-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .pagination-btn.active {
+        background: var(--accent-color);
+        color: white;
+        border-color: var(--accent-color);
+    }
+
+    /* Page Numbers */
+    .page-numbers {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .page-number-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        background: var(--light-gray);
+        color: var(--secondary-color);
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .page-number-btn:hover {
+        background: #e3f2fd;
+        color: var(--accent-color);
+        transform: translateY(-1px);
+    }
+
+    .page-number-btn.active {
+        background: var(--accent-color);
+        color: white;
+        border-color: var(--accent-color);
+    }
+
+    .page-ellipsis {
+        padding: 0 10px;
+        color: #888;
+        font-weight: 600;
+    }
+
+    /* Pagination Size Controls */
+    .pagination-size-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.9rem;
+        color: var(--secondary-color);
+    }
+
+    .pagination-size-controls label {
+        font-weight: 500;
+    }
+
+    #page-size-select {
+        padding: 8px 12px;
+        border: 2px solid var(--border-color);
+        border-radius: 6px;
+        background: white;
+        color: var(--secondary-color);
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: border-color 0.3s ease;
+    }
+
+    #page-size-select:focus {
+        outline: none;
+        border-color: var(--accent-color);
+    }
+
+    /* Header Styles */
+    #main-header {
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+
+    #main-header nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--secondary-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .logo span {
+        color: var(--accent-color);
+    }
+
+    .logo:hover {
+        color: var(--accent-color);
+    }
+
+    .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--secondary-color);
+        cursor: pointer;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .nav-links a {
+        color: var(--secondary-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        position: relative;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        color: var(--accent-color);
+    }
+
+    .nav-links a.active::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--accent-color);
+    }
+
+    .subscribe-btn {
+        background: linear-gradient(135deg, var(--accent-color), var(--hover-color));
+        color: white !important;
+        padding: 10px 20px;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+    }
+
+    .subscribe-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+    }
+
+    /* Dropdown Styles */
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: white;
+        min-width: 200px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+        z-index: 1000;
+        padding: 10px 0;
+        margin-top: 10px;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-content a {
+        display: block;
+        padding: 12px 20px;
+        color: var(--secondary-color);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    .dropdown-content a:hover {
+        background: #f8f9fa;
+        color: var(--accent-color);
+    }
+
+    /* CSS Variables */
+    :root {
+        --primary-color: #3498db;
+        --secondary-color: #2c3e50;
+        --accent-color: #3498db;
+        --hover-color: #2980b9;
+        --light-gray: #f8f9fa;
+        --border-color: #e9ecef;
+        --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .mobile-menu-btn {
+            display: block;
+        }
+
+        .nav-links {
+            display: none;
+        }
+
+        .news-controls {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .pagination-container {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .pagination-controls {
+            justify-content: center;
+        }
+
+        .news-grid.list-view .news-card {
+            flex-direction: column;
+            max-height: none;
+        }
+
+        .news-grid.list-view .news-image {
+            width: 100%;
+            height: 200px;
+        }
+
+        .view-controls {
+            align-self: center;
+        }
+
+        .pagination-size-controls {
+            align-self: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .pagination-controls {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pagination-btn {
+            padding: 8px 12px;
+            font-size: 0.8rem;
+        }
+
+        .page-number-btn {
+            width: 35px;
+            height: 35px;
+            font-size: 0.9rem;
+        }
+    }
+</style>
 
 <body>
     <header id="main-header">
@@ -86,9 +1347,22 @@
                 <button class="filter-btn" data-filter="security">Security</button>
                 <button class="filter-btn" data-filter="hardware">Hardware</button>
             </div>
-            <div class="news-search">
-                <input type="text" id="news-search-input" placeholder="Search news...">
-                <button id="news-search-btn"><i class="fas fa-search"></i></button>
+            <div class="news-controls">
+                <div class="news-search">
+                    <input type="text" id="news-search-input" placeholder="Search news...">
+                    <button id="news-search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="view-controls">
+                    <button id="grid-view-btn" class="view-btn active" title="Grid View">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button id="list-view-btn" class="view-btn" title="List View">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+                <div class="pagination-info">
+                    <span id="pagination-status">Showing 0-0 of 0 articles</span>
+                </div>
             </div>
         </section>
 
@@ -104,9 +1378,43 @@
         </div>
 
         <!-- News Grid -->
-        <section id="news-grid" class="news-grid" style="display: none;">
+        <section id="news-grid" class="news-grid grid-view" style="display: none;">
             <!-- News cards will be dynamically inserted here -->
         </section>
+
+        <!-- Pagination Controls -->
+        <div id="pagination-container" class="pagination-container" style="display: none;">
+            <div class="pagination-controls">
+                <button id="first-page-btn" class="pagination-btn" disabled>
+                    <i class="fas fa-angle-double-left"></i> First
+                </button>
+                <button id="prev-page-btn" class="pagination-btn" disabled>
+                    <i class="fas fa-angle-left"></i> Previous
+                </button>
+
+                <div id="page-numbers" class="page-numbers">
+                    <!-- Page numbers will be inserted here -->
+                </div>
+
+                <button id="next-page-btn" class="pagination-btn">
+                    Next <i class="fas fa-angle-right"></i>
+                </button>
+                <button id="last-page-btn" class="pagination-btn">
+                    Last <i class="fas fa-angle-double-right"></i>
+                </button>
+            </div>
+
+            <div class="pagination-size-controls">
+                <label for="page-size-select">Items per page:</label>
+                <select id="page-size-select">
+                    <option value="12">12 per page</option>
+                    <option value="24">24 per page</option>
+                    <option value="50">50 per page</option>
+                    <option value="100">100 per page</option>
+                    <option value="200">200 per page</option>
+                </select>
+            </div>
+        </div>
 
         <!-- No Results State -->
         <div id="no-results" class="no-results" style="display: none;">
@@ -183,11 +1491,18 @@
                 this.filteredNews = [];
                 this.currentFilter = 'all';
                 this.currentSearch = '';
+                this.currentPage = 1;
+                this.pageSize = 12;
+                this.totalPages = 0;
+                this.currentView = 'grid';
+                this.loadingTimeout = null;
+                this.maxRetries = 3;
+                this.retryCount = 0;
+
                 this.initializeElements();
                 this.bindEvents();
                 this.loadNews();
             }
-
             initializeElements() {
                 this.loadingContainer = document.getElementById('loading-container');
                 this.errorMessage = document.getElementById('error-message');
@@ -197,6 +1512,27 @@
                 this.filterBtns = document.querySelectorAll('.filter-btn');
                 this.searchInput = document.getElementById('news-search-input');
                 this.searchBtn = document.getElementById('news-search-btn');
+
+                // Pagination elements
+                this.paginationContainer = document.getElementById('pagination-container');
+                this.firstPageBtn = document.getElementById('first-page-btn');
+                this.prevPageBtn = document.getElementById('prev-page-btn');
+                this.nextPageBtn = document.getElementById('next-page-btn');
+                this.lastPageBtn = document.getElementById('last-page-btn');
+                this.pageNumbers = document.getElementById('page-numbers');
+                this.pageSizeSelect = document.getElementById('page-size-select');
+                this.paginationStatus = document.getElementById('pagination-status');
+
+                // View control elements
+                this.gridViewBtn = document.getElementById('grid-view-btn');
+                this.listViewBtn = document.getElementById('list-view-btn');
+
+                // Debug: Check if elements exist
+                console.log('Elements initialized:', {
+                    loadingContainer: !!this.loadingContainer,
+                    newsGrid: !!this.newsGrid,
+                    errorMessage: !!this.errorMessage
+                });
             }
 
             bindEvents() {
@@ -205,87 +1541,243 @@
                     btn.addEventListener('click', (e) => {
                         this.setActiveFilter(e.target);
                         this.currentFilter = e.target.getAttribute('data-filter');
+                        this.currentPage = 1;
                         this.filterAndDisplayNews();
                     });
                 });
 
                 // Search functionality
-                this.searchBtn.addEventListener('click', () => this.performSearch());
-                this.searchInput.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        this.performSearch();
-                    }
-                });
+                if (this.searchBtn) {
+                    this.searchBtn.addEventListener('click', () => this.performSearch());
+                }
+
+                if (this.searchInput) {
+                    this.searchInput.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') {
+                            this.performSearch();
+                        }
+                    });
+                }
+
+                // Pagination controls
+                if (this.firstPageBtn) this.firstPageBtn.addEventListener('click', () => this.goToPage(1));
+                if (this.prevPageBtn) this.prevPageBtn.addEventListener('click', () => this.goToPage(this.currentPage - 1));
+                if (this.nextPageBtn) this.nextPageBtn.addEventListener('click', () => this.goToPage(this.currentPage + 1));
+                if (this.lastPageBtn) this.lastPageBtn.addEventListener('click', () => this.goToPage(this.totalPages));
+
+                if (this.pageSizeSelect) {
+                    this.pageSizeSelect.addEventListener('change', (e) => {
+                        this.pageSize = parseInt(e.target.value);
+                        this.currentPage = 1;
+                        this.filterAndDisplayNews();
+                    });
+                }
+
+                // View controls
+                if (this.gridViewBtn) this.gridViewBtn.addEventListener('click', () => this.switchView('grid'));
+                if (this.listViewBtn) this.listViewBtn.addEventListener('click', () => this.switchView('list'));
 
                 // Mobile menu toggle
                 const menuBtn = document.querySelector('.mobile-menu-btn');
                 const navLinks = document.querySelector('.nav-links');
 
-                if (menuBtn) {
+                if (menuBtn && navLinks) {
                     menuBtn.addEventListener('click', () => {
                         navLinks.classList.toggle('active');
                     });
                 }
             }
 
-            setActiveFilter(activeBtn) {
-                this.filterBtns.forEach(btn => btn.classList.remove('active'));
-                activeBtn.classList.add('active');
-            }
-
             async loadNews() {
                 try {
+                    console.log('Starting to load news...');
                     this.showLoading();
 
-                    // Multiple RSS feeds for different tech news sources
+                    // Set a timeout to prevent infinite loading
+                    this.loadingTimeout = setTimeout(() => {
+                        console.error('Loading timeout reached');
+                        this.showError('Loading is taking too long. Please try again.');
+                    }, 15000); // 15 seconds timeout
+
+                    // Use more reliable RSS feeds and backup options
                     const feeds = [
-                        'https://rss2json.com/api.json?rss_url=https://feeds.feedburner.com/oreilly/radar/atom',
-                        'https://rss2json.com/api.json?rss_url=https://www.wired.com/feed/tag/ai/latest/rss',
-                        'https://rss2json.com/api.json?rss_url=https://techcrunch.com/feed/',
-                        'https://rss2json.com/api.json?rss_url=https://www.theverge.com/rss/index.xml',
-                        'https://rss2json.com/api.json?rss_url=https://arstechnica.com/feed/'
+                        // Primary feeds with fallbacks
+                        {
+                            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://techcrunch.com/feed/',
+                            name: 'TechCrunch'
+                        },
+                        {
+                            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.theverge.com/rss/index.xml',
+                            name: 'The Verge'
+                        },
+                        {
+                            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://arstechnica.com/feed/',
+                            name: 'Ars Technica'
+                        }
                     ];
 
-                    const promises = feeds.map(feed =>
-                        fetch(feed)
-                            .then(response => response.json())
-                            .catch(error => {
-                                console.warn('Feed failed:', feed, error);
-                                return { items: [] };
-                            })
-                    );
+                    // If RSS2JSON fails, use mock data as fallback
+                    const promises = feeds.map(async (feed) => {
+                        try {
+                            console.log(`Fetching from ${feed.name}...`);
+                            const controller = new AbortController();
+                            const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout per feed
+
+                            const response = await fetch(feed.url, {
+                                signal: controller.signal,
+                                headers: {
+                                    'Accept': 'application/json',
+                                }
+                            });
+
+                            clearTimeout(timeoutId);
+
+                            if (!response.ok) {
+                                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                            }
+
+                            const data = await response.json();
+                            console.log(`${feed.name} returned:`, data.items?.length || 0, 'items');
+
+                            return {
+                                items: data.items || [],
+                                source: feed.name
+                            };
+                        } catch (error) {
+                            console.warn(`Feed ${feed.name} failed:`, error.message);
+                            return { items: [], source: feed.name };
+                        }
+                    });
 
                     const results = await Promise.all(promises);
+                    console.log('All feeds processed, combining results...');
 
                     // Combine all news items
                     this.allNews = [];
+                    let totalItemsFound = 0;
+
                     results.forEach(result => {
                         if (result.items && Array.isArray(result.items)) {
+                            console.log(`Processing ${result.items.length} items from ${result.source}`);
                             result.items.forEach(item => {
                                 if (item.title && item.link) {
                                     this.allNews.push({
                                         ...item,
                                         category: this.categorizeNews(item.title + ' ' + (item.description || '')),
                                         publishedDate: new Date(item.pubDate || Date.now()),
-                                        source: this.extractSource(item.link)
+                                        source: this.extractSource(item.link),
+                                        imageLoaded: false,
+                                        feedSource: result.source
                                     });
+                                    totalItemsFound++;
                                 }
                             });
                         }
                     });
 
+                    console.log(`Total items collected: ${totalItemsFound}`);
+
+                    // If no items found, use mock data
+                    if (this.allNews.length === 0) {
+                        console.log('No items found from feeds, using mock data...');
+                        this.allNews = this.getMockNews();
+                    }
+
                     // Sort by date (newest first) and remove duplicates
                     this.allNews = this.removeDuplicates(this.allNews)
                         .sort((a, b) => b.publishedDate - a.publishedDate)
-                        .slice(0, 50); // Limit to 50 most recent articles
+                        .slice(0, 100);
+
+                    console.log(`Final news count after deduplication: ${this.allNews.length}`);
+
+                    // Clear the loading timeout
+                    if (this.loadingTimeout) {
+                        clearTimeout(this.loadingTimeout);
+                        this.loadingTimeout = null;
+                    }
 
                     this.filterAndDisplayNews();
                     this.hideLoading();
 
+                    console.log('News loading completed successfully');
+
                 } catch (error) {
                     console.error('Error loading news:', error);
-                    this.showError('Failed to load news feeds. Please try again later.');
+
+                    // Clear loading timeout
+                    if (this.loadingTimeout) {
+                        clearTimeout(this.loadingTimeout);
+                        this.loadingTimeout = null;
+                    }
+
+                    // Retry logic
+                    if (this.retryCount < this.maxRetries) {
+                        this.retryCount++;
+                        console.log(`Retrying... Attempt ${this.retryCount}/${this.maxRetries}`);
+                        setTimeout(() => this.loadNews(), 2000 * this.retryCount); // Exponential backoff
+                        return;
+                    }
+
+                    // If all retries failed, show mock data
+                    console.log('All retries failed, showing mock data');
+                    this.allNews = this.getMockNews();
+                    this.filterAndDisplayNews();
+                    this.hideLoading();
                 }
+            }
+
+            // Mock data as fallback
+            getMockNews() {
+                const mockNews = [
+                    {
+                        title: "Latest AI Breakthrough in Machine Learning",
+                        description: "Researchers have made significant progress in developing new machine learning algorithms that could revolutionize the field of artificial intelligence.",
+                        link: "https://example.com/ai-breakthrough",
+                        publishedDate: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago
+                        source: "TechNews",
+                        category: "ai",
+                        feedSource: "Mock Data"
+                    },
+                    {
+                        title: "New Web Framework Simplifies Development",
+                        description: "A new JavaScript framework promises to make web development faster and more efficient for developers worldwide.",
+                        link: "https://example.com/web-framework",
+                        publishedDate: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago
+                        source: "WebDev",
+                        category: "web",
+                        feedSource: "Mock Data"
+                    },
+                    {
+                        title: "Mobile App Security Gets Major Update",
+                        description: "New security measures are being implemented across major mobile platforms to protect user data and privacy.",
+                        link: "https://example.com/mobile-security",
+                        publishedDate: new Date(Date.now() - 1000 * 60 * 60 * 4), // 4 hours ago
+                        source: "MobileTech",
+                        category: "security",
+                        feedSource: "Mock Data"
+                    },
+                    {
+                        title: "Quantum Computing Hardware Milestone Reached",
+                        description: "Scientists achieve new milestone in quantum computing hardware development, bringing us closer to practical quantum computers.",
+                        link: "https://example.com/quantum-hardware",
+                        publishedDate: new Date(Date.now() - 1000 * 60 * 60 * 6), // 6 hours ago
+                        source: "SciTech",
+                        category: "hardware",
+                        feedSource: "Mock Data"
+                    },
+                    {
+                        title: "React 19 Features That Will Change Development",
+                        description: "The latest version of React introduces groundbreaking features that will transform how developers build web applications.",
+                        link: "https://example.com/react-19",
+                        publishedDate: new Date(Date.now() - 1000 * 60 * 60 * 8), // 8 hours ago
+                        source: "ReactNews",
+                        category: "web",
+                        feedSource: "Mock Data"
+                    }
+                ];
+
+                console.log('Generated mock news:', mockNews.length, 'items');
+                return mockNews;
             }
 
             removeDuplicates(news) {
@@ -302,9 +1794,7 @@
 
             categorizeNews(content) {
                 const text = content.toLowerCase();
-                const categories = [];
 
-                // Enhanced categorization with more keywords and patterns
                 const categoryPatterns = {
                     'ai': [
                         'ai', 'artificial intelligence', 'machine learning', 'ml', 'neural', 'chatgpt', 'openai',
@@ -338,7 +1828,6 @@
                     ]
                 };
 
-                // Score each category based on keyword matches
                 const categoryScores = {};
 
                 for (const [category, keywords] of Object.entries(categoryPatterns)) {
@@ -347,7 +1836,7 @@
                         const regex = new RegExp('\\b' + keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
                         const matches = text.match(regex);
                         if (matches) {
-                            score += matches.length * (keyword.length > 5 ? 2 : 1); // Longer keywords get more weight
+                            score += matches.length * (keyword.length > 5 ? 2 : 1);
                         }
                     }
                     if (score > 0) {
@@ -355,15 +1844,10 @@
                     }
                 }
 
-                // Return the category with the highest score, or 'web' as default for tech news
                 if (Object.keys(categoryScores).length === 0) {
-                    // If no specific category matches, try to determine if it's tech-related
-                    const techKeywords = ['tech', 'technology', 'digital', 'software', 'computer', 'internet', 'online', 'startup', 'innovation'];
-                    const isTech = techKeywords.some(keyword => text.includes(keyword));
-                    return isTech ? 'web' : 'web'; // Default to 'web' for tech news
+                    return 'web';
                 }
 
-                // Find the category with the highest score
                 const bestCategory = Object.keys(categoryScores).reduce((a, b) =>
                     categoryScores[a] > categoryScores[b] ? a : b
                 );
@@ -380,17 +1864,21 @@
                 }
             }
 
+            setActiveFilter(activeBtn) {
+                this.filterBtns.forEach(btn => btn.classList.remove('active'));
+                activeBtn.classList.add('active');
+            }
+
             performSearch() {
                 this.currentSearch = this.searchInput.value.toLowerCase().trim();
+                this.currentPage = 1;
                 this.filterAndDisplayNews();
             }
 
             filterAndDisplayNews() {
+                console.log('Filtering and displaying news...');
                 this.filteredNews = this.allNews.filter(item => {
-                    // Filter by category
                     const categoryMatch = this.currentFilter === 'all' || item.category === this.currentFilter;
-
-                    // Filter by search term
                     const searchMatch = !this.currentSearch ||
                         item.title.toLowerCase().includes(this.currentSearch) ||
                         (item.description && item.description.toLowerCase().includes(this.currentSearch));
@@ -398,10 +1886,21 @@
                     return categoryMatch && searchMatch;
                 });
 
-                this.displayNews();
+                console.log(`Filtered results: ${this.filteredNews.length} items`);
+                this.calculatePagination();
+                this.displayCurrentPage();
+                this.updatePaginationControls();
+                this.updatePaginationStatus();
             }
 
-            displayNews() {
+            calculatePagination() {
+                this.totalPages = Math.ceil(this.filteredNews.length / this.pageSize);
+                if (this.currentPage > this.totalPages) {
+                    this.currentPage = Math.max(1, this.totalPages);
+                }
+            }
+
+            displayCurrentPage() {
                 if (this.filteredNews.length === 0) {
                     this.showNoResults();
                     return;
@@ -410,12 +1909,27 @@
                 this.hideNoResults();
                 this.hideError();
 
-                const newsHTML = this.filteredNews.map(item => this.createNewsCard(item)).join('');
-                this.newsGrid.innerHTML = newsHTML;
-                this.newsGrid.style.display = 'grid';
+                const startIndex = (this.currentPage - 1) * this.pageSize;
+                const endIndex = Math.min(startIndex + this.pageSize, this.filteredNews.length);
+                const currentPageNews = this.filteredNews.slice(startIndex, endIndex);
 
-                // Add click event listeners to news cards
+                console.log(`Displaying items ${startIndex + 1}-${endIndex} of ${this.filteredNews.length}`);
+
+                const newsHTML = currentPageNews.map(item => this.createNewsCard(item)).join('');
+                this.newsGrid.innerHTML = newsHTML;
+                this.newsGrid.style.display = this.currentView === 'grid' ? 'grid' : 'block';
+
+                // Show pagination only if there are multiple pages
+                if (this.paginationContainer) {
+                    if (this.totalPages > 1) {
+                        this.paginationContainer.style.display = 'flex';
+                    } else {
+                        this.paginationContainer.style.display = 'none';
+                    }
+                }
+
                 this.addNewsCardListeners();
+                this.initializeLazyLoading();
             }
 
             createNewsCard(item) {
@@ -423,14 +1937,15 @@
                 const excerpt = this.createExcerpt(item.description || '');
                 const categoryClass = `category-${item.category}`;
                 const categoryName = this.getCategoryDisplayName(item.category);
-
-                // Clean up the image URL or use a default placeholder
                 const imageUrl = this.getImageUrl(item);
+                const cardClass = this.currentView === 'list' ? 'news-card list-card' : 'news-card grid-card';
 
                 return `
-        <article class="news-card" data-category="${item.category}">
+        <article class="${cardClass}" data-category="${item.category}">
             <div class="news-image">
-                <img src="${imageUrl}" alt="${this.escapeHtml(item.title)}" 
+                <img data-src="${imageUrl}" alt="${this.escapeHtml(item.title)}" 
+                     class="lazy-image"
+                     src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDQwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xODUuNSA4Ny41VjEwNS41SDE5NC41VjExNC41SDE4NS41VjEzMi41SDE3Ni41VjExNC41SDE2Ny41VjEwNS41SDE3Ni41Vjg3LjVIMTg1LjVaIiBmaWxsPSIjOUM5Q0EzIi8+CjxwYXRoIGQ9Ik0yMjEuNSA4Ny41VjEwNS41SDIzMC41VjExNC41SDIyMS41VjEzMi41SDIxMi41VjExNC41SDIwMy41VjEwNS41SDIxMi41Vjg3LjVIMjIxLjVaIiBmaWxsPSIjOUM5Q0EzIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOUM5Q0EzIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiPkxvYWRpbmcuLi48L3RleHQ+Cjwvc3ZnPg=="
                      onerror="this.src='https://via.placeholder.com/400x200/667eea/ffffff?text=Tech+News'">
                 <span class="news-category ${categoryClass}">${categoryName}</span>
             </div>
@@ -458,36 +1973,61 @@
                 </div>
             </div>
         </article>
-    `;
+        `;
             }
 
+            // UI State Methods
+            showLoading() {
+                console.log('Showing loading state');
+                if (this.loadingContainer) this.loadingContainer.style.display = 'flex';
+                if (this.newsGrid) this.newsGrid.style.display = 'none';
+                if (this.noResults) this.noResults.style.display = 'none';
+                if (this.errorMessage) this.errorMessage.style.display = 'none';
+            }
+
+            hideLoading() {
+                console.log('Hiding loading state');
+                if (this.loadingContainer) this.loadingContainer.style.display = 'none';
+            }
+
+            showError(message) {
+                console.log('Showing error:', message);
+                if (this.errorText) this.errorText.textContent = message;
+                if (this.errorMessage) this.errorMessage.style.display = 'block';
+                if (this.newsGrid) this.newsGrid.style.display = 'none';
+                if (this.noResults) this.noResults.style.display = 'none';
+                if (this.loadingContainer) this.loadingContainer.style.display = 'none';
+            }
+
+            hideError() {
+                if (this.errorMessage) this.errorMessage.style.display = 'none';
+            }
+
+            showNoResults() {
+                console.log('Showing no results');
+                if (this.noResults) this.noResults.style.display = 'block';
+                if (this.newsGrid) this.newsGrid.style.display = 'none';
+            }
+
+            hideNoResults() {
+                if (this.noResults) this.noResults.style.display = 'none';
+            }
+
+            // Add all other utility methods here (keeping them the same as before)
             getImageUrl(item) {
-                // Try to extract image from content or use placeholder
-                if (item.thumbnail) {
-                    return item.thumbnail;
-                }
+                if (item.thumbnail) return item.thumbnail;
+                if (item.enclosure && item.enclosure.link) return item.enclosure.link;
 
-                if (item.enclosure && item.enclosure.link) {
-                    return item.enclosure.link;
-                }
-
-                // Look for images in content
                 if (item.content) {
                     const imgMatch = item.content.match(/<img[^>]+src="([^">]+)"/);
-                    if (imgMatch) {
-                        return imgMatch[1];
-                    }
+                    if (imgMatch) return imgMatch[1];
                 }
 
-                // Look for images in description
                 if (item.description) {
                     const imgMatch = item.description.match(/<img[^>]+src="([^">]+)"/);
-                    if (imgMatch) {
-                        return imgMatch[1];
-                    }
+                    if (imgMatch) return imgMatch[1];
                 }
 
-                // Category-specific placeholder images
                 const placeholders = {
                     'ai': 'https://via.placeholder.com/400x200/9c27b0/ffffff?text=AI+%26+ML',
                     'web': 'https://via.placeholder.com/400x200/4caf50/ffffff?text=Web+Tech',
@@ -501,13 +2041,8 @@
 
             createExcerpt(description) {
                 if (!description) return 'Click to read the full article...';
-
-                // Remove HTML tags
                 const text = description.replace(/<[^>]*>/g, '');
-
-                // Limit to 150 characters
                 if (text.length <= 150) return text;
-
                 return text.substring(0, 150).trim() + '...';
             }
 
@@ -519,7 +2054,6 @@
                     'security': 'Security',
                     'hardware': 'Hardware'
                 };
-
                 return categoryNames[category] || 'Web Tech';
             }
 
@@ -560,175 +2094,346 @@
                 newsCards.forEach(card => {
                     card.addEventListener('mouseenter', () => {
                         card.style.transform = 'translateY(-8px)';
+                        card.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
                     });
 
                     card.addEventListener('mouseleave', () => {
                         card.style.transform = 'translateY(0)';
+                        card.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
                     });
                 });
             }
 
-            showLoading() {
-                this.loadingContainer.style.display = 'flex';
-                this.newsGrid.style.display = 'none';
-                this.noResults.style.display = 'none';
-                this.errorMessage.style.display = 'none';
+            initializeLazyLoading() {
+                if ('IntersectionObserver' in window) {
+                    const imageObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const img = entry.target;
+                                this.loadImage(img);
+                                observer.unobserve(img);
+                            }
+                        });
+                    }, {
+                        rootMargin: '50px 0px',
+                        threshold: 0.01
+                    });
+
+                    const lazyImages = document.querySelectorAll('.lazy-image');
+                    lazyImages.forEach(img => imageObserver.observe(img));
+                } else {
+                    const lazyImages = document.querySelectorAll('.lazy-image');
+                    lazyImages.forEach(img => this.loadImage(img));
+                }
             }
 
-            hideLoading() {
-                this.loadingContainer.style.display = 'none';
+            loadImage(img) {
+                const src = img.getAttribute('data-src');
+                if (src) {
+                    const tempImg = new Image();
+                    tempImg.onload = () => {
+                        img.src = src;
+                        img.classList.add('loaded');
+                        img.removeAttribute('data-src');
+                    };
+                    tempImg.onerror = () => {
+                        img.src = 'https://via.placeholder.com/400x200/667eea/ffffff?text=Tech+News';
+                        img.classList.add('error');
+                    };
+                    tempImg.src = src;
+                }
             }
 
-            showError(message) {
-                this.errorText.textContent = message;
-                this.errorMessage.style.display = 'block';
-                this.newsGrid.style.display = 'none';
-                this.noResults.style.display = 'none';
-                this.loadingContainer.style.display = 'none';
+            // Pagination methods (add if needed)
+            goToPage(pageNumber) {
+                if (pageNumber < 1 || pageNumber > this.totalPages) return;
+                this.currentPage = pageNumber;
+                this.displayCurrentPage();
+                this.updatePaginationControls();
+                this.scrollToTop();
             }
 
-            hideError() {
-                this.errorMessage.style.display = 'none';
+            scrollToTop() {
+                if (this.newsGrid) {
+                    this.newsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }
 
-            showNoResults() {
-                this.noResults.style.display = 'block';
-                this.newsGrid.style.display = 'none';
+            switchView(viewType) {
+                this.currentView = viewType;
+                document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
+
+                if (viewType === 'grid') {
+                    if (this.gridViewBtn) this.gridViewBtn.classList.add('active');
+                    if (this.newsGrid) this.newsGrid.className = 'news-grid grid-view';
+                } else {
+                    if (this.listViewBtn) this.listViewBtn.classList.add('active');
+                    if (this.newsGrid) this.newsGrid.className = 'news-grid list-view';
+                }
+
+                this.displayCurrentPage();
             }
 
-            hideNoResults() {
-                this.noResults.style.display = 'none';
+            updatePaginationControls() {
+                if (!this.paginationContainer) return;
+
+                // Update navigation buttons
+                if (this.firstPageBtn) {
+                    this.firstPageBtn.disabled = this.currentPage === 1;
+                }
+                if (this.prevPageBtn) {
+                    this.prevPageBtn.disabled = this.currentPage === 1;
+                }
+                if (this.nextPageBtn) {
+                    this.nextPageBtn.disabled = this.currentPage === this.totalPages;
+                }
+                if (this.lastPageBtn) {
+                    this.lastPageBtn.disabled = this.currentPage === this.totalPages;
+                }
+
+                // Update page numbers
+                this.updatePageNumbers();
             }
 
-            // Method to refresh news
-            async refreshNews() {
-                await this.loadNews();
-            }
+            updatePageNumbers() {
+                if (!this.pageNumbers) return;
 
-            // Method to get news by category
-            getNewsByCategory(category) {
-                return this.allNews.filter(item => item.category === category);
-            }
+                const maxVisiblePages = 15;
+                let startPage = Math.max(1, this.currentPage - Math.floor(maxVisiblePages / 2));
+                let endPage = Math.min(this.totalPages, startPage + maxVisiblePages - 1);
 
-            // Method to search news
-            searchNews(query) {
-                const searchTerm = query.toLowerCase().trim();
-                return this.allNews.filter(item =>
-                    item.title.toLowerCase().includes(searchTerm) ||
-                    (item.description && item.description.toLowerCase().includes(searchTerm))
-                );
-            }
+                // Adjust start page if we're near the end
+                if (endPage - startPage + 1 < maxVisiblePages) {
+                    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+                }
 
-            // Debug method to check category distribution
-            getCategoryStats() {
-                const stats = {};
-                this.allNews.forEach(item => {
-                    stats[item.category] = (stats[item.category] || 0) + 1;
+                let pageNumbersHTML = '';
+
+                // Add first page and ellipsis if needed
+                if (startPage > 1) {
+                    pageNumbersHTML += `<button class="page-number-btn" data-page="1">1</button>`;
+                    if (startPage > 2) {
+                        pageNumbersHTML += `<span class="page-ellipsis">...</span>`;
+                    }
+                }
+
+                // Add visible page numbers
+                for (let i = startPage; i <= endPage; i++) {
+                    const activeClass = i === this.currentPage ? 'active' : '';
+                    pageNumbersHTML += `<button class="page-number-btn ${activeClass}" data-page="${i}">${i}</button>`;
+                }
+
+                // Add last page and ellipsis if needed
+                if (endPage < this.totalPages) {
+                    if (endPage < this.totalPages - 1) {
+                        pageNumbersHTML += `<span class="page-ellipsis">...</span>`;
+                    }
+                    pageNumbersHTML += `<button class="page-number-btn" data-page="${this.totalPages}">${this.totalPages}</button>`;
+                }
+
+                this.pageNumbers.innerHTML = pageNumbersHTML;
+
+                // Add event listeners to page number buttons
+                const pageButtons = this.pageNumbers.querySelectorAll('.page-number-btn');
+                pageButtons.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const pageNum = parseInt(e.target.getAttribute('data-page'));
+                        this.goToPage(pageNum);
+                    });
                 });
-                console.log('Category distribution:', stats);
+            }
+
+            updatePaginationStatus() {
+                if (!this.paginationStatus) return;
+
+                const startItem = (this.currentPage - 1) * this.pageSize + 1;
+                const endItem = Math.min(this.currentPage * this.pageSize, this.filteredNews.length);
+
+                let statusText = `Showing ${startItem}-${endItem} of ${this.filteredNews.length} articles`;
+
+                // Add filter info if filtered
+                if (this.currentFilter !== 'all' || this.currentSearch) {
+                    statusText += ` (filtered from ${this.allNews.length} total)`;
+                }
+
+                // Add page info
+                if (this.totalPages > 1) {
+                    statusText += ` • Page ${this.currentPage} of ${this.totalPages}`;
+                }
+
+                this.paginationStatus.textContent = statusText;
+            }
+
+            // Refresh news manually
+            refreshNews() {
+                this.retryCount = 0;
+                this.currentPage = 1;
+                this.loadNews();
+            }
+
+            // Export filtered news data
+            exportData(format = 'json') {
+                const data = this.filteredNews.map(item => ({
+                    title: item.title,
+                    description: item.description,
+                    link: item.link,
+                    publishedDate: item.publishedDate.toISOString(),
+                    source: item.source,
+                    category: item.category
+                }));
+
+                if (format === 'json') {
+                    const dataStr = JSON.stringify(data, null, 2);
+                    this.downloadFile(dataStr, 'news-data.json', 'application/json');
+                } else if (format === 'csv') {
+                    const csvStr = this.convertToCSV(data);
+                    this.downloadFile(csvStr, 'news-data.csv', 'text/csv');
+                }
+            }
+
+            convertToCSV(data) {
+                if (data.length === 0) return '';
+
+                const headers = Object.keys(data[0]);
+                const csvRows = [headers.join(',')];
+
+                data.forEach(row => {
+                    const values = headers.map(header => {
+                        const value = row[header] || '';
+                        return `"${value.toString().replace(/"/g, '""')}"`;
+                    });
+                    csvRows.push(values.join(','));
+                });
+
+                return csvRows.join('\n');
+            }
+
+            downloadFile(content, filename, contentType) {
+                const blob = new Blob([content], { type: contentType });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }
+
+            // Get statistics about loaded news
+            getStats() {
+                const stats = {
+                    total: this.allNews.length,
+                    filtered: this.filteredNews.length,
+                    categories: {},
+                    sources: {},
+                    dateRange: {
+                        oldest: null,
+                        newest: null
+                    }
+                };
+
+                this.allNews.forEach(item => {
+                    // Count by category
+                    stats.categories[item.category] = (stats.categories[item.category] || 0) + 1;
+
+                    // Count by source
+                    stats.sources[item.source] = (stats.sources[item.source] || 0) + 1;
+
+                    // Track date range
+                    if (!stats.dateRange.oldest || item.publishedDate < stats.dateRange.oldest) {
+                        stats.dateRange.oldest = item.publishedDate;
+                    }
+                    if (!stats.dateRange.newest || item.publishedDate > stats.dateRange.newest) {
+                        stats.dateRange.newest = item.publishedDate;
+                    }
+                });
+
                 return stats;
+            }
+
+            // Clear all filters and search
+            clearFilters() {
+                this.currentFilter = 'all';
+                this.currentSearch = '';
+                this.currentPage = 1;
+
+                // Reset UI
+                if (this.searchInput) this.searchInput.value = '';
+                this.filterBtns.forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.getAttribute('data-filter') === 'all') {
+                        btn.classList.add('active');
+                    }
+                });
+
+                this.filterAndDisplayNews();
+            }
+
+            // Destroy the instance and clean up
+            destroy() {
+                // Clear timeouts
+                if (this.loadingTimeout) {
+                    clearTimeout(this.loadingTimeout);
+                }
+
+                // Remove event listeners (if needed for cleanup)
+                this.filterBtns.forEach(btn => {
+                    btn.removeEventListener('click', this.handleFilterClick);
+                });
+
+                if (this.searchBtn) {
+                    this.searchBtn.removeEventListener('click', this.handleSearch);
+                }
+
+                if (this.searchInput) {
+                    this.searchInput.removeEventListener('keypress', this.handleSearchKeypress);
+                }
+
+                // Clear data
+                this.allNews = [];
+                this.filteredNews = [];
             }
         }
 
-        // Initialize the news manager when DOM is loaded
+        // Initialize the NewsManager when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
-            const newsManager = new NewsManager();
+            window.newsManager = new NewsManager();
 
-            // Add refresh button functionality (if needed)
-            const refreshBtn = document.getElementById('refresh-news');
+            // Add global refresh button handler if exists
+            const refreshBtn = document.getElementById('refresh-btn');
             if (refreshBtn) {
                 refreshBtn.addEventListener('click', () => {
-                    newsManager.refreshNews();
+                    window.newsManager.refreshNews();
                 });
             }
 
-            // Add keyboard shortcuts
-            document.addEventListener('keydown', (e) => {
-                // Ctrl/Cmd + K to focus search
-                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-                    e.preventDefault();
-                    document.getElementById('news-search-input').focus();
-                }
-
-                // ESC to clear search
-                if (e.key === 'Escape') {
-                    const searchInput = document.getElementById('news-search-input');
-                    if (searchInput.value) {
-                        searchInput.value = '';
-                        newsManager.currentSearch = '';
-                        newsManager.filterAndDisplayNews();
-                    }
-                }
-            });
-
-            // Add window resize handler for responsive adjustments
-            let resizeTimeout;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(() => {
-                    // Trigger any responsive adjustments if needed
-                    const newsGrid = document.getElementById('news-grid');
-                    if (newsGrid && newsGrid.style.display === 'grid') {
-                        // Recalculate grid if necessary
-                        newsGrid.style.display = 'none';
-                        setTimeout(() => {
-                            newsGrid.style.display = 'grid';
-                        }, 10);
-                    }
-                }, 250);
-            });
-
-            // Add intersection observer for lazy loading if needed
-            if ('IntersectionObserver' in window) {
-                const imageObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            if (img.dataset.src) {
-                                img.src = img.dataset.src;
-                                img.removeAttribute('data-src');
-                                observer.unobserve(img);
-                            }
-                        }
-                    });
+            // Add export button handlers if they exist
+            const exportJsonBtn = document.getElementById('export-json-btn');
+            if (exportJsonBtn) {
+                exportJsonBtn.addEventListener('click', () => {
+                    window.newsManager.exportData('json');
                 });
-
-                // Observe images as they're added to the DOM
-                const observeImages = () => {
-                    const lazyImages = document.querySelectorAll('img[data-src]');
-                    lazyImages.forEach(img => imageObserver.observe(img));
-                };
-
-                // Call initially and whenever news is updated
-                setTimeout(observeImages, 1000);
             }
 
-            // Add error handling for failed image loads
-            document.addEventListener('error', (e) => {
-                if (e.target.tagName === 'IMG') {
-                    e.target.src = 'https://via.placeholder.com/400x200/667eea/ffffff?text=Tech+News';
-                }
-            }, true);
+            const exportCsvBtn = document.getElementById('export-csv-btn');
+            if (exportCsvBtn) {
+                exportCsvBtn.addEventListener('click', () => {
+                    window.newsManager.exportData('csv');
+                });
+            }
 
-            // Performance optimization: debounce search input
-            const searchInput = document.getElementById('news-search-input');
-            let searchTimeout;
-
-            searchInput.addEventListener('input', (e) => {
-                clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(() => {
-                    newsManager.currentSearch = e.target.value.toLowerCase().trim();
-                    newsManager.filterAndDisplayNews();
-                }, 300);
-            });
-
-            // Debug: Log category stats after news loads
-            setTimeout(() => {
-                newsManager.getCategoryStats();
-            }, 5000);
+            // Add clear filters button handler if exists
+            const clearFiltersBtn = document.getElementById('clear-filters-btn');
+            if (clearFiltersBtn) {
+                clearFiltersBtn.addEventListener('click', () => {
+                    window.newsManager.clearFilters();
+                });
+            }
         });
     </script>
     <script src="./js/subcription.js"></script>
+
 </body>
 
 </html>
