@@ -1,0 +1,2283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Jobs - TechMayanK | Find Your Dream Tech Career</title>
+    <meta name="description"
+        content="Discover the latest tech job opportunities in software development, data science, DevOps, and more. Search and save jobs at TechMayanK.">
+    <meta name="keywords"
+        content="tech jobs, software engineer jobs, data science careers, DevOps positions, UI/UX jobs, remote tech jobs">
+    <meta name="author" content="Mitthu Kumar(MayanK)">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Tech Jobs - TechMayanK">
+    <meta property="og:description" content="Find your dream tech career with our comprehensive job search platform.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://techmayank.netlify.app/jobs.html">
+    <meta property="og:image" content="https://techmayank.com/images/jobs-thumbnail.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tech Jobs - TechMayanK">
+    <meta name="twitter:description" content="Discover the latest tech job opportunities and build your career.">
+    <meta name="twitter:image" content="https://techmayank.com/images/jobs-thumbnail.jpg">
+    <meta name="twitter:site" content="@MayanK_Pras">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://techmayank.com/jobs.html">
+
+    <!-- Favicon -->
+    <link rel="icon" href="./image/common/favi.webp" type="image/webp">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- AOS Library for Scroll Animations -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <!-- Existing CSS Files (Header and Footer) -->
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/footer.css">
+</head>
+<style>
+    /* Jobs Page Styles */
+    :root {
+        --primary-color: #007bff;
+        --secondary-color: #6c757d;
+        --success-color: #28a745;
+        --danger-color: #dc3545;
+        --warning-color: #ffc107;
+        --info-color: #17a2b8;
+        --light-color: #f8f9fa;
+        --dark-color: #343a40;
+        --font-family: 'Poppins', sans-serif;
+        --border-radius: 8px;
+        --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s ease;
+    }
+
+    /* Main Jobs Container */
+    .jobs-main {
+        min-height: calc(100vh - 200px);
+        padding: 2rem 0;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    /* Jobs Header */
+    .jobs-header {
+        text-align: center;
+        padding: 3rem 1rem;
+        background: white;
+        margin: 0 auto 2rem;
+        max-width: 1200px;
+        border-radius: 15px;
+        box-shadow: var(--box-shadow);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .jobs-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+    }
+
+    .jobs-header h1 {
+        font-size: 2.5rem;
+        color: var(--dark-color);
+        margin-bottom: 1rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .jobs-header h1 i {
+        color: var(--primary-color);
+    }
+
+    .jobs-header p {
+        font-size: 1.1rem;
+        color: var(--secondary-color);
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    /* Search and Filter Section */
+    .search-filter-section {
+        max-width: 1200px;
+        margin: 0 auto 2rem;
+        padding: 0 1rem;
+    }
+
+    .search-container {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        background: white;
+        padding: 1.5rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+    }
+
+    .search-input {
+        flex: 1;
+        padding: 1rem;
+        border: 2px solid #e9ecef;
+        border-radius: var(--border-radius);
+        font-size: 1rem;
+        transition: var(--transition);
+        font-family: var(--font-family);
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    }
+
+    .search-btn {
+        background: linear-gradient(135deg, var(--primary-color), #0056b3);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: var(--border-radius);
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        white-space: nowrap;
+    }
+
+    .search-btn:hover {
+        background: linear-gradient(135deg, #0056b3, #004085);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    }
+
+    /* Filter Container */
+    .filter-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+        margin-bottom: 1rem;
+        background: white;
+        padding: 1.5rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+    }
+
+    .filter-label {
+        font-weight: 600;
+        color: var(--dark-color);
+        margin-right: 0.5rem;
+    }
+
+    .filter-btn {
+        background: var(--light-color);
+        border: 1px solid #dee2e6;
+        color: var(--secondary-color);
+        padding: 0.6rem 1.2rem;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: var(--transition);
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .filter-btn:hover {
+        background: #e9ecef;
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+    }
+
+    .filter-btn.active {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+    }
+
+    /* Jobs Grid */
+    .jobs-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin: 2rem auto;
+        max-width: 1200px;
+        padding: 0 1rem;
+    }
+
+    .pagination-btn {
+        background: var(--light-color);
+        border: 1px solid #dee2e6;
+        color: var(--secondary-color);
+        padding: 0.75rem 1.5rem;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: var(--transition);
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .pagination-btn:not(:disabled):hover {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+        transform: translateY(-1px);
+    }
+
+    .pagination-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .pagination-info {
+        font-weight: 600;
+        color: var(--dark-color);
+        padding: 0 1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .jobs-header {
+            margin: 0 1rem 1rem;
+            padding: 2rem 1rem;
+        }
+
+        .jobs-header h1 {
+            font-size: 2rem;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .jobs-header p {
+            font-size: 1rem;
+        }
+
+        .search-container {
+            flex-direction: column;
+            gap: 1rem;
+            margin: 0 1rem 1rem;
+            padding: 1rem;
+        }
+
+        .search-btn {
+            justify-content: center;
+            padding: 0.875rem 1.5rem;
+        }
+
+        .filter-container {
+            margin: 0 1rem 1rem;
+            padding: 1rem;
+        }
+
+        .filter-label {
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        .jobs-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            padding: 0 1rem;
+        }
+
+        .pagination {
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .pagination-btn {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .jobs-header {
+            padding: 1.5rem 0.75rem;
+        }
+
+        .jobs-header h1 {
+            font-size: 1.75rem;
+        }
+
+        .search-container,
+        .filter-container {
+            margin: 0 0.5rem 0.75rem;
+            padding: 0.75rem;
+        }
+
+        .jobs-grid {
+            padding: 0 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+    }
+
+    /* Loading States */
+    .jobs-grid.loading {
+        opacity: 0.6;
+        pointer-events: none;
+    }
+
+    /* Smooth Animations */
+    .job-card {
+        animation: fadeInUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Focus Indicators for Accessibility */
+    .search-btn:focus,
+    .filter-btn:focus,
+    .pagination-btn:focus {
+        outline: 2px solid var(--primary-color);
+        outline-offset: 2px;
+    }
+
+    /* High Contrast Mode Support */
+    @media (prefers-contrast: high) {
+        :root {
+            --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .job-card {
+            border: 2px solid var(--dark-color);
+        }
+
+        .filter-btn.active {
+            border: 2px solid white;
+        }
+    }
+
+    /* Reduced Motion Support */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+
+        .job-card:hover {
+            transform: none;
+        }
+
+        .search-btn:hover,
+        .pagination-btn:hover {
+            transform: none;
+        }
+    }
+
+    .job-details-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .job-details-modal.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .job-details-content {
+        background: white;
+        border-radius: 12px;
+        max-width: 800px;
+        width: 90%;
+        max-height: 90%;
+        overflow-y: auto;
+        position: relative;
+    }
+
+    .job-details-header {
+        padding: 2rem;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .job-details-title {
+        display: flex;
+        gap: 1rem;
+        flex: 1;
+    }
+
+    .company-logo-large {
+        width: 60px;
+        height: 60px;
+        border-radius: 8px;
+        object-fit: cover;
+    }
+
+    .company-name-large {
+        color: #666;
+        font-size: 1.1rem;
+        margin: 0.5rem 0;
+    }
+
+    .job-meta-large {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        color: #777;
+        font-size: 0.9rem;
+    }
+
+    .job-details-close {
+        background: none;
+        border: none;
+        font-size: 2rem;
+        cursor: pointer;
+        color: #999;
+        padding: 0;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.2s ease;
+    }
+
+    .job-details-close:hover {
+        background: #f5f5f5;
+        color: #333;
+    }
+
+    .job-details-body {
+        padding: 2rem;
+    }
+
+    .job-description-full {
+        margin-bottom: 2rem;
+    }
+
+    .description-content {
+        line-height: 1.6;
+        color: #555;
+    }
+
+    .job-highlights-full {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    .highlight-section h3 {
+        color: #333;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+
+    .highlight-section ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .highlight-section li {
+        padding: 0.5rem 0;
+        padding-left: 1.5rem;
+        position: relative;
+        color: #555;
+        line-height: 1.5;
+    }
+
+    .highlight-section li::before {
+        content: '•';
+        color: #007bff;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+    }
+
+    .job-details-footer {
+        padding: 1.5rem 2rem;
+        border-top: 1px solid #eee;
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .empty-wishlist {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: #666;
+    }
+
+    .empty-wishlist i {
+        font-size: 3rem;
+        color: #ddd;
+        margin-bottom: 1rem;
+    }
+
+    .empty-wishlist h3 {
+        margin: 1rem 0 0.5rem;
+        color: #333;
+    }
+
+    .wishlist-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        background: white;
+        transition: all 0.2s ease;
+    }
+
+    .wishlist-item:hover {
+        border-color: #007bff;
+        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
+    }
+
+    .wishlist-item-header {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        flex: 1;
+    }
+
+    .company-logo-small {
+        width: 40px;
+        height: 40px;
+        border-radius: 6px;
+        object-fit: cover;
+    }
+
+    .wishlist-item-info h4 {
+        margin: 0 0 0.25rem;
+        color: #333;
+        font-size: 1rem;
+    }
+
+    .wishlist-item-info p {
+        margin: 0 0 0.25rem;
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .wishlist-item-info .location {
+        color: #999;
+        font-size: 0.8rem;
+    }
+
+    .wishlist-item-actions {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .btn-small {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .btn-remove {
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 0.5rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-remove:hover {
+        background: #c82333;
+        transform: translateY(-1px);
+    }
+
+    .toast {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: #28a745;
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(100px);
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 1000;
+        font-weight: 500;
+    }
+
+    .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .toast.error {
+        background: #dc3545;
+    }
+
+    .toast.info {
+        background: #17a2b8;
+    }
+
+    .toast.warning {
+        background: #ffc107;
+        color: #333;
+    }
+
+    .advanced-filters {
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-top: 1rem;
+        display: none;
+        animation: slideDown 0.3s ease;
+    }
+
+    .advanced-filters.show {
+        display: block;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .filter-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .filter-group label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: #333;
+    }
+
+    .filter-group select,
+    .filter-group input {
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        transition: border-color 0.2s ease;
+    }
+
+    .filter-group select:focus,
+    .filter-group input:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    }
+
+    .filter-toggle-btn {
+        background: #f8f9fa;
+        border: 1px solid #ddd;
+        color: #495057;
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 0.9rem;
+        margin-top: 1rem;
+    }
+
+    .filter-toggle-btn:hover {
+        background: #e9ecef;
+        border-color: #adb5bd;
+    }
+
+    .filter-toggle-btn.active {
+        background: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
+
+    .job-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        border: 1px solid #f0f0f0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .job-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, #007bff, #28a745);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    .job-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .job-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        border-color: #007bff;
+    }
+
+    .job-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+    }
+
+    .company-info {
+        display: flex;
+        gap: 1rem;
+        flex: 1;
+    }
+
+    .company-logo {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+
+    .company-details {
+        flex: 1;
+    }
+
+    .job-title {
+        margin: 0 0 0.5rem;
+        color: #333;
+        font-size: 1.2rem;
+        font-weight: 600;
+        line-height: 1.3;
+    }
+
+    .company-name {
+        margin: 0;
+        color: #666;
+        font-size: 1rem;
+    }
+
+    .wishlist-btn {
+        background: none;
+        border: none;
+        color: #ccc;
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+    }
+
+    .wishlist-btn:hover {
+        background: #f8f9fa;
+        color: #007bff;
+    }
+
+    .wishlist-btn.wishlisted {
+        color: #007bff;
+    }
+
+    .job-meta {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    .job-meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    .job-meta i {
+        color: #007bff;
+    }
+
+    .job-description {
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .job-highlights {
+        margin-bottom: 1rem;
+    }
+
+    .highlight-item strong {
+        color: #333;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .highlight-item ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .highlight-item li {
+        padding: 0.25rem 0;
+        padding-left: 1rem;
+        position: relative;
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .highlight-item li::before {
+        content: '•';
+        color: #007bff;
+        position: absolute;
+        left: 0;
+    }
+
+    .job-card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1rem;
+        border-top: 1px solid #f0f0f0;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .posted-date {
+        color: #999;
+        font-size: 0.85rem;
+    }
+
+    .job-actions {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        min-width: 0;
+    }
+
+    /* UPDATED BUTTON STYLES - Fixed for overflow */
+    .btn-primary,
+    .apply-btn {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.25rem;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        /* Overflow fixes */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 0;
+        flex-shrink: 1;
+        word-break: break-word;
+        hyphens: auto;
+    }
+
+    .btn-primary:hover,
+    .apply-btn:hover {
+        background: linear-gradient(135deg, #0056b3, #004085);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        color: white;
+        text-decoration: none;
+    }
+
+    .btn-secondary,
+    .view-details-btn {
+        background: #f8f9fa;
+        color: #495057;
+        border: 1px solid #dee2e6;
+        padding: 0.75rem 1.25rem;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        font-size: 0.9rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        /* Overflow fixes */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 0;
+        flex-shrink: 1;
+        word-break: break-word;
+        hyphens: auto;
+    }
+
+    .btn-secondary:hover,
+    .view-details-btn:hover {
+        background: #e9ecef;
+        border-color: #adb5bd;
+        transform: translateY(-1px);
+        text-decoration: none;
+    }
+
+    .error-message {
+        background: #f8d7da;
+        color: #721c24;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+        display: none;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: #666;
+    }
+
+    .no-results i {
+        font-size: 3rem;
+        color: #ddd;
+        margin-bottom: 1rem;
+    }
+
+    .no-results h3 {
+        margin: 1rem 0 0.5rem;
+        color: #333;
+    }
+
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+    }
+
+    .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #007bff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .wishlist-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .wishlist-modal.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .wishlist-content {
+        background: white;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 800px;
+        max-height: 80%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .wishlist-header {
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .wishlist-header h2 {
+        margin: 0;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .wishlist-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #999;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: all 0.2s ease;
+    }
+
+    .wishlist-close:hover {
+        background: #f5f5f5;
+        color: #333;
+    }
+
+    .wishlist-body {
+        padding: 1.5rem 2rem;
+        overflow-y: auto;
+        flex: 1;
+    }
+
+    .wishlist-toggle {
+        position: fixed;
+        bottom: 2rem;
+        left: 2rem;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        z-index: 999;
+    }
+
+    .wishlist-toggle:hover {
+        background: #0056b3;
+        transform: scale(1.1);
+    }
+
+    .wishlist-count {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: #dc3545;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: bold;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        .job-card {
+            padding: 1rem;
+        }
+
+        .company-info {
+            gap: 0.75rem;
+        }
+
+        .company-logo {
+            width: 40px;
+            height: 40px;
+        }
+
+        .job-title {
+            font-size: 1.1rem;
+        }
+
+        .job-meta {
+            gap: 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .job-actions {
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+        .job-actions .btn-primary,
+        .job-actions .btn-secondary,
+        .job-actions .apply-btn,
+        .job-actions .view-details-btn {
+            width: 100%;
+            flex: 1;
+            /* Allow text wrapping on mobile if needed */
+            white-space: normal;
+            min-height: 44px;
+            line-height: 1.2;
+        }
+
+        .btn-primary,
+        .btn-secondary,
+        .apply-btn,
+        .view-details-btn {
+            padding: 0.6rem 1rem;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        .filter-row {
+            grid-template-columns: 1fr;
+        }
+
+        .job-details-content {
+            width: 95%;
+            max-height: 95%;
+        }
+
+        .job-details-header {
+            padding: 1rem;
+        }
+
+        .job-details-body {
+            padding: 1rem;
+        }
+
+        .job-details-footer {
+            padding: 1rem;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .wishlist-toggle {
+            width: 50px;
+            height: 50px;
+            bottom: 1rem;
+            left: 1rem;
+        }
+
+        .toast {
+            bottom: 1rem;
+            right: 1rem;
+            left: 1rem;
+            padding: 0.75rem 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+
+        .btn-primary,
+        .btn-secondary,
+        .apply-btn,
+        .view-details-btn {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.8rem;
+            /* More aggressive text handling for very small screens */
+            word-break: break-all;
+        }
+    }
+</style>
+
+
+</script>
+
+<body>
+    <!-- Header Section (Using existing header structure) -->
+    <header id="main-header">
+        <nav>
+            <a href="index.html" class="logo">Tech<span>MayanK</span></a>
+            <button class="mobile-menu-btn">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="youtube.html">YouTube</a></li>
+                <li class="dropdown">
+                    <a href="#">Blogs</a>
+                    <div class="dropdown-content">
+                        <a href="./cat/category-webdev.html">Web Development</a>
+                        <a href="./cat/category-ai.html">Artificial Intelligence</a>
+                        <a href="./cat/category-cybersecurity.html">Cybersecurity</a>
+                        <a href="./cat/category-iot.html">IoT</a>
+                        <a href="./cat/category-mobile.html">Mobile Development</a>
+                        <a href="./cat/category-cloud.html">Cloud Computing</a>
+                    </div>
+                </li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="jobs.html" class="active">Tech Jobs</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="subscribe.html" class="subscribe-btn">Subscribe</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="jobs-main">
+        <!-- Jobs Header -->
+        <section class="jobs-header" data-aos="fade-up">
+            <h1><i class="fas fa-briefcase"></i> Tech Jobs Hub</h1>
+            <p>Discover your dream tech career with our comprehensive job search platform. Find the latest opportunities
+                in software development, data science, and more.</p>
+        </section>
+
+        <!-- Search and Filter Section -->
+        <section class="search-filter-section" data-aos="fade-up" data-aos-delay="200">
+            <div class="search-container">
+                <input type="text" class="search-input" id="jobSearchInput"
+                    placeholder="Search for jobs (e.g., Software Engineer, Data Scientist)">
+                <button class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i> Search Jobs
+                </button>
+            </div>
+
+            <div class="filter-container">
+                <span class="filter-label">Quick Filters:</span>
+                <button class="filter-btn active" data-query="Software Engineer">Software Development</button>
+                <button class="filter-btn" data-query="Data Scientist">Data Science</button>
+                <button class="filter-btn" data-query="DevOps Engineer">DevOps</button>
+                <button class="filter-btn" data-query="Product Manager">Product Management</button>
+                <button class="filter-btn" data-query="UI UX Designer">UI/UX Design</button>
+            </div>
+
+            <button class="filter-toggle-btn" id="filterToggleBtn">
+                <i class="fas fa-filter"></i> Advanced Filters
+            </button>
+
+            <!-- Advanced Filters -->
+            <div class="advanced-filters" id="advancedFilters">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label for="jobType">Job Type</label>
+                        <select id="jobType">
+                            <option value="">All Types</option>
+                            <option value="FULLTIME">Full Time</option>
+                            <option value="PARTTIME">Part Time</option>
+                            <option value="CONTRACTOR">Contract</option>
+                            <option value="INTERN">Internship</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" placeholder="City, State or Remote">
+                    </div>
+                    <div class="filter-group">
+                        <label for="experience">Experience Level</label>
+                        <select id="experience">
+                            <option value="">All Levels</option>
+                            <option value="entry">Entry Level</option>
+                            <option value="mid">Mid Level</option>
+                            <option value="senior">Senior Level</option>
+                            <option value="lead">Lead/Principal</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="remote">Remote Work</label>
+                        <select id="remote">
+                            <option value="">All Options</option>
+                            <option value="true">Remote Only</option>
+                            <option value="false">On-site Only</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="search-btn" id="applyFiltersBtn">
+                    <i class="fas fa-filter"></i> Apply Filters
+                </button>
+            </div>
+        </section>
+
+        <!-- Error Message -->
+        <div class="error-message" id="errorMessage">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span id="errorText">Something went wrong. Please try again.</span>
+        </div>
+
+        <!-- Jobs Grid -->
+        <section class="jobs-grid" id="jobsGrid">
+            <!-- Jobs will be populated here -->
+        </section>
+
+        <!-- No Results -->
+        <div class="no-results" id="noResults" style="display: none;">
+            <i class="fas fa-search"></i>
+            <h3>No Jobs Found</h3>
+            <p>We couldn't find any jobs matching your search criteria. Try adjusting your search terms or filters.</p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination" style="display: none;">
+            <button class="pagination-btn" id="prevBtn" disabled>
+                <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <span class="pagination-info" id="paginationInfo">Page 1 of 1</span>
+            <button class="pagination-btn" id="nextBtn">
+                Next <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Wishlist Toggle Button -->
+    <button class="wishlist-toggle" id="wishlistToggle">
+        <i class="fas fa-bookmark"></i>
+        <span class="wishlist-count" id="wishlistCount">0</span>
+    </button>
+
+    <!-- Wishlist Modal -->
+    <div class="wishlist-modal" id="wishlistModal">
+        <div class="wishlist-content">
+            <div class="wishlist-header">
+                <h2><i class="fas fa-bookmark"></i> Saved Jobs (<span id="savedJobsCount">0</span>)</h2>
+                <button class="wishlist-close" id="wishlistClose">×</button>
+            </div>
+            <div class="wishlist-body">
+                <div class="wishlist-grid" id="wishlistGrid">
+                    <!-- Saved jobs will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage">Job saved successfully!</span>
+    </div>
+
+    <!-- Enhanced Footer (Using existing footer structure) -->
+    <footer data-aos="fade-up" data-aos-delay="1100">
+        <div class="footer-content">
+            <div class="footer-section footer-about">
+                <a href="index.html" class="footer-logo">Tech<span>MayanK</span></a>
+                <p>Your go-to source for tech insights, tutorials, and career opportunities. We make technology
+                    accessible for everyone.</p>
+                <div class="social-links">
+                    <a href="https://x.com/MayanK_Pras" class="social-icon twitter" aria-label="Twitter"><i
+                            class="fab fa-x-twitter"></i></a>
+                    <a href="https://www.linkedin.com/in/mitthu-kumar/" class="social-icon linkedin"
+                        aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/mkshahi22" class="social-icon github" aria-label="GitHub"><i
+                            class="fab fa-github"></i></a>
+                    <a href="https://mkshahi.netlify.app/" class="social-icon website" aria-label="Website"><i
+                            class="fas fa-globe"></i></a>
+                    <a href="https://www.instagram.com/shahi_jii_22/?next=%2F" class="social-icon instagram"
+                        aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="./blogs/blogs.html">Blogs</a></li>
+                    <li><a href="./cat/categories.html">Categories</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Popular Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="./cat/category-webdev.html">Web Development</a></li>
+                    <li><a href="./cat/category-ai.html">Artificial Intelligence</a></li>
+                    <li><a href="./cat/category-cybersecurity.html">Cybersecurity</a></li>
+                    <li><a href="./cat/category-cloud.html">Cloud Computing</a></li>
+                    <li><a href="./cat/category-mobile.html">Mobile Development</a></li>
+                    <li><a href="./cat/category-iot.html">IoT</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="far fa-envelope"></i> mayankpra97@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Greater Noida, India</p>
+                <p><i class="fas fa-phone"></i> +91 9798743248</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2025 TechMayanK. All rights reserved.</p>
+            <p><a href="privacy.html" style="color: white; text-decoration: none;">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <!-- AOS Library for Scroll Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <script>
+        class JobSearchPlatform {
+            constructor() {
+                this.apiKey = '459da8d9cfmsha8a7f3d52d69c8ap15f02cjsn6e12e95dc0d5';
+                this.apiHost = 'jsearch.p.rapidapi.com';
+                this.currentPage = 1;
+                this.jobsPerPage = 10;
+                this.currentJobs = [];
+                this.totalJobs = 0;
+                this.wishlist = this.loadWishlist();
+                this.searchHistory = this.loadSearchHistory();
+
+                // Default location for Indian jobs
+                this.defaultLocation = 'India';
+                this.currentQuery = '';
+                this.currentFilters = {};
+
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.updateWishlistCount();
+                this.loadDefaultJobs();
+
+                // Initialize AOS
+                AOS.init({
+                    duration: 800,
+                    easing: 'ease-in-out',
+                    once: true
+                });
+            }
+
+            setupEventListeners() {
+                // Search functionality
+                document.getElementById('searchBtn').addEventListener('click', () => this.performSearch());
+                document.getElementById('jobSearchInput').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.performSearch();
+                });
+
+                // Quick filter buttons
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.handleQuickFilter(e));
+                });
+
+                // Advanced filters
+                document.getElementById('filterToggleBtn').addEventListener('click', () => this.toggleAdvancedFilters());
+                document.getElementById('applyFiltersBtn').addEventListener('click', () => this.applyAdvancedFilters());
+
+                // Pagination
+                document.getElementById('prevBtn').addEventListener('click', () => this.goToPreviousPage());
+                document.getElementById('nextBtn').addEventListener('click', () => this.goToNextPage());
+
+                // Wishlist
+                document.getElementById('wishlistToggle').addEventListener('click', () => this.toggleWishlistModal());
+                document.getElementById('wishlistClose').addEventListener('click', () => this.closeWishlistModal());
+
+                // Mobile menu
+                document.querySelector('.mobile-menu-btn').addEventListener('click', () => this.toggleMobileMenu());
+
+                // Close modals on outside click
+                window.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('wishlist-modal')) {
+                        this.closeWishlistModal();
+                    }
+                });
+            }
+
+            async loadDefaultJobs() {
+                this.showLoading();
+                try {
+                    // Load default jobs with India location
+                    await this.searchJobs('Software Engineer', { job_country: 'IN' });
+                } catch (error) {
+                    this.showError('Failed to load default jobs');
+                }
+                this.hideLoading();
+            }
+
+            async performSearch() {
+                const query = document.getElementById('jobSearchInput').value.trim();
+                if (!query) {
+                    this.showToast('Please enter a search term', 'error');
+                    return;
+                }
+
+                this.currentPage = 1;
+                this.currentQuery = query;
+                this.addToSearchHistory(query);
+
+                // Get advanced filters and ensure India is prioritized
+                const filters = this.getAdvancedFilters();
+                await this.searchJobs(query, filters);
+            }
+
+            async searchJobs(query, filters = {}) {
+                this.showLoading();
+
+                try {
+                    // Ensure we're searching for Indian jobs by default
+                    const searchFilters = {
+                        job_country: 'IN', // Default to India
+                        ...filters // Allow override if user specifies different location
+                    };
+
+                    const params = new URLSearchParams({
+                        query: query,
+                        page: this.currentPage.toString(),
+                        num_pages: '1',
+                        ...searchFilters
+                    });
+
+                    console.log('Search params:', params.toString()); // Debug log
+
+                    const response = await fetch(`https://${this.apiHost}/search?${params}`, {
+                        method: 'GET',
+                        headers: {
+                            'X-RapidAPI-Key': this.apiKey,
+                            'X-RapidAPI-Host': this.apiHost
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    console.log('API Response:', data); // Debug log
+
+                    if (data.data && data.data.length > 0) {
+                        this.currentJobs = data.data;
+                        this.totalJobs = data.data.length;
+                        this.currentFilters = searchFilters;
+                        this.renderJobsGrid(this.currentJobs);
+                        this.updatePagination();
+                        this.hideNoResults();
+                    } else {
+                        // If no results found in India, try broader search
+                        if (searchFilters.job_country === 'IN' && this.currentPage === 1) {
+                            console.log('No results in India, trying broader search...');
+                            await this.searchJobsGlobal(query, filters);
+                        } else {
+                            this.showNoResults();
+                        }
+                    }
+
+                } catch (error) {
+                    console.error('Search error:', error);
+                    this.showError('Failed to fetch jobs. Please try again.');
+                }
+
+                this.hideLoading();
+            }
+
+            async searchJobsGlobal(query, filters = {}) {
+                try {
+                    // Fallback search without country restriction
+                    const globalFilters = { ...filters };
+                    delete globalFilters.job_country;
+
+                    const params = new URLSearchParams({
+                        query: `${query} India`, // Add India to query instead
+                        page: this.currentPage.toString(),
+                        num_pages: '1',
+                        ...globalFilters
+                    });
+
+                    console.log('Global search params:', params.toString());
+
+                    const response = await fetch(`https://${this.apiHost}/search?${params}`, {
+                        method: 'GET',
+                        headers: {
+                            'X-RapidAPI-Key': this.apiKey,
+                            'X-RapidAPI-Host': this.apiHost
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+
+                    if (data.data && data.data.length > 0) {
+                        // Filter results to prioritize Indian locations
+                        const indianJobs = data.data.filter(job =>
+                            job.job_country === 'India' ||
+                            job.job_country === 'IN' ||
+                            (job.job_location && job.job_location.toLowerCase().includes('india')) ||
+                            (job.job_city && ['mumbai', 'delhi', 'bangalore', 'pune', 'hyderabad', 'chennai', 'kolkata', 'ahmedabad', 'gurgaon', 'noida'].includes(job.job_city.toLowerCase()))
+                        );
+
+                        // If we have Indian jobs, show them first, otherwise show all results
+                        this.currentJobs = indianJobs.length > 0 ? indianJobs : data.data;
+                        this.totalJobs = this.currentJobs.length;
+                        this.renderJobsGrid(this.currentJobs);
+                        this.updatePagination();
+                        this.hideNoResults();
+
+                        if (indianJobs.length > 0) {
+                            this.showToast(`Found ${indianJobs.length} jobs in India`, 'success');
+                        }
+                    } else {
+                        this.showNoResults();
+                    }
+
+                } catch (error) {
+                    console.error('Global search error:', error);
+                    this.showNoResults();
+                }
+            }
+
+            renderJobsGrid(jobs) {
+                const jobsGrid = document.getElementById('jobsGrid');
+
+                if (!jobs || jobs.length === 0) {
+                    jobsGrid.innerHTML = '';
+                    return;
+                }
+
+                jobsGrid.innerHTML = jobs.map(job => this.createJobCard(job)).join('');
+
+                // Add event listeners to job cards
+                this.attachJobCardListeners();
+            }
+
+            createJobCard(job) {
+                const isWishlisted = this.wishlist.some(item => item.job_id === job.job_id);
+                const salary = this.formatSalary(job);
+                const location = this.formatLocation(job);
+                const companyLogo = job.employer_logo || './image/common/default-company.png';
+                const jobType = job.job_employment_type || 'Full-time';
+                const postedDate = this.formatDate(job.job_posted_at_datetime_utc);
+
+                return `
+        <div class="job-card" data-job-id="${job.job_id}" data-aos="fade-up">
+            <div class="job-card-header">
+                <div class="company-info">
+                    <img src="${companyLogo}" alt="${job.employer_name}" class="company-logo" 
+                         onerror="this.src='./image/common/default-company.png'">
+                    <div class="company-details">
+                        <h3 class="job-title">${job.job_title}</h3>
+                        <p class="company-name">${job.employer_name}</p>
+                    </div>
+                </div>
+                <button class="wishlist-btn ${isWishlisted ? 'wishlisted' : ''}" 
+                        data-job-id="${job.job_id}">
+                    <i class="fas fa-bookmark"></i>
+                </button>
+            </div>
+            
+            <div class="job-details">
+                <div class="job-meta">
+                    <span class="job-location">
+                        <i class="fas fa-map-marker-alt"></i> ${location}
+                    </span>
+                    <span class="job-type">
+                        <i class="fas fa-briefcase"></i> ${jobType}
+                    </span>
+                    ${salary ? `<span class="job-salary"><i class="fas fa-rupee-sign"></i> ${salary}</span>` : ''}
+                </div>
+                
+                <p class="job-description">${this.truncateText(job.job_description, 120)}</p>
+                
+                <div class="job-highlights">
+                    ${job.job_highlights && job.job_highlights.Qualifications ?
+                        `<div class="highlight-item">
+                            <strong>Key Requirements:</strong>
+                            <ul>${job.job_highlights.Qualifications.slice(0, 2).map(q => `<li>${q}</li>`).join('')}</ul>
+                        </div>` : ''}
+                </div>
+            </div>
+            
+            <div class="job-card-footer">
+                <span class="posted-date">Posted ${postedDate}</span>
+                <div class="job-actions">
+                    <button class="btn-secondary view-details-btn" data-job-id="${job.job_id}">
+                        View Details
+                    </button>
+                    <a href="${job.job_apply_link}" target="_blank" class="btn-primary apply-btn">
+                        Apply Now <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    `;
+            }
+
+            attachJobCardListeners() {
+                // Wishlist buttons
+                document.querySelectorAll('.wishlist-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const jobId = btn.dataset.jobId;
+                        this.toggleWishlist(jobId);
+                    });
+                });
+
+                // View details buttons
+                document.querySelectorAll('.view-details-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const jobId = btn.dataset.jobId;
+                        this.showJobDetails(jobId);
+                    });
+                });
+            }
+
+            toggleWishlist(jobId) {
+                const job = this.currentJobs.find(j => j.job_id === jobId);
+                if (!job) return;
+
+                const existingIndex = this.wishlist.findIndex(item => item.job_id === jobId);
+
+                if (existingIndex > -1) {
+                    this.wishlist.splice(existingIndex, 1);
+                    this.showToast('Job removed from saved jobs', 'info');
+                } else {
+                    this.wishlist.push({
+                        job_id: job.job_id,
+                        job_title: job.job_title,
+                        employer_name: job.employer_name,
+                        job_city: job.job_city,
+                        job_country: job.job_country,
+                        job_apply_link: job.job_apply_link,
+                        employer_logo: job.employer_logo,
+                        saved_at: new Date().toISOString()
+                    });
+                    this.showToast('Job saved successfully!', 'success');
+                }
+
+                this.saveWishlist();
+                this.updateWishlistCount();
+                this.updateWishlistButtons();
+                this.renderWishlist();
+            }
+
+            showJobDetails(jobId) {
+                const job = this.currentJobs.find(j => j.job_id === jobId);
+                if (!job) return;
+
+                // Create and show job details modal
+                const modal = this.createJobDetailsModal(job);
+                document.body.appendChild(modal);
+
+                // Show modal with animation
+                setTimeout(() => modal.classList.add('show'), 10);
+
+                // Add close functionality
+                const closeBtn = modal.querySelector('.job-details-close');
+                const closeModal = () => {
+                    modal.classList.remove('show');
+                    setTimeout(() => document.body.removeChild(modal), 300);
+                };
+
+                closeBtn.addEventListener('click', closeModal);
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModal();
+                });
+            }
+
+            createJobDetailsModal(job) {
+                const modal = document.createElement('div');
+                modal.className = 'job-details-modal';
+
+                const salary = this.formatSalary(job);
+                const location = this.formatLocation(job);
+                const companyLogo = job.employer_logo || './image/common/default-company.png';
+
+                modal.innerHTML = `
+        <div class="job-details-content">
+            <div class="job-details-header">
+                <div class="job-details-title">
+                    <img src="${companyLogo}" alt="${job.employer_name}" class="company-logo-large"
+                         onerror="this.src='./image/common/default-company.png'">
+                    <div>
+                        <h2>${job.job_title}</h2>
+                        <p class="company-name-large">${job.employer_name}</p>
+                        <div class="job-meta-large">
+                            <span><i class="fas fa-map-marker-alt"></i> ${location}</span>
+                            ${salary ? `<span><i class="fas fa-rupee-sign"></i> ${salary}</span>` : ''}
+                            <span><i class="fas fa-briefcase"></i> ${job.job_employment_type || 'Full-time'}</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="job-details-close">×</button>
+            </div>
+            
+            <div class="job-details-body">
+                <div class="job-description-full">
+                    <h3>Job Description</h3>
+                    <div class="description-content">${job.job_description}</div>
+                </div>
+                
+                ${job.job_highlights ? `
+                    <div class="job-highlights-full">
+                        ${job.job_highlights.Qualifications ? `
+                            <div class="highlight-section">
+                                <h3>Qualifications</h3>
+                                <ul>${job.job_highlights.Qualifications.map(q => `<li>${q}</li>`).join('')}</ul>
+                            </div>
+                        ` : ''}
+                        
+                        ${job.job_highlights.Responsibilities ? `
+                            <div class="highlight-section">
+                                <h3>Responsibilities</h3>
+                                <ul>${job.job_highlights.Responsibilities.map(r => `<li>${r}</li>`).join('')}</ul>
+                            </div>
+                        ` : ''}
+                        
+                        ${job.job_highlights.Benefits ? `
+                            <div class="highlight-section">
+                                <h3>Benefits</h3>
+                                <ul>${job.job_highlights.Benefits.map(b => `<li>${b}</li>`).join('')}</ul>
+                            </div>
+                        ` : ''}
+                    </div>
+                ` : ''}
+            </div>
+            
+            <div class="job-details-footer">
+                <button class="btn-secondary wishlist-job-btn" data-job-id="${job.job_id}">
+                    <i class="fas fa-bookmark"></i> Save Job
+                </button>
+                <a href="${job.job_apply_link}" target="_blank" class="btn-primary">
+                    Apply Now <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+        </div>
+    `;
+
+                // Add wishlist functionality to modal
+                const wishlistBtn = modal.querySelector('.wishlist-job-btn');
+                wishlistBtn.addEventListener('click', () => {
+                    this.toggleWishlist(job.job_id);
+                    this.updateModalWishlistButton(wishlistBtn, job.job_id);
+                });
+
+                this.updateModalWishlistButton(wishlistBtn, job.job_id);
+
+                return modal;
+            }
+
+            updateModalWishlistButton(btn, jobId) {
+                const isWishlisted = this.wishlist.some(item => item.job_id === jobId);
+                btn.innerHTML = isWishlisted ?
+                    '<i class="fas fa-bookmark"></i> Saved' :
+                    '<i class="far fa-bookmark"></i> Save Job';
+                btn.classList.toggle('wishlisted', isWishlisted);
+            }
+
+            handleQuickFilter(e) {
+                // Update active filter button
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+
+                // Perform search with filter query
+                const query = e.target.dataset.query;
+                document.getElementById('jobSearchInput').value = query;
+                this.currentPage = 1;
+                this.currentQuery = query;
+
+                // Apply India filter by default
+                const filters = this.getAdvancedFilters();
+                this.searchJobs(query, filters);
+            }
+
+            toggleAdvancedFilters() {
+                const filters = document.getElementById('advancedFilters');
+                const toggleBtn = document.getElementById('filterToggleBtn');
+
+                filters.classList.toggle('show');
+                toggleBtn.classList.toggle('active');
+
+                const icon = toggleBtn.querySelector('i');
+                icon.className = filters.classList.contains('show') ?
+                    'fas fa-filter-circle-xmark' : 'fas fa-filter';
+            }
+
+            getAdvancedFilters() {
+                const filters = {};
+
+                const jobType = document.getElementById('jobType').value;
+                const location = document.getElementById('location').value;
+                const experience = document.getElementById('experience').value;
+                const remote = document.getElementById('remote').value;
+
+                if (jobType) filters.employment_types = jobType;
+
+                // Handle location filter - prioritize user selection over default
+                if (location) {
+                    if (location.toLowerCase().includes('india') || location === 'IN') {
+                        filters.job_country = 'IN';
+                    } else {
+                        filters.job_location = location;
+                    }
+                } else {
+                    // Default to India if no location specified
+                    filters.job_country = 'IN';
+                }
+
+                if (remote === 'true') filters.job_is_remote = true;
+
+                return filters;
+            }
+
+            applyAdvancedFilters() {
+                const query = this.currentQuery || document.getElementById('jobSearchInput').value.trim() || 'Software Engineer';
+                this.currentPage = 1;
+                this.searchJobs(query, this.getAdvancedFilters());
+                this.toggleAdvancedFilters(); // Hide filters after applying
+            }
+
+            // Pagination methods
+            goToPreviousPage() {
+                if (this.currentPage > 1) {
+                    this.currentPage--;
+                    this.performCurrentSearch();
+                }
+            }
+
+            goToNextPage() {
+                this.currentPage++;
+                this.performCurrentSearch();
+            }
+
+            performCurrentSearch() {
+                const query = this.currentQuery || document.getElementById('jobSearchInput').value.trim() || 'Software Engineer';
+                this.searchJobs(query, this.currentFilters);
+            }
+
+            updatePagination() {
+                const pagination = document.getElementById('pagination');
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                const paginationInfo = document.getElementById('paginationInfo');
+
+                if (this.totalJobs > 0) {
+                    pagination.style.display = 'flex';
+                    prevBtn.disabled = this.currentPage === 1;
+
+                    // For simplicity, we'll show next button if we have results
+                    // In a real app, you'd get total pages from the API
+                    nextBtn.disabled = this.currentJobs.length < this.jobsPerPage;
+
+                    paginationInfo.textContent = `Page ${this.currentPage}`;
+                } else {
+                    pagination.style.display = 'none';
+                }
+            }
+
+            // Wishlist methods
+            toggleWishlistModal() {
+                const modal = document.getElementById('wishlistModal');
+                modal.classList.toggle('show');
+                this.renderWishlist();
+            }
+
+            closeWishlistModal() {
+                document.getElementById('wishlistModal').classList.remove('show');
+            }
+
+            renderWishlist() {
+                const wishlistGrid = document.getElementById('wishlistGrid');
+                const savedJobsCount = document.getElementById('savedJobsCount');
+
+                savedJobsCount.textContent = this.wishlist.length;
+
+                if (this.wishlist.length === 0) {
+                    wishlistGrid.innerHTML = `
+            <div class="empty-wishlist">
+                <i class="fas fa-bookmark"></i>
+                <h3>No Saved Jobs</h3>
+                <p>Jobs you save will appear here for easy access.</p>
+            </div>
+        `;
+                    return;
+                }
+
+                wishlistGrid.innerHTML = this.wishlist.map(job => `
+        <div class="wishlist-item">
+            <div class="wishlist-item-header">
+                <img src="${job.employer_logo || './image/common/default-company.png'}" 
+                     alt="${job.employer_name}" class="company-logo-small"
+                     onerror="this.src='./image/common/default-company.png'">
+                <div class="wishlist-item-info">
+                    <h4>${job.job_title}</h4>
+                    <p>${job.employer_name}</p>
+                    <span class="location">${job.job_city}, ${job.job_country}</span>
+                </div>
+            </div>
+            <div class="wishlist-item-actions">
+                <a href="${job.job_apply_link}" target="_blank" class="btn-primary btn-small">Apply</a>
+                <button class="btn-remove" onclick="jobPlatform.removeFromWishlist('${job.job_id}')">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    `).join('');
+            }
+
+            removeFromWishlist(jobId) {
+                const index = this.wishlist.findIndex(item => item.job_id === jobId);
+                if (index > -1) {
+                    this.wishlist.splice(index, 1);
+                    this.saveWishlist();
+                    this.updateWishlistCount();
+                    this.renderWishlist();
+                    this.updateWishlistButtons();
+                    this.showToast('Job removed from saved jobs', 'info');
+                }
+            }
+
+            updateWishlistCount() {
+                const count = this.wishlist.length;
+                document.getElementById('wishlistCount').textContent = count;
+                document.getElementById('wishlistCount').style.display = count > 0 ? 'block' : 'none';
+            }
+
+            updateWishlistButtons() {
+                document.querySelectorAll('.wishlist-btn').forEach(btn => {
+                    const jobId = btn.dataset.jobId;
+                    const isWishlisted = this.wishlist.some(item => item.job_id === jobId);
+                    btn.classList.toggle('wishlisted', isWishlisted);
+                });
+            }
+
+            // Local Storage methods
+            loadWishlist() {
+                try {
+                    const saved = localStorage.getItem('techMayanK_wishlist');
+                    return saved ? JSON.parse(saved) : [];
+                } catch (error) {
+                    console.error('Error loading wishlist:', error);
+                    return [];
+                }
+            }
+
+            saveWishlist() {
+                try {
+                    localStorage.setItem('techMayanK_wishlist', JSON.stringify(this.wishlist));
+                } catch (error) {
+                    console.error('Error saving wishlist:', error);
+                }
+            }
+
+            loadSearchHistory() {
+                try {
+                    const saved = localStorage.getItem('techMayanK_searchHistory');
+                    return saved ? JSON.parse(saved) : [];
+                } catch (error) {
+                    console.error('Error loading search history:', error);
+                    return [];
+                }
+            }
+
+            addToSearchHistory(query) {
+                if (!this.searchHistory.includes(query)) {
+                    this.searchHistory.unshift(query);
+                    if (this.searchHistory.length > 10) {
+                        this.searchHistory.pop();
+                    }
+                    this.saveSearchHistory();
+                }
+            }
+
+            saveSearchHistory() {
+                try {
+                    localStorage.setItem('techMayanK_searchHistory', JSON.stringify(this.searchHistory));
+                } catch (error) {
+                    console.error('Error saving search history:', error);
+                }
+            }
+
+            // Utility methods
+            formatSalary(job) {
+                if (job.job_min_salary && job.job_max_salary) {
+                    return `₹${this.formatNumber(job.job_min_salary)} - ₹${this.formatNumber(job.job_max_salary)}`;
+                } else if (job.job_salary) {
+                    return `₹${this.formatNumber(job.job_salary)}`;
+                }
+                return null;
+            }
+
+            formatNumber(num) {
+                if (num >= 100000) {
+                    return (num / 100000).toFixed(1) + 'L';
+                } else if (num >= 1000) {
+                    return (num / 1000).toFixed(1) + 'K';
+                }
+                return num.toString();
+            }
+
+            formatLocation(job) {
+                if (job.job_city && job.job_country) {
+                    return `${job.job_city}, ${job.job_country}`;
+                } else if (job.job_country) {
+                    return job.job_country;
+                } else if (job.job_location) {
+                    return job.job_location;
+                }
+                return 'Location not specified';
+            }
+
+            formatDate(dateString) {
+                if (!dateString) return 'Recently';
+
+                const date = new Date(dateString);
+                const now = new Date();
+                const diffTime = Math.abs(now - date);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                if (diffDays === 1) return '1 day ago';
+                if (diffDays < 7) return `${diffDays} days ago`;
+                if (diffDays < 30) return `${Math.ceil(diffDays / 7)} weeks ago`;
+                return `${Math.ceil(diffDays / 30)} months ago`;
+            }
+
+            truncateText(text, length) {
+                if (!text) return '';
+                return text.length > length ? text.substring(0, length) + '...' : text;
+            }
+
+            // UI methods
+            showLoading() {
+                document.getElementById('loadingOverlay').style.display = 'flex';
+            }
+
+            hideLoading() {
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }
+
+            showError(message) {
+                const errorDiv = document.getElementById('errorMessage');
+                document.getElementById('errorText').textContent = message;
+                errorDiv.style.display = 'block';
+
+                setTimeout(() => {
+                    errorDiv.style.display = 'none';
+                }, 5000);
+            }
+
+            showNoResults() {
+                document.getElementById('noResults').style.display = 'block';
+                document.getElementById('jobsGrid').innerHTML = '';
+                document.getElementById('pagination').style.display = 'none';
+            }
+
+            hideNoResults() {
+                document.getElementById('noResults').style.display = 'none';
+            }
+
+            showToast(message, type = 'success') {
+                const toast = document.getElementById('toast');
+                const toastMessage = document.getElementById('toastMessage');
+
+                toastMessage.textContent = message;
+                toast.className = `toast ${type} show`;
+
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+
+            toggleMobileMenu() {
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.classList.toggle('active');
+            }
+        }
+
+        // Initialize the job platform when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.jobPlatform = new JobSearchPlatform();
+        });
+    </script>
+</body>
+
+</html>

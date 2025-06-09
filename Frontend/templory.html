@@ -4,545 +4,797 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechMayanK - Latest Tech News, Programming & Reviews</title>
+    <title>Online Code Editor - TechMayanK</title>
     <meta name="description"
-        content="Get the latest updates on technology, programming, and gadget reviews. Learn coding, web development, and AI trends at TechMayanK.">
-    <meta name="keywords"
-        content="latest tech news, programming tutorials, web development, AI trends, gadget reviews, coding tips">
-    <meta name="author" content="Mitthu Kumar(MayanK)">
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="TechMayanK - Latest Tech News & Programming">
-    <meta property="og:description"
-        content="Stay updated with the latest in technology, programming, web development, and AI trends.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://techmayank.netlify.app">
-    <meta property="og:image" content="https://techmayank.com/images/techmayank-thumbnail.jpg">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="TechMayanK - Tech News & Programming">
-    <meta name="twitter:description"
-        content="Get the latest updates on tech, coding, and AI trends. Learn web development and gadget reviews at TechMayanK.">
-    <meta name="twitter:image" content="https://techmayank.com/images/techmayank-thumbnail.jpg">
-    <meta name="twitter:site" content="@MayanK_Pras">
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://techmayank.com">
-
-    <!-- Favicon -->
-    <link rel="icon" href="./image/common/favi.webp" type="image/webp">
+        content="Free online code editor for HTML, CSS, and JavaScript. Test and preview your code instantly.">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
 
-    <!-- Font Awesome for better social icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    <!-- AOS Library for Scroll Animations -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <!-- CodeMirror for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/eclipse.min.css">
 
-    <!-- Existing CSS Files -->
-    <link rel="stylesheet" href="./css/header.css">
-    <link rel="stylesheet" href="./css/footer.css">
-    <link rel="stylesheet" href="./css/main.css">
-
-    <!-- Minimal CSS for new features only -->
     <style>
-        /* Enhanced Hero Section Styles */
-        .hero-enhanced {
-            text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            min-height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .hero-tagline {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --dark-bg: #1a1a1a;
+            --light-bg: #ffffff;
+            --dark-surface: #2d2d2d;
+            --light-surface: #f8f9fa;
+            --dark-text: #ffffff;
+            --light-text: #333333;
+            --border-color: #444;
+            --light-border: #e0e0e0;
+            --success-color: #4caf50;
+            --danger-color: #f44336;
+            --warning-color: #ff9800;
+        }
+
+        body {
             font-family: 'Poppins', sans-serif;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            font-weight: 300;
-            opacity: 0.9;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background: #fff;
-            color: #667eea;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
+            background: var(--light-bg);
+            color: var(--light-text);
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            overflow-x: hidden;
         }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        body.dark-theme {
+            background: var(--dark-bg);
+            color: var(--dark-text);
         }
 
-        /* Recent Articles Section */
-        .recent-articles {
-            padding: 60px 20px;
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header */
+        .editor-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .article-card {
-            background: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .article-thumbnail {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .article-content {
-            padding: 20px;
-        }
-
-        .article-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
-
-        .article-title a {
-            color: #333;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
             text-decoration: none;
         }
 
-        .article-title a:hover {
-            color: #667eea;
+        .logo span {
+            color: #ffd700;
         }
 
-        .article-excerpt {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 15px;
+        .header-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
         }
 
-        .article-meta {
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Editor Layout */
+        .editor-container {
+            display: flex;
+            height: calc(100vh - 80px);
+            background: var(--light-surface);
+            transition: background 0.3s ease;
+        }
+
+        .dark-theme .editor-container {
+            background: var(--dark-surface);
+        }
+
+        .editors-panel {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            min-width: 300px;
+            resize: horizontal;
+            overflow: auto;
+            border-right: 2px solid var(--light-border);
+        }
+
+        .dark-theme .editors-panel {
+            border-right-color: var(--border-color);
+        }
+
+        .editor-tabs {
+            display: flex;
+            background: var(--light-bg);
+            border-bottom: 1px solid var(--light-border);
+        }
+
+        .dark-theme .editor-tabs {
+            background: var(--dark-bg);
+            border-bottom-color: var(--border-color);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background: none;
+            border: none;
+            color: var(--light-text);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .dark-theme .tab {
+            color: var(--dark-text);
+        }
+
+        .tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .tab:hover:not(.active) {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .editor-content {
+            flex: 1;
+            position: relative;
+        }
+
+        .code-editor {
+            width: 100%;
+            height: 100%;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            border: none;
+            outline: none;
+            resize: none;
+            background: var(--light-bg);
+            color: var(--light-text);
+            padding: 1rem;
+            line-height: 1.5;
+        }
+
+        .dark-theme .code-editor {
+            background: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        .CodeMirror {
+            height: 100% !important;
+            font-family: 'JetBrains Mono', monospace !important;
+            font-size: 14px !important;
+        }
+
+        .preview-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--light-bg);
+        }
+
+        .dark-theme .preview-panel {
+            background: var(--dark-bg);
+        }
+
+        .preview-header {
+            padding: 0.75rem 1rem;
+            background: var(--light-surface);
+            border-bottom: 1px solid var(--light-border);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.9rem;
-            color: #888;
         }
 
-        /* Responsive Design */
+        .dark-theme .preview-header {
+            background: var(--dark-surface);
+            border-bottom-color: var(--border-color);
+        }
+
+        .preview-iframe {
+            flex: 1;
+            border: none;
+            background: white;
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .hero-tagline {
-                font-size: 2rem;
+            .editor-header {
+                padding: 1rem;
             }
 
-            .hero-subtitle {
-                font-size: 1rem;
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
             }
 
-            .articles-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
+            .header-controls {
+                flex-wrap: wrap;
+                justify-content: center;
             }
+
+            .editor-container {
+                flex-direction: column;
+                height: calc(100vh - 120px);
+            }
+
+            .editors-panel {
+                width: 100%;
+                height: 50%;
+                resize: vertical;
+                border-right: none;
+                border-bottom: 2px solid var(--light-border);
+            }
+
+            .dark-theme .editors-panel {
+                border-bottom-color: var(--border-color);
+            }
+
+            .preview-panel {
+                height: 50%;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-controls {
+                gap: 0.5rem;
+            }
+
+            .btn {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .tab {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Loading and Error States */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        .error-message {
+            padding: 1rem;
+            background: rgba(244, 67, 54, 0.1);
+            border: 1px solid var(--danger-color);
+            border-radius: 5px;
+            color: var(--danger-color);
+            margin: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .editor-container {
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light-surface);
+        }
+
+        .dark-theme ::-webkit-scrollbar-track {
+            background: var(--dark-surface);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Auto-save indicator */
+        .auto-save-indicator {
+            font-size: 0.8rem;
+            color: var(--success-color);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .auto-save-indicator.show {
+            opacity: 1;
         }
     </style>
 </head>
 
 <body>
-    <!-- Header Section -->
-    <header id="main-header">
-        <nav>
-            <a href="index.html" class="logo">Tech<span>MayanK</span></a>
-            <button class="mobile-menu-btn">☰</button>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="./blogs/blogs.html">Blogs</a></li>
-                <li class="dropdown">
-                    <a href="#">Categories</a>
-                    <div class="dropdown-content">
-                        <a href="./cat/category-webdev.html">Web Development</a>
-                        <a href="./cat/category-ai.html">Artificial Intelligence</a>
-                        <a href="./cat/category-cybersecurity.html">Cybersecurity</a>
-                        <a href="./cat/category-iot.html">IoT</a>
-                        <a href="./cat/category-mobile.html">Mobile Development</a>
-                        <a href="./cat/category-cloud.html">Cloud Computing</a>
-                    </div>
-                </li>
-                <li><a href="news.html">News</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="subscribe.html" class="subscribe-btn">Subscribe</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <!-- Enhanced Hero Section -->
-        <section class="hero-enhanced" data-aos="fade-up">
-            <div class="hero-content">
-                <h1 class="hero-tagline">TechMayanK — where code meets clarity.</h1>
-                <p class="hero-subtitle">Your go-to source for tech insights, tutorials, and reviews. Explore the latest
-                    in technology, programming, and digital trends with simple, easy-to-understand content.</p>
-                <a href="#featured-posts" class="cta-button">
-                    <i class="fas fa-rocket"></i> Explore Articles
-                </a>
-            </div>
-        </section>
-
-        <!-- Featured Posts Section -->
-        <section id="featured-posts" class="featured-posts" data-aos="fade-up" data-aos-delay="200">
-            <div class="container">
-                <h2 class="section-title">Featured Posts</h2>
-
-                <!-- Featured Post 1 -->
-                <article class="post-card" data-aos="fade-up" data-aos-delay="300">
-                    <img src="./image/blog1/main_blog1.webp" alt="Web Development Trends" class="post-img">
-                    <div class="post-content">
-                        <div class="post-category">Web Development</div>
-                        <h3 class="post-title">
-                            <a href="https://techmayank.netlify.app/blogs/blog1">
-                                Building Accessible First: Designing Inclusive Web Experiences from Day One
-                            </a>
-                        </h3>
-                        <p class="post-excerpt">
-                            Discover how to create accessible and inclusive websites by prioritizing accessibility from
-                            the start. This blog explores why accessibility isn't just a feature, but a foundation of
-                            modern web design. Learn how semantic HTML, proper contrast, keyboard navigation, ARIA
-                            roles, and testing tools can make your website usable for people of all abilities.
-                        </p>
-                        <div class="post-meta">
-                            <span class="post-date"><i class="far fa-calendar-alt"></i> April 13, 2025</span>
-                            <span class="post-read-time"><i class="far fa-clock"></i> 12 min read</span>
-                        </div>
-                        <a href="https://techmayank.netlify.app/blogs/blog1" class="read-more" target="_blank">Read more
-                            →</a>
-                    </div>
-                </article>
-
-                <!-- Featured Post 2 -->
-                <article class="post-card" data-aos="fade-up" data-aos-delay="400">
-                    <img src="./image/blog2/main_blog2.webp" alt="Mobile Development Trends" class="post-img">
-                    <div class="post-content">
-                        <div class="post-category">Mobile Development</div>
-                        <h3 class="post-title">
-                            <a href="https://techmayank.netlify.app/blogs/blog2">
-                                Cross-Platform vs. Native in 2025: The State of Mobile Development
-                            </a>
-                        </h3>
-                        <p class="post-excerpt">
-                            Explore the evolving landscape of mobile development in 2025. This article compares modern
-                            cross-platform frameworks like <strong>Flutter</strong>, <strong>React Native</strong>, and
-                            <strong>Kotlin Multiplatform</strong> with traditional native development for Android and
-                            iOS. Understand the pros, cons, performance differences, and use cases to help you make
-                            informed decisions.
-                        </p>
-                        <div class="post-meta">
-                            <span class="post-date"><i class="far fa-calendar-alt"></i> April 20, 2025</span>
-                            <span class="post-read-time"><i class="far fa-clock"></i> 8 min read</span>
-                        </div>
-                        <a href="https://techmayank.netlify.app/blogs/blog2" class="read-more" target="_blank">Read more
-                            →</a>
-                    </div>
-                </article>
-
-                <!-- Featured Post 3 -->
-                <article class="post-card" data-aos="fade-up" data-aos-delay="500">
-                    <img src="./image/blog3/main_blog3.webp" alt="Social Engineering in Cybersecurity" class="post-img">
-                    <div class="post-content">
-                        <div class="post-category">Cybersecurity</div>
-                        <h3 class="post-title">
-                            <a href="https://techmayank.netlify.app/blogs/blog3">
-                                The Human Element: Social Engineering Attacks and Defense in the AI Era
-                            </a>
-                        </h3>
-                        <p class="post-excerpt">
-                            Dive into the psychological side of cybersecurity—social engineering. This post explores how
-                            attackers exploit human behavior to bypass even the strongest technical defenses. Learn
-                            about phishing, pretexting, baiting, and AI-driven deception tactics, and discover how
-                            individuals and organizations can defend themselves.
-                        </p>
-                        <div class="post-meta">
-                            <span class="post-date"><i class="far fa-calendar-alt"></i> April 27, 2025</span>
-                            <span class="post-read-time"><i class="far fa-clock"></i> 10 min read</span>
-                        </div>
-                        <a href="https://techmayank.netlify.app/blogs/blog3" class="read-more" target="_blank">Read more
-                            →</a>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Recent Articles Section -->
-        <section class="recent-articles" data-aos="fade-up" data-aos-delay="600">
-            <h2 class="section-title">Recent Articles</h2>
-            <div class="articles-grid">
-                <!-- Recent Article 1 -->
-                <article class="article-card" data-aos="fade-up" data-aos-delay="700">
-                    <img src="./image/blog4/main_blog4.webp" alt="LLM Use in Traditional Businesses"
-                        class="article-thumbnail">
-                    <div class="article-content">
-                        <div class="post-category">Artificial Intelligence</div>
-                        <h3 class="article-title">
-                            <a href="https://techmayank.netlify.app/blogs/blog4.html">
-                                Practical Applications of LLMs for Non-AI Businesses
-                            </a>
-                        </h3>
-                        <p class="article-excerpt">
-                            Discover how non-AI companies are embracing large language models (LLMs) to boost efficiency
-                            and cut costs—without building AI from scratch. This blog highlights real-world applications
-                            like automating customer support, generating reports, and optimizing workflows.
-                        </p>
-                        <div class="article-meta">
-                            <span class="post-date"><i class="far fa-calendar-alt"></i> May 11, 2025</span>
-                            <span class="post-read-time"><i class="far fa-clock"></i> 9 min read</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Recent Article 2 -->
-                <article class="article-card" data-aos="fade-up" data-aos-delay="800">
-                    <img src="./image/blog1/main_blog1.webp" alt="Web Accessibility" class="article-thumbnail">
-                    <div class="article-content">
-                        <div class="post-category">Web Development</div>
-                        <h3 class="article-title">
-                            <a href="https://techmayank.netlify.app/blogs/blog1">
-                                Building Accessible First: Inclusive Web Design
-                            </a>
-                        </h3>
-                        <p class="article-excerpt">
-                            Learn how semantic HTML, proper contrast, keyboard navigation, and ARIA roles can make your
-                            website usable for people of all abilities. Accessibility isn't just a feature—it's a
-                            foundation of modern web design.
-                        </p>
-                        <div class="article-meta">
-                            <span class="post-date"><i class="far fa-calendar-alt"></i> April 13, 2025</span>
-                            <span class="post-read-time"><i class="far fa-clock"></i> 12 min read</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Recent Article 3 -->
-                <article class="article-card" data-aos="fade-up" data-aos-delay="900">
-                    <img src="./image/blog2/main_blog2.webp" alt="Mobile Development" class="article-thumbnail">
-                    <div class="article-content">
-                        <div class="post-category">Mobile Development</div>
-                        <h3 class="article-title">
-                            <a href="https://techmayank.netlify.app/blogs/blog2">
-                                Cross-Platform vs Native Development in 2025
-                            </a>
-                        </h3>
-                        <p class="article-excerpt">
-                            Compare modern cross-platform frameworks like Flutter, React Native, and Kotlin
-                            Multiplatform with traditional native development. Make informed decisions for your next
-                            mobile app project.
-                        </p>
-                        <div class="article-meta">
-                            <span class="post-date"><i class="far fa-calendar-alt"></i> April 20, 2025</span>
-                            <span class="post-read-time"><i class="far fa-clock"></i> 8 min read</span>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Newsletter Subscription Section -->
-        <section class="cta-section" id="subscribe" data-aos="fade-up" data-aos-delay="1000">
-            <h2>Subscribe to Our Newsletter</h2>
-            <p>Get the latest tech updates, tutorials, and insights delivered directly to your inbox. No spam, just
-                valuable content!</p>
-
-            <!-- Netlify Form with improved design -->
-            <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field"
-                class="newsletter-form" action="/success">
-                <!-- Honeypot field to prevent spam -->
-                <div hidden>
-                    <label>Don't fill this out if you're human: <input name="bot-field"></label>
+    <div class="container">
+        <!-- Header -->
+        <header class="editor-header">
+            <div class="header-content">
+                <a href="#" class="logo">Tech<span>MayanK</span> Editor</a>
+                <div class="header-controls">
+                    <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="btn btn-primary" id="runBtn">
+                        <i class="fas fa-play"></i> Run
+                    </button>
+                    <button class="btn btn-secondary" id="downloadBtn">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                    <button class="btn btn-danger" id="clearBtn">
+                        <i class="fas fa-trash"></i> Clear
+                    </button>
+                    <span class="auto-save-indicator" id="autoSaveIndicator">
+                        <i class="fas fa-check"></i> Auto-saved
+                    </span>
                 </div>
+            </div>
+        </header>
 
-                <!-- Required for Netlify forms -->
-                <input type="hidden" name="form-name" value="newsletter">
-
-                <!-- Form input group -->
-                <div class="form-group">
-                    <input type="email" name="email" class="newsletter-input" placeholder="Your email address" required
-                        aria-label="Email address">
-                    <button type="submit" class="btn btn-submit">
-                        <i class="fas fa-paper-plane"></i> Subscribe
+        <!-- Main Editor -->
+        <div class="editor-container">
+            <div class="editors-panel" id="editorsPanel">
+                <div class="editor-tabs">
+                    <button class="tab active" data-editor="html">
+                        <i class="fab fa-html5"></i> HTML
+                    </button>
+                    <button class="tab" data-editor="css">
+                        <i class="fab fa-css3-alt"></i> CSS
+                    </button>
+                    <button class="tab" data-editor="js">
+                        <i class="fab fa-js"></i> JavaScript
                     </button>
                 </div>
+                <div class="editor-content">
+                    <textarea class="code-editor" id="htmlEditor" placeholder="Enter your HTML code here..."><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Code</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+    <p>Welcome to TechMayanK Code Editor!</p>
+</body>
+</html></textarea>
+                    <textarea class="code-editor" id="cssEditor" style="display: none;"
+                        placeholder="Enter your CSS code here...">body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 20px;
+    margin: 0;
+}
 
-                <!-- Success message container -->
-                <div id="form-success" class="form-message" style="display: none;">
-                    <p><i class="fas fa-check-circle"></i> Thank you for subscribing! Check your inbox for updates.</p>
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: center;
+    font-size: 18px;
+}</textarea>
+                    <textarea class="code-editor" id="jsEditor" style="display: none;"
+                        placeholder="Enter your JavaScript code here...">// Welcome to TechMayanK Code Editor!
+console.log('Hello, World!');
+
+// Add some interactivity
+document.addEventListener('DOMContentLoaded', function() {
+    const h1 = document.querySelector('h1');
+    if (h1) {
+        h1.addEventListener('click', function() {
+            alert('Hello from TechMayanK!');
+        });
+    }
+});</textarea>
                 </div>
-            </form>
-        </section>
-    </main>
+            </div>
 
-    <!-- Enhanced Footer -->
-    <footer data-aos="fade-up" data-aos-delay="1100">
-        <div class="footer-content">
-            <div class="footer-section footer-about">
-                <a href="index.html" class="footer-logo">Tech<span>MayanK</span></a>
-                <p>Your go-to source for tech insights, tutorials, and reviews. We make complex technology concepts easy
-                    to understand for everyone.</p>
-                <div class="social-links">
-                    <a href="https://x.com/MayanK_Pras" class="social-icon twitter" aria-label="Twitter"><i
-                            class="fab fa-x-twitter"></i></a>
-                    <a href="https://www.linkedin.com/in/mitthu-kumar/" class="social-icon linkedin"
-                        aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/mkshahi22" class="social-icon github" aria-label="GitHub"><i
-                            class="fab fa-github"></i></a>
-                    <a href="https://mkshahi.netlify.app/" class="social-icon website" aria-label="Website"><i
-                            class="fas fa-globe"></i></a>
-                    <a href="https://www.instagram.com/shahi_jii_22/?next=%2F" class="social-icon instagram"
-                        aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <div class="preview-panel">
+                <div class="preview-header">
+                    <h3><i class="fas fa-eye"></i> Live Preview</h3>
                 </div>
-            </div>
-
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="./blogs/blogs.html">Blogs</a></li>
-                    <li><a href="./cat/categories.html">Categories</a></li>
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>Popular Categories</h3>
-                <ul class="footer-links">
-                    <li><a href="./cat/category-webdev.html">Web Development</a></li>
-                    <li><a href="./cat/category-ai.html">Artificial Intelligence</a></li>
-                    <li><a href="./cat/category-cybersecurity.html">Cybersecurity</a></li>
-                    <li><a href="./cat/category-cloud.html">Cloud Computing</a></li>
-                    <li><a href="./cat/category-mobile.html">Mobile Development</a></li>
-                    <li><a href="./cat/category-iot.html">IoT</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section footer-contact">
-                <h3>Contact Us</h3>
-                <p><i class="far fa-envelope"></i> mayankpra97@gmail.com</p>
-                <p><i class="fas fa-map-marker-alt"></i> Greater Noida, India</p>
-                <p><i class="fas fa-phone"></i> +91 9798743248</p>
+                <iframe class="preview-iframe" id="previewFrame"></iframe>
             </div>
         </div>
+    </div>
 
-        <div class="copyright">
-            <p>&copy; 2025 TechMayanK. All rights reserved.</p>
-            <p><a href="privacy.html" style="color: white; text-decoration: none;">Privacy Policy</a></p>
-        </div>
-    </footer>
-
-    <!-- JavaScript Files -->
-    <!-- AOS Library for Scroll Animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- CodeMirror Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/htmlmixed/htmlmixed.min.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Initialize AOS (Animate On Scroll)
-            AOS.init({
-                duration: 800,
-                easing: 'ease-in-out',
-                once: true,
-                mirror: false
-            });
+        class CodeEditor {
+            constructor() {
+                this.editors = {};
+                this.currentEditor = 'html';
+                this.autoSaveTimeout = null;
+                this.isDarkTheme = localStorage.getItem('darkTheme') === 'true';
 
-            // Mobile menu toggle
-            const menuBtn = document.querySelector('.mobile-menu-btn');
-            const navLinks = document.querySelector('.nav-links');
+                this.init();
+            }
 
-            menuBtn.addEventListener('click', function () {
-                navLinks.classList.toggle('active');
-            });
+            init() {
+                this.setupTheme();
+                this.setupEditors();
+                this.setupEventListeners();
+                this.loadSavedCode();
+                this.runCode();
+            }
 
-            // Mobile dropdown toggle
-            const dropdowns = document.querySelectorAll('.dropdown');
+            setupTheme() {
+                if (this.isDarkTheme) {
+                    document.body.classList.add('dark-theme');
+                    document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            }
 
-            dropdowns.forEach(dropdown => {
-                const dropdownLink = dropdown.querySelector('a');
+            setupEditors() {
+                const editorConfigs = {
+                    html: { mode: 'htmlmixed', element: 'htmlEditor' },
+                    css: { mode: 'css', element: 'cssEditor' },
+                    js: { mode: 'javascript', element: 'jsEditor' }
+                };
 
-                if (window.innerWidth <= 768) {
-                    dropdownLink.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        dropdown.classList.toggle('active');
+                Object.keys(editorConfigs).forEach(key => {
+                    const config = editorConfigs[key];
+                    this.editors[key] = CodeMirror.fromTextArea(document.getElementById(config.element), {
+                        mode: config.mode,
+                        theme: this.isDarkTheme ? 'monokai' : 'eclipse',
+                        lineNumbers: true,
+                        autoCloseBrackets: true,
+                        matchBrackets: true,
+                        indentUnit: 2,
+                        tabSize: 2,
+                        lineWrapping: true,
+                        extraKeys: {
+                            'Ctrl-Space': 'autocomplete',
+                            'Ctrl-S': () => this.downloadCode(),
+                            'Ctrl-Enter': () => this.runCode()
+                        }
                     });
-                }
-            });
 
-            // Close menu when clicking outside
-            document.addEventListener('click', function (event) {
-                if (!event.target.closest('nav') && !event.target.closest('.mobile-menu-btn')) {
-                    navLinks.classList.remove('active');
-                }
-            });
+                    this.editors[key].on('change', () => {
+                        this.autoSave();
+                        this.debounceRun();
+                    });
 
-            // Navbar scroll effect
-            window.addEventListener('scroll', function () {
-                const header = document.getElementById('main-header');
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-
-            // Smooth scrolling for CTA button
-            const ctaButton = document.querySelector('.cta-button');
-            if (ctaButton) {
-                ctaButton.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector('#featured-posts');
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+                    if (key !== 'html') {
+                        this.editors[key].getWrapperElement().style.display = 'none';
                     }
                 });
             }
-        });
-    </script>
 
-    <!-- Existing JavaScript Files -->
-    <script src="./js/subcription.js"></script>
-    <script src="./js/accible.js"></script>
+            setupEventListeners() {
+                // Theme toggle
+                document.getElementById('themeToggle').addEventListener('click', () => {
+                    this.toggleTheme();
+                });
+
+                // Tab switching
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.addEventListener('click', (e) => {
+                        this.switchTab(e.target.dataset.editor);
+                    });
+                });
+
+                // Control buttons
+                document.getElementById('runBtn').addEventListener('click', () => this.runCode());
+                document.getElementById('downloadBtn').addEventListener('click', () => this.downloadCode());
+                document.getElementById('clearBtn').addEventListener('click', () => this.clearCode());
+
+                // Keyboard shortcuts
+                document.addEventListener('keydown', (e) => {
+                    if (e.ctrlKey || e.metaKey) {
+                        switch (e.key) {
+                            case 's':
+                                e.preventDefault();
+                                this.downloadCode();
+                                break;
+                            case 'Enter':
+                                e.preventDefault();
+                                this.runCode();
+                                break;
+                        }
+                    }
+                });
+
+                // Auto-run with debounce
+                this.debounceRun = this.debounce(() => this.runCode(), 1000);
+            }
+
+            toggleTheme() {
+                this.isDarkTheme = !this.isDarkTheme;
+                document.body.classList.toggle('dark-theme');
+                localStorage.setItem('darkTheme', this.isDarkTheme);
+
+                const themeToggle = document.getElementById('themeToggle');
+                themeToggle.innerHTML = this.isDarkTheme ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+
+                // Update CodeMirror themes
+                const theme = this.isDarkTheme ? 'monokai' : 'eclipse';
+                Object.values(this.editors).forEach(editor => {
+                    editor.setOption('theme', theme);
+                });
+            }
+
+            switchTab(editorType) {
+                // Hide current editor
+                this.editors[this.currentEditor].getWrapperElement().style.display = 'none';
+
+                // Show new editor
+                this.editors[editorType].getWrapperElement().style.display = 'block';
+                this.editors[editorType].refresh();
+
+                // Update tab states
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                document.querySelector(`[data-editor="${editorType}"]`).classList.add('active');
+
+                this.currentEditor = editorType;
+            }
+
+            runCode() {
+                const html = this.editors.html.getValue();
+                const css = this.editors.css.getValue();
+                const js = this.editors.js.getValue();
+
+                const output = `
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Preview</title>
+                        <style>${css}</style>
+                    </head>
+                    <body>
+                        ${html}
+                        <script>
+                            try {
+                                ${js}
+                            } catch (error) {
+                                console.error('JavaScript Error:', error);
+                                document.body.innerHTML += '<div style="background: #f44336; color: white; padding: 10px; margin: 10px; border-radius: 5px;"><strong>JavaScript Error:</strong> ' + error.message + '</div>';
+                            }
+    </script>
+</body>
+
+</html>
+`;
+
+const iframe = document.getElementById('previewFrame');
+iframe.srcdoc = output;
+}
+
+downloadCode() {
+const html = this.editors.html.getValue();
+const css = this.editors.css.getValue();
+const js = this.editors.js.getValue();
+
+const fullCode = `
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Code</title>
+    <style>
+        $ {
+            css
+        }
+    </style>
+</head>
+
+<body>
+    ${html}
+    <script>
+${js}
+    </script>
+</body>
+
+</html>`;
+
+const blob = new Blob([fullCode], { type: 'text/html' });
+const url = URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url;
+a.download = 'code.html';
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+URL.revokeObjectURL(url);
+}
+
+clearCode() {
+if (confirm('Are you sure you want to clear all code? This action cannot be undone.')) {
+this.editors.html.setValue('
+<!DOCTYPE html>\n<html lang="en">\n
+
+<head>\n
+    <meta charset="UTF-8">\n
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n <title>My Code</title>\n
+</head>\n
+
+<body>\n <h1>Hello, World!</h1>\n <p>Welcome to TechMayanK Code Editor!</p>\n</body>\n
+
+</html>');
+this.editors.css.setValue('body {\n font-family: Arial, sans-serif;\n background: linear-gradient(135deg, #667eea,
+#764ba2);\n color: white;\n padding: 20px;\n margin: 0;\n}\n\nh1 {\n text-align: center;\n margin-bottom: 20px;\n}\n\np
+{\n text-align: center;\n font-size: 18px;\n}');
+this.editors.js.setValue('// Welcome to TechMayanK Code Editor!\nconsole.log(\'Hello, World!\');\n\n// Add some
+interactivity\ndocument.addEventListener(\'DOMContentLoaded\', function() {\n const h1 =
+document.querySelector(\'h1\');\n if (h1) {\n h1.addEventListener(\'click\', function() {\n alert(\'Hello from
+TechMayanK!\');\n });\n }\n});');
+this.runCode();
+this.clearAutoSave();
+}
+}
+
+autoSave() {
+const code = {
+html: this.editors.html.getValue(),
+css: this.editors.css.getValue(),
+js: this.editors.js.getValue(),
+timestamp: Date.now()
+};
+localStorage.setItem('techMayanKCode', JSON.stringify(code));
+this.showAutoSaveIndicator();
+}
+
+loadSavedCode() {
+const saved = localStorage.getItem('techMayanKCode');
+if (saved) {
+try {
+const code = JSON.parse(saved);
+this.editors.html.setValue(code.html || '');
+this.editors.css.setValue(code.css || '');
+this.editors.js.setValue(code.js || '');
+} catch (error) {
+console.error('Error loading saved code:', error);
+}
+}
+}
+
+clearAutoSave() {
+localStorage.removeItem('techMayanKCode');
+}
+
+showAutoSaveIndicator() {
+const indicator = document.getElementById('autoSaveIndicator');
+indicator.classList.add('show');
+
+clearTimeout(this.autoSaveTimeout);
+this.autoSaveTimeout = setTimeout(() => {
+indicator.classList.remove('show');
+}, 2000);
+}
+
+debounce(func, wait) {
+let timeout;
+return function executedFunction(...args) {
+const later = () => {
+clearTimeout(timeout);
+func(...args);
+};
+clearTimeout(timeout);
+timeout = setTimeout(later, wait);
+};
+}
+}
+
+// Initialize the code editor when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+new CodeEditor();
+});
+</script>
 </body>
 
 </html>

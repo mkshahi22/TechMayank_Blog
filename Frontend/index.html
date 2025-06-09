@@ -49,136 +49,6 @@
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/footer.css">
     <link rel="stylesheet" href="./css/main.css">
-
-    <!-- Minimal CSS for new features only -->
-    <style>
-        /* Enhanced Hero Section Styles */
-        .hero-enhanced {
-            text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            min-height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            border-radius: 20px;
-        }
-
-        .hero-tagline {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            font-weight: 300;
-            opacity: 0.9;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background: #fff;
-            color: #667eea;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Recent Articles Section */
-        .recent-articles {
-            padding: 60px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .article-card {
-            background: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .article-thumbnail {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .article-content {
-            padding: 20px;
-        }
-
-        .article-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
-
-        .article-title a {
-            color: #333;
-            text-decoration: none;
-        }
-
-        .article-title a:hover {
-            color: #667eea;
-        }
-
-        .article-excerpt {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        .article-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9rem;
-            color: #888;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero-tagline {
-                font-size: 2rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .articles-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -189,9 +59,17 @@
             <button class="mobile-menu-btn">☰</button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="./blogs/blogs.html">Blogs</a></li>
+
                 <li class="dropdown">
-                    <a href="#">Categories</a>
+                    <a href="#">Resources</a>
+                    <div class="dropdown-content">
+                        <a href="editor.html">Online Code Editor</a>
+                        <a href="docs.html">Tech Docs & Paths</a>
+                    </div>
+                </li>
+
+                <li class="dropdown">
+                    <a href="./blogs/blogs.html">Blogs</a>
                     <div class="dropdown-content">
                         <a href="./cat/category-webdev.html">Web Development</a>
                         <a href="./cat/category-ai.html">Artificial Intelligence</a>
@@ -201,12 +79,14 @@
                         <a href="./cat/category-cloud.html">Cloud Computing</a>
                     </div>
                 </li>
+
                 <li><a href="news.html">News</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="jobs.html">Tech Jobs</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="subscribe.html" class="subscribe-btn">Subscribe</a></li>
             </ul>
         </nav>
+
     </header>
 
     <main>
@@ -483,8 +363,8 @@
         document.addEventListener('DOMContentLoaded', function () {
             // Initialize AOS (Animate On Scroll)
             AOS.init({
-                duration: 800,
-                easing: 'ease-in-out',
+                duration: 1,
+                // easing: 'ease-in-out',
                 once: true,
                 mirror: false
             });
