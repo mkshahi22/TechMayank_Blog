@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechMayanK Resume Builder</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/test.css">
+    <link rel="stylesheet" href="./css/footer.css">
+</head>
+
+<body>
+    <header id="main-header">
+        <nav>
+            <a href="index.html" class="logo">Tech<span>MayanK</span></a>
+            <button class="mobile-menu-btn">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+
+                <li class="dropdown">
+                    <a href="#">Resources</a>
+                    <div class="dropdown-content">
+                        <a href="editor.html">Online Code Editor</a>
+                        <a href="docs.html">Tech Docs & Paths</a>
+                        <a href="resume.html">Resume Builder</a>
+                    </div>
+                </li>
+
+                <li class="dropdown">
+                    <a href="./blogs/blogs.html">Blogs</a>
+                    <div class="dropdown-content">
+                        <a href="./cat/category-webdev.html">Web Development</a>
+                        <a href="./cat/category-ai.html">Artificial Intelligence</a>
+                        <a href="./cat/category-cybersecurity.html">Cybersecurity</a>
+                        <a href="./cat/category-iot.html">IoT</a>
+                        <a href="./cat/category-mobile.html">Mobile Development</a>
+                        <a href="./cat/category-cloud.html">Cloud Computing</a>
+                    </div>
+                </li>
+
+                <li><a href="news.html">News</a></li>
+                <li><a href="jobs.html">Tech Jobs</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="subscribe.html" class="subscribe-btn">Subscribe</a></li>
+            </ul>
+        </nav>
+
+    </header>
+    <div class="container">
+        <div class="header">
+            <h1><span style="color:#667eea;">TechMayanK</span> Resume Builder</h1>
+            <p>Build sleek, ATS-optimized resumes effortlessly and stand out to recruiters.</p>
+        </div>
+
+        <div class="form-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <!-- Basic Info Section -->
+            <div class="section active" id="basicInfo">
+                <h2>Basic Information</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Desired Role *</label>
+                        <input type="text" id="role" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" placeholder="City, State">
+                    </div>
+                    <div class="form-group">
+                        <label for="linkedin">LinkedIn</label>
+                        <input type="url" id="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="github">GitHub</label>
+                    <input type="url" id="github" placeholder="https://github.com/yourusername">
+                </div>
+            </div>
+
+            <!-- Summary Section -->
+            <div class="section" id="summary">
+                <h2>Professional Summary</h2>
+                <div class="form-group">
+                    <label for="professionalSummary">Professional Summary</label>
+                    <textarea id="professionalSummary"
+                        placeholder="Write a brief professional summary highlighting your key strengths and career objectives..."></textarea>
+                </div>
+            </div>
+
+            <!-- Education Section -->
+            <div class="section" id="education">
+                <h2>Education</h2>
+                <div id="educationList">
+                    <div class="dynamic-section">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Degree/Qualification</label>
+                                <input type="text" class="education-degree" placeholder="e.g., Bachelor of Technology">
+                            </div>
+                            <div class="form-group">
+                                <label>School/College</label>
+                                <input type="text" class="education-school" placeholder="e.g., ABC University">
+                            </div>
+                        </div>
+                        <div class="form-row three-col">
+                            <div class="form-group">
+                                <label>Start Year</label>
+                                <input type="text" class="education-start-year" placeholder="e.g., 2020">
+                            </div>
+                            <div class="form-group">
+                                <label>End Year</label>
+                                <input type="text" class="education-end-year" placeholder="e.g., 2024">
+                            </div>
+                            <div class="form-group">
+                                <label>GPA/Marks</label>
+                                <input type="text" class="education-marks" placeholder="e.g., 8.5/10.0">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Relevant Coursework</label>
+                            <textarea class="education-coursework"
+                                placeholder="e.g., Data Structures, Algorithms, Database Management, Software Engineering"></textarea>
+                        </div>
+                        <button type="button" class="remove-btn" onclick="removeEducation(this)">Remove</button>
+                    </div>
+                </div>
+                <button type="button" class="add-btn" onclick="addEducation()">Add Education</button>
+            </div>
+
+            <!-- Experience Section -->
+            <div class="section" id="experience">
+                <h2>Work Experience</h2>
+                <div id="experienceList">
+                    <div class="dynamic-section">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Job Title</label>
+                                <input type="text" class="experience-title" placeholder="e.g., Software Developer">
+                            </div>
+                            <div class="form-group">
+                                <label>Company</label>
+                                <input type="text" class="experience-company" placeholder="e.g., Tech Solutions Inc.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Duration</label>
+                            <input type="text" class="experience-duration" placeholder="e.g., Jan 2022 - Present">
+                        </div>
+                        <div class="form-group">
+                            <label>Job Description</label>
+                            <textarea class="experience-description"
+                                placeholder="Describe your responsibilities and achievements..."></textarea>
+                        </div>
+                        <button type="button" class="remove-btn" onclick="removeExperience(this)">Remove</button>
+                    </div>
+                </div>
+                <button type="button" class="add-btn" onclick="addExperience()">Add Experience</button>
+            </div>
+
+            <!-- Projects Section -->
+            <div class="section" id="projects">
+                <h2>Projects</h2>
+                <div id="projectsList">
+                    <div class="dynamic-section">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Project Title</label>
+                                <input type="text" class="project-title" placeholder="e.g., E-commerce Website">
+                            </div>
+                            <div class="form-group">
+                                <label>Project Link</label>
+                                <input type="url" class="project-link"
+                                    placeholder="https://github.com/username/project">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Technologies Used</label>
+                            <input type="text" class="project-technologies" placeholder="e.g., React, Node.js, MongoDB">
+                        </div>
+                        <div class="form-group">
+                            <label>Project Description</label>
+                            <textarea class="project-description"
+                                placeholder="Describe your project and your role..."></textarea>
+                        </div>
+                        <button type="button" class="remove-btn" onclick="removeProject(this)">Remove</button>
+                    </div>
+                </div>
+                <button type="button" class="add-btn" onclick="addProject()">Add Project</button>
+            </div>
+
+            <!-- Skills Section -->
+            <div class="section" id="skills">
+                <h2>Skills</h2>
+                <div class="form-group">
+                    <label for="skillsList">Skills (comma-separated)</label>
+                    <textarea id="skillsList"
+                        placeholder="e.g., JavaScript, Python, React, Node.js, SQL, Git"></textarea>
+                    <small>Enter your skills separated by commas</small>
+                </div>
+            </div>
+
+            <!-- Languages Section -->
+            <div class="section" id="languages">
+                <h2>Languages</h2>
+                <div id="languagesList">
+                    <div class="dynamic-section">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Language</label>
+                                <input type="text" class="language-name" placeholder="e.g., English">
+                            </div>
+                            <div class="form-group">
+                                <label>Proficiency Level</label>
+                                <select class="language-level">
+                                    <option value="">Select Level</option>
+                                    <option value="Native">Native</option>
+                                    <option value="Fluent">Fluent</option>
+                                    <option value="Conversational">Conversational</option>
+                                    <option value="Basic">Basic</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="button" class="remove-btn" onclick="removeLanguage(this)">Remove</button>
+                    </div>
+                </div>
+                <button type="button" class="add-btn" onclick="addLanguage()">Add Language</button>
+            </div>
+
+            <!-- Hobbies Section -->
+            <div class="section" id="hobbies">
+                <h2>Hobbies & Interests</h2>
+                <div class="form-group">
+                    <label for="hobbiesList">Hobbies & Interests</label>
+                    <textarea id="hobbiesList"
+                        placeholder="e.g., Photography, Traveling, Reading, Playing Guitar, Cooking"></textarea>
+                    <small>Enter your hobbies and interests separated by commas</small>
+                </div>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="section" id="preview">
+                <h2>Resume Preview</h2>
+                <div class="preview-container">
+                    <div class="resume-preview" id="resumePreview">
+                        <!-- Resume content will be generated here -->
+                    </div>
+                    <div style="text-align: center;">
+                        <button class="download-btn" onclick="downloadPDF()">Download as PDF</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="nav-btn secondary" id="prevBtn" onclick="previousSection()">Previous</button>
+                <span id="sectionIndicator">1 of 9</span>
+                <div>
+                    <button class="nav-btn secondary" id="skipBtn" onclick="nextSection()">Skip</button>
+                    <button class="nav-btn primary" id="nextBtn" onclick="nextSection()">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Enhanced Footer -->
+    <footer data-aos="fade-up" data-aos-delay="1100" style="margin-top: 0; border-radius: 0;">
+        <div class="footer-content">
+            <div class="footer-section footer-about">
+                <a href="index.html" class="footer-logo">Tech<span>MayanK</span></a>
+                <p>Your go-to source for tech insights, tutorials, and reviews. We make complex technology concepts easy
+                    to understand for everyone.</p>
+                <div class="social-links">
+                    <a href="https://x.com/MayanK_Pras" class="social-icon twitter" aria-label="Twitter"><i
+                            class="fab fa-x-twitter"></i></a>
+                    <a href="https://www.linkedin.com/in/mitthu-kumar/" class="social-icon linkedin"
+                        aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/mkshahi22" class="social-icon github" aria-label="GitHub"><i
+                            class="fab fa-github"></i></a>
+                    <a href="https://mkshahi.netlify.app/" class="social-icon website" aria-label="Website"><i
+                            class="fas fa-globe"></i></a>
+                    <a href="https://www.instagram.com/shahi_jii_22/?next=%2F" class="social-icon instagram"
+                        aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="./blogs/blogs.html">Blogs</a></li>
+                    <li><a href="./cat/categories.html">Categories</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Popular Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="./cat/category-webdev.html">Web Development</a></li>
+                    <li><a href="./cat/category-ai.html">Artificial Intelligence</a></li>
+                    <li><a href="./cat/category-cybersecurity.html">Cybersecurity</a></li>
+                    <li><a href="./cat/category-cloud.html">Cloud Computing</a></li>
+                    <li><a href="./cat/category-mobile.html">Mobile Development</a></li>
+                    <li><a href="./cat/category-iot.html">IoT</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="far fa-envelope"></i> mayankpra97@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Greater Noida, India</p>
+                <p><i class="fas fa-phone"></i> +91 9798743248</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2025 TechMayanK. All rights reserved.</p>
+            <p><a href="privacy.html" style="color: white; text-decoration: none;">Privacy Policy</a></p>
+        </div>
+    </footer>
+    <script>
+        // Data storage object
+        let resumeData = {
+            basicInfo: {},
+            summary: '',
+            education: [],
+            experience: [],
+            projects: [],
+            skills: '',
+            languages: [],
+            hobbies: ''
+        };
+
+        let currentSection = 0;
+        const sections = ['basicInfo', 'summary', 'education', 'experience', 'projects', 'skills', 'languages', 'hobbies', 'preview'];
+        const sectionTitles = ['Basic Info', 'Summary', 'Education', 'Experience', 'Projects', 'Skills', 'Languages', 'Hobbies', 'Preview'];
+
+        // Initialize the form
+        function init() {
+            updateProgress();
+            updateNavigation();
+            loadData();
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentSection + 1) / sections.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('sectionIndicator').textContent = `${currentSection + 1} of ${sections.length}`;
+        }
+
+        // Update navigation buttons
+        function updateNavigation() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const skipBtn = document.getElementById('skipBtn');
+
+            prevBtn.disabled = currentSection === 0;
+
+            if (currentSection === sections.length - 1) {
+                nextBtn.style.display = 'none';
+                skipBtn.style.display = 'none';
+            } else {
+                nextBtn.style.display = 'inline-block';
+                skipBtn.style.display = 'inline-block';
+                nextBtn.textContent = currentSection === sections.length - 2 ? 'Generate Preview' : 'Next';
+            }
+        }
+
+        // Show section
+        function showSection(index) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sections[index]).classList.add('active');
+
+            if (index === sections.length - 1) {
+                generatePreview();
+            }
+        }
+
+        // Navigation functions
+        function nextSection() {
+            saveCurrentSection();
+            if (currentSection < sections.length - 1) {
+                currentSection++;
+                showSection(currentSection);
+                updateProgress();
+                updateNavigation();
+            }
+        }
+
+        function previousSection() {
+            if (currentSection > 0) {
+                currentSection--;
+                showSection(currentSection);
+                updateProgress();
+                updateNavigation();
+            }
+        }
+
+        // Save current section data
+        function saveCurrentSection() {
+            switch (sections[currentSection]) {
+                case 'basicInfo':
+                    resumeData.basicInfo = {
+                        fullName: document.getElementById('fullName').value,
+                        email: document.getElementById('email').value,
+                        phone: document.getElementById('phone').value,
+                        role: document.getElementById('role').value,
+                        location: document.getElementById('location').value,
+                        linkedin: document.getElementById('linkedin').value,
+                        github: document.getElementById('github').value
+                    };
+                    break;
+                case 'summary':
+                    resumeData.summary = document.getElementById('professionalSummary').value;
+                    break;
+                case 'education':
+                    resumeData.education = collectEducationData();
+                    break;
+                case 'experience':
+                    resumeData.experience = collectExperienceData();
+                    break;
+                case 'projects':
+                    resumeData.projects = collectProjectsData();
+                    break;
+                case 'skills':
+                    resumeData.skills = document.getElementById('skillsList').value;
+                    break;
+                case 'languages':
+                    resumeData.languages = collectLanguagesData();
+                    break;
+                case 'hobbies':
+                    resumeData.hobbies = document.getElementById('hobbiesList').value;
+                    break;
+            }
+        }
+
+        // Load data into forms
+        function loadData() {
+            // Load basic info
+            if (resumeData.basicInfo.fullName) {
+                document.getElementById('fullName').value = resumeData.basicInfo.fullName || '';
+                document.getElementById('email').value = resumeData.basicInfo.email || '';
+                document.getElementById('phone').value = resumeData.basicInfo.phone || '';
+                document.getElementById('role').value = resumeData.basicInfo.role || '';
+                document.getElementById('location').value = resumeData.basicInfo.location || '';
+                document.getElementById('linkedin').value = resumeData.basicInfo.linkedin || '';
+                document.getElementById('github').value = resumeData.basicInfo.github || '';
+            }
+
+            // Load summary
+            document.getElementById('professionalSummary').value = resumeData.summary || '';
+
+            // Load skills
+            document.getElementById('skillsList').value = resumeData.skills || '';
+
+            // Load hobbies
+            document.getElementById('hobbiesList').value = resumeData.hobbies || '';
+        }
+
+        // Education functions
+        function addEducation() {
+            const educationList = document.getElementById('educationList');
+            const educationHTML = `
+        <div class="dynamic-section">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Degree/Qualification</label>
+                    <input type="text" class="education-degree" placeholder="e.g., Bachelor of Technology">
+                </div>
+                <div class="form-group">
+                    <label>School/College</label>
+                    <input type="text" class="education-school" placeholder="e.g., ABC University">
+                </div>
+            </div>
+            <div class="form-row three-col">
+                <div class="form-group">
+                    <label>Start Year</label>
+                    <input type="text" class="education-start-year" placeholder="e.g., 2020">
+                </div>
+                <div class="form-group">
+                    <label>End Year</label>
+                    <input type="text" class="education-end-year" placeholder="e.g., 2024">
+                </div>
+                <div class="form-group">
+                    <label>GPA/Marks</label>
+                    <input type="text" class="education-marks" placeholder="e.g., 8.5/10.0">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Relevant Coursework</label>
+                <textarea class="education-coursework" placeholder="e.g., Data Structures, Algorithms, Database Management, Software Engineering"></textarea>
+            </div>
+            <button type="button" class="remove-btn" onclick="removeEducation(this)">Remove</button>
+        </div>
+    `;
+            educationList.insertAdjacentHTML('beforeend', educationHTML);
+        }
+
+        function removeEducation(btn) {
+            btn.parentElement.remove();
+        }
+
+        function collectEducationData() {
+            const educationSections = document.querySelectorAll('#educationList .dynamic-section');
+            return Array.from(educationSections).map(section => ({
+                degree: section.querySelector('.education-degree').value,
+                school: section.querySelector('.education-school').value,
+                startYear: section.querySelector('.education-start-year').value,
+                endYear: section.querySelector('.education-end-year').value,
+                marks: section.querySelector('.education-marks').value,
+                coursework: section.querySelector('.education-coursework').value
+            })).filter(edu => edu.degree || edu.school);
+        }
+
+        // Experience functions
+        function addExperience() {
+            const experienceList = document.getElementById('experienceList');
+            const experienceHTML = `
+        <div class="dynamic-section">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Job Title</label>
+                    <input type="text" class="experience-title" placeholder="e.g., Software Developer">
+                </div>
+                <div class="form-group">
+                    <label>Company</label>
+                    <input type="text" class="experience-company" placeholder="e.g., Tech Solutions Inc.">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Duration</label>
+                <input type="text" class="experience-duration" placeholder="e.g., Jan 2022 - Present">
+            </div>
+            <div class="form-group">
+                <label>Job Description</label>
+                <textarea class="experience-description" placeholder="Describe your responsibilities and achievements..."></textarea>
+            </div>
+            <button type="button" class="remove-btn" onclick="removeExperience(this)">Remove</button>
+        </div>
+    `;
+            experienceList.insertAdjacentHTML('beforeend', experienceHTML);
+        }
+
+        function removeExperience(btn) {
+            btn.parentElement.remove();
+        }
+
+        function collectExperienceData() {
+            const experienceSections = document.querySelectorAll('#experienceList .dynamic-section');
+            return Array.from(experienceSections).map(section => ({
+                title: section.querySelector('.experience-title').value,
+                company: section.querySelector('.experience-company').value,
+                duration: section.querySelector('.experience-duration').value,
+                description: section.querySelector('.experience-description').value
+            })).filter(exp => exp.title || exp.company);
+        }
+
+        // Projects functions
+        function addProject() {
+            const projectsList = document.getElementById('projectsList');
+            const projectHTML = `
+        <div class="dynamic-section">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Project Title</label>
+                    <input type="text" class="project-title" placeholder="e.g., E-commerce Website">
+                </div>
+                <div class="form-group">
+                    <label>Project Link</label>
+                    <input type="url" class="project-link" placeholder="https://github.com/username/project">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Technologies Used</label>
+                <input type="text" class="project-technologies" placeholder="e.g., React, Node.js, MongoDB">
+            </div>
+            <div class="form-group">
+                <label>Project Description</label>
+                <textarea class="project-description" placeholder="Describe your project and your role..."></textarea>
+            </div>
+            <button type="button" class="remove-btn" onclick="removeProject(this)">Remove</button>
+        </div>
+    `;
+            projectsList.insertAdjacentHTML('beforeend', projectHTML);
+        }
+
+        function removeProject(btn) {
+            btn.parentElement.remove();
+        }
+
+        function collectProjectsData() {
+            const projectSections = document.querySelectorAll('#projectsList .dynamic-section');
+            return Array.from(projectSections).map(section => ({
+                title: section.querySelector('.project-title').value,
+                link: section.querySelector('.project-link').value,
+                technologies: section.querySelector('.project-technologies').value,
+                description: section.querySelector('.project-description').value
+            })).filter(proj => proj.title);
+        }
+
+        // Languages functions
+        function addLanguage() {
+            const languagesList = document.getElementById('languagesList');
+            const languageHTML = `
+        <div class="dynamic-section">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Language</label>
+                    <input type="text" class="language-name" placeholder="e.g., English">
+                </div>
+                <div class="form-group">
+                    <label>Proficiency Level</label>
+                    <select class="language-level">
+                        <option value="">Select Level</option>
+                        <option value="Native">Native</option>
+                        <option value="Fluent">Fluent</option>
+                        <option value="Conversational">Conversational</option>
+                        <option value="Basic">Basic</option>
+                    </select>
+                </div>
+            </div>
+            <button type="button" class="remove-btn" onclick="removeLanguage(this)">Remove</button>
+        </div>
+    `;
+            languagesList.insertAdjacentHTML('beforeend', languageHTML);
+        }
+
+        function removeLanguage(btn) {
+            btn.parentElement.remove();
+        }
+
+        function collectLanguagesData() {
+            const languageSections = document.querySelectorAll('#languagesList .dynamic-section');
+            return Array.from(languageSections).map(section => ({
+                name: section.querySelector('.language-name').value,
+                level: section.querySelector('.language-level').value
+            })).filter(lang => lang.name);
+        }
+
+        // Format description text with bullet points
+        function formatDescription(text) {
+            if (!text) return '';
+
+            // Split by line breaks and filter out empty lines
+            const lines = text.split('\n').filter(line => line.trim());
+
+            if (lines.length <= 1) {
+                return `<div class="description">${text}</div>`;
+            }
+
+            // Create bullet points for multiple lines
+            const bulletPoints = lines.map(line => `<li>${line.trim()}</li>`).join('');
+            return `<ul class="description-list">${bulletPoints}</ul>`;
+        }
+
+        // Generate preview with enhanced styling
+        function generatePreview() {
+            saveCurrentSection();
+            const preview = document.getElementById('resumePreview');
+
+            let html = `
+    <style>
+      .resume-container {
+        font-family: 'Arial', sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 30px;
+        line-height: 1.5;
+        color: #333;
+        background: white;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        border: 1px solid #ddd;
+      }
+      
+      .resume-header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 3px solid #2c3e50;
+      }
+      
+      .resume-header h1 {
+        font-size: 32px;
+        margin: 0 0 10px 0;
+        color: #2c3e50;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      
+      .contact-info {
+        font-size: 14px;
+        color: #666;
+        margin: 5px 0;
+      }
+      
+      .contact-info strong {
+        color: #e74c3c;
+        font-size: 16px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .contact-links {
+        margin-top: 10px;
+      }
+
+      .contact-links a {
+        color: #3498db;
+        text-decoration: none;
+        margin: 0 10px;
+        font-weight: 500;
+      }
+
+      .contact-links a:hover {
+        text-decoration: underline;
+      }
+      
+      .resume-section {
+        margin-bottom: 25px;
+        page-break-inside: avoid;
+      }
+      
+      .resume-section h2 {
+        font-size: 20px;
+        color: #2c3e50;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+      }
+      
+      .resume-item {
+        margin-bottom: 18px;
+        padding-left: 5px;
+        border-left: 3px solid #ecf0f1;
+        padding-left: 15px;
+      }
+      
+      .resume-item h3 {
+        font-size: 16px;
+        color: #2c3e50;
+        margin: 0 0 5px 0;
+        font-weight: 600;
+      }
+      
+      .details {
+        font-size: 13px;
+        color: #7f8c8d;
+        margin-bottom: 8px;
+        font-style: italic;
+      }
+      
+      .description {
+        font-size: 14px;
+        color: #555;
+        line-height: 1.6;
+        text-align: justify;
+      }
+      
+      .description-list {
+        margin: 8px 0;
+        padding-left: 18px;
+      }
+      
+      .description-list li {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 4px;
+        line-height: 1.5;
+      }
+      
+      .skills-list, .hobbies-list, .languages-list {
+        font-size: 14px;
+        color: #555;
+        line-height: 1.8;
+        padding: 15px;
+        border-radius: 5px;
+      }
+
+      .language-item {
+        display: inline-block;
+        margin-right: 20px;
+        margin-bottom: 5px;
+      }
+
+      .language-level {
+        color: #7f8c8d;
+        font-style: italic;
+      }
+      
+      .project-link {
+        color: #3498db;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      
+      .project-link:hover {
+        text-decoration: underline;
+      }
+
+      .coursework {
+        font-size: 14px;
+        color: #666;
+        margin-top: 8px;
+        line-height: 1.5;
+      }
+      
+      /* Print styles for better PDF output */
+      @media print {
+        .resume-container {
+          box-shadow: none;
+          padding: 20px;
+        }
+        
+        .resume-section {
+          page-break-inside: avoid;
+        }
+        
+        .resume-item {
+          page-break-inside: avoid;
+        }
+      }
+    </style>
+    
+    <div class="resume-container">
+      <div class="resume-header">
+        <h1>${resumeData.basicInfo.fullName || 'Your Name'}</h1>
+        <div class="contact-info">
+          ${resumeData.basicInfo.email || 'email@example.com'} | 
+          ${resumeData.basicInfo.phone || 'Phone Number'}
+          ${resumeData.basicInfo.location ? ' | ' + resumeData.basicInfo.location : ''}
+        </div>
+        <div class="contact-info">
+          <strong>${resumeData.basicInfo.role || 'Desired Role'}</strong>
+        </div>`;
+
+            // Add contact links if provided
+            const hasLinks = resumeData.basicInfo.linkedin || resumeData.basicInfo.github;
+            if (hasLinks) {
+                html += `<div class="contact-links">`;
+                if (resumeData.basicInfo.linkedin) {
+                    html += `<a href="${resumeData.basicInfo.linkedin}" target="_blank">LinkedIn</a>`;
+                }
+                if (resumeData.basicInfo.github) {
+                    html += `<a href="${resumeData.basicInfo.github}" target="_blank">GitHub</a>`;
+                }
+                html += `</div>`;
+            }
+
+            html += `</div>`;
+
+            if (resumeData.summary) {
+                html += `
+      <div class="resume-section">
+        <h2>Professional Summary</h2>
+        <div class="description">${resumeData.summary}</div>
+      </div>
+    `;
+            }
+
+            if (resumeData.education.length > 0) {
+                html += `
+      <div class="resume-section">
+        <h2>Education</h2>
+    `;
+                resumeData.education.forEach(edu => {
+                    const yearRange = edu.startYear && edu.endYear ? `${edu.startYear} – ${edu.endYear}` :
+                        edu.startYear ? `${edu.startYear} - Present` :
+                            edu.endYear ? `Graduated: ${edu.endYear}` : '';
+
+                    html += `
+        <div class="resume-item">
+          <h3>${edu.degree}</h3>
+          <div class="details">${edu.school}${yearRange ? ' | ' + yearRange : ''}${edu.marks ? ' | ' + edu.marks : ''}</div>
+          ${edu.coursework ? `<div class="coursework"><strong>Relevant Coursework:</strong> ${edu.coursework}</div>` : ''}
+        </div>
+      `;
+                });
+                html += `</div>`;
+            }
+
+            if (resumeData.experience.length > 0) {
+                html += `
+      <div class="resume-section">
+        <h2>Professional Experience</h2>
+    `;
+                resumeData.experience.forEach(exp => {
+                    html += `
+        <div class="resume-item">
+          <h3>${exp.title}</h3>
+          <div class="details">${exp.company}${exp.duration ? ' | ' + exp.duration : ''}</div>
+          ${exp.description ? formatDescription(exp.description) : ''}
+        </div>
+      `;
+                });
+                html += `</div>`;
+            }
+
+            if (resumeData.projects.length > 0) {
+                html += `
+      <div class="resume-section">
+        <h2>Projects</h2>
+    `;
+                resumeData.projects.forEach(proj => {
+                    const projectTitle = proj.link ?
+                        `${proj.title} | <a href="${proj.link}" class="project-link" target="_blank">${proj.link}</a>` :
+                        proj.title;
+
+                    html += `
+        <div class="resume-item">
+          <h3>${projectTitle}</h3>
+          ${proj.technologies ? `<div class="details"><strong>Technologies:</strong> ${proj.technologies}</div>` : ''}
+          ${proj.description ? formatDescription(proj.description) : ''}
+        </div>
+      `;
+                });
+                html += `</div>`;
+            }
+
+            if (resumeData.skills) {
+                html += `
+      <div class="resume-section">
+        <h2>Technical Skills</h2>
+        <div class="skills-list">${resumeData.skills}</div>
+      </div>
+    `;
+            }
+
+            if (resumeData.languages.length > 0) {
+                html += `
+      <div class="resume-section">
+        <h2>Languages</h2>
+        <div class="languages-list">
+    `;
+                resumeData.languages.forEach(lang => {
+                    html += `<div class="language-item">${lang.name}${lang.level ? ` <span class="language-level">(${lang.level})</span>` : ''}</div>`;
+                });
+                html += `
+        </div>
+      </div>
+    `;
+            }
+
+            if (resumeData.hobbies) {
+                html += `
+      <div class="resume-section">
+        <h2>Hobbies & Interests</h2>
+        <div class="hobbies-list">${resumeData.hobbies}</div>
+      </div>
+    `;
+            }
+
+            html += `</div>`;
+            preview.innerHTML = html;
+        }
+
+        // Enhanced PDF download function with better options
+        function downloadPDF() {
+            const preview = document.getElementById('resumePreview');
+
+            // Ensure the element is visible
+            preview.style.display = 'block';
+            preview.style.opacity = '1';
+            preview.style.visibility = 'visible';
+            preview.style.position = 'relative';
+
+            console.log('Generating PDF, preview length:', preview.innerHTML.length);
+
+            // Wait for any dynamic content to load
+            setTimeout(() => {
+                const opt = {
+                    margin: [0.45, 0.45, 0.45, 0.45], // top, left, bottom, right
+                    filename: 'TechMayank_Resume.pdf',
+                    image: {
+                        type: 'jpeg',
+                        quality: 0.98
+                    },
+                    html2canvas: {
+                        scale: 2,
+                        useCORS: true,
+                        allowTaint: true,
+                        letterRendering: true,
+                        logging: true, // Enable logging for debugging
+                        width: preview.scrollWidth,
+                        height: preview.scrollHeight,
+                        scrollX: 0,
+                        scrollY: 0
+                    },
+                    jsPDF: {
+                        unit: 'in',
+                        format: 'a4', // Changed from 'letter' to 'a4' for better compatibility
+                        orientation: 'portrait',
+                        compress: true
+                    },
+                    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+                };
+
+                html2pdf()
+                    .set(opt)
+                    .from(preview)
+                    .save()
+                    .then(() => {
+                        console.log('PDF created successfully');
+                    })
+                    .catch(err => {
+                        console.error('PDF generation error:', err);
+                        // Fallback: try with simpler options
+                        fallbackPDFGeneration(preview);
+                    });
+            }, 500); // Increased timeout
+        }
+
+        // Fallback PDF generation with simpler options
+        function fallbackPDFGeneration(element) {
+            console.log('Trying fallback PDF generation...');
+
+            const simpleOpt = {
+                margin: [0.45, 0.45, 0.45, 0.45],
+                filename: 'TechMayank_Resume.pdf',
+                html2canvas: {
+                    scale: 1,
+                    logging: true,
+                    width: preview.scrollWidth,
+                    height: preview.scrollHeight,
+                    scrollX: 0,
+                    scrollY: 0
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'a4',
+                    orientation: 'portrait'
+                }
+            };
+
+            html2pdf()
+                .set(simpleOpt)
+                .from(element)
+                .save()
+                .then(() => console.log('Fallback PDF created'))
+                .catch(err => console.error('Fallback PDF also failed:', err));
+        }
+
+        // Initialize the application
+        init();
+    </script>
+</body>
+
+</html>
