@@ -1,0 +1,2132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechMayanK - Latest Tech News, Programming & Reviews</title>
+    <meta name="description"
+        content="Get the latest updates on technology, programming, and gadget reviews. Learn coding, web development, and AI trends at TechMayanK.">
+    <meta name="keywords"
+        content="latest tech news, programming tutorials, web development, AI trends, gadget reviews, coding tips">
+    <meta name="author" content="Mitthu Kumar(MayanK)">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="TechMayanK - Latest Tech News & Programming">
+    <meta property="og:description"
+        content="Stay updated with the latest in technology, programming, web development, and AI trends.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://techmayank.netlify.app">
+    <meta property="og:image" content="https://techmayank.com/images/techmayank-thumbnail.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TechMayanK - Tech News & Programming">
+    <meta name="twitter:description"
+        content="Get the latest updates on tech, coding, and AI trends. Learn web development and gadget reviews at TechMayanK.">
+    <meta name="twitter:image" content="https://techmayank.com/images/techmayank-thumbnail.jpg">
+    <meta name="twitter:site" content="@MayanK_Pras">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://techmayank.com">
+
+    <!-- Favicon -->
+    <link rel="icon" href="./image/common/favi.webp" type="image/webp">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome for better social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- AOS Library for Scroll Animations -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <!-- Existing CSS Files -->
+    <style>
+        /* Base Styles - Required by header */
+        :root {
+            /* Light Theme Variables */
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --accent-color: #3498db;
+            --secondary-color: #2c3e50;
+            --light-gray: #f5f5f5;
+            --border-color: #eeeeee;
+            --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            --hover-color: #2980b9;
+            --dropdown-bg: #ffffff;
+            --dropdown-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --card-bg: #ffffff;
+            --footer-bg: #2c3e50;
+            --footer-text: #ecf0f1;
+            --hero-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --notification-bg: #ffffff;
+            --notification-border: #e0e0e0;
+            --notification-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme Variables */
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
+            --accent-color: #4dabf7;
+            --secondary-color: #e0e0e0;
+            --light-gray: #2d2d2d;
+            --border-color: #404040;
+            --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --hover-color: #339af0;
+            --dropdown-bg: #2d2d2d;
+            --dropdown-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            --card-bg: #2d2d2d;
+            --footer-bg: #141414;
+            --footer-text: #e0e0e0;
+            --hero-gradient: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+            --notification-bg: #2d2d2d;
+            --notification-border: #404040;
+            --notification-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Header & Navbar Styles */
+        header {
+            padding: 15px 0;
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-color);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo:hover {
+            color: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 10px 0;
+            display: block;
+            position: relative;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .dropdown>a::before {
+            content: '▼';
+            font-size: 0.7em;
+            margin-left: 5px;
+            vertical-align: middle;
+            transition: transform 0.3s;
+        }
+
+        .dropdown:hover>a::before {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--dropdown-bg);
+            min-width: 200px;
+            box-shadow: var(--dropdown-shadow);
+            border-radius: 8px;
+            z-index: 10;
+            overflow: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a {
+            color: var(--text-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--light-gray);
+            color: var(--accent-color);
+            border-left: 3px solid var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        .dropdown:hover .dropdown-content {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .subscribe-btn {
+            background-color: var(--accent-color);
+            color: white !important;
+            padding: 10px 20px !important;
+            border-radius: 50px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+        }
+
+        .subscribe-btn:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-3px) !important;
+            text-decoration: none;
+            box-shadow: 0 6px 12px rgba(52, 152, 219, 0.4);
+        }
+
+        .subscribe-btn:active {
+            transform: translateY(-1px) !important;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--secondary-color);
+            transition: color 0.3s;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Design for Header */
+        @media (max-width: 768px) {
+            nav {
+                position: relative;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--bg-color);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--card-shadow);
+                z-index: 10;
+                align-items: flex-start;
+                border-radius: 0 0 10px 10px;
+            }
+
+            .nav-links.active {
+                display: flex;
+                animation: slideDown 0.4s ease;
+            }
+
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .nav-links a {
+                padding: 12px 0;
+            }
+
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                margin-left: 20px;
+                width: 90%;
+                display: none;
+                margin-top: 10px;
+                background-color: var(--light-gray);
+                border-radius: 5px;
+                transform: none;
+            }
+
+            .dropdown.active .dropdown-content {
+                display: block;
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+
+    <style>
+        /* Main content styling */
+        /* Note: Root variables and basic body setup are in header.css */
+
+        .hero {
+            padding: 60px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .hero span {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin-bottom: 30px;
+            color: #666;
+        }
+
+        .featured-posts {
+            padding: 40px 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .post-card {
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .post-content {
+            padding: 20px;
+        }
+
+        .post-category {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .post-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .post-title a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .post-excerpt {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .post-date {
+            margin-right: 15px;
+        }
+
+        /* CTA Section Styles */
+        .cta-section {
+            padding: 40px 0;
+            text-align: center;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            margin: 40px 0;
+        }
+
+        .cta-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .cta-section p {
+            max-width: 700px;
+            margin: 0 auto 25px;
+            color: #666;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Newsletter Form Styles */
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .form-group {
+            display: flex;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 14px 20px;
+            border: 2px solid var(--border-color);
+            border-right: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            width: 70%;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
+        }
+
+        .btn-submit {
+            border-radius: 0 50px 50px 0;
+            padding: 14px 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            min-width: 120px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--hover-color);
+        }
+
+        /* Response Messages */
+        #mce-success-response,
+        #mce-error-response,
+        .subscribe-message,
+        .form-message {
+            margin: 20px auto 0;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            max-width: 500px;
+            animation: fadeIn 0.5s ease-in-out;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #mce-success-response,
+        .form-message {
+            color: #4CAF50;
+            background-color: rgba(76, 175, 80, 0.12);
+            border-left: 4px solid #4CAF50;
+        }
+
+        #mce-error-response {
+            color: #f44336;
+            background-color: rgba(244, 67, 54, 0.12);
+            border-left: 4px solid #f44336;
+        }
+
+        .form-message p {
+            margin: 0;
+        }
+
+        /* Loading state */
+        .btn-submit.loading {
+            background-color: #2980b9;
+            color: transparent;
+        }
+
+        .btn-submit.loading::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .read-more {
+            color: #007BFF;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styles for Main Content */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .post-card {
+                max-width: 100%;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                width: 100%;
+                max-width: 90%;
+            }
+
+            .form-group {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .newsletter-input {
+                width: 100%;
+                margin-bottom: 0;
+                border-radius: 5px 5px 0 0;
+                border-right: 2px solid var(--border-color);
+                border-bottom: none;
+            }
+
+            .btn-submit {
+                width: 100%;
+                padding: 16px 30px;
+                margin-top: 15px;
+            }
+
+            #mce-success-response,
+            #mce-error-response,
+            .subscribe-message,
+            .form-message {
+                position: static;
+                padding: 12px;
+                margin-top: 15px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .newsletter-input {
+                padding: 14px 16px;
+                font-size: 0.95rem;
+            }
+
+            .btn-submit {
+                padding: 14px 20px;
+                font-size: 0.95rem;
+                margin-top: 10px;
+            }
+        }
+
+        /* Holographic Stats Section */
+        .stats-holographic {
+            background: linear-gradient(135deg, #2b5876, #4e4376);
+            color: white;
+            padding: 60px 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+            margin: 60px auto;
+            max-width: 1200px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .stats-container-holographic {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-item-holographic {
+            flex: 1 1 200px;
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 25px rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-item-holographic:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.15);
+        }
+
+        .stat-number-holographic {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .stat-label-holographic {
+            font-size: 1rem;
+            color: #e0e0e0;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .stats-container-holographic {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stat-item-holographic {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .stat-number-holographic {
+                font-size: 2rem;
+            }
+
+            .stat-label-holographic {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Enhanced Hero Section Styles */
+        .hero-enhanced {
+            text-align: center;
+            padding: 80px 20px;
+            background: var(--hero-gradient);
+            color: white;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 20px;
+        }
+
+        .hero-tagline {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* Creative CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            background-size: 200% 200%;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(118, 75, 162, 0.25);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.2));
+            transition: all 0.6s ease;
+            z-index: 0;
+            border-radius: 50px;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            background-position: right center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Optional glow effect when focused */
+        .cta-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3);
+        }
+
+
+        /* Recent Articles Section */
+        .recent-articles {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .article-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .article-content {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .article-title a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .article-title a:hover {
+            color: #667eea;
+        }
+
+        .article-excerpt {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-tagline {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        /* Feature Cards Section Styles */
+        .feature-cards {
+            padding: 60px 20px;
+            background-color: var(--bg-color);
+        }
+
+        .feature-cards .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-cards .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            color: var(--text-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .feature-cards .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-color) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            background-color: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .card-icon {
+            background-color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .card-icon i {
+            font-size: 30px;
+            color: var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .card-icon i {
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-card p {
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-link {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-link:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Responsive Styles for Feature Cards */
+        @media (max-width: 768px) {
+            .feature-cards {
+                padding: 40px 15px;
+            }
+
+            .feature-cards .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature-card {
+                padding: 25px;
+            }
+
+            .card-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .card-icon i {
+                font-size: 25px;
+            }
+
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .feature-cards .section-title {
+                font-size: 1.5rem;
+            }
+
+            .feature-card {
+                padding: 20px;
+            }
+
+            .card-icon {
+                width: 50px;
+                height: 50px;
+                margin-bottom: 15px;
+            }
+
+            .card-icon i {
+                font-size: 20px;
+            }
+
+            .feature-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .card-link {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <style>
+        /* Footer Styles */
+        /* Note: Root variables are defined in header.css */
+
+        footer {
+            padding: 60px 0 40px;
+            margin-top: 60px;
+            background-color: var(--footer-bg, #2c3e50);
+            color: var(--footer-text, #ecf0f1);
+            border-radius: 15px 15px 0 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-section {
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color, #3498db);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--footer-text, #ecf0f1);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color, #3498db);
+            transform: translateX(5px);
+        }
+
+        /* Footer Contact Section */
+        .footer-contact p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--accent-color, #3498db);
+        }
+
+        /* Footer About Section */
+        .footer-about p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .footer-logo span {
+            color: var(--accent-color, #3498db);
+        }
+
+        /* Social Media Links */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--footer-text, #ecf0f1);
+            border-radius: 50%;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .social-icon:hover {
+            background-color: var(--accent-color, #3498db);
+            color: white;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        /* Platform-specific social icon hover states */
+        .x-twitter:hover {
+            background-color: #000;
+        }
+
+        .linkedin:hover {
+            background-color: #0077B5;
+        }
+
+        .github:hover {
+            background-color: #333;
+        }
+
+        .website:hover {
+            background-color: #4CAF50;
+        }
+
+        .instagram:hover {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+        }
+
+        /* Copyright Section */
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive Footer Styles */
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .footer-links a:hover {
+                transform: none;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .footer-contact p {
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <style>
+        /* Notification System Styles */
+        .notification-container {
+            position: fixed;
+            top: 80px;
+            right: 40px;
+            z-index: 9999;
+        }
+
+        .notification-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--bg-color);
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .notification-toggle:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .notification-panel {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            width: 320px;
+            background-color: var(--bg-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--border-color);
+            transform: translateY(-20px) scale(0.95);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .notification-panel.active {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .notification-header {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notification-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .notification-close:hover {
+            color: var(--accent-color);
+        }
+
+        .notification-list {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .notification-item {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s ease;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-item:hover {
+            background-color: var(--light-gray);
+        }
+
+        .notification-item p {
+            margin: 0 0 5px 0;
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .notification-item .time {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .notification-container {
+                top: 80px;
+                right: 40px;
+            }
+
+            .notification-panel {
+                width: calc(100vw - 20px);
+                max-width: 320px;
+                right: 0;
+            }
+        }
+    </style>
+
+    <style>
+        /* Theme Toggle Styles */
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--bg-color);
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .theme-toggle i {
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle.active {
+            animation: rotate 0.5s ease;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Theme Transition Effects */
+        body,
+        header,
+        .notification-panel,
+        .notification-toggle,
+        .theme-toggle,
+        .feature-card,
+        .post-card,
+        .cta-section,
+        footer,
+        .nav-links a,
+        .dropdown-content,
+        .social-icon,
+        .card-link,
+        .btn,
+        .newsletter-input,
+        .btn-submit {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Dark Theme Specific Styles */
+        [data-theme="dark"] .theme-toggle {
+            background-color: var(--bg-color);
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        [data-theme="dark"] .theme-toggle:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .theme-toggle {
+                width: 35px;
+                height: 35px;
+            }
+
+            .theme-toggle i {
+                font-size: 1rem;
+            }
+        }
+    </style>
+
+    <style>
+        /* View More Articles Button Styles */
+        .view-more-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .view-more-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .view-more-btn:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .view-more-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .view-more-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .view-more-btn:hover::after {
+            transform: translateX(100%);
+        }
+
+        /* Dark Theme Specific Styles */
+        [data-theme="dark"] .view-more-btn {
+            background-color: var(--accent-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="dark"] .view-more-btn:hover {
+            background-color: var(--hover-color);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .view-more-container {
+                margin: 30px 0;
+                padding: 15px;
+            }
+
+            .view-more-btn {
+                padding: 10px 25px;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .view-more-container {
+                margin: 20px 0;
+                padding: 10px;
+            }
+
+            .view-more-btn {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header id="main-header">
+        <nav>
+            <a href="index.html" class="logo">Tech<span>MayanK</span></a>
+            <button class="mobile-menu-btn">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#">Resources</a>
+                    <div class="dropdown-content">
+                        <a href="editor.html">Online Code Editor</a>
+                        <a href="docs.html">Tech Docs & Paths</a>
+                    </div>
+                </li>
+                <li><a href="./blogs/blogs.html">Blogs</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="jobs.html">Tech Jobs</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="subscribe.html" class="subscribe-btn">Subscribe</a></li>
+                <li>
+                    <button class="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Add notification toggle and panel at the start of main -->
+        <div class="notification-container">
+            <button class="notification-toggle" aria-label="Toggle notifications">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </button>
+
+            <div class="notification-panel">
+                <div class="notification-header">
+                    <h3>Notifications</h3>
+                    <button class="notification-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="notification-list">
+                    <div class="notification-item">
+                        <p>New article published: "Building Accessible First"</p>
+                        <span class="time">2 hours ago</span>
+                    </div>
+                    <div class="notification-item">
+                        <p>TechMayanK Resume Builder is now live!</p>
+                        <span class="time">1 day ago</span>
+                    </div>
+                    <div class="notification-item">
+                        <p>New tech jobs added to the platform</p>
+                        <span class="time">2 days ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enhanced Hero Section -->
+        <section class="hero-enhanced" data-aos="fade-up">
+            <div class="hero-content">
+                <h1 class="hero-tagline">TechMayanK — Learn. Build. Rule the Future</h1>
+                <p class="hero-subtitle">At TechMayanK, we make tech simple for all of us. From clear tutorials and
+                    hands-on coding projects to honest reviews <br> and the latest trends — we break things down so we
+                    can learn faster, build smarter, and grow together.<br>
+                    <b>This is our space to explore, create, and rule the future — one line of code at a time.</b>
+                </p>
+                <a href="#featured-posts" class="cta-button">
+                    <i class="fas fa-rocket"></i> Explore Articles
+                </a>
+            </div>
+        </section>
+
+        <!-- Feature Cards Section -->
+        <section class="feature-cards" data-aos="fade-up">
+            <div class="container">
+                <h2 class="section-title">Our Features</h2>
+                <div class="cards-grid">
+                    <!-- Resume Builder Card -->
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>Resume Builder</h3>
+                        <p>Create professional tech resumes with our AI-powered builder. Get industry-specific templates
+                            and real-time suggestions.</p>
+                        <a href="resume-builder.html" class="card-link">Build Your Resume →</a>
+                    </div>
+
+                    <!-- Tech Jobs Card -->
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Tech Jobs</h3>
+                        <p>Find the latest tech job opportunities. From startups to tech giants, discover your next
+                            career move.</p>
+                        <a href="jobs.html" class="card-link">Browse Jobs →</a>
+                    </div>
+
+                    <!-- Tech News Card -->
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card-icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <h3>Tech News</h3>
+                        <p>Stay updated with the latest tech news, product launches, and industry trends.</p>
+                        <a href="news.html" class="card-link">Read News →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Posts Section -->
+        <section id="featured-posts" class="featured-posts" data-aos="fade-up">
+            <div class="container">
+                <h2 class="section-title">Featured Posts</h2>
+                <div class="posts-grid">
+                    <!-- Featured Post 1 -->
+                    <article class="post-card" data-aos="fade-up" data-aos-delay="300">
+                        <img src="./image/blog1/main_blog1.webp" alt="Web Development Trends" class="post-img">
+                        <div class="post-content">
+                            <div class="post-category">Web Development</div>
+                            <h3 class="post-title">
+                                <a href="https://techmayank.netlify.app/blogs/blog1">
+                                    Building Accessible First: Designing Inclusive Web Experiences
+                                </a>
+                            </h3>
+                            <p class="post-excerpt">
+                                Discover how to create accessible and inclusive websites by prioritizing accessibility
+                                from
+                                the start. Learn about semantic HTML, proper contrast, and ARIA roles.
+                            </p>
+                            <div class="post-meta">
+                                <span class="post-date"><i class="far fa-calendar-alt"></i> April 13, 2025</span>
+                                <span class="post-read-time"><i class="far fa-clock"></i> 12 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Featured Post 2 -->
+                    <article class="post-card" data-aos="fade-up" data-aos-delay="400">
+                        <img src="./image/blog2/main_blog2.webp" alt="Mobile Development Trends" class="post-img">
+                        <div class="post-content">
+                            <div class="post-category">Mobile Development</div>
+                            <h3 class="post-title">
+                                <a href="https://techmayank.netlify.app/blogs/blog2">
+                                    Cross-Platform vs. Native in 2025
+                                </a>
+                            </h3>
+                            <p class="post-excerpt">
+                                Compare modern cross-platform frameworks with traditional native development. Make
+                                informed decisions for your next mobile app project.
+                            </p>
+                            <div class="post-meta">
+                                <span class="post-date"><i class="far fa-calendar-alt"></i> April 20, 2025</span>
+                                <span class="post-read-time"><i class="far fa-clock"></i> 8 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Featured Post 3 -->
+                    <article class="post-card" data-aos="fade-up" data-aos-delay="500">
+                        <img src="./image/blog3/main_blog3.webp" alt="Social Engineering in Cybersecurity"
+                            class="post-img">
+                        <div class="post-content">
+                            <div class="post-category">Cybersecurity</div>
+                            <h3 class="post-title">
+                                <a href="https://techmayank.netlify.app/blogs/blog3">
+                                    The Human Element: Social Engineering Attacks
+                                </a>
+                            </h3>
+                            <p class="post-excerpt">
+                                Explore how attackers exploit human behavior to bypass technical defenses. Learn about
+                                phishing, pretexting, and AI-driven deception tactics.
+                            </p>
+                            <div class="post-meta">
+                                <span class="post-date"><i class="far fa-calendar-alt"></i> April 27, 2025</span>
+                                <span class="post-read-time"><i class="far fa-clock"></i> 10 min read</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="view-more-container">
+                    <a href="./blogs/blogs.html" class="view-more-btn">View More Articles →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Subscription Section -->
+        <section class="cta-section" id="subscribe" data-aos="fade-up" data-aos-delay="1000">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get the latest tech updates, tutorials, and insights delivered directly to your inbox. No spam, just
+                valuable content!</p>
+
+            <!-- Netlify Form with improved design -->
+            <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+                class="newsletter-form" action="/success">
+                <!-- Honeypot field to prevent spam -->
+                <div hidden>
+                    <label>Don't fill this out if you're human: <input name="bot-field"></label>
+                </div>
+
+                <!-- Required for Netlify forms -->
+                <input type="hidden" name="form-name" value="newsletter">
+
+                <!-- Form input group -->
+                <div class="form-group">
+                    <input type="email" name="email" class="newsletter-input" placeholder="Your email address" required
+                        aria-label="Email address">
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-paper-plane"></i> Subscribe
+                    </button>
+                </div>
+
+                <!-- Success message container -->
+                <div id="form-success" class="form-message" style="display: none;">
+                    <p><i class="fas fa-check-circle"></i> Thank you for subscribing! Check your inbox for updates.</p>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <!-- Enhanced Footer -->
+    <footer data-aos="fade-up" data-aos-delay="1100">
+        <div class="footer-content">
+            <div class="footer-section footer-about">
+                <a href="index.html" class="footer-logo">Tech<span>MayanK</span></a>
+                <p>Your go-to source for tech insights, tutorials, and reviews. We make complex technology concepts easy
+                    to understand for everyone.</p>
+                <div class="social-links">
+                    <a href="https://x.com/MayanK_Pras" class="social-icon twitter" aria-label="Twitter"><i
+                            class="fab fa-x-twitter"></i></a>
+                    <a href="https://www.linkedin.com/in/mitthu-kumar/" class="social-icon linkedin"
+                        aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/mkshahi22" class="social-icon github" aria-label="GitHub"><i
+                            class="fab fa-github"></i></a>
+                    <a href="https://mkshahi.netlify.app/" class="social-icon website" aria-label="Website"><i
+                            class="fas fa-globe"></i></a>
+                    <a href="https://www.instagram.com/shahi_jii_22/?next=%2F" class="social-icon instagram"
+                        aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="./blogs/blogs.html">Blogs</a></li>
+                    <li><a href="./cat/categories.html">Categories</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Popular Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="./cat/category-webdev.html">Web Development</a></li>
+                    <li><a href="./cat/category-ai.html">Artificial Intelligence</a></li>
+                    <li><a href="./cat/category-cybersecurity.html">Cybersecurity</a></li>
+                    <li><a href="./cat/category-cloud.html">Cloud Computing</a></li>
+                    <li><a href="./cat/category-mobile.html">Mobile Development</a></li>
+                    <li><a href="./cat/category-iot.html">IoT</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="far fa-envelope"></i> mayankpra97@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Greater Noida, India</p>
+                <p><i class="fas fa-phone"></i> +91 9798743248</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2025 TechMayanK. All rights reserved.</p>
+            <p><a href="privacy.html" style="color: white; text-decoration: none;">Privacy Policy</a></p>
+        </div>
+    </footer>
+    <script async type='module'
+        src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
+    <zapier-interfaces-chatbot-embed is-popup='true'
+        chatbot-id='cmbrp7sc90020bzfbeb1zdkex'></zapier-interfaces-chatbot-embed>
+    <!-- JavaScript Files -->
+    <!-- AOS Library for Scroll Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize AOS (Animate On Scroll)
+            AOS.init({
+                duration: 1,
+                once: true,
+                mirror: false
+            });
+
+            // Notification System
+            const notificationToggle = document.querySelector('.notification-toggle');
+            const notificationPanel = document.querySelector('.notification-panel');
+            const notificationClose = document.querySelector('.notification-close');
+            const notificationBadge = document.querySelector('.notification-badge');
+            let isNotificationPanelOpen = false;
+
+            function toggleNotificationPanel() {
+                isNotificationPanelOpen = !isNotificationPanelOpen;
+                notificationPanel.classList.toggle('active');
+
+                if (isNotificationPanelOpen) {
+                    notificationBadge.style.display = 'none';
+                    notificationPanel.style.transform = 'translateY(0) scale(1)';
+                    notificationPanel.style.opacity = '1';
+                    notificationPanel.style.visibility = 'visible';
+                } else {
+                    notificationPanel.style.transform = 'translateY(-20px) scale(0.95)';
+                    notificationPanel.style.opacity = '0';
+                    notificationPanel.style.visibility = 'hidden';
+                }
+            }
+
+            notificationToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleNotificationPanel();
+            });
+
+            notificationClose.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleNotificationPanel();
+            });
+
+            document.addEventListener('click', (event) => {
+                if (isNotificationPanelOpen &&
+                    !event.target.closest('.notification-panel') &&
+                    !event.target.closest('.notification-toggle')) {
+                    toggleNotificationPanel();
+                }
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && isNotificationPanelOpen) {
+                    toggleNotificationPanel();
+                }
+            });
+
+            const notificationItems = document.querySelectorAll('.notification-item');
+            notificationItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    item.style.backgroundColor = 'var(--light-gray)';
+                });
+                item.addEventListener('mouseleave', () => {
+                    item.style.backgroundColor = '';
+                });
+            });
+
+            // Theme Toggle System
+            const themeToggle = document.querySelector('.theme-toggle');
+            const themeIcon = themeToggle.querySelector('i');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+            // Function to set theme
+            function setTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                updateThemeIcon(theme);
+            }
+
+            // Function to update theme icon
+            function updateThemeIcon(theme) {
+                themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            }
+
+            // Function to toggle theme
+            function toggleTheme() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+                themeToggle.classList.add('active');
+                setTheme(newTheme);
+
+                // Remove active class after animation
+                setTimeout(() => {
+                    themeToggle.classList.remove('active');
+                }, 500);
+            }
+
+            // Initialize theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else if (prefersDarkScheme.matches) {
+                setTheme('dark');
+            }
+
+            // Theme toggle click event
+            themeToggle.addEventListener('click', toggleTheme);
+
+            // Listen for system theme changes
+            prefersDarkScheme.addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    setTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+
+            // Mobile menu toggle
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+
+            menuBtn.addEventListener('click', function () {
+                navLinks.classList.toggle('active');
+            });
+
+            // Mobile dropdown toggle
+            const dropdowns = document.querySelectorAll('.dropdown');
+
+            dropdowns.forEach(dropdown => {
+                const dropdownLink = dropdown.querySelector('a');
+
+                if (window.innerWidth <= 768) {
+                    dropdownLink.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                    });
+                }
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function (event) {
+                if (!event.target.closest('nav') && !event.target.closest('.mobile-menu-btn')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', function () {
+                const header = document.getElementById('main-header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Smooth scrolling for CTA button
+            const ctaButton = document.querySelector('.cta-button');
+            if (ctaButton) {
+                ctaButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector('#featured-posts');
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Existing JavaScript Files -->
+    <script src="./js/subcription.js"></script>
+    <script src="./js/accible.js"></script>
+</body>
+
+</html>
